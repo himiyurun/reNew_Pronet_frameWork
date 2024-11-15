@@ -1,5 +1,6 @@
 #define GLFW_INCLUDE_NONE
 
+#include "Shader.h"
 #include "readtxt.h"
 #include "glfw_Window.h"
 
@@ -24,10 +25,10 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfw_Window Window(winInfo);
 
-	readtxt f("vertex_shader.glslc");
-	std::cout << f.c_ptr() << std::endl;
+	Shader shader("vertex_shader.glslc", "fragment_shader.glslc");
 
 	try {
+		shader.use();
 		Window.run();
 	}
 	catch (const std::exception& e) {

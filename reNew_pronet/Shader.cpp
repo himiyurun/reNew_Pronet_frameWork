@@ -10,7 +10,9 @@ Shader::Shader(const char* vsrc, const char* fsrc)
 		glShaderSource(vobj, 1, &src, nullptr);
 		glCompileShader(vobj);
 
-		glAttachShader(program, vobj);
+		if (ShaderInfo(vobj, "Vertex Shader")) {
+			glAttachShader(program, vobj);
+		}
 		glDeleteShader(vobj);
 	}
 	if (fsrc) {
@@ -20,7 +22,9 @@ Shader::Shader(const char* vsrc, const char* fsrc)
 		glShaderSource(fobj, 1, &src, nullptr);
 		glCompileShader(fobj);
 
-		glAttachShader(program, fobj);
+		if (ShaderInfo(fobj, "Fragment Shader")) {
+			glAttachShader(program, fobj);
+		}
 		glDeleteShader(fobj);
 	}
 
@@ -28,11 +32,18 @@ Shader::Shader(const char* vsrc, const char* fsrc)
 	glBindFragDataLocation(program, 0, "fragment");
 
 	glLinkProgram(program);
+
+	if (!ProgramInfo(program)) {
+		glDeleteProgram(program);
+		program = 0;
+	}
 }
 
 Shader::~Shader()
 {
-	glDeleteProgram(program);
+	if (!program) {
+		glDeleteProgram(program);
+	}
 }
 
 GLboolean Shader::ProgramInfo(GLuint program) const

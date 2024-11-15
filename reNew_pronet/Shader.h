@@ -18,6 +18,8 @@ public:
 
 	GLboolean ShaderInfo(GLuint shader, const char* name) const;
 
-	GLuint getProgram() const { return program; }
+	void use() const { glUseProgram(program); }
+
+	[[nodiscard]]GLuint getProgram() const { return program; }
 };
 
