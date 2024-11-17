@@ -1,18 +1,26 @@
 #define GLFW_INCLUDE_NONE
 
-#include "Shader.h"
-#include "readtxt.h"
-#include "glfw_Window.h"
+#include "Pronet.h"
+#include "BoundaryTag.h"
 
-void PronetInit() {
+void libInit() {
 	if (!glfwInit()) {
 		throw std::runtime_error("Can't Initlize GLFW!");
 	}
 }
 
+constexpr glm::vec2 rectangleVertex[] = {
+	{ -0.5f,  0.5f },
+	{ -0.5f, -0.5f },
+	{  0.5f, -0.5f },
+	{  0.5f,  0.5f }
+};
+
+static constexpr uint8_t pool[1024];
+
 int main() {
 
-	PronetInit();
+	libInit();
 
 	glfw_windowCreateInfo winInfo;
 	winInfo.width = 640;
@@ -23,13 +31,16 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfw_Window Window(winInfo);
+	PronetManager game(winInfo, 2);
 
-	Shader shader("vertex_shader.glslc", "fragment_shader.glslc");
+	game.InitShader("vertex_shader.glslc", "fragment_shader.glslc");
+
+	game.InitObj(4, rectangleVertex);
+
+	pronet::BoundaryTagBegin
 
 	try {
-		shader.use();
-		Window.run();
+		game.run();
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Error : " << e.what() << std::endl;

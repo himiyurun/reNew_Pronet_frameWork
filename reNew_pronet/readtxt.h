@@ -19,7 +19,7 @@ public:
 
 	[[nodiscard]] const char* c_ptr() const { return src.data(); }
 
-	[[nodiscard]] int getsize() const { return src.size(); }
+	[[nodiscard]] size_t getsize() const { return src.size(); }
 
 	[[nodiscard]] bool filestat() const { return file.fail(); }
 };

@@ -19,6 +19,8 @@ class glfw_Window
 {
 	GLFWwindow* const window;
 
+protected:
+
 	GLfloat size[2];
 
 	GLfloat scale;
@@ -30,5 +32,9 @@ public:
 	~glfw_Window();
 
 	void run() const;
+
+	virtual void process() const{
+		std::cout << "Hello World!!" << std::endl;
+	};
 };
 

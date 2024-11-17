@@ -1,6 +1,18 @@
 #include "Shader.h"
 
-Shader::Shader(const char* vsrc, const char* fsrc)
+Shader::Shader()
+	: program(0)
+{
+}
+
+Shader::~Shader()
+{
+	if (!program) {
+		glDeleteProgram(program);
+	}
+}
+
+GLboolean Shader::Init(const char* vsrc, const char* fsrc)
 {
 	program = glCreateProgram();
 	if (vsrc) {
@@ -36,14 +48,10 @@ Shader::Shader(const char* vsrc, const char* fsrc)
 	if (!ProgramInfo(program)) {
 		glDeleteProgram(program);
 		program = 0;
+		return false;
 	}
-}
 
-Shader::~Shader()
-{
-	if (!program) {
-		glDeleteProgram(program);
-	}
+	return true;
 }
 
 GLboolean Shader::ProgramInfo(GLuint program) const

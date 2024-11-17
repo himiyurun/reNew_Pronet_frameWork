@@ -10,9 +10,11 @@ class Shader
 	GLuint program;
 
 public:
-	Shader(const char* vsrc, const char* fsrc);
+	Shader();
 
 	~Shader();
+
+	GLboolean Init(const char* vsrc, const char* fsrc);
 
 	GLboolean ProgramInfo(GLuint program) const;
 
