@@ -4,12 +4,11 @@
 #include <stdexcept>
 
 namespace pronet {
-	
-	struct BoundaryTagEnd 
+	struct BoundaryTagEnd
 	{
 		BoundaryTagEnd(uint32_t size)
 			: size(size) {}
-		
+
 		uint32_t size;
 
 		~BoundaryTagEnd() {}
@@ -29,48 +28,24 @@ namespace pronet {
 		~BoundaryTagBegin();
 
 		BoundaryTagBegin* split(uint32_t new_size);
+		void marge();
 
 		void setSize(uint32_t new_size) { size = new_size; }
 		void setUsed(bool now_used) { is_used = now_used; }
 
+		void setNext(BoundaryTagBegin* new_next) { next = new_next; }
+		void setPrev(BoundaryTagBegin* new_prev) { prev = new_prev; }
+
+		[[nodiscard]] BoundaryTagEnd* endTag(){
+			uint8_t* p = reinterpret_cast<uint8_t*>(this);
+			return reinterpret_cast<BoundaryTagEnd*>(p + sizeof(*this) + size);
+		}
+
+		[[nodiscard]] BoundaryTagBegin* NextLink() const { return next; }
+		[[nodiscard]] BoundaryTagBegin* PrevLink() const { return prev; }
 		[[nodiscard]] uint32_t bufSize() const { return size; }
 		[[nodiscard]] bool used() const { return is_used; }
 	};
-
-	//	終わりのタグの作成
-	void createEndTag(void* p, uint32_t size) {
-		new(p) BoundaryTagEnd(size);
-		
-		if (!p) { throw std::bad_alloc(); }
-	}
-
-	//	初めのタグの作成
-	void createBegTag(void* p, uint32_t size, bool used) {
-		new(p) BoundaryTagBegin(size, used);
-
-		if (!p) { throw std::bad_alloc(); }
-	}
-
-	//	タグの新規作成
-	BoundaryTagBegin* createNewTag(void* p, uint32_t size, bool used) {
-		createBegTag(p, size, used);
-
-		createEndTag(static_cast<char*>(p) + begSize + size, size);
-
-		return static_cast<BoundaryTagBegin*>(p);
-	}
-
-	//	タグの消去
-	void deleteTag(void* p) {
-		BoundaryTagBegin* begin = reinterpret_cast<BoundaryTagBegin*>(static_cast<char*>(p) - begSize);
-		assert(begin && "Memory Error : Delete Pointer is null");
-
-		BoundaryTagEnd* end = reinterpret_cast<BoundaryTagEnd*>(static_cast<char*>(p) + begSize + begin->bufSize());
-		assert(end && "Memory Error : Delete Pointer is null");
-
-		begin->~BoundaryTagBegin();
-		end->~BoundaryTagEnd();
-	}
 
 	//	エンドタグのサイズ
 	static const uint8_t endSize = sizeof(BoundaryTagEnd);
@@ -78,4 +53,16 @@ namespace pronet {
 	static const uint8_t begSize = sizeof(BoundaryTagBegin);
 	//	タグの合計のサイズ
 	static const uint8_t tagSize = endSize + begSize;
+
+	//	終わりのタグの作成
+	void createEndTag(void* p, uint32_t size);
+
+	//	初めのタグの作成
+	void createBeginTag(void* p, uint32_t size, bool used);
+
+	//	タグの新規作成
+	BoundaryTagBegin* createNewTag(void* p, uint32_t size, bool used);
+
+	//	タグの消去
+	void deleteTag(void* p);
 }

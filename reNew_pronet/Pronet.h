@@ -1,5 +1,4 @@
 #pragma once
-#include <memory>
 
 #include "Shader.h"
 #include "Object.h"
@@ -17,7 +16,7 @@ public:
 	//	コンストラクタ
 	//	windowInfo : 作成するウインドウの情報
 	//	dimentionSize : 作成するゲームの次元
-	PronetManager(glfw_windowCreateInfo windowInfo, GLint dimentionSize);
+	PronetManager(glfw_windowCreateInfo *windowInfo, GLint dimentionSize);
 
 	//	デストラクタ
 	~PronetManager();

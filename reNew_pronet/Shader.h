@@ -1,6 +1,4 @@
 #pragma once
-#include <functional>
-
 #include <glad/glad.h>
 
 #include "readtxt.h"

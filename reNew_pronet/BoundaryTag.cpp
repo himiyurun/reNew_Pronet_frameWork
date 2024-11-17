@@ -1,16 +1,18 @@
 #include "BoundaryTag.h"
 
-pronet::BoundaryTagBegin::BoundaryTagBegin(uint32_t size = 0, bool is_used = false)
+using namespace pronet;
+
+BoundaryTagBegin::BoundaryTagBegin(uint32_t size = 0, bool is_used = false)
 	: size(size), is_used(is_used)
 	, next(nullptr), prev(nullptr)
 {
 }
 
-pronet::BoundaryTagBegin::~BoundaryTagBegin()
+BoundaryTagBegin::~BoundaryTagBegin()
 {
 }
 
-pronet::BoundaryTagBegin* pronet::BoundaryTagBegin::split(uint32_t new_size)
+BoundaryTagBegin* BoundaryTagBegin::split(uint32_t new_size)
 {
 	static uint8_t* p = nullptr;
 
@@ -26,15 +28,83 @@ pronet::BoundaryTagBegin* pronet::BoundaryTagBegin::split(uint32_t new_size)
 	p += endSize;
 	assert(p && "Memory Error : not enough memory!!");
 	BoundaryTagBegin* rBegin = reinterpret_cast<BoundaryTagBegin*>(p);
-	createBegTag(p, rsize, false);
+	createBeginTag(p, rsize, false);
 
 	p += rsize;
 	assert(p && "Memory Error : not enough memory!!");
 	BoundaryTagEnd* rEnd = reinterpret_cast<BoundaryTagEnd*>(p);
 
 	this->size = new_size;
-
 	rEnd->size = rsize;
 
+	rBegin->setNext(next);
+	this->setNext(rBegin);
+	rBegin->setPrev(this);
+
 	return rBegin;
+}
+
+void pronet::BoundaryTagBegin::marge()
+{
+	if (!next->used()) {
+		BoundaryTagBegin* rbegin = next;
+		BoundaryTagEnd* rend = endTag();
+
+		setNext(next->NextLink());
+		size += tagSize + rbegin->bufSize();
+		BoundaryTagEnd* end = endTag();
+		end->size = size;
+
+		rbegin->~BoundaryTagBegin();
+		rend->~BoundaryTagEnd();
+	}
+	if (!prev->used()) {
+		BoundaryTagBegin* lbegin = prev;
+		BoundaryTagEnd* lend = endTag();
+
+		setPrev(prev->PrevLink());
+		size += tagSize + lbegin->bufSize();
+		BoundaryTagEnd* end = endTag();
+		end->size = size;
+
+		lbegin->~BoundaryTagBegin();
+		lend->~BoundaryTagEnd();
+	}
+}
+
+void pronet::createEndTag(void* p, uint32_t size)
+{
+	new(p) BoundaryTagEnd(size);
+
+	if (!p) { throw std::bad_alloc(); }
+}
+
+void pronet::createBeginTag(void* p, uint32_t size, bool used)
+{
+	new(p) BoundaryTagBegin(size, used);
+
+	if (!p) { throw std::bad_alloc(); }
+}
+
+BoundaryTagBegin* pronet::createNewTag(void* p, uint32_t size, bool used)
+{
+	std::cout << "h" << std::endl;
+	createBeginTag(p, size, used);
+	std::cout << "h" << std::endl;
+	createEndTag(static_cast<char*>(p) + begSize + size, size);
+	std::cout << "h" << std::endl;
+
+	return static_cast<BoundaryTagBegin*>(p);
+}
+
+void pronet::deleteTag(void* p)
+{
+	BoundaryTagBegin* begin = reinterpret_cast<BoundaryTagBegin*>(static_cast<char*>(p) - begSize);
+	assert(begin && "Memory Error : Delete Pointer is null");
+
+	BoundaryTagEnd* end = reinterpret_cast<BoundaryTagEnd*>(static_cast<char*>(p) + begSize + begin->bufSize());
+	assert(end && "Memory Error : Delete Pointer is null");
+
+	begin->~BoundaryTagBegin();
+	end->~BoundaryTagEnd();
 }

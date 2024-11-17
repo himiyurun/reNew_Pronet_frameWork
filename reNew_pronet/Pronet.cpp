@@ -1,6 +1,6 @@
 #include "Pronet.h"
 
-PronetManager::PronetManager(glfw_windowCreateInfo windowInfo, GLint dimentionSize)
+PronetManager::PronetManager(glfw_windowCreateInfo* windowInfo, GLint dimentionSize)
 	: glfw_Window(windowInfo)
 	, dimentionSize(dimentionSize)
 {

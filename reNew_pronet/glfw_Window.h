@@ -1,17 +1,15 @@
 #pragma once
 #include <iostream>
+#include <stdexcept>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <cassert>
-#include <stdexcept>
-
 struct glfw_windowCreateInfo 
 {
-	const GLchar* title;
-	GLint width;
-	GLint height;
+	const char* title;
+	int width;
+	int height;
 	GLFWmonitor* monitor;
 };
 
@@ -27,7 +25,7 @@ protected:
 
 public:
 
-	glfw_Window(glfw_windowCreateInfo windowinfo);
+	glfw_Window(glfw_windowCreateInfo *windowinfo);
 
 	~glfw_Window();
 

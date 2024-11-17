@@ -1,4 +1,4 @@
-#define GLFW_INCLUDE_NONE
+#include <memory>
 
 #include "Pronet.h"
 #include "BoundaryTag.h"
@@ -16,11 +16,13 @@ constexpr glm::vec2 rectangleVertex[] = {
 	{  0.5f,  0.5f }
 };
 
-static constexpr uint8_t pool[1024];
+uint8_t pool[284];
 
 int main() {
 
 	libInit();
+
+	memset(pool, 0, sizeof(pool));
 
 	glfw_windowCreateInfo winInfo;
 	winInfo.width = 640;
@@ -29,15 +31,19 @@ int main() {
 	winInfo.monitor = nullptr;
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	PronetManager game(winInfo, 2);
+	PronetManager game(&winInfo, 2);
 
 	game.InitShader("vertex_shader.glslc", "fragment_shader.glslc");
 
 	game.InitObj(4, rectangleVertex);
 
-	pronet::BoundaryTagBegin
+	pronet::BoundaryTagBegin* begin = pronet::createNewTag(pool, 256, true);
+	char* buf = reinterpret_cast<char*>(begin) + pronet::begSize;
+	buf[256] = 'c';
+	std::cout << buf[256] << std::endl;
+	pronet::deleteTag(pool);
 
 	try {
 		game.run();
