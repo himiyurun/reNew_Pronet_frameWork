@@ -46,29 +46,33 @@ BoundaryTagBegin* BoundaryTagBegin::split(uint32_t new_size)
 
 void pronet::BoundaryTagBegin::marge()
 {
-	if (!next->used()) {
-		BoundaryTagBegin* rbegin = next;
-		BoundaryTagEnd* rend = endTag();
+	if (next) {
+		if (!next->used()) {
+			BoundaryTagBegin* rbegin = next;
+			BoundaryTagEnd* rend = endTag();
 
-		setNext(next->NextLink());
-		size += tagSize + rbegin->bufSize();
-		BoundaryTagEnd* end = endTag();
-		end->size = size;
+			setNext(next->NextLink());
+			size += tagSize + rbegin->bufSize();
+			BoundaryTagEnd* end = endTag();
+			end->size = size;
 
-		rbegin->~BoundaryTagBegin();
-		rend->~BoundaryTagEnd();
+			rbegin->~BoundaryTagBegin();
+			rend->~BoundaryTagEnd();
+		}
 	}
-	if (!prev->used()) {
-		BoundaryTagBegin* lbegin = prev;
-		BoundaryTagEnd* lend = endTag();
+	if (prev) {
+		if (!prev->used()) {
+			BoundaryTagBegin* lbegin = prev;
+			BoundaryTagEnd* lend = endTag();
 
-		setPrev(prev->PrevLink());
-		size += tagSize + lbegin->bufSize();
-		BoundaryTagEnd* end = endTag();
-		end->size = size;
+			setPrev(prev->PrevLink());
+			size += tagSize + lbegin->bufSize();
+			BoundaryTagEnd* end = endTag();
+			end->size = size;
 
-		lbegin->~BoundaryTagBegin();
-		lend->~BoundaryTagEnd();
+			lbegin->~BoundaryTagBegin();
+			lend->~BoundaryTagEnd();
+		}
 	}
 }
 
@@ -88,11 +92,8 @@ void pronet::createBeginTag(void* p, uint32_t size, bool used)
 
 BoundaryTagBegin* pronet::createNewTag(void* p, uint32_t size, bool used)
 {
-	std::cout << "h" << std::endl;
 	createBeginTag(p, size, used);
-	std::cout << "h" << std::endl;
 	createEndTag(static_cast<char*>(p) + begSize + size, size);
-	std::cout << "h" << std::endl;
 
 	return static_cast<BoundaryTagBegin*>(p);
 }

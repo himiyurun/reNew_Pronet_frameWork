@@ -1,7 +1,9 @@
 #include "Object.h"
 
 Object::Object()
-	: vertexcount(0)
+	: vao(0)
+	, vbo(0)
+	, vertexcount(0)
 {
 }
 

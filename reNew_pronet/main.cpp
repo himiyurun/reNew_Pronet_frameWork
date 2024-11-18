@@ -39,11 +39,28 @@ int main() {
 
 	game.InitObj(4, rectangleVertex);
 
+	/*
 	pronet::BoundaryTagBegin* begin = pronet::createNewTag(pool, 256, true);
 	char* buf = reinterpret_cast<char*>(begin) + pronet::begSize;
 	buf[256] = 'c';
 	std::cout << buf[256] << std::endl;
-	pronet::deleteTag(pool);
+	pronet::BoundaryTagBegin* rbegin = begin->split(128);
+	rbegin->setUsed(true);
+	char* rbuf = reinterpret_cast<char*>(begin) + pronet::begSize;
+	for (int i = 0; i < rbegin->bufSize(); i++) {
+		rbuf[i] = 'c';
+	}
+	for (int i = 0; i < rbegin->bufSize(); i++) {
+		std::cout<<rbuf[i]<<" ";
+	}
+	std::cout <<rbegin->bufSize()<< std::endl;
+	rbegin->setUsed(false);
+	begin->marge();
+	pronet::BoundaryTagEnd* end = begin->endTag();
+	std::cout << "begin size : " << begin->bufSize() << ", end size : " << end->size << std::endl;
+	pronet::deleteTag(buf);
+	//pronet::deleteTag(rbuf);
+	*/
 
 	try {
 		game.run();
