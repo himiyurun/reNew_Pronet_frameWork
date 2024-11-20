@@ -1,7 +1,7 @@
 #include <memory>
 
 #include "Pronet.h"
-#include "BoundaryTag.h"
+#include "TLSFmemory.h"
 
 void libInit() {
 	if (!glfwInit()) {
@@ -39,6 +39,7 @@ int main() {
 
 	game.InitObj(4, rectangleVertex);
 
+	pronet::TLSFmemory tlsf(7, 4);
 	/*
 	pronet::BoundaryTagBegin* begin = pronet::createNewTag(pool, 256, true);
 	char* buf = reinterpret_cast<char*>(begin) + pronet::begSize;
