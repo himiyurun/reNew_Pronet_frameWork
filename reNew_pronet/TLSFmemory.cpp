@@ -3,7 +3,7 @@
 using namespace pronet;
 
 TLSFmemory::TLSFmemory(uint32_t n = 7, uint8_t divsize = 4)
-	: pool((1 << n) + tagSize + endSize, 0)
+	: pool((1 << n) + tagSize + begSize, 0)
 	, freelist((1 << divsize) * n, nullptr)
 	, parititionSLI(n + 1, 0)
 	, parititionFLI(0)
@@ -19,7 +19,6 @@ TLSFmemory::TLSFmemory(uint32_t n = 7, uint8_t divsize = 4)
 
 	createBeginTag(pool.data() + tagSize + bufSize, 0, true);
 	BoundaryTagBegin* begin = createNewTag(pool.data(), bufSize, false);
-	std::cout << "pool size : " << begin->bufSize() << std::endl;
 
 	rigist(begin, bufSize + tagSize);
 	std::cout << "FLI : ";
@@ -36,7 +35,8 @@ pronet::TLSFmemory::~TLSFmemory()
 		if(a)
 			deleteTag(a);
 	}
-	BoundaryTagBegin* dummy = reinterpret_cast<BoundaryTagBegin*>(pool.data() + tagSize + pool.size());
+
+	BoundaryTagBegin* dummy = reinterpret_cast<BoundaryTagBegin*>(pool.data() + tagSize + bufSize);
 	dummy->~BoundaryTagBegin();
 }
 
@@ -60,8 +60,8 @@ void* pronet::TLSFmemory::allocate(uint32_t size)
 	
 	BoundaryTagBegin* lbegin = begin->split(sizeAlignment(size));
 	if (lbegin) {
-		rigist(lbegin, lbegin->bufSize() + tagSize);
-		std::cout << "h" << std::endl;
+		std::cout << lbegin->bufSize() << std::endl;
+		rigist(lbegin, lbegin->bufSize());
 	}
 
 	std::cout << "FLI : ";

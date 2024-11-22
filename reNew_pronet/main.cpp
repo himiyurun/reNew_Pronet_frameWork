@@ -56,6 +56,8 @@ int main() {
 		}
 		std::cout << &test[0] << std::endl;
 		pronet::deleteTag(beg);
+		beg->~BoundaryTagBegin();
+		end->~BoundaryTagEnd();
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
