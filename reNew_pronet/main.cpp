@@ -39,7 +39,27 @@ int main() {
 
 	game.InitObj(4, rectangleVertex);
 
-	pronet::TLSFmemory tlsf(7, 4);
+	try {
+		pronet::TLSFmemory tlsf(9, 4);
+		char* test = static_cast<char*>(tlsf.allocate(256));
+		pronet::BoundaryTagBegin* beg = reinterpret_cast<pronet::BoundaryTagBegin*>(test - pronet::begSize);
+		pronet::BoundaryTagEnd* end = beg->endTag();
+		std::cout << "size : " << beg->bufSize() << ", " << end->size << std::endl;
+		std::cout << "diraddres : " << reinterpret_cast<uint64_t>(end) - reinterpret_cast<uint64_t>(beg) << std::endl;
+		for (int i = 0; i < 256; i++) {
+			if (i % 32 == 0)
+				test[i] = 'd';
+			else if (i % 8 == 0)
+				test[i] = 'e';
+			else
+				test[i] = 'c';
+		}
+		std::cout << &test[0] << std::endl;
+		pronet::deleteTag(beg);
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
 	/*
 	pronet::BoundaryTagBegin* begin = pronet::createNewTag(pool, 256, true);
 	char* buf = reinterpret_cast<char*>(begin) + pronet::begSize;

@@ -64,5 +64,5 @@ namespace pronet {
 	BoundaryTagBegin* createNewTag(void* p, uint32_t size, bool used);
 
 	//	ƒ^ƒO‚ÌÁ‹
-	void deleteTag(void* p);
+	void deleteTag(BoundaryTagBegin* begin);
 }

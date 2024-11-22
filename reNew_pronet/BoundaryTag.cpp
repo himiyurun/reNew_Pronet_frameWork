@@ -18,6 +18,7 @@ BoundaryTagBegin* BoundaryTagBegin::split(uint32_t new_size)
 
 	if (new_size <= 0) { return nullptr; }
 	assert(new_size < size - tagSize && "Memory Error : new_size is too big!!");
+	if (new_size > size - tagSize) { return nullptr; }
 
 	uint8_t rsize(size - new_size - tagSize);
 
@@ -98,12 +99,11 @@ BoundaryTagBegin* pronet::createNewTag(void* p, uint32_t size, bool used)
 	return static_cast<BoundaryTagBegin*>(p);
 }
 
-void pronet::deleteTag(void* p)
+void pronet::deleteTag(BoundaryTagBegin* begin)
 {
-	BoundaryTagBegin* begin = reinterpret_cast<BoundaryTagBegin*>(static_cast<char*>(p) - begSize);
 	assert(begin && "Memory Error : Delete Pointer is null");
 
-	BoundaryTagEnd* end = reinterpret_cast<BoundaryTagEnd*>(static_cast<char*>(p) + begSize + begin->bufSize());
+	BoundaryTagEnd* end = begin->endTag();
 	assert(end && "Memory Error : Delete Pointer is null");
 
 	begin->~BoundaryTagBegin();

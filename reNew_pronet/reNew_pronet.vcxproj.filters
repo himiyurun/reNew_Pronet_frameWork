@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="glad.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -40,6 +37,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="TLSFmemory.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
