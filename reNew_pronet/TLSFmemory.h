@@ -38,6 +38,9 @@ namespace pronet {
 		//	p : 解放したいメモリブロックの先頭ポインタ
 		void deallocate(void* p);
 
+		bool margeNextfreeBlock(BoundaryTagBegin* begin, BoundaryTagBegin* next);
+		bool margePrevfreeBlock(BoundaryTagBegin* prev, BoundaryTagBegin* begin);
+
 		//	フリーリストにタグを割り当てる
 		//	begin : 割り当てたいタグのポインタ
 		//	size : 割り当てたいサイズ

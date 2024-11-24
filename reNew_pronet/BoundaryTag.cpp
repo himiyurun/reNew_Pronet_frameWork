@@ -17,8 +17,7 @@ BoundaryTagBegin* BoundaryTagBegin::split(uint32_t new_size)
 	static uint8_t* p = nullptr;
 
 	if (new_size <= 0) { return nullptr; }
-	assert(new_size < size - tagSize && "Memory Error : new_size is too big!!");
-	if (new_size > size - tagSize) { return nullptr; }
+	if (new_size >= size - tagSize) { return nullptr; }
 
 	uint8_t rsize(size - new_size - tagSize);
 
@@ -38,29 +37,38 @@ BoundaryTagBegin* BoundaryTagBegin::split(uint32_t new_size)
 	this->size = new_size;
 	rEnd->size = rsize;
 
+	
 	rBegin->setNext(next);
 	this->setNext(rBegin);
 	rBegin->setPrev(this);
+	
+	/*
+	next->setPrev(prev);
+	prev->setNext(next);
+	next = nullptr;
+	prev = nullptr;
+	*/
 
 	return rBegin;
 }
 
-void pronet::BoundaryTagBegin::marge()
+void pronet::BoundaryTagBegin::marge(BoundaryTagBegin* next)
 {
 	if (next) {
 		if (!next->used()) {
 			BoundaryTagBegin* rbegin = next;
-			BoundaryTagEnd* rend = endTag();
+			BoundaryTagEnd* rend = next->endTag();
 
 			setNext(next->NextLink());
 			size += tagSize + rbegin->bufSize();
 			BoundaryTagEnd* end = endTag();
-			end->size = size;
+			rend->size = size;
 
 			rbegin->~BoundaryTagBegin();
-			rend->~BoundaryTagEnd();
+			end->~BoundaryTagEnd();
 		}
 	}
+	/*
 	if (prev) {
 		if (!prev->used()) {
 			BoundaryTagBegin* lbegin = prev;
@@ -75,6 +83,23 @@ void pronet::BoundaryTagBegin::marge()
 			lend->~BoundaryTagEnd();
 		}
 	}
+	*/
+}
+
+BoundaryTagBegin* pronet::BoundaryTagBegin::getNext() const
+{
+	uint8_t* ptr = reinterpret_cast<uint8_t*>(const_cast<BoundaryTagBegin*>(this));
+	//	Šë‚È‚¢II
+	ptr += size + tagSize;
+	return reinterpret_cast<BoundaryTagBegin*>(ptr);
+}
+
+BoundaryTagEnd* pronet::BoundaryTagBegin::getPrev() const
+{
+	uint8_t* ptr = reinterpret_cast<uint8_t*>(const_cast<BoundaryTagBegin*>(this));
+	ptr -= endSize;
+	BoundaryTagEnd* prevEnd = reinterpret_cast<BoundaryTagEnd*>(ptr);
+	return reinterpret_cast<BoundaryTagEnd*>(ptr);
 }
 
 void pronet::createEndTag(void* p, uint32_t size)
@@ -108,4 +133,10 @@ void pronet::deleteTag(BoundaryTagBegin* begin)
 
 	begin->~BoundaryTagBegin();
 	end->~BoundaryTagEnd();
+}
+
+BoundaryTagBegin* pronet::getBegin(BoundaryTagEnd* end)
+{
+	uint8_t* ptr = reinterpret_cast<uint8_t*>(end);
+	return reinterpret_cast<BoundaryTagBegin*>(ptr - end->size - begSize);
 }

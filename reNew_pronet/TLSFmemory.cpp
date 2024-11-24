@@ -3,7 +3,7 @@
 using namespace pronet;
 
 TLSFmemory::TLSFmemory(uint32_t n = 7, uint8_t divsize = 4)
-	: pool((1 << n) + tagSize + begSize, 0)
+	: pool((1 << n) + (tagSize * 2), 0)
 	, freelist((1 << divsize) * n, nullptr)
 	, parititionSLI(n + 1, 0)
 	, parititionFLI(0)
@@ -17,8 +17,9 @@ TLSFmemory::TLSFmemory(uint32_t n = 7, uint8_t divsize = 4)
 	}
 	std::cout << "pool size : " << bufSize << std::endl;
 
+	createEndTag(pool.data(), 0xffffffff);
 	createBeginTag(pool.data() + tagSize + bufSize, 0, true);
-	BoundaryTagBegin* begin = createNewTag(pool.data(), bufSize, false);
+	BoundaryTagBegin* begin = createNewTag(pool.data() + endSize, bufSize, false);
 
 	rigist(begin, bufSize + tagSize);
 	std::cout << "FLI : ";
@@ -94,6 +95,46 @@ BoundaryTagBegin* pronet::TLSFmemory::searchFreeBlock(uint8_t fli, uint8_t sli) 
 
 void pronet::TLSFmemory::deallocate(void* p)
 {
+	uint8_t* ptr = static_cast<uint8_t*>(p);
+	BoundaryTagBegin* begin = reinterpret_cast<BoundaryTagBegin*>(ptr - begSize);
+	begin->setUsed(false);
+
+	if (!margeNextfreeBlock(begin, begin->NextLink()) && !margePrevfreeBlock(begin->PrevLink(), begin)) {
+		rigist(begin, begin->bufSize());
+	}
+
+	std::cout << "FLI : ";
+	printBit(parititionFLI, 64);
+	for (uint16_t a : parititionSLI) {
+		std::cout << "SLI : ";
+		printBit(a, 16);
+	}
+}
+
+bool pronet::TLSFmemory::margeNextfreeBlock(BoundaryTagBegin* begin, BoundaryTagBegin* next)
+{
+	if (begin->getNext()) {
+		if (!next->used()) {
+			unrigist(next, next->bufSize());
+			begin->marge(next);
+			rigist(begin, begin->bufSize());
+			return true;
+		}
+	}
+	return false;
+}
+
+bool pronet::TLSFmemory::margePrevfreeBlock(BoundaryTagBegin* prev, BoundaryTagBegin* begin)
+{
+	if (prev) {
+		if (!prev->used()) {
+			unrigist(begin, begin->bufSize());
+			prev->marge(begin);
+			rigist(prev, prev->bufSize());
+			return true;
+		}
+	}
+	return false;
 }
 
 void pronet::TLSFmemory::rigist(BoundaryTagBegin* begin, uint32_t size)

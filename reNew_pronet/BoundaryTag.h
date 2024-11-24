@@ -22,13 +22,15 @@ namespace pronet {
 		BoundaryTagBegin* next;
 		BoundaryTagBegin* prev;
 
+		
+
 	public:
 		BoundaryTagBegin(uint32_t size, bool is_used);
 
 		~BoundaryTagBegin();
 
 		BoundaryTagBegin* split(uint32_t new_size);
-		void marge();
+		void marge(BoundaryTagBegin* next);
 
 		void setSize(uint32_t new_size) { size = new_size; }
 		void setUsed(bool now_used) { is_used = now_used; }
@@ -41,6 +43,8 @@ namespace pronet {
 			return reinterpret_cast<BoundaryTagEnd*>(p + sizeof(*this) + size);
 		}
 
+		[[nodiscard]] BoundaryTagBegin* getNext() const;
+		[[nodiscard]] BoundaryTagEnd* getPrev() const;
 		[[nodiscard]] BoundaryTagBegin* NextLink() const { return next; }
 		[[nodiscard]] BoundaryTagBegin* PrevLink() const { return prev; }
 		[[nodiscard]] uint32_t bufSize() const { return size; }
@@ -65,4 +69,6 @@ namespace pronet {
 
 	//	É^ÉOÇÃè¡ãé
 	void deleteTag(BoundaryTagBegin* begin);
+
+	BoundaryTagBegin* getBegin(BoundaryTagEnd* end);
 }

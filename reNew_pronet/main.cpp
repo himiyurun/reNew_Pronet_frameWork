@@ -55,9 +55,8 @@ int main() {
 				test[i] = 'c';
 		}
 		std::cout << &test[0] << std::endl;
-		pronet::deleteTag(beg);
-		beg->~BoundaryTagBegin();
-		end->~BoundaryTagEnd();
+
+		tlsf.deallocate(test);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
