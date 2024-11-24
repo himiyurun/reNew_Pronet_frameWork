@@ -18,8 +18,15 @@ BoundaryTagBegin* BoundaryTagBegin::split(uint32_t new_size)
 
 	if (new_size <= 0) { return nullptr; }
 	if (new_size >= size - tagSize) { return nullptr; }
+	std::cout << "this size : " << size << std::endl;
+	std::cout << "may be rsize : " << size << " - " << new_size << " - " << static_cast<unsigned>(tagSize) << " = " << size - new_size - tagSize << std::endl;
+#ifdef _DEBUG
+	std::cout << "No problem your allocate size" << std::endl;
+#endif // _DEBUG
 
-	uint8_t rsize(size - new_size - tagSize);
+
+	uint32_t rsize(size - new_size - tagSize);
+	std::cout << "rsize : " << static_cast<unsigned>(rsize) << std::endl;
 
 	p = reinterpret_cast<uint8_t*>(this);
 	p += begSize + new_size;
@@ -37,17 +44,18 @@ BoundaryTagBegin* BoundaryTagBegin::split(uint32_t new_size)
 	this->size = new_size;
 	rEnd->size = rsize;
 
-	
+	/*
 	rBegin->setNext(next);
 	this->setNext(rBegin);
 	rBegin->setPrev(this);
+	*/
 	
-	/*
-	next->setPrev(prev);
-	prev->setNext(next);
+	if(next)
+		next->setPrev(prev);
+	if(prev)
+		prev->setNext(next);
 	next = nullptr;
 	prev = nullptr;
-	*/
 
 	return rBegin;
 }
@@ -59,7 +67,7 @@ void pronet::BoundaryTagBegin::marge(BoundaryTagBegin* next)
 			BoundaryTagBegin* rbegin = next;
 			BoundaryTagEnd* rend = next->endTag();
 
-			setNext(next->NextLink());
+			//setNext(next->NextLink());
 			size += tagSize + rbegin->bufSize();
 			BoundaryTagEnd* end = endTag();
 			rend->size = size;
@@ -68,28 +76,12 @@ void pronet::BoundaryTagBegin::marge(BoundaryTagBegin* next)
 			end->~BoundaryTagEnd();
 		}
 	}
-	/*
-	if (prev) {
-		if (!prev->used()) {
-			BoundaryTagBegin* lbegin = prev;
-			BoundaryTagEnd* lend = endTag();
-
-			setPrev(prev->PrevLink());
-			size += tagSize + lbegin->bufSize();
-			BoundaryTagEnd* end = endTag();
-			end->size = size;
-
-			lbegin->~BoundaryTagBegin();
-			lend->~BoundaryTagEnd();
-		}
-	}
-	*/
 }
 
 BoundaryTagBegin* pronet::BoundaryTagBegin::getNext() const
 {
 	uint8_t* ptr = reinterpret_cast<uint8_t*>(const_cast<BoundaryTagBegin*>(this));
-	//	危ない！！
+	//	危ない！！ たぶん解決
 	ptr += size + tagSize;
 	return reinterpret_cast<BoundaryTagBegin*>(ptr);
 }

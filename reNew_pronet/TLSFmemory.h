@@ -39,7 +39,7 @@ namespace pronet {
 		void deallocate(void* p);
 
 		bool margeNextfreeBlock(BoundaryTagBegin* begin, BoundaryTagBegin* next);
-		bool margePrevfreeBlock(BoundaryTagBegin* prev, BoundaryTagBegin* begin);
+		bool margePrevfreeBlock(BoundaryTagBegin* prev, BoundaryTagBegin* &begin);
 
 		//	フリーリストにタグを割り当てる
 		//	begin : 割り当てたいタグのポインタ
@@ -79,6 +79,27 @@ namespace pronet {
 		//	num : 描画を行いたい変数
 		//	size : ビットのサイズ
 		void printBit(uint64_t num, uint8_t size) const;
+
+		//	フリーリストの中身が入っているかを描画する
+		void printFreelistStatus() {
+			for (int i = 0; i < freelist.size(); i++) {
+				if (i % divSize == 0) {
+					std::cout << std::endl;
+					std::cout << "num" << i / divSize << " : ";
+				}
+				
+				if (freelist[i]) {
+					std::cout << "1";
+				}
+				else {
+					std::cout << "0";
+				}
+			}
+			std::cout << std::endl << std::endl;
+		}
+
+		//	パリティションビットの中身を描画
+		void printParititionBit();
 
 		//	FLIとSLIをもとに1次元配列のインデックスに変換
 		[[nodiscard]] uint32_t calcIndex(uint8_t fli, uint8_t sli) const { return (fli << divBit) + sli; }

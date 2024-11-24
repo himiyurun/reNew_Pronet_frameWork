@@ -40,23 +40,27 @@ int main() {
 	game.InitObj(4, rectangleVertex);
 
 	try {
-		pronet::TLSFmemory tlsf(9, 4);
+		pronet::TLSFmemory tlsf(10, 4);
+		
 		char* test = static_cast<char*>(tlsf.allocate(256));
+		char* test2 = static_cast<char*>(tlsf.allocate(256));
+		char* test3 = static_cast<char*>(tlsf.allocate(256));
 		pronet::BoundaryTagBegin* beg = reinterpret_cast<pronet::BoundaryTagBegin*>(test - pronet::begSize);
 		pronet::BoundaryTagEnd* end = beg->endTag();
 		std::cout << "size : " << beg->bufSize() << ", " << end->size << std::endl;
 		std::cout << "diraddres : " << reinterpret_cast<uint64_t>(end) - reinterpret_cast<uint64_t>(beg) << std::endl;
-		for (int i = 0; i < 256; i++) {
-			if (i % 32 == 0)
-				test[i] = 'd';
-			else if (i % 8 == 0)
-				test[i] = 'e';
-			else
-				test[i] = 'c';
-		}
-		std::cout << &test[0] << std::endl;
 
 		tlsf.deallocate(test);
+		tlsf.printFreelistStatus();
+
+		tlsf.deallocate(test2);
+
+		tlsf.printFreelistStatus();
+
+		tlsf.deallocate(test3);
+
+		tlsf.printFreelistStatus();
+		
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
