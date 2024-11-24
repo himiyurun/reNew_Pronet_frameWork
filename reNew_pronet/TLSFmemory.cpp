@@ -218,7 +218,7 @@ void pronet::TLSFmemory::clearBit(uint8_t fli, uint8_t sli)
 	if (sli_used(fli, sli))
 		parititionSLI[fli] &= ~(static_cast<uint16_t>(1) << sli);
 
-	if (!parititionSLI[fli]) {}
+	if (!parititionSLI[fli]) 
 		parititionFLI &= ~(static_cast<uint64_t>(1) << fli);
 }
 
@@ -252,9 +252,11 @@ void pronet::TLSFmemory::printParititionBit()
 {
 	std::cout << "FLI : ";
 	printBit(parititionFLI, 64);
+	uint32_t index(0);
 	for (uint16_t a : parititionSLI) {
-		std::cout << "SLI : ";
+		std::cout << "SLI " << index << " : ";
 		printBit(a, 16);
+		index++;
 	}
 }
 

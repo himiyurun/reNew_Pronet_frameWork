@@ -45,6 +45,7 @@ void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pro
 					buf[j] = 'c';
 			}
 			std::cout << &ptr.back()[0] << std::endl;
+			tlsf->printFreelistStatus();
 			std::cout << std::endl;
 		}
 		for (int i = 0; i < deallocateCount; i++) {
@@ -53,6 +54,7 @@ void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pro
 				tlsf->deallocate(ptr.front());
 				ptr.erase(ptr.begin());
 			}
+			tlsf->printFreelistStatus();
 			std::cout << std::endl;
 		}
 
@@ -95,7 +97,7 @@ int main() {
 	try {
 		pronet::TLSFmemory tlsf(10, 4);
 
-		runMemoryAllocater(128, 32, 60 * 60, &tlsf);
+		runMemoryAllocater(128, 32, 1, &tlsf);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
