@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="BoundaryTag.h" />
     <ClInclude Include="glfw_Window.h" />
+    <ClInclude Include="MemoryAllocaterTester.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pronet.h" />
     <ClInclude Include="readtxt.h" />
@@ -155,6 +156,9 @@
   <ItemGroup>
     <None Include="fragment_shader.glslc" />
     <None Include="vertex_shader.glslc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="AllocaterTesterLog.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

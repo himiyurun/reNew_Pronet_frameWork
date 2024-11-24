@@ -50,7 +50,11 @@ void* pronet::TLSFmemory::allocate(uint32_t size)
 	std::cout << "fli : " << static_cast<unsigned>(fli) << ", sli : " << static_cast<unsigned>(sli) << std::endl;
 
 	BoundaryTagBegin* begin = searchFreeBlock(fli, sli);
-	if (!begin) { throw std::runtime_error("tag is null"); }
+	if (!begin) { 
+		//throw std::runtime_error("tag is null");
+		std::cout << "tag is NULL" << std::endl;
+		return nullptr;
+	}
 
 	unrigist(begin, begin->bufSize());
 	
@@ -74,7 +78,8 @@ BoundaryTagBegin* pronet::TLSFmemory::searchFreeBlock(uint8_t fli, uint8_t sli) 
 	uint8_t f = fli, s = sli;
 	if (!getLSB(parititionSLI[fli] & ~((1 << sli) - 1), &s)) {
 		if (!getLSB(parititionFLI & ~((1 << fli) - 1), &f)) {
-			throw std::runtime_error("Memory Pool is Full");
+			//throw std::runtime_error("Memory Pool is Full");
+			std::cout << "Memory Pool is Full" << std::endl;
 			return nullptr;
 		}
 		if (!getLSB(parititionSLI[f], &s)) {

@@ -9,6 +9,59 @@ void libInit() {
 	}
 }
 
+void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pronet::TLSFmemory* tlsf) {
+	time_t nowtime(time(nullptr));
+	time_t lasttime(time(nullptr));
+
+	const uint8_t maxAllocation(4);
+
+	uint32_t size(0);
+	uint32_t allocateCount(0);
+	uint32_t deallocateCount(0);
+	std::vector<char*> ptr;
+	while (nowtime - lasttime <= testTime) {
+
+		allocateCount = rand() % maxAllocation;
+		deallocateCount = rand() % maxAllocation;
+
+		for (int i = 0; i < allocateCount; i++) {
+			size = minsize + rand() % (maxsize - minsize);
+			char* alocPtr = static_cast<char*>(tlsf->allocate(size));
+			std::cout << "Allocate Size : " << size << std::endl;
+			if (alocPtr)
+				ptr.emplace_back(alocPtr);
+#ifdef _DEBUG
+			else
+				std::cout << std::endl << "May be Memory Pool is FULL" << std::endl << std::endl;
+#endif // _DEBUG
+
+			char* buf = ptr.back();
+			for (int j = 0; j < size; j++) {
+				if (j % 32 == 0)
+					buf[j] = 'T';
+				else if (j % 8 == 0)
+					buf[j] = 'S';
+				else
+					buf[j] = 'c';
+			}
+			std::cout << &ptr.back()[0] << std::endl;
+			std::cout << std::endl;
+		}
+		for (int i = 0; i < deallocateCount; i++) {
+			size = minsize + rand() % (maxsize - minsize);
+			if (!ptr.empty()) {
+				tlsf->deallocate(ptr.front());
+				ptr.erase(ptr.begin());
+			}
+			std::cout << std::endl;
+		}
+
+		nowtime = time(nullptr);
+	}
+
+	std::cout << "MemoryAllocateTest is Finish!!" << std::endl;
+}
+
 constexpr glm::vec2 rectangleVertex[] = {
 	{ -0.5f,  0.5f },
 	{ -0.5f, -0.5f },
@@ -41,26 +94,8 @@ int main() {
 
 	try {
 		pronet::TLSFmemory tlsf(10, 4);
-		
-		char* test = static_cast<char*>(tlsf.allocate(256));
-		char* test2 = static_cast<char*>(tlsf.allocate(256));
-		char* test3 = static_cast<char*>(tlsf.allocate(256));
-		pronet::BoundaryTagBegin* beg = reinterpret_cast<pronet::BoundaryTagBegin*>(test - pronet::begSize);
-		pronet::BoundaryTagEnd* end = beg->endTag();
-		std::cout << "size : " << beg->bufSize() << ", " << end->size << std::endl;
-		std::cout << "diraddres : " << reinterpret_cast<uint64_t>(end) - reinterpret_cast<uint64_t>(beg) << std::endl;
 
-		tlsf.deallocate(test);
-		tlsf.printFreelistStatus();
-
-		tlsf.deallocate(test2);
-
-		tlsf.printFreelistStatus();
-
-		tlsf.deallocate(test3);
-
-		tlsf.printFreelistStatus();
-		
+		runMemoryAllocater(128, 32, 60 * 60, &tlsf);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;

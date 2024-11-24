@@ -65,6 +65,9 @@
     <ClInclude Include="TLSFmemory.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="MemoryAllocaterTester.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex_shader.glslc">
@@ -73,5 +76,10 @@
     <None Include="fragment_shader.glslc">
       <Filter>ソース ファイル</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="AllocaterTesterLog.txt">
+      <Filter>ソース ファイル</Filter>
+    </Text>
   </ItemGroup>
 </Project>
