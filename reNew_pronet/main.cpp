@@ -97,7 +97,7 @@ int main() {
 	try {
 		pronet::TLSFmemory tlsf(10, 4);
 
-		runMemoryAllocater(128, 32, 1, &tlsf);
+		runMemoryAllocater(128, 32, 10, &tlsf);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;

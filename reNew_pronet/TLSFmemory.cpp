@@ -58,10 +58,13 @@ void* pronet::TLSFmemory::allocate(uint32_t size)
 
 	unrigist(begin, begin->bufSize());
 	
-	BoundaryTagBegin* lbegin = begin->split(sizeAlignment(size));
-	if (lbegin) {
-		std::cout << "split size : " << lbegin->bufSize() << std::endl;
-		rigist(lbegin, lbegin->bufSize());
+	std::cout << "dir size : " << begin->bufSize() << " >= " << bufsize + tagSize + minSize << std::endl;
+	if (begin->bufSize() >= minSize + bufsize + tagSize) {
+		BoundaryTagBegin* lbegin = begin->split(sizeAlignment(size));
+		if (lbegin) {
+			std::cout << "split size : " << lbegin->bufSize() << std::endl;
+			rigist(lbegin, lbegin->bufSize());
+		}
 	}
 
 	printParititionBit();
@@ -180,6 +183,7 @@ void pronet::TLSFmemory::unrigist(BoundaryTagBegin* begin, uint32_t size)
 	if (begin->NextLink()) {
 		freelist[calcIndex(fli, sli)] = begin->NextLink();
 		begin->NextLink()->setPrev(nullptr);
+		begin->setNext(nullptr);
 #ifdef _DEBUG
 		std::cout << "use Link list" << std::endl;
 #endif
