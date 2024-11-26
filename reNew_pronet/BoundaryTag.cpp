@@ -37,7 +37,7 @@ BoundaryTagBegin* BoundaryTagBegin::split(uint32_t new_size)
 	BoundaryTagBegin* rBegin = reinterpret_cast<BoundaryTagBegin*>(p);
 	createBeginTag(p, rsize, false);
 
-	p += rsize;
+	p += begSize + rsize;
 	assert(p && "Memory Error : not enough memory!!");
 	BoundaryTagEnd* rEnd = reinterpret_cast<BoundaryTagEnd*>(p);
 
@@ -74,6 +74,13 @@ void pronet::BoundaryTagBegin::marge(BoundaryTagBegin* next)
 
 			rbegin->~BoundaryTagBegin();
 			end->~BoundaryTagEnd();
+
+			if (this->next)
+				this->next->setPrev(prev);
+			if (prev)
+				prev->setNext(this->next);
+			this->next = nullptr;
+			prev = nullptr;
 		}
 	}
 }

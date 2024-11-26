@@ -27,9 +27,15 @@ TLSFmemory::TLSFmemory(uint32_t n = 7, uint8_t divsize = 4)
 
 pronet::TLSFmemory::~TLSFmemory()
 {
+	static BoundaryTagBegin* next(nullptr);
 	for (BoundaryTagBegin*& a : freelist) {
-		if(a)
-			deleteTag(a);
+		if (a) {
+			next = a;
+			while (next != nullptr) {
+				deleteTag(a);
+				next = next->NextLink();
+			}
+		}
 	}
 
 	BoundaryTagBegin* dummy = reinterpret_cast<BoundaryTagBegin*>(pool.data() + tagSize + bufSize);
@@ -54,6 +60,16 @@ void* pronet::TLSFmemory::allocate(uint32_t size)
 		//throw std::runtime_error("tag is null");
 		std::cout << "tag is NULL" << std::endl;
 		return nullptr;
+	}
+	if (begin->NextLink()) {
+		BoundaryTagBegin* begNext = begin->NextLink();
+		begNext->setPrev(begin->PrevLink());
+		begin->setNext(nullptr);
+	}
+	if (begin->PrevLink()) {
+		BoundaryTagBegin* begPrev = begin->PrevLink();
+		begPrev->setNext(begin->NextLink());
+		begin->setPrev(nullptr);
 	}
 
 	unrigist(begin, begin->bufSize());
@@ -99,7 +115,7 @@ void pronet::TLSFmemory::deallocate(void* p)
 	uint8_t* ptr = static_cast<uint8_t*>(p);
 	BoundaryTagBegin* begin = reinterpret_cast<BoundaryTagBegin*>(ptr - begSize);
 	begin->setUsed(false);
-
+	std::cout << "Memory size : " << begin->bufSize() << std::endl;
 	margeNextfreeBlock(begin, begin->getNext());
 		
 	BoundaryTagEnd* lend = begin->getPrev();
@@ -182,10 +198,11 @@ void pronet::TLSFmemory::unrigist(BoundaryTagBegin* begin, uint32_t size)
 
 	if (begin->NextLink()) {
 		freelist[calcIndex(fli, sli)] = begin->NextLink();
-		begin->NextLink()->setPrev(nullptr);
+		freelist[calcIndex(fli, sli)]->setPrev(nullptr);
 		begin->setNext(nullptr);
 #ifdef _DEBUG
 		std::cout << "use Link list" << std::endl;
+		std::cout << "Link list size : " << freelist[calcIndex(fli, sli)]->bufSize() << std::endl;
 #endif
 	}
 	else {

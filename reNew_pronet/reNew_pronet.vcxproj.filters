@@ -81,5 +81,14 @@
     <Text Include="AllocaterTesterLog.txt">
       <Filter>ソース ファイル</Filter>
     </Text>
+    <Text Include="AllocaterTesterLog01120241126.txt">
+      <Filter>ソース ファイル</Filter>
+    </Text>
+    <Text Include="AllocaterTesterLog130920241126.txt">
+      <Filter>ソース ファイル</Filter>
+    </Text>
+    <Text Include="AllocaterTesterLog05820241127.txt">
+      <Filter>ソース ファイル</Filter>
+    </Text>
   </ItemGroup>
 </Project>
