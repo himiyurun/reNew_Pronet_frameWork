@@ -99,7 +99,11 @@ namespace pronet {
 		}
 
 		//	パリティションビットの中身を描画
-		void printParititionBit();
+		void printParititionBit() const;
+
+		void printMemoryLayout() const;
+
+		//	メモリアロケーターのレイアウト
 
 		//	FLIとSLIをもとに1次元配列のインデックスに変換
 		[[nodiscard]] uint32_t calcIndex(uint8_t fli, uint8_t sli) const { return (fli << divBit) + sli; }

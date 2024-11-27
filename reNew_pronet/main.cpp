@@ -47,6 +47,8 @@ void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pro
 			std::cout << &ptr.back()[0] << std::endl;
 			tlsf->printFreelistStatus();
 			std::cout << std::endl;
+			tlsf->printMemoryLayout();
+			std::cout << std::endl;
 		}
 		for (int i = 0; i < deallocateCount; i++) {
 			size = minsize + rand() % (maxsize - minsize);
@@ -55,6 +57,8 @@ void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pro
 				ptr.erase(ptr.begin());
 			}
 			tlsf->printFreelistStatus();
+			std::cout << std::endl;
+			tlsf->printMemoryLayout();
 			std::cout << std::endl;
 		}
 

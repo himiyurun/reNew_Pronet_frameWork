@@ -1,0 +1,3050 @@
+file read vertex_shader.glslc
+file read fragment_shader.glslc
+pool size : 1024
+list size : 176
+fli : 10, sli : 0
+calc : 160, 160
+FLI : 0000000000100000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 1000000000000000
+Allocate
+fli : 7, sli : 3
+don't use Link list
+dir size : 1024 >= 184
+this size : 1024
+may be rsize : 1024 - 128 - 28 = 868
+No problem your allocate size
+rsize : 868
+split size : 868
+fli : 9, sli : 11
+calc : 155, 155
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000010000
+SLI 10 : 0000000000000000
+
+Allocate Size : 126
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccSccccc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000010000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 868, end : 868, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 128
+don't use Link list
+marged next bufsize : 1024
+lend bufsize : 4294967295
+Block Out of lange
+fli : 10, sli : 0
+calc : 160, 160
+marged begin bufsize : 1024
+FLI : 0000000000100000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 1000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 1000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 1024, end : 4294967295, used : 0
+dummy size : 1
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 1000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 1024, end : 4294967295, used : 0
+dummy size : 1
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 1000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 1024, end : 4294967295, used : 0
+dummy size : 1
+
+Allocate
+fli : 7, sli : 2
+don't use Link list
+dir size : 1024 >= 172
+this size : 1024
+may be rsize : 1024 - 116 - 28 = 880
+No problem your allocate size
+rsize : 880
+split size : 880
+fli : 9, sli : 11
+calc : 155, 155
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000010000
+SLI 10 : 0000000000000000
+
+Allocate Size : 114
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccSccct
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000010000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 116, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 880, end : 880, used : 0
+dummy size : 1
+
+Allocate
+fli : 7, sli : 1
+don't use Link list
+dir size : 880 >= 168
+this size : 880
+may be rsize : 880 - 112 - 28 = 740
+No problem your allocate size
+rsize : 740
+split size : 740
+fli : 9, sli : 7
+calc : 151, 151
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000100000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 112
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccp
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000100000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 116, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 112, end : 112, used : 1
+dummy size : 1
+tag 2 :  size beg : 740, end : 740, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 116
+Next Tag is used
+lend bufsize : 4294967295
+Block Out of lange
+fli : 6, sli : 13
+calc : 109, 109
+marged begin bufsize : 116
+FLI : 0000001001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000100
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000100000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000100
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000100000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 116, end : 4294967295, used : 0
+dummy size : 1
+tag 1 :  size beg : 112, end : 112, used : 1
+dummy size : 1
+tag 2 :  size beg : 740, end : 740, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 112
+don't use Link list
+marged next bufsize : 880
+lend bufsize : 116
+marge prev
+don't use Link list
+marged perv bufsize : 1024
+fli : 10, sli : 0
+calc : 160, 160
+marged begin bufsize : 1024
+FLI : 0000000000100000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 1000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 1000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 1024, end : 4294967295, used : 0
+dummy size : 1
+
+Allocate
+fli : 7, sli : 1
+don't use Link list
+dir size : 1024 >= 164
+this size : 1024
+may be rsize : 1024 - 108 - 28 = 888
+No problem your allocate size
+rsize : 888
+split size : 888
+fli : 9, sli : 11
+calc : 155, 155
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000010000
+SLI 10 : 0000000000000000
+
+Allocate Size : 105
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccl
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000010000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 108, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 888, end : 888, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 108
+don't use Link list
+marged next bufsize : 1024
+lend bufsize : 4294967295
+Block Out of lange
+fli : 10, sli : 0
+calc : 160, 160
+marged begin bufsize : 1024
+FLI : 0000000000100000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 1000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 1000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 1024, end : 4294967295, used : 0
+dummy size : 1
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 1000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 1024, end : 4294967295, used : 0
+dummy size : 1
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 1000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 1024, end : 4294967295, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 9
+don't use Link list
+dir size : 1024 >= 128
+this size : 1024
+may be rsize : 1024 - 72 - 28 = 924
+No problem your allocate size
+rsize : 924
+split size : 924
+fli : 9, sli : 12
+calc : 156, 156
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000001000
+SLI 10 : 0000000000000000
+
+Allocate Size : 71
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccH
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000001000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 72, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 924, end : 924, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 2
+don't use Link list
+dir size : 924 >= 100
+this size : 924
+may be rsize : 924 - 44 - 28 = 852
+No problem your allocate size
+rsize : 852
+split size : 852
+fli : 9, sli : 10
+calc : 154, 154
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000100000
+SLI 10 : 0000000000000000
+
+Allocate Size : 44
+TcccccccScccccccScccccccScccccccTcccccccSccc,
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000100000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 72, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 852, end : 852, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 15
+don't use Link list
+dir size : 852 >= 152
+this size : 852
+may be rsize : 852 - 96 - 28 = 728
+No problem your allocate size
+rsize : 728
+split size : 728
+fli : 9, sli : 6
+calc : 150, 150
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000001000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 94
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccSccccc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000001000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 72, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 96, end : 96, used : 1
+dummy size : 1
+tag 3 :  size beg : 728, end : 728, used : 0
+dummy size : 1
+
+Allocate
+fli : 7, sli : 3
+don't use Link list
+dir size : 728 >= 184
+this size : 728
+may be rsize : 728 - 128 - 28 = 572
+No problem your allocate size
+rsize : 572
+split size : 572
+fli : 9, sli : 1
+calc : 145, 145
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0100000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 126
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccSccccc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0100000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 72, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 96, end : 96, used : 1
+dummy size : 1
+tag 3 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 4 :  size beg : 572, end : 572, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 9
+don't use Link list
+dir size : 572 >= 128
+this size : 572
+may be rsize : 572 - 72 - 28 = 472
+No problem your allocate size
+rsize : 472
+split size : 472
+fli : 8, sli : 13
+calc : 141, 141
+FLI : 0000000010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000100
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 70
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTccccc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000100
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 72, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 96, end : 96, used : 1
+dummy size : 1
+tag 3 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 4 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 5 :  size beg : 472, end : 472, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 7
+don't use Link list
+dir size : 472 >= 120
+this size : 472
+may be rsize : 472 - 64 - 28 = 380
+No problem your allocate size
+rsize : 380
+split size : 380
+fli : 8, sli : 7
+calc : 135, 135
+FLI : 0000000010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000100000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 62
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccSccccc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000100000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 72, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 96, end : 96, used : 1
+dummy size : 1
+tag 3 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 4 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 5 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 6 :  size beg : 380, end : 380, used : 0
+dummy size : 1
+
+Allocate
+fli : 7, sli : 2
+don't use Link list
+dir size : 380 >= 172
+this size : 380
+may be rsize : 380 - 116 - 28 = 236
+No problem your allocate size
+rsize : 236
+split size : 236
+fli : 7, sli : 13
+calc : 125, 125
+FLI : 0000000100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000100
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 115
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000100
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 72, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 96, end : 96, used : 1
+dummy size : 1
+tag 3 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 4 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 5 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 6 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 7 :  size beg : 236, end : 236, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 4
+don't use Link list
+dir size : 236 >= 108
+this size : 236
+may be rsize : 236 - 52 - 28 = 156
+No problem your allocate size
+rsize : 156
+split size : 156
+fli : 7, sli : 3
+calc : 115, 115
+FLI : 0000000100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0001000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 50
+TcccccccScccccccScccccccScccccccTcccccccScccccccSc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0001000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 72, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 96, end : 96, used : 1
+dummy size : 1
+tag 3 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 4 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 5 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 6 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 7 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 8 :  size beg : 156, end : 156, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 72
+Next Tag is used
+lend bufsize : 4294967295
+Block Out of lange
+fli : 6, sli : 2
+calc : 98, 98
+marged begin bufsize : 72
+FLI : 0000001100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0010000000000000
+SLI 7 : 0001000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0010000000000000
+num7 : 0001000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 72, end : 4294967295, used : 0
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 96, end : 96, used : 1
+dummy size : 1
+tag 3 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 4 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 5 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 6 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 7 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 8 :  size beg : 156, end : 156, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 44
+Next Tag is used
+lend bufsize : 72
+marge prev
+don't use Link list
+marged perv bufsize : 144
+fli : 7, sli : 2
+calc : 114, 114
+marged begin bufsize : 144
+FLI : 0000000100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0011000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0011000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 144, end : 4294967295, used : 0
+dummy size : 1
+tag 1 :  size beg : 96, end : 96, used : 1
+dummy size : 1
+tag 2 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 3 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 4 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 5 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 6 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 7 :  size beg : 156, end : 156, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 96
+Next Tag is used
+lend bufsize : 144
+marge prev
+don't use Link list
+marged perv bufsize : 268
+fli : 8, sli : 0
+calc : 128, 128
+marged begin bufsize : 268
+FLI : 0000000110000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0001000000000000
+SLI 8 : 1000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0001000000000000
+num8 : 1000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 268, end : 4294967295, used : 0
+dummy size : 1
+tag 1 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 2 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 3 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 4 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 5 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 6 :  size beg : 156, end : 156, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 1
+don't use Link list
+dir size : 156 >= 96
+this size : 156
+may be rsize : 156 - 40 - 28 = 88
+No problem your allocate size
+rsize : 88
+split size : 88
+fli : 6, sli : 6
+calc : 102, 102
+FLI : 0000001010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000001000000000
+SLI 7 : 0000000000000000
+SLI 8 : 1000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 38
+TcccccccScccccccScccccccScccccccTccccc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000001000000000
+num7 : 0000000000000000
+num8 : 1000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 268, end : 4294967295, used : 0
+dummy size : 1
+tag 1 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 2 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 3 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 4 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 5 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 6 :  size beg : 40, end : 40, used : 1
+dummy size : 1
+tag 7 :  size beg : 88, end : 88, used : 0
+dummy size : 1
+
+Allocate
+fli : 7, sli : 3
+don't use Link list
+dir size : 268 >= 184
+this size : 268
+may be rsize : 268 - 128 - 28 = 112
+No problem your allocate size
+rsize : 112
+split size : 112
+fli : 6, sli : 12
+calc : 108, 108
+FLI : 0000001000000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000001000001000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 127
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccSccccccc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000001000001000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 112, end : 112, used : 0
+dummy size : 1
+tag 2 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 3 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 4 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 5 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 6 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 7 :  size beg : 40, end : 40, used : 1
+dummy size : 1
+tag 8 :  size beg : 88, end : 88, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 0
+don't use Link list
+dir size : 88 >= 92
+FLI : 0000001000000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000001000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 35
+TcccccccScccccccScccccccScccccccTcc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000001000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 112, end : 112, used : 0
+dummy size : 1
+tag 2 :  size beg : 128, end : 128, used : 1
+dummy size : 1
+tag 3 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 4 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 5 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 6 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 7 :  size beg : 40, end : 40, used : 1
+dummy size : 1
+tag 8 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Deallocate
+Memory size : 128
+Next Tag is used
+lend bufsize : 112
+marge prev
+don't use Link list
+marged perv bufsize : 268
+fli : 8, sli : 0
+calc : 128, 128
+marged begin bufsize : 268
+FLI : 0000000010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 1000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 1000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 268, end : 268, used : 0
+dummy size : 1
+tag 2 :  size beg : 72, end : 72, used : 1
+dummy size : 1
+tag 3 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 4 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 5 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 6 :  size beg : 40, end : 40, used : 1
+dummy size : 1
+tag 7 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Deallocate
+Memory size : 72
+Next Tag is used
+lend bufsize : 268
+marge prev
+don't use Link list
+marged perv bufsize : 368
+fli : 8, sli : 7
+calc : 135, 135
+marged begin bufsize : 368
+FLI : 0000000010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000100000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000100000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 368, end : 368, used : 0
+dummy size : 1
+tag 2 :  size beg : 64, end : 64, used : 1
+dummy size : 1
+tag 3 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 4 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 5 :  size beg : 40, end : 40, used : 1
+dummy size : 1
+tag 6 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Deallocate
+Memory size : 64
+Next Tag is used
+lend bufsize : 368
+marge prev
+don't use Link list
+marged perv bufsize : 460
+fli : 8, sli : 12
+calc : 140, 140
+marged begin bufsize : 460
+FLI : 0000000010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000001000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000001000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 460, end : 460, used : 0
+dummy size : 1
+tag 2 :  size beg : 116, end : 116, used : 1
+dummy size : 1
+tag 3 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 4 :  size beg : 40, end : 40, used : 1
+dummy size : 1
+tag 5 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Deallocate
+Memory size : 116
+Next Tag is used
+lend bufsize : 460
+marge prev
+don't use Link list
+marged perv bufsize : 604
+fli : 9, sli : 2
+calc : 146, 146
+marged begin bufsize : 604
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0010000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0010000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 604, end : 604, used : 0
+dummy size : 1
+tag 2 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 3 :  size beg : 40, end : 40, used : 1
+dummy size : 1
+tag 4 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Allocate
+fli : 6, sli : 2
+don't use Link list
+dir size : 604 >= 100
+this size : 604
+may be rsize : 604 - 44 - 28 = 532
+No problem your allocate size
+rsize : 532
+split size : 532
+fli : 9, sli : 0
+calc : 144, 144
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 1000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 43
+TcccccccScccccccScccccccScccccccTcccccccSccc,
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 1000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 532, end : 532, used : 0
+dummy size : 1
+tag 3 :  size beg : 52, end : 52, used : 1
+dummy size : 1
+tag 4 :  size beg : 40, end : 40, used : 1
+dummy size : 1
+tag 5 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Deallocate
+Memory size : 52
+Next Tag is used
+lend bufsize : 532
+marge prev
+don't use Link list
+marged perv bufsize : 612
+fli : 9, sli : 3
+calc : 147, 147
+marged begin bufsize : 612
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0001000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0001000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 612, end : 612, used : 0
+dummy size : 1
+tag 3 :  size beg : 40, end : 40, used : 1
+dummy size : 1
+tag 4 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Deallocate
+Memory size : 40
+Next Tag is used
+lend bufsize : 612
+marge prev
+don't use Link list
+marged perv bufsize : 680
+fli : 9, sli : 5
+calc : 149, 149
+marged begin bufsize : 680
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000010000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000010000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 680, end : 680, used : 0
+dummy size : 1
+tag 3 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Allocate
+fli : 6, sli : 11
+don't use Link list
+dir size : 680 >= 136
+this size : 680
+may be rsize : 680 - 80 - 28 = 572
+No problem your allocate size
+rsize : 572
+split size : 572
+fli : 9, sli : 1
+calc : 145, 145
+FLI : 0000000001000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0100000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 77
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccP
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0100000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 3 :  size beg : 572, end : 572, used : 0
+dummy size : 1
+tag 4 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Allocate
+fli : 7, sli : 1
+don't use Link list
+dir size : 572 >= 164
+this size : 572
+may be rsize : 572 - 108 - 28 = 436
+No problem your allocate size
+rsize : 436
+split size : 436
+fli : 8, sli : 11
+calc : 139, 139
+FLI : 0000000010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000010000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 105
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccS
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000010000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 3 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 4 :  size beg : 436, end : 436, used : 0
+dummy size : 1
+tag 5 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Allocate
+fli : 6, sli : 2
+don't use Link list
+dir size : 436 >= 100
+this size : 436
+may be rsize : 436 - 44 - 28 = 364
+No problem your allocate size
+rsize : 364
+split size : 364
+fli : 8, sli : 6
+calc : 134, 134
+FLI : 0000000010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000001000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 42
+TcccccccScccccccScccccccScccccccTcccccccSccc,
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000001000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 3 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 4 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 5 :  size beg : 364, end : 364, used : 0
+dummy size : 1
+tag 6 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Deallocate
+Memory size : 128
+Next Tag is used
+lend bufsize : 4294967295
+Block Out of lange
+fli : 7, sli : 0
+calc : 112, 112
+marged begin bufsize : 128
+FLI : 0000000110000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 1000000000000000
+SLI 8 : 0000001000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 1000000000000000
+num8 : 0000001000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 0
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 3 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 4 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 5 :  size beg : 364, end : 364, used : 0
+dummy size : 1
+tag 6 :  size beg : 88, end : 88, used : 1
+dummy size : 1
+
+Deallocate
+Memory size : 88
+don't use Link list
+marged next bufsize : 117
+lend bufsize : 364
+marge prev
+don't use Link list
+marged perv bufsize : 509
+fli : 8, sli : 15
+calc : 143, 143
+marged begin bufsize : 509
+FLI : 0000000110000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 1000000000000000
+SLI 8 : 0000000000000001
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 1000000000000000
+num8 : 0000000000000001
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 128, end : 4294967295, used : 0
+dummy size : 1
+tag 1 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 3 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 4 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 5 :  size beg : 509, end : 509, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 44
+Next Tag is used
+lend bufsize : 128
+marge prev
+don't use Link list
+marged perv bufsize : 200
+fli : 7, sli : 9
+calc : 121, 121
+marged begin bufsize : 200
+FLI : 0000000110000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000001000000
+SLI 8 : 0000000000000001
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000001000000
+num8 : 0000000000000001
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 200, end : 4294967295, used : 0
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 3 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 4 :  size beg : 509, end : 509, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 14
+don't use Link list
+dir size : 200 >= 148
+this size : 200
+may be rsize : 200 - 92 - 28 = 80
+No problem your allocate size
+rsize : 80
+split size : 80
+fli : 6, sli : 4
+calc : 100, 100
+FLI : 0000001010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000100000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000001
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 90
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccSccc\
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000100000000000
+num7 : 0000000000000000
+num8 : 0000000000000001
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 0
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 3 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 4 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 5 :  size beg : 509, end : 509, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 3
+don't use Link list
+dir size : 80 >= 104
+FLI : 0000000010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000001
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 48
+TcccccccScccccccScccccccScccccccTcccccccScccccccccccScccccccScccccccTcccccccScccP
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000001
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 3 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 4 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 5 :  size beg : 509, end : 509, used : 0
+dummy size : 1
+
+Allocate
+fli : 7, sli : 2
+don't use Link list
+dir size : 509 >= 176
+this size : 509
+may be rsize : 509 - 120 - 28 = 361
+No problem your allocate size
+rsize : 361
+split size : 361
+fli : 8, sli : 6
+calc : 134, 134
+FLI : 0000000010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000001000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 120
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccx
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000001000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 3 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 4 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 6 :  size beg : 361, end : 361, used : 0
+dummy size : 1
+
+Allocate
+fli : 7, sli : 2
+don't use Link list
+dir size : 361 >= 176
+this size : 361
+may be rsize : 361 - 120 - 28 = 213
+No problem your allocate size
+rsize : 213
+split size : 213
+fli : 7, sli : 10
+calc : 122, 122
+FLI : 0000000100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000100000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 118
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccx
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000100000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 3 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 4 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 6 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 7 :  size beg : 213, end : 213, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 2
+don't use Link list
+dir size : 213 >= 100
+this size : 213
+may be rsize : 213 - 44 - 28 = 141
+No problem your allocate size
+rsize : 141
+split size : 141
+fli : 7, sli : 1
+calc : 113, 113
+FLI : 0000000100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0100000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 41
+TcccccccScccccccScccccccScccccccTcccccccSccc,
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0100000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 3 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 4 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 6 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 8 :  size beg : 141, end : 141, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 80
+Next Tag is used
+lend bufsize : 80
+marge prev
+Prev Tag is used
+fli : 6, sli : 4
+calc : 100, 100
+marged begin bufsize : 80
+FLI : 0000001100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000100000000000
+SLI 7 : 0100000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000100000000000
+num7 : 0100000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 80, end : 80, used : 0
+dummy size : 1
+tag 3 :  size beg : 108, end : 108, used : 1
+dummy size : 1
+tag 4 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 6 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 8 :  size beg : 141, end : 141, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 108
+Next Tag is used
+lend bufsize : 80
+marge prev
+don't use Link list
+marged perv bufsize : 216
+fli : 7, sli : 11
+calc : 123, 123
+marged begin bufsize : 216
+FLI : 0000000100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0100000000010000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0100000000010000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 216, end : 216, used : 0
+dummy size : 1
+tag 3 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 7 :  size beg : 141, end : 141, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 2
+don't use Link list
+dir size : 141 >= 100
+this size : 141
+may be rsize : 141 - 44 - 28 = 69
+No problem your allocate size
+rsize : 69
+split size : 69
+fli : 6, sli : 1
+calc : 97, 97
+FLI : 0000001100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0100000000000000
+SLI 7 : 0000000000010000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 41
+TcccccccScccccccScccccccScccccccTcccccccSccc,
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0100000000000000
+num7 : 0000000000010000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 216, end : 216, used : 0
+dummy size : 1
+tag 3 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 8 :  size beg : 69, end : 69, used : 0
+dummy size : 1
+
+Allocate
+fli : 7, sli : 3
+don't use Link list
+dir size : 216 >= 180
+this size : 216
+may be rsize : 216 - 124 - 28 = 64
+No problem your allocate size
+rsize : 64
+split size : 64
+fli : 6, sli : 0
+calc : 96, 96
+FLI : 0000001000000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 1100000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 124
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccSccc|
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 1100000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 124, end : 124, used : 1
+dummy size : 1
+tag 3 :  size beg : 64, end : 64, used : 0
+dummy size : 1
+tag 4 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 6 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 8 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 9 :  size beg : 69, end : 69, used : 0
+dummy size : 1
+
+Deallocate
+Memory size : 44
+Next Tag is used
+lend bufsize : 64
+marge prev
+don't use Link list
+marged perv bufsize : 136
+fli : 7, sli : 1
+calc : 113, 113
+marged begin bufsize : 136
+FLI : 0000001100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0100000000000000
+SLI 7 : 0100000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0100000000000000
+num7 : 0100000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 124, end : 124, used : 1
+dummy size : 1
+tag 3 :  size beg : 136, end : 136, used : 0
+dummy size : 1
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 8 :  size beg : 69, end : 69, used : 0
+dummy size : 1
+
+Allocate
+fli : 7, sli : 2
+don't use Link list
+dir size : 136 >= 172
+FLI : 0000001000000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0100000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 114
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccScccccccTcccccccSccc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0100000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1
+tag 2 :  size beg : 124, end : 124, used : 1
+dummy size : 1
+tag 3 :  size beg : 136, end : 136, used : 1
+dummy size : 1
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1
+tag 8 :  size beg : 69, end : 69, used : 0
+dummy size : 1
+
+Allocate
+fli : 6, sli : 8
+don't use Link list
+dir size : 69 >= 124
+FLI : 0000000000000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 68
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccýE
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1667457891
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1667457891
+tag 2 :  size beg : 124, end : 124, used : 1
+dummy size : 1667457891
+tag 3 :  size beg : 136, end : 136, used : 1
+dummy size : 1667457891
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 8 :  size beg : 69, end : 69, used : 1
+dummy size : 1667457891
+
+Allocate
+fli : 6, sli : 7
+Memory Pool is Full
+tag is NULL
+Allocate Size : 64
+
+May be Memory Pool is FULL
+
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccýE
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1667457891
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1667457891
+tag 2 :  size beg : 124, end : 124, used : 1
+dummy size : 1667457891
+tag 3 :  size beg : 136, end : 136, used : 1
+dummy size : 1667457891
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 8 :  size beg : 69, end : 69, used : 1
+dummy size : 1667457891
+
+Allocate
+fli : 6, sli : 2
+Memory Pool is Full
+tag is NULL
+Allocate Size : 43
+
+May be Memory Pool is FULL
+
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccýE
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1667457891
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1667457891
+tag 2 :  size beg : 124, end : 124, used : 1
+dummy size : 1667457891
+tag 3 :  size beg : 136, end : 136, used : 1
+dummy size : 1667457891
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 8 :  size beg : 69, end : 69, used : 1
+dummy size : 1667457891
+
+Allocate
+fli : 6, sli : 0
+Memory Pool is Full
+tag is NULL
+Allocate Size : 36
+
+May be Memory Pool is FULL
+
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccýE
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 1
+dummy size : 1667457891
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1667457891
+tag 2 :  size beg : 124, end : 124, used : 1
+dummy size : 1667457891
+tag 3 :  size beg : 136, end : 136, used : 1
+dummy size : 1667457891
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 8 :  size beg : 69, end : 69, used : 1
+dummy size : 1667457891
+
+Deallocate
+Memory size : 92
+Next Tag is used
+lend bufsize : 4294967295
+Block Out of lange
+fli : 6, sli : 7
+calc : 103, 103
+marged begin bufsize : 92
+FLI : 0000001000000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000100000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000100000000
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 92, end : 4294967295, used : 0
+dummy size : 1667457891
+tag 1 :  size beg : 80, end : 80, used : 1
+dummy size : 1667457891
+tag 2 :  size beg : 124, end : 124, used : 1
+dummy size : 1667457891
+tag 3 :  size beg : 136, end : 136, used : 1
+dummy size : 1667457891
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 8 :  size beg : 69, end : 69, used : 1
+dummy size : 1667457891
+
+Deallocate
+Memory size : 80
+Next Tag is used
+lend bufsize : 92
+marge prev
+don't use Link list
+marged perv bufsize : 200
+fli : 7, sli : 9
+calc : 121, 121
+marged begin bufsize : 200
+FLI : 0000000100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000000
+SLI 7 : 0000000001000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000000
+num7 : 0000000001000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 200, end : 4294967295, used : 0
+dummy size : 1667457891
+tag 1 :  size beg : 124, end : 124, used : 1
+dummy size : 1667457891
+tag 2 :  size beg : 136, end : 136, used : 1
+dummy size : 1667457891
+tag 3 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 5 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 7 :  size beg : 69, end : 69, used : 1
+dummy size : 1667457891
+
+Deallocate
+Memory size : 120
+Next Tag is used
+lend bufsize : 136
+marge prev
+Prev Tag is used
+fli : 6, sli : 14
+calc : 110, 110
+marged begin bufsize : 120
+FLI : 0000001100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0000000000000010
+SLI 7 : 0000000001000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0000000000000010
+num7 : 0000000001000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 200, end : 4294967295, used : 0
+dummy size : 1667457891
+tag 1 :  size beg : 124, end : 124, used : 1
+dummy size : 1667457891
+tag 2 :  size beg : 136, end : 136, used : 1
+dummy size : 1667457891
+tag 3 :  size beg : 120, end : 120, used : 0
+dummy size : 1667457891
+tag 4 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 5 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 7 :  size beg : 69, end : 69, used : 1
+dummy size : 1667457891
+
+Allocate
+fli : 7, sli : 0
+don't use Link list
+dir size : 200 >= 156
+this size : 200
+may be rsize : 200 - 100 - 28 = 72
+No problem your allocate size
+rsize : 72
+split size : 72
+fli : 6, sli : 2
+calc : 98, 98
+FLI : 0000001000000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0010000000000010
+SLI 7 : 0000000000000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 98
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0010000000000010
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 100, end : 4294967295, used : 1
+dummy size : 1667457891
+tag 1 :  size beg : 72, end : 72, used : 0
+dummy size : 1667457891
+tag 2 :  size beg : 124, end : 124, used : 1
+dummy size : 1667457891
+tag 3 :  size beg : 136, end : 136, used : 1
+dummy size : 1667457891
+tag 4 :  size beg : 120, end : 120, used : 0
+dummy size : 1667457891
+tag 5 :  size beg : 120, end : 120, used : 1
+dummy size : 1667457891
+tag 6 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 7 :  size beg : 44, end : 44, used : 1
+dummy size : 1667457891
+tag 8 :  size beg : 69, end : 69, used : 1
+dummy size : 1667457891
+
+Allocate
+fli : 7, sli : 2
+Memory Pool is Full
+tag is NULL
+Allocate Size : 113
+
+May be Memory Pool is FULL
+
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccS
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0010000000000010
+num7 : 0000000000000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 100, end : 4294967295, used : 1
+dummy size : 1667457891
+
+Deallocate
+Memory size : 120
+Next Tag is used
+lend bufsize : 120
+marge prev
+don't use Link list
+marged perv bufsize : 268
+fli : 8, sli : 0
+calc : 128, 128
+marged begin bufsize : 268
+FLI : 0000001010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0010000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 1000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0010000000000000
+num7 : 0000000000000000
+num8 : 1000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 100, end : 4294967295, used : 1
+dummy size : 1667457891
+
+Deallocate
+Memory size : 44
+Next Tag is used
+lend bufsize : 268
+marge prev
+don't use Link list
+marged perv bufsize : 340
+fli : 8, sli : 5
+calc : 133, 133
+marged begin bufsize : 340
+FLI : 0000001010000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0010000000000000
+SLI 7 : 0000000000000000
+SLI 8 : 0000010000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0010000000000000
+num7 : 0000000000000000
+num8 : 0000010000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 100, end : 4294967295, used : 1
+dummy size : 1667457891
+
+Allocate
+fli : 7, sli : 3
+don't use Link list
+dir size : 340 >= 180
+this size : 340
+may be rsize : 340 - 124 - 28 = 188
+No problem your allocate size
+rsize : 188
+split size : 188
+fli : 7, sli : 7
+calc : 119, 119
+FLI : 0000001100000000000000000000000000000000000000000000000000000000
+SLI 0 : 0000000000000000
+SLI 1 : 0000000000000000
+SLI 2 : 0000000000000000
+SLI 3 : 0000000000000000
+SLI 4 : 0000000000000000
+SLI 5 : 0000000000000000
+SLI 6 : 0010000000000000
+SLI 7 : 0000000100000000
+SLI 8 : 0000000000000000
+SLI 9 : 0000000000000000
+SLI 10 : 0000000000000000
+
+Allocate Size : 122
+TcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccScccccccTcccccccScccccccScccccccSc
+
+num0 : 0000000000000000
+num1 : 0000000000000000
+num2 : 0000000000000000
+num3 : 0000000000000000
+num4 : 0000000000000000
+num5 : 0000000000000000
+num6 : 0010000000000000
+num7 : 0000000100000000
+num8 : 0000000000000000
+num9 : 0000000000000000
+num10 : 0000000000000000
+
+
+Memory Pool
+tag 0 :  size beg : 100, end : 4294967295, used : 1
+dummy size : 1667457891
+
+Allocate
+fli : 6, sli : 11
