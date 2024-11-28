@@ -161,6 +161,7 @@
     <Text Include="AllocaterTesterLog.txt" />
     <Text Include="AllocaterTesterLog01120241126.txt" />
     <Text Include="AllocaterTesterLog05820241127.txt" />
+    <Text Include="AllocaterTesterLog112420241128.txt" />
     <Text Include="AllocaterTesterLog11620241128.txt" />
     <Text Include="AllocaterTesterLog130920241126.txt" />
   </ItemGroup>

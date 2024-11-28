@@ -27,19 +27,37 @@ TLSFmemory::TLSFmemory(uint32_t n = 7, uint8_t divsize = 4)
 
 pronet::TLSFmemory::~TLSFmemory()
 {
-	static BoundaryTagBegin* next(nullptr);
-	for (BoundaryTagBegin*& a : freelist) {
-		if (a) {
-			next = a;
-			while (next != nullptr) {
-				deleteTag(a);
-				next = next->NextLink();
-			}
-		}
+	static uint8_t* ptr(nullptr);
+	static BoundaryTagBegin* begin(nullptr);
+	static BoundaryTagEnd* end(nullptr);
+	static uint32_t count(0);
+
+	count = 0;
+
+	ptr = const_cast<uint8_t*>(pool.data());
+	end = reinterpret_cast<BoundaryTagEnd*>(ptr);
+	if (end->size != 0xffffffff) {
+		std::cerr << "dummy end is probably not working" << std::endl;
+		return;
+	}
+
+	ptr += endSize;
+	begin = reinterpret_cast<BoundaryTagBegin*>(ptr);
+	end = begin->endTag();
+
+	while (begin->bufSize() > 32 && begin->bufSize() <= bufSize) {
+		begin->~BoundaryTagBegin();
+		end->~BoundaryTagEnd();
+		begin = begin->getNext();
+		end = begin->endTag();
+		BoundaryTagBegin* dummy = reinterpret_cast<BoundaryTagBegin*>(const_cast<uint8_t*>(pool.data()) + endSize + tagSize + bufSize);
+		count++;
 	}
 
 	BoundaryTagBegin* dummy = reinterpret_cast<BoundaryTagBegin*>(pool.data() + tagSize + bufSize);
 	dummy->~BoundaryTagBegin();
+	BoundaryTagEnd* dummy_end = reinterpret_cast<BoundaryTagEnd*>(pool.data());
+	dummy_end->~BoundaryTagEnd();
 }
 
 void* pronet::TLSFmemory::allocate(uint32_t size)
@@ -299,6 +317,7 @@ void pronet::TLSFmemory::printMemoryLayout() const
 	
 	ptr += endSize;
 	begin = reinterpret_cast<BoundaryTagBegin*>(ptr);
+	end = begin->endTag();
 	std::cout << "Memory Pool" << std::endl;
 
 	while (begin->bufSize() > 32 && begin->bufSize() <= bufSize) {
@@ -309,7 +328,6 @@ void pronet::TLSFmemory::printMemoryLayout() const
 		std::cout<<"dummy size : "<<dummy->bufSize()<<std::endl;
 		count++;
 	}
-	
 }
 
 bool pronet::TLSFmemory::getLSB(uint64_t num, uint8_t *lsb) const

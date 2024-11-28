@@ -28,23 +28,25 @@ void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pro
 			size = minsize + rand() % (maxsize - minsize);
 			char* alocPtr = static_cast<char*>(tlsf->allocate(size));
 			std::cout << "Allocate Size : " << size << std::endl;
-			if (alocPtr)
+			if (alocPtr) {
 				ptr.emplace_back(alocPtr);
+				/*
+				char* buf = ptr.back();
+				for (int j = 0; j < size; j++) {
+					if (j % 32 == 0)
+						buf[j] = 'T';
+					else if (j % 8 == 0)
+						buf[j] = 'S';
+					else
+						buf[j] = 'c';
+				}
+				std::cout << &ptr.back()[0] << std::endl;
+				*/
+			}
 #ifdef _DEBUG
 			else
 				std::cout << std::endl << "May be Memory Pool is FULL" << std::endl << std::endl;
 #endif // _DEBUG
-
-			char* buf = ptr.back();
-			for (int j = 0; j < size; j++) {
-				if (j % 32 == 0)
-					buf[j] = 'T';
-				else if (j % 8 == 0)
-					buf[j] = 'S';
-				else
-					buf[j] = 'c';
-			}
-			std::cout << &ptr.back()[0] << std::endl;
 			tlsf->printFreelistStatus();
 			std::cout << std::endl;
 			tlsf->printMemoryLayout();

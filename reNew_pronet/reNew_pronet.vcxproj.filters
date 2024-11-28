@@ -93,5 +93,8 @@
     <Text Include="AllocaterTesterLog11620241128.txt">
       <Filter>リソース ファイル</Filter>
     </Text>
+    <Text Include="AllocaterTesterLog112420241128.txt">
+      <Filter>リソース ファイル</Filter>
+    </Text>
   </ItemGroup>
 </Project>
