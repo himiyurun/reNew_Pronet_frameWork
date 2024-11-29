@@ -30,7 +30,6 @@ void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pro
 			std::cout << "Allocate Size : " << size << std::endl;
 			if (alocPtr) {
 				ptr.emplace_back(alocPtr);
-				/*
 				char* buf = ptr.back();
 				for (int j = 0; j < size; j++) {
 					if (j % 32 == 0)
@@ -41,7 +40,6 @@ void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pro
 						buf[j] = 'c';
 				}
 				std::cout << &ptr.back()[0] << std::endl;
-				*/
 			}
 #ifdef _DEBUG
 			else
@@ -103,7 +101,7 @@ int main() {
 	try {
 		pronet::TLSFmemory tlsf(10, 4);
 
-		runMemoryAllocater(128, 32, 10, &tlsf);
+		runMemoryAllocater(128, 32, 300, &tlsf);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;

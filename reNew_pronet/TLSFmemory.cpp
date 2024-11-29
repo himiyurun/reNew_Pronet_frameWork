@@ -18,7 +18,7 @@ TLSFmemory::TLSFmemory(uint32_t n = 7, uint8_t divsize = 4)
 	std::cout << "pool size : " << bufSize << std::endl;
 
 	createEndTag(pool.data(), 0xffffffff);
-	createBeginTag(pool.data() + tagSize + bufSize, 0, true);
+	createBeginTag(pool.data() + endSize + tagSize + bufSize, 0, true);
 	BoundaryTagBegin* begin = createNewTag(pool.data() + endSize, bufSize, false);
 	std::cout << "list size : " << freelist.size() << std::endl;
 	rigist(begin, bufSize);
