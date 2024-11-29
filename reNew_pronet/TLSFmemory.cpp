@@ -62,12 +62,11 @@ pronet::TLSFmemory::~TLSFmemory()
 
 void* pronet::TLSFmemory::allocate(uint32_t size)
 {
-	std::cout << "Allocate" << std::endl;
 	uint32_t bufsize(sizeAlignment(size));
-	//std::cout << "size : "<<size << std::endl;
+	std::cout << "tlsf allocate size : " << bufsize << ", " << size << std::endl;
+
 	if (bufsize < minSize) { bufsize = minSize; }
 	bufsize += tagSize;
-	//std::cout << "bufsize : " << bufsize << std::endl;
 
 	uint8_t fli, sli;
 	calcTlsfIndex(&fli, &sli, bufsize);
@@ -75,28 +74,15 @@ void* pronet::TLSFmemory::allocate(uint32_t size)
 
 	BoundaryTagBegin* begin = searchFreeBlock(fli, sli);
 	if (!begin) { 
-		//throw std::runtime_error("tag is null");
-		std::cout << "tag is NULL" << std::endl;
+		std::cerr << "tag is null" << std::endl;
 		return nullptr;
-	}
-	if (begin->NextLink()) {
-		BoundaryTagBegin* begNext = begin->NextLink();
-		begNext->setPrev(begin->PrevLink());
-		begin->setNext(nullptr);
-	}
-	if (begin->PrevLink()) {
-		BoundaryTagBegin* begPrev = begin->PrevLink();
-		begPrev->setNext(begin->NextLink());
-		begin->setPrev(nullptr);
 	}
 
 	unrigist(begin, begin->bufSize());
 	
-	std::cout << "dir size : " << begin->bufSize() << " >= " << bufsize + tagSize + minSize << std::endl;
 	if (begin->bufSize() >= minSize + bufsize + tagSize) {
 		BoundaryTagBegin* lbegin = begin->split(sizeAlignment(size));
 		if (lbegin) {
-			std::cout << "split size : " << lbegin->bufSize() << std::endl;
 			rigist(lbegin, lbegin->bufSize());
 		}
 	}
@@ -112,16 +98,23 @@ void* pronet::TLSFmemory::allocate(uint32_t size)
 
 BoundaryTagBegin* pronet::TLSFmemory::searchFreeBlock(uint8_t fli, uint8_t sli) const
 {
-	uint8_t f = fli, s = sli;
-	if (!getLSB(parititionSLI[fli] & ~((1 << sli) - 1), &s)) {
-		if (!getLSB(parititionFLI & ~((1 << fli) - 1), &f)) {
-			//throw std::runtime_error("Memory Pool is Full");
-			std::cout << "Memory Pool is Full" << std::endl;
+	static uint8_t f = 0, s = 0;
+	f = fli;
+	s = sli;
+	/*
+	+ 1;
+	if (sli >= divSize) {
+		s -= divSize;
+		f++;
+	}
+	*/
+	if (!getLSB(parititionSLI[fli] & ~((1 << s) - 1), &s)) {
+		if (!getLSB(parititionFLI & ~((1 << (f + 1)) - 1), &f)) {
+			std::cout << "Log : Memory Pool is Full" << std::endl;
 			return nullptr;
 		}
 		if (!getLSB(parititionSLI[f], &s)) {
 			throw std::runtime_error("Not work paritition Bit SLI or FLI");
-			return nullptr;
 		}
 	}
 	return freelist[calcIndex(f, s)];

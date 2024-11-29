@@ -18,6 +18,8 @@ void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pro
 	uint32_t size(0);
 	uint32_t allocateCount(0);
 	uint32_t deallocateCount(0);
+	pronet::BoundaryTagBegin* begin(nullptr);
+	pronet::BoundaryTagEnd* end(nullptr);
 	std::vector<char*> ptr;
 	while (nowtime - lasttime <= testTime) {
 
@@ -31,7 +33,10 @@ void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pro
 			if (alocPtr) {
 				ptr.emplace_back(alocPtr);
 				char* buf = ptr.back();
-				for (int j = 0; j < size; j++) {
+				begin = reinterpret_cast<pronet::BoundaryTagBegin*>(buf - pronet::begSize);
+				end = begin->endTag();
+				std::cout << "true size : " << begin->bufSize() << ", " << end->size << std::endl;
+				for (int j = 0; j < size - 1; j++) {
 					if (j % 32 == 0)
 						buf[j] = 'T';
 					else if (j % 8 == 0)
@@ -39,12 +44,14 @@ void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pro
 					else
 						buf[j] = 'c';
 				}
+				buf[size - 1] = '\0';
 				std::cout << &ptr.back()[0] << std::endl;
 			}
 #ifdef _DEBUG
 			else
 				std::cout << std::endl << "May be Memory Pool is FULL" << std::endl << std::endl;
 #endif // _DEBUG
+
 			tlsf->printFreelistStatus();
 			std::cout << std::endl;
 			tlsf->printMemoryLayout();
@@ -101,33 +108,11 @@ int main() {
 	try {
 		pronet::TLSFmemory tlsf(10, 4);
 
-		runMemoryAllocater(128, 32, 300, &tlsf);
+		runMemoryAllocater(128, 32, 90, &tlsf);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
 	}
-	/*
-	pronet::BoundaryTagBegin* begin = pronet::createNewTag(pool, 256, true);
-	char* buf = reinterpret_cast<char*>(begin) + pronet::begSize;
-	buf[256] = 'c';
-	std::cout << buf[256] << std::endl;
-	pronet::BoundaryTagBegin* rbegin = begin->split(128);
-	rbegin->setUsed(true);
-	char* rbuf = reinterpret_cast<char*>(begin) + pronet::begSize;
-	for (int i = 0; i < rbegin->bufSize(); i++) {
-		rbuf[i] = 'c';
-	}
-	for (int i = 0; i < rbegin->bufSize(); i++) {
-		std::cout<<rbuf[i]<<" ";
-	}
-	std::cout <<rbegin->bufSize()<< std::endl;
-	rbegin->setUsed(false);
-	begin->marge();
-	pronet::BoundaryTagEnd* end = begin->endTag();
-	std::cout << "begin size : " << begin->bufSize() << ", end size : " << end->size << std::endl;
-	pronet::deleteTag(buf);
-	//pronet::deleteTag(rbuf);
-	*/
 
 	try {
 		game.run();

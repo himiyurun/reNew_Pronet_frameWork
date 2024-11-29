@@ -73,7 +73,12 @@ namespace pronet {
 
 		void calcSLI(uint8_t* sli, uint8_t fli, uint32_t size) const;
 
-		uint32_t sizeAlignment(uint32_t size) const { return (size + 0x03) & ~(0x03); }
+		uint32_t sizeAlignment(uint32_t size) const { 
+#ifdef _DEBUG
+			std::cout << "original : " << size << ", alignment :" << ((size + 3) & ~(3)) << std::endl;
+#endif
+			return (size + 3) & ~(3); 
+		}
 
 		//	ビットの描画を行う
 		//	num : 描画を行いたい変数
