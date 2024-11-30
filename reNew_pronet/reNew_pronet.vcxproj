@@ -141,6 +141,7 @@
     <ClCompile Include="Pronet.cpp" />
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TLSFmemory.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="Pronet.h" />
     <ClInclude Include="readtxt.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="TLSFmemory.h" />
   </ItemGroup>
   <ItemGroup>
