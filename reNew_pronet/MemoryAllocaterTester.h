@@ -1,85 +1,170 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include <cstdlib>
-#include <ctime>
-#include <functional>
+
+#include "TLSFmemory.h"
+#include "Timer.h"
 
 namespace pronet {
 
-	template<typename T, typename S, class M>
-	class MemoryAllocaterTester
-	{
-		std::function<T> allocateMethod;
 
-		std::function<S> deallocateMethod;
+	void runMemoryAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, pronet::TLSFmemory* tlsf, uint64_t* alc, uint64_t* dlc) {
+		time_t nowtime(time(nullptr));
+		time_t lasttime(time(nullptr));
 
-		M* manager;
+		const uint8_t maxAllocation(32);
+		uint64_t allocCount(0);
+		uint64_t deallocCount(0);
 
-		time_t testTime;
+		uint32_t size(0);
+		uint32_t allocateCount(0);
+		uint32_t deallocateCount(0);
+		pronet::BoundaryTagBegin* begin(nullptr);
+		pronet::BoundaryTagEnd* end(nullptr);
+		std::vector<char*> ptr;
+		while (nowtime - lasttime <= testTime) {
 
-	public:
+			allocateCount = rand() % maxAllocation;
+			deallocateCount = rand() % maxAllocation;
 
-		//	自作メモリアロケータのテスト用
-		//	メモリリークが起こらないかを調べる
-		//	allocatemethod : 自作メモリアロケーターのメモリ確保する関数ポインタ
-		//	deallocatemethod : 自作メモリアロケーターのメモリ開放する関数ポインタ
-		//	manager : メモリアロケータのクラスのポインタ
-		//	testtime : テストする時間（1秒当たり1で指定する。ミリ秒未対応）
-		MemoryAllocaterTester(T* allocatemethod, S* deallocatemethod, M* manager, time_t testtime)
-			: allocateMethod(allocatemethod)
-			, deallocateMethod(deallocatemethod)
-			, manager()
-			, testTime(testtime)
-		{
-			srand(static_cast<unsigned>(time(nullptr)));
-		}
+			for (int i = 0; i < allocateCount; i++) {
+				{
+					Timer time;
 
-		~MemoryAllocaterTester() {
-
-		}
-
-		void run(uint32_t maxsize, uint32_t minsize) {
-			time_t nowtime(time(nullptr));
-			time_t lasttime(time(nullptr));
-
-			const uint8_t maxAllocation(16);
-
-			uint32_t size(0);
-			uint32_t allocateCount(0);
-			uint32_t deallocateCount(0);
-			std::vector<char*> ptr;
-			while (nowtime - lasttime <= testTime) {
-
-				allocateCount = rand() % maxAllocation;
-				deallocateCount = rand() % maxAllocation;
-				
-				for (int i = 0; i < allocateCount; i++) {
 					size = minsize + rand() % (maxsize - minsize);
-					ptr.emplace_back(allocateMethod(size));
-					for (int j = 0; j < size; j++) {
-						if (j % 32 == 0)
-							ptr.back()[j] = "T";
-						else if (j % 8 == 0)
-							ptr.back()[j] = "S";
-						else
-							ptr.back()[j] = "c";
+					char* alocPtr = static_cast<char*>(tlsf->allocate(size));
+#ifdef _DEBUG
+					std::cout << "Allocate Size : " << size << std::endl;
+#endif
+					if (alocPtr) {
+						ptr.emplace_back(alocPtr);
+						char* buf = ptr.back();
+#ifdef _DEBUG
+						begin = reinterpret_cast<pronet::BoundaryTagBegin*>(buf - pronet::begSize);
+						end = begin->endTag();
+						std::cout << "true size : " << begin->bufSize() << ", " << end->size << std::endl;
+#endif			
+						for (int j = 0; j < size - 1; j++) {
+							if (j % 32 == 0)
+								buf[j] = 'T';
+							else if (j % 8 == 0)
+								buf[j] = 'S';
+							else
+								buf[j] = 'c';
+						}
+						buf[size - 1] = '\0';
+						//std::cout << &ptr.back()[0] << std::endl;
+						allocCount++;
 					}
-					std::cout << &ptr.back()[0] << std::endl;
+#ifdef _DEBUG
+					else
+					{
+						std::cout << std::endl << "May be Memory Pool is FULL" << std::endl << std::endl;
+					}
+					tlsf->printFreelistStatus();
+					std::cout << std::endl;
+					tlsf->printMemoryLayout();
+					std::cout << std::endl;
+#endif // _DEBUG
 				}
-				for (int i = 0; i < deallocateCount; i++) {
+			}
+			for (int i = 0; i < deallocateCount; i++) {
+				{
+					Timer time;
 					size = minsize + rand() % (maxsize - minsize);
 					if (!ptr.empty()) {
-						ptr.emplace_back(deallocateMethod(ptr.front()));
+						tlsf->deallocate(ptr.front());
 						ptr.erase(ptr.begin());
+						deallocCount++;
 					}
 				}
-
-				nowtime(time(nullptr));
+#ifdef _DEBUG
+				tlsf->printFreelistStatus();
+				std::cout << std::endl;
+				tlsf->printMemoryLayout();
+				std::cout << std::endl;
+#endif
 			}
 
-			std::cout << "MemoryAllocateTest is Finish!!" << std::endl;
+			nowtime = time(nullptr);
 		}
-	};
+
+		for (auto& a : ptr) {
+			if (a)
+				tlsf->deallocate(a);
+		}
+
+		*alc += allocCount;
+		*dlc += deallocCount;
+		std::cout << "Allocate count : " << allocCount << ", deallocate count : " << deallocCount << std::endl;
+		std::cout << "MemoryAllocateTest is Finish!!" << std::endl;
+	}
+
+	void runNormalAllocater(uint32_t maxsize, uint32_t minsize, time_t testTime, uint64_t* alc, uint64_t* dlc) {
+		time_t nowtime(time(nullptr));
+		time_t lasttime(time(nullptr));
+
+		const uint8_t maxAllocation(32);
+		uint64_t allocCount(0);
+		uint64_t deallocCount(0);
+
+		uint32_t size(0);
+		uint32_t allocateCount(0);
+		uint32_t deallocateCount(0);
+		std::vector<char*> ptr;
+		while (nowtime - lasttime <= testTime) {
+
+			nowtime = time(nullptr);
+
+			allocateCount = rand() % maxAllocation;
+			deallocateCount = rand() % maxAllocation;
+
+			for (int i = 0; i < allocateCount; i++) {
+				{
+					Timer time;
+
+					size = minsize + rand() % (maxsize - minsize);
+					char* alocPtr = new char[size];
+					if (alocPtr) {
+						ptr.emplace_back(alocPtr);
+						char* buf = ptr.back();
+						for (int j = 0; j < size - 1; j++) {
+							if (j % 32 == 0)
+								buf[j] = 'T';
+							else if (j % 8 == 0)
+								buf[j] = 'S';
+							else
+								buf[j] = 'c';
+						}
+						buf[size - 1] = '\0';
+						//std::cout << &ptr.back()[0] << std::endl;
+						allocCount++;
+					}
+				}
+			}
+			for (int i = 0; i < deallocateCount; i++) {
+				{
+					Timer time;
+					size = minsize + rand() % (maxsize - minsize);
+					if (!ptr.empty()) {
+						delete[] ptr[0];
+						ptr.erase(ptr.begin());
+						deallocCount++;
+					}
+				}
+			}
+		}
+
+		for (char* a : ptr) {
+			if (a)
+				delete[] a;
+		}
+
+		*alc += allocCount;
+		*dlc += deallocCount;
+		std::cout << "Allocate count : " << allocCount << ", deallocate count : " << deallocCount << std::endl;
+		std::cout << "MemoryAllocateTest is Finish!!" << std::endl;
+	}
+
 }
 

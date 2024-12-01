@@ -62,6 +62,9 @@ pronet::TLSFmemory::~TLSFmemory()
 
 void* pronet::TLSFmemory::allocate(uint32_t size)
 {
+#ifdef _DEBUG
+	std::cout << "Allocate" << std::endl;
+#endif
 	uint32_t bufsize(sizeAlignment(size));
 
 	if (bufsize < minSize) { bufsize = minSize; }
@@ -119,6 +122,9 @@ BoundaryTagBegin* pronet::TLSFmemory::searchFreeBlock(uint8_t fli, uint8_t sli) 
 
 void pronet::TLSFmemory::deallocate(void* p)
 {
+#ifdef _DEBUG
+	std::cout << "Deallocate" << std::endl;
+#endif
 	uint8_t* ptr = static_cast<uint8_t*>(p);
 	BoundaryTagBegin* begin = reinterpret_cast<BoundaryTagBegin*>(ptr - begSize);
 	begin->setUsed(false);

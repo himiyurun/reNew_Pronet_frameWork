@@ -2,14 +2,17 @@
 
 #include "Shader.h"
 #include "Object.h"
+#include "TLSFmemory.h"
 #include "glfw_Window.h"
 
 class PronetManager : public glfw_Window {
-	Shader shader;
+	Shader *shader;
 
-	Object object;
+	Object *object;
 
 	const GLint dimentionSize;
+
+	pronet::TLSFmemory tlsf;
 
 public:
 
@@ -23,11 +26,29 @@ public:
 
 	
 	void InitShader(const char* vsrc, const char* fsrc) {
-		shader.Init(vsrc, fsrc);
+		if (shader) {
+			uint8_t* ptr = reinterpret_cast<uint8_t*>(shader);
+			Shader* buf = new(ptr) Shader();
+			buf->Init(vsrc, fsrc);
+		}
+#ifdef _DEBUG
+		else {
+			throw std::runtime_error("Can't properly work Memory Allocater");
+		}
+#endif
 	}
 
 	void InitObj(GLsizei vertexcount, const glm::vec2* vertex) {
-		object.Init(dimentionSize, vertexcount, vertex);
+		if (object) {
+			uint8_t* ptr = reinterpret_cast<uint8_t*>(object);
+			Object* buf = new(ptr) Object();
+			buf->Init(dimentionSize, vertexcount, vertex);
+		}
+#ifdef _DEBUG
+		else {
+			throw std::runtime_error("Can't properly work Memory Allocater");
+		}
+#endif
 	}
 
 	//	ÉãÅ[Évì‡Ç≈é¿çsÇ∑ÇÈèàóù
