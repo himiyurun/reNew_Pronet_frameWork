@@ -3,6 +3,7 @@
 #include "Pronet.h"
 #include "TLSFmemory.h"
 #include "Timer.h"
+#include "MemoryAllocaterTester.h"
 
 void libInit() {
 	if (!glfwInit()) {
@@ -17,13 +18,9 @@ constexpr glm::vec2 rectangleVertex[] = {
 	{  0.5f,  0.5f }
 };
 
-uint8_t pool[284];
-
 int main() {
 
 	libInit();
-
-	memset(pool, 0, sizeof(pool));
 
 	glfw_windowCreateInfo winInfo;
 	winInfo.width = 640;
@@ -39,6 +36,9 @@ int main() {
 	game.InitShader("vertex_shader.glslc", "fragment_shader.glslc");
 
 	game.InitObj(4, rectangleVertex);
+
+	Object* obj2 = new_class<Object>(4);
+	delete_class<Object>(obj2);
 
 	try {
 		game.run();
