@@ -13,66 +13,84 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\PnLib">
+      <UniqueIdentifier>{0bd5dc81-b768-4ccc-bdc8-654ca503e684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\PnHead">
+      <UniqueIdentifier>{6d1230f1-3d61-4406-a9dd-b07b7123bd40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GLI">
+      <UniqueIdentifier>{5cc593df-b688-4039-acb1-4f81c3d22e75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GLI">
+      <UniqueIdentifier>{c1c23186-4dea-4e6d-85c7-d622c9a80820}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="glfw_Window.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="readtxt.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Pronet.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="BoundaryTag.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="TLSFmemory.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="glad.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="BoundaryTag.cpp">
+      <Filter>ソース ファイル\PnLib</Filter>
+    </ClCompile>
+    <ClCompile Include="TLSFmemory.cpp">
+      <Filter>ソース ファイル\PnLib</Filter>
+    </ClCompile>
+    <ClCompile Include="readtxt.cpp">
+      <Filter>ソース ファイル\PnLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>ソース ファイル\GLI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>ソース ファイル\GLI</Filter>
+    </ClCompile>
+    <ClCompile Include="glfw_Window.cpp">
+      <Filter>ソース ファイル\GLI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPool.cpp">
+      <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="glfw_Window.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="readtxt.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Pronet.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="BoundaryTag.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="TLSFmemory.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\PnHead</Filter>
     </ClInclude>
     <ClInclude Include="MemoryAllocaterTester.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\PnHead</Filter>
+    </ClInclude>
+    <ClInclude Include="readtxt.h">
+      <Filter>ヘッダー ファイル\PnHead</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\PnHead</Filter>
+    </ClInclude>
+    <ClInclude Include="TLSFmemory.h">
+      <Filter>ヘッダー ファイル\PnHead</Filter>
+    </ClInclude>
+    <ClInclude Include="glfw_Window.h">
+      <Filter>ヘッダー ファイル\GLI</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>ヘッダー ファイル\GLI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>ヘッダー ファイル\GLI</Filter>
+    </ClInclude>
+    <ClInclude Include="pnTlsf.h">
+      <Filter>ヘッダー ファイル\PnHead</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPool.h">
+      <Filter>ヘッダー ファイル\PnHead</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,6 @@
 #include <memory>
 
 #include "Pronet.h"
-#include "TLSFmemory.h"
-#include "Timer.h"
-#include "MemoryAllocaterTester.h"
 
 void libInit() {
 	if (!glfwInit()) {
@@ -36,9 +33,6 @@ int main() {
 	game.InitShader("vertex_shader.glslc", "fragment_shader.glslc");
 
 	game.InitObj(4, rectangleVertex);
-
-	Object* obj2 = new_class<Object>(4);
-	delete_class<Object>(obj2);
 
 	try {
 		game.run();

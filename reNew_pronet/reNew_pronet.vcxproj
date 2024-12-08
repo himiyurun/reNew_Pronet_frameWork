@@ -138,10 +138,10 @@
     <ClCompile Include="glfw_Window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectPool.cpp" />
     <ClCompile Include="Pronet.cpp" />
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TLSFmemory.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +149,8 @@
     <ClInclude Include="glfw_Window.h" />
     <ClInclude Include="MemoryAllocaterTester.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectPool.h" />
+    <ClInclude Include="pnTlsf.h" />
     <ClInclude Include="Pronet.h" />
     <ClInclude Include="readtxt.h" />
     <ClInclude Include="Shader.h" />

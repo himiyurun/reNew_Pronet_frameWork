@@ -2,23 +2,17 @@
 
 #include "Shader.h"
 #include "Object.h"
-#include "TLSFmemory.h"
+#include "ObjectPool.h"
 #include "glfw_Window.h"
 
-static pronet::TLSFmemory tlsf(10, 8);
-
-template<class T>
-T* new_class(size_t size);
-
-template<typename T>
-void delete_class(void* p);
-
-class PronetManager : public glfw_Window {
+class PronetManager : public glfw_Window, pnTlsf {
 	Shader *shader;
 
 	Object *object;
 
 	const GLint dimentionSize;
+
+	pronet::ObjectPool<Object> test;
 
 public:
 
@@ -35,7 +29,7 @@ public:
 	}
 
 	void InitObj(GLsizei vertexcount, const glm::vec2* vertex) {
-		object[0].Init(dimentionSize, vertexcount, vertex);
+		object->Init(dimentionSize, vertexcount, vertex);
 	}
 
 	//	ÉãÅ[Évì‡Ç≈é¿çsÇ∑ÇÈèàóù
