@@ -14,6 +14,8 @@ class PronetManager : public glfw_Window, pnTlsf {
 
 	pronet::ObjectPool<Object> test;
 
+	pronet::ObjectPool<Shader> testshader;
+
 public:
 
 	//	コンストラクタ
@@ -25,11 +27,17 @@ public:
 	~PronetManager();
 	
 	void InitShader(const char* vsrc, const char* fsrc) {
-		shader[0].Init(vsrc, fsrc);
+		shader = testshader.pop();
+		if (shader) {
+			shader->Init(vsrc, fsrc);
+		}
 	}
 
-	void InitObj(GLsizei vertexcount, const glm::vec2* vertex) {
-		object->Init(dimentionSize, vertexcount, vertex);
+	void InitObj(ObjectInfo2v *info,GLboolean index_used) {
+		object = test.pop();
+		if (object) {
+			object->Init(dimentionSize, info, index_used);
+		}
 	}
 
 	//	ループ内で実行する処理

@@ -14,6 +14,8 @@ public:
 
 	GLboolean Init(const char* vsrc, const char* fsrc);
 
+	void Reset();
+
 	GLboolean ProgramInfo(GLuint program) const;
 
 	GLboolean ShaderInfo(GLuint shader, const char* name) const;

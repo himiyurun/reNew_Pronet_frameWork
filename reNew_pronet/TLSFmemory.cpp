@@ -3,7 +3,7 @@
 using namespace pronet;
 
 TLSFmemory::TLSFmemory(uint32_t n = 7, uint8_t divsize = 4)
-	: pool((1 << n) + (tagSize * 2), 0)
+	: pool((static_cast<uint64_t>(1) << n) + (tagSize * 2), 0)
 	, freelist((1 << divsize)* (n + 1), nullptr)
 	, parititionSLI(n + 1, 0)
 	, parititionFLI(0)
@@ -108,8 +108,8 @@ BoundaryTagBegin* pronet::TLSFmemory::searchFreeBlock(uint8_t fli, uint8_t sli) 
 		s -= divSize;
 		f++;
 	}
-	if (!getLSB(parititionSLI[fli] & ~((1 << s) - 1), &s)) {
-		if (!getLSB(parititionFLI & ~((1 << (f + 1)) - 1), &f)) {
+	if (!getLSB(parititionSLI[fli] & ~((static_cast<uint64_t>(1) << s) - 1), &s)) {
+		if (!getLSB(parititionFLI & ~((static_cast<uint64_t>(1) << (f + 1)) - 1), &f)) {
 			std::cout << "Log : Memory Pool is Full" << std::endl;
 			return nullptr;
 		}

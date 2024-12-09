@@ -15,11 +15,15 @@ constexpr glm::vec2 rectangleVertex[] = {
 	{  0.5f,  0.5f }
 };
 
+constexpr GLuint rectangleIndex[] = {
+	0, 1, 2, 0, 3, 2
+};
+
 int main() {
 
 	libInit();
 
-	glfw_windowCreateInfo winInfo;
+	glfw_windowCreateInfo winInfo = {};
 	winInfo.width = 640;
 	winInfo.height = 480;
 	winInfo.title = "syu-thingumoruka-";
@@ -32,7 +36,12 @@ int main() {
 
 	game.InitShader("vertex_shader.glslc", "fragment_shader.glslc");
 
-	game.InitObj(4, rectangleVertex);
+	ObjectInfo2v objInfo{};
+	objInfo.vertexcount = 4;
+	objInfo.vertex = rectangleVertex;
+	objInfo.indexcount = 6;
+	objInfo.index = rectangleIndex;
+	game.InitObj(&objInfo, GL_TRUE);
 
 	try {
 		game.run();

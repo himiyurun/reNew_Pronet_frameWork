@@ -3,21 +3,24 @@
 PronetManager::PronetManager(glfw_windowCreateInfo* windowInfo, GLint dimentionSize)
 	: glfw_Window(windowInfo)
 	, dimentionSize(dimentionSize)
-	, test(16)
+	, object(nullptr)
+	, shader(nullptr)
+	, test(4)
+	, testshader(4)
 {
-	object = test.pop();
-	shader = new_class<Shader>(4);
 }
 
 PronetManager::~PronetManager()
 {
+	shader->Reset();
+	testshader.push(&shader);
+	object->Reset();
 	test.push(&object);
-	delete_class<Shader>(shader);
 }
 
 void PronetManager::process() const
 {
-	shader[0].use();
+	shader->use();
 
 	bindWindowPram(glGetUniformLocation(shader[0].getProgram(), "size"), glGetUniformLocation(shader[0].getProgram(), "scale"));
 

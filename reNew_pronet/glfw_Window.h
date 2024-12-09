@@ -31,10 +31,13 @@ protected:
 
 public:
 
-	glfw_Window(glfw_windowCreateInfo *windowinfo);
+	glfw_Window(glfw_windowCreateInfo *windowinfo) noexcept;
 
 	~glfw_Window();
 
+	//	ウインドウの情報をバインドする
+	//	sizeLoc : ウインドウサイズの uniform変数の場所、vec2型
+	//	scaleLoc : ウインドウスケールの uniform変数の場所、float型
 	void bindWindowPram(GLuint sizeLoc, GLuint scaleLoc) const;
 
 	void run() const;

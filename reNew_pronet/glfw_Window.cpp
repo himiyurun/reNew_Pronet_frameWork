@@ -1,20 +1,20 @@
 #include "glfw_Window.h"
 
-glfw_Window::glfw_Window(glfw_windowCreateInfo* windowinfo)
+glfw_Window::glfw_Window(glfw_windowCreateInfo* windowinfo) noexcept
 	: window(glfwCreateWindow(windowinfo->width, windowinfo->height, windowinfo->title, windowinfo->monitor, nullptr))
 	, size{ static_cast<float>(windowinfo->width), static_cast<float>(windowinfo->height) }
 	, scale(100.f), keyStatus(GLFW_RELEASE)
 	, lastPosition{ 0.0f, 0.0f }, nowPosition{ 0.0f, 0.0f }
 {
 	if (window == nullptr) {
-		std::cerr << "window is null" << std::endl;
+		std::cerr << "Error : window is null" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 
 	glfwMakeContextCurrent(window);
 
 	if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
-		std::cerr << "Can't Load glad" << std::endl;
+		std::cerr << "Error : Can't Load glad" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 

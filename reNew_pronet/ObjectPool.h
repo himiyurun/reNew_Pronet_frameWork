@@ -10,8 +10,8 @@ namespace pronet {
 	template<class T>
 	class ObjectPool : public pnTlsf
 	{
-		T* objpool;
-		T** objlist;
+		std::vector<T, pnTlsfInsertSTLtype<T>> objpool;
+		std::vector<T*, pnTlsfInsertSTLpointer<T*>> objlist;
 
 		uint32_t pointer;
 		uint32_t bufsize;
@@ -19,35 +19,36 @@ namespace pronet {
 
 	public:
 
-		ObjectPool(uint32_t size)
-			: pointer(0), bufsize(size), usedSize(0)
+		ObjectPool(uint32_t size = 0)
+			: objpool(0), objlist(0)
+			, pointer(0), bufsize(size), usedSize(0)
 		{
-			objpool = new_class<T>(size);
-			objlist = new_class<T*>(size);
-			for (int i = 0; i < bufsize; i++) {
-				*(objlist + i) = objpool + i;
-			}
+			resize(size);
 		}
 
 		~ObjectPool() {
-			if(objpool)
-				delete_class<T>(objpool);
-			if (objlist)
-				delete_class<T>(objlist);
 		}
 
 		T* pop() {
-			if (usedSize == bufsize)
-				return nullptr;
+			if (usedSize == bufsize) {
+				resize(bufsize * 2);
+			}
 
-			while (*(objlist + pointer) == nullptr) {
+			T* buf = nullptr;
+			for (int i = 0; i < bufsize; i++) {
+				if (objlist[pointer]) {
+					buf = objlist[pointer];
+					objlist[pointer] = nullptr;
+					usedSize++;
+					pointer++;
+					break;
+				}
 				pointer++;
-				if (pointer >= bufsize) {
+				if (pointer >= objlist.size()) {
 					pointer = 0;
 				}
 			}
-			usedSize++;
-			return std::move(*(objlist + pointer));
+			return buf;
 		}
 
 		void push(T** ptr) {
@@ -55,10 +56,11 @@ namespace pronet {
 				throw std::runtime_error("return pool obj is null");
 			}
 
-			for (int i = 0; i < bufsize; i++) {
-				if (*(objlist + i) != nullptr) {
-					*(objlist + i) = std::move(*ptr);
-					break;
+			for ( T* &a : objlist ) {
+				if (!a) {
+					a = *ptr;
+					*ptr = nullptr;
+					usedSize--;
 				}
 			}
 		}
@@ -66,27 +68,15 @@ namespace pronet {
 	private :
 
 		void resize(uint32_t size) {
-			T* buf = new_class<T>(size);
-			T** listbuf = new_class<T*>(size);
+			objpool.resize(size);
+			objlist.resize(size);
 
-			if (buf) {
-				if (bufsize < size)
-					bufsize = size;
-
-				for (int i = 0; i < bufsize; i++) {
-					*(buf + i) = *(objpool + i);
-					*(listbuf + i) = buf + i;
-				}
-				delete_class<T>(objpool);
-				delete_class<T>(objlist);
-				bufsize = size;
-				objpool = buf;
-				objlist = listbuf;
+			static uint32_t pointer(0);
+			pointer = 0;
+			for (T*& list : objlist) {
+				objlist[pointer] = &objpool[pointer];
 			}
-			else {
-				std::cerr << "memory Pool is full" << std::endl;
-			}
+			bufsize = size;
 		}
 	};
 }
-
