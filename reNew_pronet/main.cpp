@@ -1,6 +1,7 @@
 #include <memory>
 
 #include "Pronet.h"
+#include "readDocument.h"
 
 void libInit() {
 	if (!glfwInit()) {
@@ -37,13 +38,17 @@ int main() {
 	game.InitShader("vertex_shader.glslc", "fragment_shader.glslc");
 
 	ObjectInfo2v objInfo{};
-	objInfo.vertexcount = 4;
-	objInfo.vertex = rectangleVertex;
-	objInfo.indexcount = 6;
-	objInfo.index = rectangleIndex;
-	game.InitObj(&objInfo, GL_TRUE);
+
+	pronet::PronetReadObject2v objfile;
+	std::unique_ptr<pronet::vertexArrayInfo[]> hoge;
 
 	try {
+		objfile.readFile("test.str2v", hoge);
+		objInfo.vertexcount = hoge[0].vertexcount;
+		objInfo.vertex = hoge[0].verts;
+		objInfo.indexcount = hoge[0].indexcount;
+		objInfo.index = hoge[0].index;
+		game.InitObj(&objInfo, GL_TRUE);
 		game.run();
 	}
 	catch (const std::exception& e) {

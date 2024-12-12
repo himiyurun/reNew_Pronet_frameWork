@@ -20,9 +20,13 @@ TLSFmemory::TLSFmemory(uint32_t n = 7, uint8_t divsize = 4)
 	createEndTag(pool.data(), 0xffffffff);
 	createBeginTag(pool.data() + endSize + tagSize + bufSize, 0, true);
 	BoundaryTagBegin* begin = createNewTag(pool.data() + endSize, bufSize, false);
+#ifdef _DEBUG
 	std::cout << "list size : " << freelist.size() << std::endl;
+#endif
 	rigist(begin, bufSize);
+#ifdef _DEBUG
 	printParititionBit();
+#endif
 }
 
 pronet::TLSFmemory::~TLSFmemory()

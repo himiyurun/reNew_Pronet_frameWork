@@ -57,6 +57,9 @@
     <ClCompile Include="ObjectPool.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
+    <ClCompile Include="readDocument.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pronet.h">
@@ -92,12 +95,18 @@
     <ClInclude Include="ObjectPool.h">
       <Filter>ヘッダー ファイル\PnHead</Filter>
     </ClInclude>
+    <ClInclude Include="readDocument.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertex_shader.glslc">
+    <None Include="fragment_shader.glslc">
       <Filter>ソース ファイル</Filter>
     </None>
-    <None Include="fragment_shader.glslc">
+    <None Include="test.str2v">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="vertex_shader.glslc">
       <Filter>ソース ファイル</Filter>
     </None>
   </ItemGroup>

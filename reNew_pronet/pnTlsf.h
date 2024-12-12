@@ -11,7 +11,7 @@ static pronet::TLSFmemory mainMemory(POOL_SIZE_BIT, POOL_INDEX_BIT);
 class pnTlsf {
 
 public:
-
+	/*
 	void* operator new(size_t size) {
 		void* ptr = mainMemory.allocate(size);
 		std::cout << "operator new" << std::endl;
@@ -37,6 +37,7 @@ public:
 		std::cout << "operator delete[]" << std::endl;
 		mainMemory.deallocate(p);
 	}
+	*/
 
 	template<class T>
 	inline T* new_type(size_t size)

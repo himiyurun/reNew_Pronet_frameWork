@@ -140,6 +140,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectPool.cpp" />
     <ClCompile Include="Pronet.cpp" />
+    <ClCompile Include="readDocument.cpp" />
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="TLSFmemory.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="pnTlsf.h" />
     <ClInclude Include="Pronet.h" />
+    <ClInclude Include="readDocument.h" />
     <ClInclude Include="readtxt.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Timer.h" />
@@ -159,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment_shader.glslc" />
+    <None Include="test.str2v" />
     <None Include="vertex_shader.glslc" />
   </ItemGroup>
   <ItemGroup>
