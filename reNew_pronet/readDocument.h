@@ -126,7 +126,41 @@ namespace pronet
 	class PronetReadLoadFileList {
 		const char* name;
 
+		uint8_t current;
+		uint8_t points;
 
+		std::ifstream file;
+		std::string line;
+		std::string script;
+		std::istringstream iss;
+
+		uint16_t chanckSize;
+		uint32_t shaderSize;
+		uint32_t objectSize;
+
+	public:
+		struct PronetLoadChanckInfo {
+			std::unique_ptr<ShaderMakeInfo[]> shaders;
+			std::unique_ptr<ObjectInfo2v[]> objs;
+		};
+
+		PronetReadLoadFileList(const char* name);
+
+		~PronetReadLoadFileList();
+
+		PronetLoadChanckInfo getLoadFile();
+
+	private:
+
+		inline bool type_correct(const char* script);
+
+		inline void fileError(const char* MSG);
+
+		inline void thMsg(const char* msg) const;
+
+		inline void scriptFunc(const char* text, std::function<void()> func);
+
+		void clear();
 	};
 
 	void printVaoInfo(ObjectInfo2v* info);

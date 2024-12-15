@@ -287,3 +287,49 @@ void pronet::readShaderMake::clear()
 	src.clear();
 	script.clear();
 }
+
+pronet::PronetReadLoadFileList::PronetReadLoadFileList(const char* name)
+	: name(name)
+	, current(0)
+	, points(0)
+	, chanckSize(0)
+	, shaderSize(0)
+	, objectSize(0)
+{
+}
+
+pronet::PronetReadLoadFileList::~PronetReadLoadFileList()
+{
+}
+
+PronetLoadChanckInfo pronet::PronetReadLoadFileList::getLoadFile()
+{
+	return PronetLoadChanckInfo();
+}
+
+inline bool pronet::PronetReadLoadFileList::type_correct(const char* script)
+{
+	return false;
+}
+
+inline void pronet::PronetReadLoadFileList::fileError(const char* MSG)
+{
+}
+
+inline void pronet::PronetReadLoadFileList::thMsg(const char* msg) const
+{
+}
+
+inline void pronet::PronetReadLoadFileList::scriptFunc(const char* text, std::function<void()> func)
+{
+}
+
+void pronet::PronetReadLoadFileList::clear()
+{
+	file.close();
+	file.clear();
+	fileError("Can't Close");
+	line.clear();
+	script.clear();
+	iss.clear();
+}
