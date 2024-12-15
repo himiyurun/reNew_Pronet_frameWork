@@ -144,6 +144,7 @@
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="TLSFmemory.cpp" />
+    <ClCompile Include="Uniform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoundaryTag.h" />
@@ -158,11 +159,14 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TLSFmemory.h" />
+    <ClInclude Include="Uniform.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment_shader.glslc" />
+    <None Include="fragment_shader.frag" />
+    <None Include="sample.fi" />
+    <None Include="sample.pnsm" />
     <None Include="test.str2v" />
-    <None Include="vertex_shader.glslc" />
+    <None Include="vertex_shader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="AllocaterTesterLog.txt" />

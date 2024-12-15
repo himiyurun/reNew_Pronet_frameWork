@@ -2,16 +2,20 @@
 #include <glad/glad.h>
 #include <glm/vec2.hpp>
 
+#include "pnTlsf.h"
+
 //	2次元オブジェクトを作る際の情報を格納する構造体
 //	vertexcount : 頂点の数
 //	vertex : 2D頂点属性
 //	indexcount : 頂点インデックスの個数
 //	index : 頂点インデックスの配列ポインタ
-struct ObjectInfo2v {
+struct ObjectInfo2v : public pnTlsf{
 	GLsizei vertexcount;
-	const glm::vec2* vertex;
+	glm::vec2* verts;
+	glm::vec2* uv;
 	GLsizei indexcount;
-	const GLuint* index;
+	uint32_t* index;
+	uint8_t shader_index;
 };
 
 //	オブジェクトクラス

@@ -1,0 +1,8 @@
+#Pronet Shader Make
+
+Shaders 1
+
+unit {
+	Vertex vertex_shader.vert
+	Fragment fragment_shader.frag
+}

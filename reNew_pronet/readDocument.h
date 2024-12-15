@@ -4,10 +4,13 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <functional>
 
 #include <glm/vec2.hpp>
 
 #include "pnTlsf.h"
+#include "Object.h"
+#include "Shader.h"
 
 namespace pronet 
 {
@@ -65,22 +68,66 @@ namespace pronet
 
 		~PronetReadObject2v();
 
-		bool readFile(const char* name, std::unique_ptr<vertexArrayInfo[]>& info);
+		bool readFile(const char* name, std::unique_ptr<ObjectInfo2v[]>& info);
 
 	private:
 
 		bool type_correct(const std::string text);
 
-		void getFromText(const std::string text, std::unique_ptr<vertexArrayInfo[]>& info);
+		void getFromText(const std::string text, std::unique_ptr<ObjectInfo2v[]>& info);
 
-		inline void getVerts(const char* script, std::unique_ptr<vertexArrayInfo[]>& info);
+		inline void getVerts(const char* script, std::unique_ptr<ObjectInfo2v[]>& info);
 
-		inline void getIndex(const char* script, std::unique_ptr<vertexArrayInfo[]>& info);
+		inline void getIndex(const char* script, std::unique_ptr<ObjectInfo2v[]>& info);
 
-		inline void getUv(const char* script, std::unique_ptr<vertexArrayInfo[]>& info);
+		inline void getUv(const char* script, std::unique_ptr<ObjectInfo2v[]>& info);
 
-		inline void getShader(const char* script, std::unique_ptr<vertexArrayInfo[]>& info);
+		inline void getShader(const char* script, std::unique_ptr<ObjectInfo2v[]>& info);
+
+		void fileclose(const char* log);
 	};
 
-	void printVaoInfo(vertexArrayInfo *info);
+	class readShaderMake {
+		const char* name;
+
+		std::string src;
+
+		std::ifstream file;
+
+		std::istringstream iss;
+
+		std::string script;
+
+		uint8_t points;
+
+		uint8_t size;
+
+	public:
+
+		readShaderMake();
+
+		~readShaderMake();
+
+		void readFile(const char* name, std::unique_ptr<ShaderMakeInfo[]>& info);
+
+	private:
+
+		inline bool type_correct(const char* script);
+
+		inline void fileError(const char* MSG);
+
+		inline void thMsg(const char* msg) const;
+
+		inline void scriptFunc(const char* text, std::function<void()> func);
+
+		void clear();
+	};
+
+	class PronetReadLoadFileList {
+		const char* name;
+
+
+	};
+
+	void printVaoInfo(ObjectInfo2v* info);
 }

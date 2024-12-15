@@ -23,7 +23,7 @@ void Object::Init(GLint size, ObjectInfo2v* info, GLboolean index_used)
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * vertexcount, info->vertex, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * vertexcount, info->verts, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, size, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);

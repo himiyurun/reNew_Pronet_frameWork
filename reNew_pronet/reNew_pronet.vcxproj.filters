@@ -25,6 +25,9 @@
     <Filter Include="ヘッダー ファイル\GLI">
       <UniqueIdentifier>{c1c23186-4dea-4e6d-85c7-d622c9a80820}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\MemoryAllocaterLog">
+      <UniqueIdentifier>{7d25417c-60d4-4b90-a208-525c2606eb14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,7 +61,10 @@
       <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
     <ClCompile Include="readDocument.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\PnLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniform.cpp">
+      <Filter>ソース ファイル\GLI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,38 +102,47 @@
       <Filter>ヘッダー ファイル\PnHead</Filter>
     </ClInclude>
     <ClInclude Include="readDocument.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\PnHead</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniform.h">
+      <Filter>ヘッダー ファイル\GLI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment_shader.glslc">
+    <None Include="fragment_shader.frag">
       <Filter>ソース ファイル</Filter>
     </None>
     <None Include="test.str2v">
       <Filter>リソース ファイル</Filter>
     </None>
-    <None Include="vertex_shader.glslc">
+    <None Include="vertex_shader.vert">
       <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="sample.pnsm">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="sample.fi">
+      <Filter>リソース ファイル</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="AllocaterTesterLog.txt">
-      <Filter>リソース ファイル</Filter>
+      <Filter>リソース ファイル\MemoryAllocaterLog</Filter>
     </Text>
     <Text Include="AllocaterTesterLog01120241126.txt">
-      <Filter>リソース ファイル</Filter>
+      <Filter>リソース ファイル\MemoryAllocaterLog</Filter>
     </Text>
     <Text Include="AllocaterTesterLog05820241127.txt">
-      <Filter>リソース ファイル</Filter>
-    </Text>
-    <Text Include="AllocaterTesterLog130920241126.txt">
-      <Filter>リソース ファイル</Filter>
+      <Filter>リソース ファイル\MemoryAllocaterLog</Filter>
     </Text>
     <Text Include="AllocaterTesterLog11620241128.txt">
-      <Filter>リソース ファイル</Filter>
+      <Filter>リソース ファイル\MemoryAllocaterLog</Filter>
     </Text>
     <Text Include="AllocaterTesterLog112420241128.txt">
-      <Filter>リソース ファイル</Filter>
+      <Filter>リソース ファイル\MemoryAllocaterLog</Filter>
+    </Text>
+    <Text Include="AllocaterTesterLog130920241126.txt">
+      <Filter>リソース ファイル\MemoryAllocaterLog</Filter>
     </Text>
   </ItemGroup>
 </Project>

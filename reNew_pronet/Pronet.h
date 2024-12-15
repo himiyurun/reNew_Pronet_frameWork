@@ -5,6 +5,10 @@
 #include "ObjectPool.h"
 #include "glfw_Window.h"
 
+#define PronetFrameWorkMain FrameWorkManager
+
+using FrameWorkManager = class PronetManager;
+
 class PronetManager : public glfw_Window, pnTlsf {
 	Shader *shader;
 

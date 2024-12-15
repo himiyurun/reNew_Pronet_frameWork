@@ -1,0 +1,17 @@
+#Pronet File Load List
+#Pronet_2D
+
+chanckCount 1
+
+Chanck{
+	Shaders 1
+	Objs 1
+
+	Shader {
+		sample.pnsm
+	}
+
+	Object {
+		test.str2v
+	}
+}

@@ -1,11 +1,16 @@
 #include <memory>
+#include <stdlib.h>
+#include <crtdbg.h>
+
+#define PRONET_2D
 
 #include "Pronet.h"
 #include "readDocument.h"
 
 void libInit() {
 	if (!glfwInit()) {
-		throw std::runtime_error("Can't Initlize GLFW!");
+		std::cerr << "Error : Can't Initlize GLFW" << std::endl;
+		exit(1);
 	}
 }
 
@@ -22,6 +27,8 @@ constexpr GLuint rectangleIndex[] = {
 
 int main() {
 
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	libInit();
 
 	glfw_windowCreateInfo winInfo = {};
@@ -33,27 +40,28 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	PronetManager game(&winInfo, 2);
-
-	game.InitShader("vertex_shader.glslc", "fragment_shader.glslc");
+	PronetFrameWorkMain game(&winInfo, 2);
 
 	ObjectInfo2v objInfo{};
 
 	pronet::PronetReadObject2v objfile;
-	std::unique_ptr<pronet::vertexArrayInfo[]> hoge;
+	pronet::readShaderMake shaderfile;
+	std::unique_ptr<ObjectInfo2v[]> hoge;
+	std::unique_ptr<ShaderMakeInfo[]> shader;
 
 	try {
 		objfile.readFile("test.str2v", hoge);
-		objInfo.vertexcount = hoge[0].vertexcount;
-		objInfo.vertex = hoge[0].verts;
-		objInfo.indexcount = hoge[0].indexcount;
-		objInfo.index = hoge[0].index;
-		game.InitObj(&objInfo, GL_TRUE);
+		shaderfile.readFile("sample.pnsm", shader);
+		game.InitShader(shader[0].vsrc.c_str(), shader[0].fsrc.c_str());
+		game.InitObj(&hoge[0], GL_TRUE);
 		game.run();
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Error : " << e.what() << std::endl;
 		return EXIT_FAILURE;
 	}
+	hoge[0].delete_type<glm::vec2>(hoge[0].verts);
+	hoge[0].delete_type<uint32_t>(hoge[0].index);
+	hoge[0].delete_type<glm::vec2>(hoge[0].uv);
 	return EXIT_SUCCESS;
 }
