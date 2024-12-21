@@ -44,24 +44,18 @@ int main() {
 
 	ObjectInfo2v objInfo{};
 
-	pronet::PronetReadObject2v objfile;
-	pronet::readShaderMake shaderfile;
-	std::unique_ptr<ObjectInfo2v[]> hoge;
-	std::unique_ptr<ShaderMakeInfo[]> shader;
+	int size;
+	pronet::PronetReadLoadFileList listfile("sample.fi", &size);
+	pronet::PronetReadLoadFileList::PronetLoadChanckInfo mainInfo(listfile.getLoadFile(0));
 
 	try {
-		objfile.readFile("test.str2v", hoge);
-		shaderfile.readFile("sample.pnsm", shader);
-		game.InitShader(shader[0].vsrc.c_str(), shader[0].fsrc.c_str());
-		game.InitObj(&hoge[0], GL_TRUE);
+		game.InitShader(mainInfo.shaders[0][0].vsrc.c_str(), mainInfo.shaders[0][0].fsrc.c_str());
+		game.InitObj(&mainInfo.objs[0][0], GL_TRUE);
 		game.run();
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Error : " << e.what() << std::endl;
 		return EXIT_FAILURE;
 	}
-	hoge[0].delete_type<glm::vec2>(hoge[0].verts);
-	hoge[0].delete_type<uint32_t>(hoge[0].index);
-	hoge[0].delete_type<glm::vec2>(hoge[0].uv);
 	return EXIT_SUCCESS;
 }

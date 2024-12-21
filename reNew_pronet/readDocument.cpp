@@ -1,5 +1,10 @@
 #include "readDocument.h"
 
+/*	read Object 2v impl
+* 
+* 
+*/
+
 pronet::PronetReadObject2v::PronetReadObject2v()
 	: name(nullptr)
 	, data()
@@ -166,6 +171,13 @@ void pronet::printVaoInfo(ObjectInfo2v* info)
 	}
 }
 
+//	read object 2v impl end.
+
+/*	read shader make impl
+* 
+* 
+*/
+
 pronet::readShaderMake::readShaderMake()
 	: name(nullptr)
 	, points(0)
@@ -288,40 +300,207 @@ void pronet::readShaderMake::clear()
 	script.clear();
 }
 
-pronet::PronetReadLoadFileList::PronetReadLoadFileList(const char* name)
-	: name(name)
+//	read shader make impl end.
+
+/*	read load file list impl
+* 
+* 
+*/
+
+pronet::PronetReadLoadFileList::PronetReadLoadFileList(const char* name, int* dimentionSize)
+	: objfile()
+	, shaderfile()
+	, name(name)
 	, current(0)
 	, points(0)
+	, geometory(0)
 	, chanckSize(0)
 	, shaderSize(0)
 	, objectSize(0)
 {
+	file.open(name, std::ios::in);
+	if (!file.is_open()) {
+		thMsg("Can't Open!");
+	}
+
+	std::getline(file, line);
+	if (!type_correct("#Pronet Load File List")) {
+		clear();
+		thMsg("file type is not correct!!");
+	}
+	std::getline(file, line);
+	if (strcmp(line.c_str(), "#Pronet_2D") == 0) {
+		*dimentionSize = 2;
+	}
+	else if (strcmp(line.c_str(), "#Pronet_3D") == 0) {
+		*dimentionSize = 3;
+	}
+	else {
+		clear();
+		thMsg("Dimention size undefined!!");
+	}
+
+	std::cout << "Dimentionsize : " << *dimentionSize << std::endl;
+
+	while (std::getline(file, line) && chanckSize == 0) {
+		iss.clear();
+		script.clear();
+		iss.str(line);
+		iss >> script;
+		scriptFunc("chanckCount", [this] {
+			iss >> this->chanckSize;
+			});
+	}
+
+	geometory = static_cast<uint8_t>(file.tellg());
 }
 
 pronet::PronetReadLoadFileList::~PronetReadLoadFileList()
 {
+	clear();
 }
 
-PronetLoadChanckInfo pronet::PronetReadLoadFileList::getLoadFile()
+pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getLoadFile(uint32_t chanck_Index)
 {
-	return PronetLoadChanckInfo();
+	if (chanck_Index >= chanckSize) {
+		clear();
+		thMsg("chanck_Index out of lange!!!");
+	}
+	file.seekg(geometory, std::ios::beg);
+
+	points = 0;
+	while (!file.eof() && chanck_Index >= points) {
+		flash();
+		std::getline(file, line);
+		iss.str(line);
+		std::cout << line << std::endl;
+		iss >> script;
+		std::cout << "script : " << script << std::endl;
+		scriptFunc("Chanck", [this](){
+			points++;
+			});
+	}
+	std::cout << "finish" << std::endl;
+
+	return getParam();
+}
+
+inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getParam()
+{
+	PronetLoadChanckInfo info;
+	uint32_t objSize, shaderSize;
+	uint32_t objCurrent = 0, shaderCurrent = 0;
+	while (strcmp(script.c_str(), "}") != 0 && std::getline(file,line)) {
+		flash();
+		iss.str(line);
+		iss >> script;
+		std::cout << "line : " << line << std::endl;
+		std::cout << "script : " << script << std::endl;
+		switch (script[0]) {
+		case 'O':
+			scriptFunc("Objs", [this, &info, &objSize] {
+				if (info.objs == nullptr) {
+					iss >> objSize;
+					info.objs = std::make_unique<std::unique_ptr<ObjectInfo2v[]>[]>(objSize);
+					std::cout << "objsize : " << objSize << std::endl;
+				}
+#ifdef _DEBUG
+				else {
+					std::cerr << "Msg : Shader count is already specified!" << std::endl;
+				}
+#endif
+				});
+			scriptFunc("Object", [this, &info, &objCurrent, objSize] {
+#ifdef _DEBUG
+				if (objSize == 0) {
+					std::cerr << "MSG : Shader size may be wrong!" << std::endl;
+				}
+#endif
+				for (int i = 0; i < objSize; i++) {
+					std::getline(file, line);
+					iss.str(line);
+					iss >> script;
+					objfile.readFile(script.c_str(),info.objs[i]);
+				}
+				std::getline(file, line);
+				if (strcmp(line.c_str(), "}") == 0) {
+					std::cout << "Object list read Finished properly" << std::endl;
+				}
+				});
+			break;
+		case 'S':
+			scriptFunc("Shaders", [this, &info, &shaderSize] {
+				if (info.shaders == nullptr) {
+					iss >> shaderSize;
+					info.shaders = std::make_unique<std::unique_ptr<ShaderMakeInfo[]>[]>(shaderSize);
+				}
+#ifdef _DEBUG
+				else {
+					std::cerr << "Msg : Shader count is already specified!" << std::endl;
+				}
+#endif
+				});
+			scriptFunc("Shader", [this, &info, &objCurrent, shaderSize] {
+#ifdef _DEBUG
+				if (objSize == 0) {
+					std::cerr << "MSG : Shader size may be wrong!" << std::endl;
+				}
+#endif
+				for (int i = 0; i < shaderSize; i++) {
+					std::getline(file, line);
+					iss.str(line);
+					iss >> script;
+					shaderfile.readFile(script.c_str(), info.shaders[i]);
+				}
+				std::getline(file, line);
+				if (strcmp(line.c_str(), "}") == 0) {
+					std::cout << "Shader list read Finished properly" << std::endl;
+				}
+				});
+			break;
+		case 'T':
+			break;
+		default:
+			break;
+		}
+	}
+	iss.clear();
+	script.clear();
+	line.clear();
+
+	return info;
 }
 
 inline bool pronet::PronetReadLoadFileList::type_correct(const char* script)
 {
-	return false;
+	if (line != script) {
+		clear();
+		thMsg("file_type may be Wrong!");
+		return false;
+	}
+	return true;
 }
 
 inline void pronet::PronetReadLoadFileList::fileError(const char* MSG)
 {
+	if (file.fail()) {
+		clear();
+		thMsg(MSG);
+	}
 }
 
 inline void pronet::PronetReadLoadFileList::thMsg(const char* msg) const
 {
+	std::string err(name);
+	err += ' ' + msg;
+	throw std::runtime_error(err);
 }
 
 inline void pronet::PronetReadLoadFileList::scriptFunc(const char* text, std::function<void()> func)
 {
+	if (strcmp(script.c_str(), text) == 0) {
+		func();
+	}
 }
 
 void pronet::PronetReadLoadFileList::clear()
@@ -333,3 +512,11 @@ void pronet::PronetReadLoadFileList::clear()
 	script.clear();
 	iss.clear();
 }
+
+void pronet::PronetReadLoadFileList::flash()
+{
+	iss.clear();
+	script.clear();
+}
+
+//	read load file list impl end.

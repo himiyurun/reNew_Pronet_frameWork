@@ -68,7 +68,7 @@ namespace pronet
 
 		~PronetReadObject2v();
 
-		bool readFile(const char* name, std::unique_ptr<ObjectInfo2v[]>& info);
+		virtual bool readFile(const char* name, std::unique_ptr<ObjectInfo2v[]>& info);
 
 	private:
 
@@ -108,7 +108,7 @@ namespace pronet
 
 		~readShaderMake();
 
-		void readFile(const char* name, std::unique_ptr<ShaderMakeInfo[]>& info);
+		virtual void readFile(const char* name, std::unique_ptr<ShaderMakeInfo[]>& info);
 
 	private:
 
@@ -126,8 +126,12 @@ namespace pronet
 	class PronetReadLoadFileList {
 		const char* name;
 
+		PronetReadObject2v objfile;
+		readShaderMake shaderfile;
+
 		uint8_t current;
 		uint8_t points;
+		size_t geometory;
 
 		std::ifstream file;
 		std::string line;
@@ -140,17 +144,19 @@ namespace pronet
 
 	public:
 		struct PronetLoadChanckInfo {
-			std::unique_ptr<ShaderMakeInfo[]> shaders;
-			std::unique_ptr<ObjectInfo2v[]> objs;
+			std::unique_ptr<std::unique_ptr<ShaderMakeInfo[]>[]> shaders;
+			std::unique_ptr<std::unique_ptr<ObjectInfo2v[]>[]> objs;
 		};
 
-		PronetReadLoadFileList(const char* name);
+		PronetReadLoadFileList(const char* name, int* dimentionSize);
 
 		~PronetReadLoadFileList();
 
-		PronetLoadChanckInfo getLoadFile();
+		PronetLoadChanckInfo getLoadFile(uint32_t chanck_Index);
 
 	private:
+
+		inline PronetLoadChanckInfo getParam();
 
 		inline bool type_correct(const char* script);
 
@@ -161,6 +167,8 @@ namespace pronet
 		inline void scriptFunc(const char* text, std::function<void()> func);
 
 		void clear();
+
+		void flash();
 	};
 
 	void printVaoInfo(ObjectInfo2v* info);

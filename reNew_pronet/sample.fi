@@ -1,14 +1,24 @@
-#Pronet File Load List
+#Pronet Load File List
 #Pronet_2D
 
 chanckCount 1
+texture-Object
+texture-Character
+texture-Bragge 
 
-Chanck{
+ChanckMapping {
+0 1 2 3
+4 5 6 7
+8 9 10 11
+12 13 14 15
+}
+
+Chanck {
 	Shaders 1
 	Objs 1
 
 	Shader {
-		sample.pnsm
+		sample.pnsm		
 	}
 
 	Object {
