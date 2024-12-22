@@ -28,6 +28,9 @@
     <Filter Include="リソース ファイル\MemoryAllocaterLog">
       <UniqueIdentifier>{7d25417c-60d4-4b90-a208-525c2606eb14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Shader">
+      <UniqueIdentifier>{3468d990-bed4-48d7-a6bf-b6be6f7619bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -62,9 +65,6 @@
     </ClCompile>
     <ClCompile Include="readDocument.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
-    </ClCompile>
-    <ClCompile Include="Uniform.cpp">
-      <Filter>ソース ファイル\GLI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,20 +109,20 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment_shader.frag">
-      <Filter>ソース ファイル</Filter>
-    </None>
     <None Include="test.str2v">
       <Filter>リソース ファイル</Filter>
-    </None>
-    <None Include="vertex_shader.vert">
-      <Filter>ソース ファイル</Filter>
     </None>
     <None Include="sample.pnsm">
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="sample.fi">
       <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="fragment_shader.frag">
+      <Filter>ソース ファイル\Shader</Filter>
+    </None>
+    <None Include="vertex_shader.vert">
+      <Filter>ソース ファイル\Shader</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

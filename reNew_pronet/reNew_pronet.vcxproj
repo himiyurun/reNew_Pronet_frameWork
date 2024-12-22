@@ -144,7 +144,6 @@
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="TLSFmemory.cpp" />
-    <ClCompile Include="Uniform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoundaryTag.h" />

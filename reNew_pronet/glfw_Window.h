@@ -13,21 +13,22 @@ struct glfw_windowCreateInfo
 	GLFWmonitor* monitor;
 };
 
+typedef struct {
+	GLfloat size[2];			//	ウインドウのサイズ
+	GLfloat nowPosition[2];		//	マウスの現在の位置
+	GLfloat lastPosition[2];	//	マウスの図形をつかんだときの位置（つかんでいないときは0）
+	GLfloat scale;				//	ウインドウのスケール
+} WindowParam;
+
 class glfw_Window
 {
 	GLFWwindow* const window;
 
 protected:
 
-	GLfloat size[2];
-
-	GLfloat scale;
+	WindowParam param;
 
 	GLint keyStatus;
-
-	GLfloat lastPosition[2];
-
-	GLfloat nowPosition[2];
 
 public:
 
@@ -40,9 +41,9 @@ public:
 	//	scaleLoc : ウインドウスケールの uniform変数の場所、float型
 	void bindWindowPram(GLuint sizeLoc, GLuint scaleLoc) const;
 
-	void run() const;
+	void run();
 
-	virtual void process() const
+	virtual void process()
 	{
 		std::cout << "Hello World!!" << std::endl;
 	};

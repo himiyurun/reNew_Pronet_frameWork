@@ -7,7 +7,9 @@ PronetManager::PronetManager(glfw_windowCreateInfo* windowInfo, GLint dimentionS
 	, shader(nullptr)
 	, test(4)
 	, testshader(4)
+	, winParamUbo("window")
 {
+	
 }
 
 PronetManager::~PronetManager()
@@ -18,13 +20,13 @@ PronetManager::~PronetManager()
 	test.push(&object);
 }
 
-void PronetManager::process() const
+void PronetManager::process()
 {
 	shader->use();
+	winParamUbo.bind();
 
-	bindWindowPram(glGetUniformLocation(shader[0].getProgram(), "size"), glGetUniformLocation(shader[0].getProgram(), "scale"));
-
-	glUniform2fv(glGetUniformLocation(shader[0].getProgram(), "location"), 1, nowPosition);
+	std::cout << "x : " << param.nowPosition[0] << ", y : " << param.nowPosition[1] << std::endl;
+	winParamUbo.Update(&param, 1);
 
 	object->draw();
 }

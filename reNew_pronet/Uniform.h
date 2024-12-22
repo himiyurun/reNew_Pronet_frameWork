@@ -1,85 +1,72 @@
 #pragma once
 #include <iostream>
 #include <memory>
-
 #include <glad/glad.h>
 
-/*
-* シェーダのUniformブロックリスト
-* 
-window {
-	vec2 size;
-	float scale;
-	vec2 mousePos;
-}
+namespace pronet {
+	template<typename T>
+	class Uniform
+	{
+		struct UniformBuffer {
+			GLuint ubo;
 
-object2v {
-	vec2 location;
-}
+			UniformBuffer(const T* data = nullptr, GLsizeiptr size = 1) {
+				glGenBuffers(1, &ubo);
+				glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+				glBufferData(GL_UNIFORM_BUFFER, sizeof(T) * size, data, GL_DYNAMIC_DRAW);
+			}
 
-Function2v {
-	vec2 func;
-}
-* 
-*/
+			void Init(const T* data = nullptr, GLsizeiptr size = 1) {
+				Clear();
+				glGenBuffers(1, &ubo);
+				glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+				glBufferData(GL_UNIFORM_BUFFER, sizeof(T) * size, data, GL_DYNAMIC_DRAW);
+			}
 
-template<typename T>
-class Uniform
-{
-	struct UniformBuffer {
-		GLuint ubo;
+			void Clear() {
+				glDeleteBuffers(1, &ubo);
+			}
 
-		UniformBuffer(const T* data = nullptr, GLsizeiptr size = 1) {
-			glGenBuffers(1, &ubo);
-			glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-			glBufferData(GL_UNIFORM_BUFFER, sizeof(T) * size, data, GL_DYNAMIC_DRAW);
+			~UniformBuffer() {
+				Clear();
+			}
+		};
+
+		const char* BlockName;
+		std::shared_ptr<UniformBuffer> buffer;
+		GLuint BlockID;
+
+	public:
+
+		Uniform(const char* name, const T* data = nullptr, GLsizeiptr size = 1)
+			: BlockName(name)
+			, buffer(new UniformBuffer(data, size))
+			, BlockID(0xffffffff)
+		{
 		}
 
-		void Init(const T* data = nullptr, GLsizeiptr size = 1) {
-			Clear();
-			glGenBuffers(1, &ubo);
-			glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-			glBufferData(GL_UNIFORM_BUFFER, sizeof(T) * size, data, GL_DYNAMIC_DRAW);
+		~Uniform() {
+
 		}
 
-		void Clear() {
-			glDeleteBuffers(1, &ubo);
+		bool Init(GLuint program, const T* data = nullptr, GLsizeiptr size = 1) {
+			buffer->Init(data, size);
+			BlockID = glGetUniformBlockIndex(program, BlockName);
+			if (BlockID == 0xffffffff) {
+				return false;
+			}
+			glUniformBlockBinding(program, BlockID, 0);
+			return true;
 		}
 
-		~UniformBuffer() {
-			Clear();
+		void Update(const T* data, GLsizeiptr size = 1) {
+			glBindBuffer(GL_UNIFORM_BUFFER, buffer->ubo);
+			glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(T) * size, data);
+		}
+
+		void bind() const {
+			glBindBufferBase(GL_UNIFORM_BUFFER, 0, buffer->ubo);
 		}
 	};
-
-	std::shared_ptr<UniformBuffer> buffer;
-	GLuint BlockID;
-
-public:
-
-	Uniform(GLuint program, GLuint BlockId, const T* data = nullptr, GLsizeiptr size = 1)
-		: buffer(new UniformBuffer(data, size))
-		, BlockID(BlockId)
-	{
-		glUniformBlockBinding(program, BlockID, BlockID);
-	}
-
-	~Uniform() {
-
-	}
-
-	void Init(GLuint program, GLuint BlockId, const T* data = nullptr, GLsizeiptr size = 1) {
-		buffer->Init(data, size);
-		BlockID = BlockId;
-		glUniformBlockBinding(program, BlockID, BlockID);
-	}
-
-	void Updata(const T* data, GLsizeiptr size = 1) {
-		glBindBuffer(GL_UNIFORM_BUFFER, buffer->ubo);
-		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(T) * size, data);
-	}
-
-	void bind() const {
-		glBindBufferBase(GL_UNIFORM_BUFFER, BlockID, buffer->ubo);
-	}
-};
+}
 
