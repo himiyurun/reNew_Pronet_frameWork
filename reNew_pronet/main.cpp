@@ -7,6 +7,7 @@
 
 #include "Pronet.h"
 #include "readDocument.h"
+#include "ObjectPoolArray.h"
 
 void libInit() {
 	if (!glfwInit()) {
@@ -39,9 +40,13 @@ int main() {
 	winInfo.monitor = nullptr;
 
 	ObjectInfo2v objInfo{};
-	pronet::ValPool<Object> test;
+	pronet::ObjectPool_Array<Object> test;
 	test.resize(12*64);
-	test.pop(4);
+	pronet::PoolArray<Object> hoge1 = test.pop(320);
+	pronet::PoolArray<Object> hoge2 = test.pop(248);
+	pronet::PoolArray<Object> hoge3 = test.pop(480);
+	test.push(&hoge1);
+
 	//test.pop(64 * 4);
 	//test.pop(64 * 8);
 

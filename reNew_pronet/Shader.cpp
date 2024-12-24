@@ -9,7 +9,7 @@ Shader::~Shader()
 {
 }
 
-GLboolean Shader::Init(const char* vsrc, const char* fsrc)
+GLboolean Shader::init(const char* vsrc, const char* fsrc)
 {
 	program = glCreateProgram();
 	if (vsrc) {
@@ -51,7 +51,7 @@ GLboolean Shader::Init(const char* vsrc, const char* fsrc)
 	return true;
 }
 
-void Shader::Reset()
+void Shader::reset()
 {
 	if (program != 0) {
 		glDeleteProgram(program);

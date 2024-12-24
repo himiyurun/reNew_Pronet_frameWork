@@ -5,8 +5,8 @@ PronetManager::PronetManager(glfw_windowCreateInfo* windowInfo, GLint dimentionS
 	, dimentionSize(dimentionSize)
 	, object(nullptr)
 	, shader(nullptr)
-	, test(4)
-	, testshader(4)
+	, objPool(4)
+	, shdPool(4)
 	, winParamUbo("window")
 {
 	
@@ -14,18 +14,16 @@ PronetManager::PronetManager(glfw_windowCreateInfo* windowInfo, GLint dimentionS
 
 PronetManager::~PronetManager()
 {
-	shader->Reset();
-	testshader.push(&shader);
-	object->Reset();
-	test.push(&object);
+	objPool.push(&object);
+	shdPool.push(&shader);
 }
 
 void PronetManager::process()
 {
-	shader->use();
+	shader[0].use();
 	winParamUbo.bind();
 
 	winParamUbo.Update(&param, 1);
 
-	object->draw();
+	object[0].draw();
 }

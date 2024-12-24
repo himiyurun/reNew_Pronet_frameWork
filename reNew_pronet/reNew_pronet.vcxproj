@@ -133,12 +133,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BitMap64.cpp" />
     <ClCompile Include="BoundaryTag.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="glfw_Window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectPool.cpp" />
+    <ClCompile Include="ObjectPoolArray.cpp" />
     <ClCompile Include="Pronet.cpp" />
     <ClCompile Include="readDocument.cpp" />
     <ClCompile Include="readtxt.cpp" />
@@ -146,11 +148,13 @@
     <ClCompile Include="TLSFmemory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BitMap64.h" />
     <ClInclude Include="BoundaryTag.h" />
     <ClInclude Include="glfw_Window.h" />
     <ClInclude Include="MemoryAllocaterTester.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectPool.h" />
+    <ClInclude Include="ObjectPoolArray.h" />
     <ClInclude Include="pnTlsf.h" />
     <ClInclude Include="Pronet.h" />
     <ClInclude Include="readDocument.h" />

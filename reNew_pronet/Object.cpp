@@ -6,14 +6,16 @@ Object::Object()
 	, ibo(0)
 	, vertexcount(0)
 	, indexcount(0)
+	, index_used(false)
 {
 }
 
 Object::~Object()
 {
+	reset();
 }
 
-void Object::Init(GLint size, ObjectInfo2v* info, GLboolean index_used)
+void Object::init(GLint size, ObjectInfo2v* info, GLboolean index_used)
 {
 	vertexcount = info->vertexcount;
 	this->index_used = index_used;
@@ -36,10 +38,22 @@ void Object::Init(GLint size, ObjectInfo2v* info, GLboolean index_used)
 	}
 }
 
-void Object::Reset()
+void Object::reset()
 {
-	glDeleteVertexArrays(1, &vbo);
-	glDeleteBuffers(1, &vbo);
-	glDeleteBuffers(1, &ibo);
+	if (vao != 0) {
+		glDeleteVertexArrays(1, &vao);
+		vao = 0;
+	}
+	if (vbo != 0) {
+		glDeleteBuffers(1, &vbo);
+		vbo = 0;
+	}
+	if (ibo != 0) {
+		glDeleteBuffers(1, &ibo);
+		ibo = 0;
+	}
+		
 	vertexcount = 0;
+	indexcount = 0;
+	index_used = false;
 }

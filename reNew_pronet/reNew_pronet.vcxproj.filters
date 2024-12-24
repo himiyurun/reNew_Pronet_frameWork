@@ -60,10 +60,16 @@
     <ClCompile Include="glfw_Window.cpp">
       <Filter>ソース ファイル\GLI</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectPool.cpp">
+    <ClCompile Include="readDocument.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
-    <ClCompile Include="readDocument.cpp">
+    <ClCompile Include="BitMap64.cpp">
+      <Filter>ソース ファイル\PnLib</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPoolArray.cpp">
+      <Filter>ソース ファイル\PnLib</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPool.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
   </ItemGroup>
@@ -106,6 +112,12 @@
     </ClInclude>
     <ClInclude Include="Uniform.h">
       <Filter>ヘッダー ファイル\GLI</Filter>
+    </ClInclude>
+    <ClInclude Include="BitMap64.h">
+      <Filter>ヘッダー ファイル\PnHead</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPoolArray.h">
+      <Filter>ヘッダー ファイル\PnHead</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

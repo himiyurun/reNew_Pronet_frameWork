@@ -27,9 +27,9 @@ public:
 
 	~Shader();
 
-	GLboolean Init(const char* vsrc, const char* fsrc);
+	GLboolean init(const char* vsrc, const char* fsrc);
 
-	void Reset();
+	void reset();
 
 	GLboolean ProgramInfo(GLuint program) const;
 

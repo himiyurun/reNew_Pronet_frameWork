@@ -42,9 +42,9 @@ public:
 
 	~Object();
 
-	void Init(GLint size, ObjectInfo2v *info, GLboolean index_used);
+	void init(GLint size, ObjectInfo2v *info, GLboolean index_used);
 
-	void Reset();
+	void reset();
 
 	virtual void bind() const {
 		glBindVertexArray(vao);
