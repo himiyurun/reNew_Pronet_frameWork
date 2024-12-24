@@ -3,6 +3,7 @@
 #include <crtdbg.h>
 
 #define PRONET_2D
+#define _POOL_DEBUG
 
 #include "Pronet.h"
 #include "readDocument.h"
@@ -36,17 +37,23 @@ int main() {
 	winInfo.height = 480;
 	winInfo.title = "syu-thingumoruka-";
 	winInfo.monitor = nullptr;
+
+	ObjectInfo2v objInfo{};
+	pronet::ValPool<Object> test;
+	test.resize(12*64);
+	test.pop(4);
+	//test.pop(64 * 4);
+	//test.pop(64 * 8);
+
+	int size;
+	pronet::PronetReadLoadFileList listfile("sample.fi", &size);
+	pronet::PronetReadLoadFileList::PronetLoadChanckInfo mainInfo(listfile.getLoadFile(0));
+
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	PronetFrameWorkMain game(&winInfo, 2);
-
-	ObjectInfo2v objInfo{};
-
-	int size;
-	pronet::PronetReadLoadFileList listfile("sample.fi", &size);
-	pronet::PronetReadLoadFileList::PronetLoadChanckInfo mainInfo(listfile.getLoadFile(0));
 
 	try {
 		game.InitShader(mainInfo.shaders[0][0].vsrc.c_str(), mainInfo.shaders[0][0].fsrc.c_str());

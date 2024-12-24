@@ -440,7 +440,7 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 				}
 #endif
 				});
-			scriptFunc("Shader", [this, &info, &objCurrent, shaderSize] {
+			scriptFunc("Shader", [this, &info, &objCurrent, shaderSize, objSize] {
 #ifdef _DEBUG
 				if (objSize == 0) {
 					std::cerr << "MSG : Shader size may be wrong!" << std::endl;

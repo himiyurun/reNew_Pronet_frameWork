@@ -25,7 +25,6 @@ void PronetManager::process()
 	shader->use();
 	winParamUbo.bind();
 
-	std::cout << "x : " << param.nowPosition[0] << ", y : " << param.nowPosition[1] << std::endl;
 	winParamUbo.Update(&param, 1);
 
 	object->draw();
