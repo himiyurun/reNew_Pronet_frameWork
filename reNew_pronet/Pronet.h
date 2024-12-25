@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "ObjectPoolArray.h"
 #include "glfw_Window.h"
+#include "readDocument.h"
 
 #define PronetFrameWorkMain FrameWorkManager
 
@@ -12,13 +13,16 @@ using FrameWorkManager = class PronetManager;
 //	ウインドウのパラメーターを送信するユニフォームバッファオブジェクト
 
 class PronetManager : public glfw_Window, pnTlsf {
-	pronet::PoolArray<Shader> shader;
-	pronet::PoolArray<Object> object;
+	pronet::PronetReadLoadFileList file_reader;
 
 	GLint dimentionSize;
 
+	pronet::PoolArray<Shader> shader;
+	pronet::PoolArray<Object> object;
 	pronet::ObjectPool_Array<Object> objPool;
 	pronet::ObjectPool_Array<Shader> shdPool;
+	pronet::ObjectPool_Array<glm::vec2> vertsPool;
+	pronet::ObjectPool_Array<uint32_t> indexPool;
 
 	pronet::Uniform<WindowParam> winParamUbo;
 
@@ -27,10 +31,12 @@ public:
 	//	コンストラクタ
 	//	windowInfo : 作成するウインドウの情報
 	//	dimentionSize : 作成するゲームの次元
-	PronetManager(glfw_windowCreateInfo *windowInfo, GLint dimentionSize);
+	PronetManager(glfw_windowCreateInfo *windowInfo, const char* loadfilelist_name);
 
 	//	デストラクタ
 	~PronetManager();
+
+	void load();
 	
 	void InitShader(const char* vsrc, const char* fsrc) {
 		shader[0].init(vsrc, fsrc);

@@ -39,30 +39,14 @@ int main() {
 	winInfo.title = "syu-thingumoruka-";
 	winInfo.monitor = nullptr;
 
-	ObjectInfo2v objInfo{};
-	pronet::ObjectPool_Array<Object> test;
-	test.resize(12*64);
-	pronet::PoolArray<Object> hoge1 = test.pop(320);
-	pronet::PoolArray<Object> hoge2 = test.pop(248);
-	pronet::PoolArray<Object> hoge3 = test.pop(480);
-	test.push(&hoge1);
-
-	//test.pop(64 * 4);
-	//test.pop(64 * 8);
-
-	int size;
-	pronet::PronetReadLoadFileList listfile("sample.fi", &size);
-	pronet::PronetReadLoadFileList::PronetLoadChanckInfo mainInfo(listfile.getLoadFile(0));
-
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	PronetFrameWorkMain game(&winInfo, 2);
+	PronetFrameWorkMain game(&winInfo, "LoadFileList.fi");
 
 	try {
-		game.InitShader(mainInfo.shaders[0][0].vsrc.c_str(), mainInfo.shaders[0][0].fsrc.c_str());
-		game.InitObj(&mainInfo.objs[0][0], GL_TRUE);
+		game.load();
 		game.run();
 	}
 	catch (const std::exception& e) {

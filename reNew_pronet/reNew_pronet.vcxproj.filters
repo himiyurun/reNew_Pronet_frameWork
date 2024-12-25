@@ -66,9 +66,6 @@
     <ClCompile Include="BitMap64.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectPoolArray.cpp">
-      <Filter>ソース ファイル\PnLib</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectPool.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
@@ -119,6 +116,9 @@
     <ClInclude Include="ObjectPoolArray.h">
       <Filter>ヘッダー ファイル\PnHead</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectPoolList.h">
+      <Filter>ヘッダー ファイル\PnHead</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="test.str2v">
@@ -127,7 +127,7 @@
     <None Include="sample.pnsm">
       <Filter>リソース ファイル</Filter>
     </None>
-    <None Include="sample.fi">
+    <None Include="LoadFileList.fi">
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="fragment_shader.frag">

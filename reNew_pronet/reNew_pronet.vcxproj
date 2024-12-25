@@ -140,7 +140,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectPool.cpp" />
-    <ClCompile Include="ObjectPoolArray.cpp" />
     <ClCompile Include="Pronet.cpp" />
     <ClCompile Include="readDocument.cpp" />
     <ClCompile Include="readtxt.cpp" />
@@ -155,6 +154,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ObjectPoolArray.h" />
+    <ClInclude Include="ObjectPoolList.h" />
     <ClInclude Include="pnTlsf.h" />
     <ClInclude Include="Pronet.h" />
     <ClInclude Include="readDocument.h" />
@@ -166,7 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment_shader.frag" />
-    <None Include="sample.fi" />
+    <None Include="LoadFileList.fi" />
     <None Include="sample.pnsm" />
     <None Include="test.str2v" />
     <None Include="vertex_shader.vert" />

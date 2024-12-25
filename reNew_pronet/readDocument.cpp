@@ -20,7 +20,7 @@ pronet::PronetReadObject2v::~PronetReadObject2v()
 {
 }
 
-bool pronet::PronetReadObject2v::readFile(const char* name, std::unique_ptr<ObjectInfo2v[]>& info)
+bool pronet::PronetReadObject2v::readFile(const char* name, ObjectInfo2v *info, pronet::ObjectPool_Array<glm::vec2> *vertsPool, pronet::ObjectPool_Array<uint32_t> *indexPool)
 {
 	this->name = name;
 	file.open(name, std::ios::in);
@@ -36,7 +36,7 @@ bool pronet::PronetReadObject2v::readFile(const char* name, std::unique_ptr<Obje
 
 	while (!file.eof() && std::getline(file, data)) {
 		fileclose("Can't read");
-		getFromText(data, info);
+		getFromText(data, info, vertsPool, indexPool);
 	}
 
 	file.clear();
@@ -62,19 +62,19 @@ bool pronet::PronetReadObject2v::type_correct(const std::string text)
 	return true;
 }
 
-void pronet::PronetReadObject2v::getFromText(const std::string text, std::unique_ptr<ObjectInfo2v[]>& info)
+void pronet::PronetReadObject2v::getFromText(const std::string text, ObjectInfo2v* info, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool)
 {
 	iss.str(text);
 	iss >> buf;
 	switch (buf[0]) {
 	case 'v':
-		getVerts(buf.c_str(), info);
+		getVerts(buf.c_str(), info, vertsPool);
 		break;
 	case 'u':
 		getUv(buf.c_str(), info);
 		break;
 	case 'i':
-		getIndex(buf.c_str(), info);
+		getIndex(buf.c_str(), info, indexPool);
 		break;
 	case 's':
 		getShader(buf.c_str(), info);
@@ -91,42 +91,42 @@ void pronet::PronetReadObject2v::getFromText(const std::string text, std::unique
 	buf.clear();
 }
 
-inline void pronet::PronetReadObject2v::getVerts(const char* script, std::unique_ptr<ObjectInfo2v[]>& info)
+inline void pronet::PronetReadObject2v::getVerts(const char* script, ObjectInfo2v* info, pronet::ObjectPool_Array<glm::vec2> *vertsPool)
 {
 	if (!script)return;
 	if (strcmp(script, "vp") == 0) {
-		iss >> info[nowVao].verts[points].x >> info[nowVao].verts[points].y;
+		iss >> info->verts[points].x >> info[nowVao].verts[points].y;
 		points++;
 	}
 	else if (strcmp(script, "verts") == 0) {
-		iss >> info[nowVao].vertexcount;
-		info[nowVao].verts = new_type<glm::vec2>(info[nowVao].vertexcount);
-		info[nowVao].uv = new_type<glm::vec2>(info[nowVao].vertexcount);
+		iss >> info->vertexcount;
+		info->verts = vertsPool->get(info->vertexcount);
+		info->uv = vertsPool->get(info->vertexcount);
 	}
 	else if (strcmp(script, "vArray") == 0){
 		iss >> vaocount;
-		info = std::make_unique<ObjectInfo2v[]>(vaocount);
+		//info = std::make_unique<ObjectInfo2v[]>(vaocount);
 	}
 }
 
-inline void pronet::PronetReadObject2v::getIndex(const char* script, std::unique_ptr<ObjectInfo2v[]>& info)
+inline void pronet::PronetReadObject2v::getIndex(const char* script, ObjectInfo2v* info, pronet::ObjectPool_Array<uint32_t>* indexPool)
 {
 	if (!script)return;
 	if (strcmp(script, "index") == 0) {
 		for (int i = 0; i < info[nowVao].indexcount; i++) {
-			iss >> info[nowVao].index[i];
+			iss >> info->index[i];
 		}
 	}
 	else if (strcmp(script, "indices") == 0) {
-		iss >> info[nowVao].indexcount;
-		info[nowVao].index = new_type<uint32_t>(info[nowVao].indexcount);
+		iss >> info->indexcount;
+		info->index = indexPool->get(info->indexcount);;
 	}
 	else {
 
 	}
 }
 
-inline void pronet::PronetReadObject2v::getUv(const char* script, std::unique_ptr<ObjectInfo2v[]>& info)
+inline void pronet::PronetReadObject2v::getUv(const char* script, ObjectInfo2v* info)
 {
 	if (!script)return;
 	if (strcmp(script, "uvp") == 0) {
@@ -135,7 +135,7 @@ inline void pronet::PronetReadObject2v::getUv(const char* script, std::unique_pt
 	}
 }
 
-inline void pronet::PronetReadObject2v::getShader(const char* script, std::unique_ptr<ObjectInfo2v[]>& info)
+inline void pronet::PronetReadObject2v::getShader(const char* script, ObjectInfo2v* info)
 {
 	if (!script)return;
 	if (strcmp(script, "shader") == 0) {
@@ -216,8 +216,6 @@ void pronet::readShaderMake::readFile(const char* name, std::unique_ptr<ShaderMa
 		script.clear();
 		iss.str(src);
 		iss >> script;
-		std::cout << "script : " << script << std::endl;
-		std::cout << "src : " << src << std::endl;
 		switch (script[0]) {
 		case 'V':
 			scriptFunc("Vertex", [this, &info]() {
@@ -360,7 +358,7 @@ pronet::PronetReadLoadFileList::~PronetReadLoadFileList()
 	clear();
 }
 
-pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getLoadFile(uint32_t chanck_Index)
+pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getLoadFile(uint32_t chanck_Index, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool)
 {
 	if (chanck_Index >= chanckSize) {
 		clear();
@@ -373,19 +371,17 @@ pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileL
 		flash();
 		std::getline(file, line);
 		iss.str(line);
-		std::cout << line << std::endl;
 		iss >> script;
-		std::cout << "script : " << script << std::endl;
 		scriptFunc("Chanck", [this](){
 			points++;
 			});
 	}
 	std::cout << "finish" << std::endl;
 
-	return getParam();
+	return getParam(vertsPool, indexPool);
 }
 
-inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getParam()
+inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getParam(pronet::ObjectPool_Array<glm::vec2> *objPool, pronet::ObjectPool_Array<uint32_t> *shdPool)
 {
 	PronetLoadChanckInfo info;
 	uint32_t objSize, shaderSize;
@@ -394,14 +390,12 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 		flash();
 		iss.str(line);
 		iss >> script;
-		std::cout << "line : " << line << std::endl;
-		std::cout << "script : " << script << std::endl;
 		switch (script[0]) {
 		case 'O':
 			scriptFunc("Objs", [this, &info, &objSize] {
 				if (info.objs == nullptr) {
 					iss >> objSize;
-					info.objs = std::make_unique<std::unique_ptr<ObjectInfo2v[]>[]>(objSize);
+					info.objs = std::make_unique<ObjectInfo2v[]>(objSize);
 					std::cout << "objsize : " << objSize << std::endl;
 				}
 #ifdef _DEBUG
@@ -410,7 +404,7 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 				}
 #endif
 				});
-			scriptFunc("Object", [this, &info, &objCurrent, objSize] {
+			scriptFunc("Object", [this, &info, &objCurrent, objSize, objPool, shdPool] {
 #ifdef _DEBUG
 				if (objSize == 0) {
 					std::cerr << "MSG : Shader size may be wrong!" << std::endl;
@@ -420,7 +414,7 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 					std::getline(file, line);
 					iss.str(line);
 					iss >> script;
-					objfile.readFile(script.c_str(),info.objs[i]);
+					objfile.readFile(script.c_str(),&info.objs[i], objPool, shdPool);
 				}
 				std::getline(file, line);
 				if (strcmp(line.c_str(), "}") == 0) {
@@ -432,7 +426,7 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 			scriptFunc("Shaders", [this, &info, &shaderSize] {
 				if (info.shaders == nullptr) {
 					iss >> shaderSize;
-					info.shaders = std::make_unique<std::unique_ptr<ShaderMakeInfo[]>[]>(shaderSize);
+					info.shaders = std::make_unique<ShaderMakeInfo[]>(shaderSize);
 				}
 #ifdef _DEBUG
 				else {
@@ -450,7 +444,7 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 					std::getline(file, line);
 					iss.str(line);
 					iss >> script;
-					shaderfile.readFile(script.c_str(), info.shaders[i]);
+					shaderfile.readFile(script.c_str(), info.shaders);
 				}
 				std::getline(file, line);
 				if (strcmp(line.c_str(), "}") == 0) {

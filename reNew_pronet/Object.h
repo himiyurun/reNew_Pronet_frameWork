@@ -2,19 +2,19 @@
 #include <glad/glad.h>
 #include <glm/vec2.hpp>
 
-#include "pnTlsf.h"
+#include "ObjectPoolList.h"
 
 //	2次元オブジェクトを作る際の情報を格納する構造体
 //	vertexcount : 頂点の数
 //	vertex : 2D頂点属性
 //	indexcount : 頂点インデックスの個数
 //	index : 頂点インデックスの配列ポインタ
-struct ObjectInfo2v : public pnTlsf{
+struct ObjectInfo2v{
 	GLsizei vertexcount;
-	glm::vec2* verts;
-	glm::vec2* uv;
+	pronet::PoolArray<glm::vec2> verts;
+	pronet::PoolArray<glm::vec2> uv;
 	GLsizei indexcount;
-	uint32_t* index;
+	pronet::PoolArray<uint32_t> index;
 	uint8_t shader_index;
 };
 

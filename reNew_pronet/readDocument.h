@@ -8,46 +8,12 @@
 
 #include <glm/vec2.hpp>
 
-#include "pnTlsf.h"
+#include "ObjectPoolArray.h"
 #include "Object.h"
 #include "Shader.h"
 
 namespace pronet 
 {
-	//	vao の情報を格納する
-	struct vertexArrayInfo : public pnTlsf{
-		vertexArrayInfo()
-			: vertexcount(0)
-			, verts(nullptr)
-			, uv(nullptr)
-			, indexcount(0)
-			, index(nullptr)
-			, shader_index(0xffff)
-		{}
-
-		size_t vertexcount;	//	頂点の数
-		glm::vec2 *verts;	//	頂点属性
-		glm::vec2* uv;	//	UV座標
-		size_t indexcount;		//	頂点インデックスの数
-		uint32_t *index;	//	頂点インデックス
-		uint8_t shader_index;	//	シェーダーの番号
-
-		~vertexArrayInfo() {
-			if (verts) {
-				delete_type<glm::vec2>(verts);
-				std::cout << "deallocate" << std::endl;
-			}
-			if (uv) {
-				delete_type<glm::vec2>(uv);
-				std::cout << "deallocate" << std::endl;
-			}
-			if (index) {
-				delete_type<uint32_t>(index);
-				std::cout << "deallocate" << std::endl;
-			}
-		}
-	};
-
 	class PronetReadObject2v : public pnTlsf
 	{
 		const char* name;
@@ -68,21 +34,21 @@ namespace pronet
 
 		~PronetReadObject2v();
 
-		virtual bool readFile(const char* name, std::unique_ptr<ObjectInfo2v[]>& info);
+		virtual bool readFile(const char* name, ObjectInfo2v* info, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
 
 	private:
 
 		bool type_correct(const std::string text);
 
-		void getFromText(const std::string text, std::unique_ptr<ObjectInfo2v[]>& info);
+		void getFromText(const std::string text, ObjectInfo2v* info, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
 
-		inline void getVerts(const char* script, std::unique_ptr<ObjectInfo2v[]>& info);
+		inline void getVerts(const char* script, ObjectInfo2v* info, pronet::ObjectPool_Array<glm::vec2>* vertsPool);
 
-		inline void getIndex(const char* script, std::unique_ptr<ObjectInfo2v[]>& info);
+		inline void getIndex(const char* script, ObjectInfo2v* info, pronet::ObjectPool_Array<uint32_t>* indexPool);
 
-		inline void getUv(const char* script, std::unique_ptr<ObjectInfo2v[]>& info);
+		inline void getUv(const char* script, ObjectInfo2v* info);
 
-		inline void getShader(const char* script, std::unique_ptr<ObjectInfo2v[]>& info);
+		inline void getShader(const char* script, ObjectInfo2v* info);
 
 		void fileclose(const char* log);
 	};
@@ -144,19 +110,19 @@ namespace pronet
 
 	public:
 		struct PronetLoadChanckInfo {
-			std::unique_ptr<std::unique_ptr<ShaderMakeInfo[]>[]> shaders;
-			std::unique_ptr<std::unique_ptr<ObjectInfo2v[]>[]> objs;
+			std::unique_ptr<ShaderMakeInfo[]> shaders;
+			std::unique_ptr<ObjectInfo2v[]> objs;
 		};
 
 		PronetReadLoadFileList(const char* name, int* dimentionSize);
 
 		~PronetReadLoadFileList();
 
-		PronetLoadChanckInfo getLoadFile(uint32_t chanck_Index);
+		PronetLoadChanckInfo getLoadFile(uint32_t chanck_Index, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
 
 	private:
 
-		inline PronetLoadChanckInfo getParam();
+		inline PronetLoadChanckInfo getParam(pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
 
 		inline bool type_correct(const char* script);
 
