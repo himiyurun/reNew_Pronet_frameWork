@@ -31,6 +31,30 @@
     <Filter Include="ソース ファイル\Shader">
       <UniqueIdentifier>{3468d990-bed4-48d7-a6bf-b6be6f7619bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\PnLib\exmemory">
+      <UniqueIdentifier>{9373ef29-0c38-4efe-be4a-648d48a85101}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\PnLib\exreader">
+      <UniqueIdentifier>{50ecb825-4624-43eb-9ee4-9199bdc4cbec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\PnLib\pnstr">
+      <UniqueIdentifier>{c27dca9a-6ddc-473f-bb60-a5e347762031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\PnHead\exmemory">
+      <UniqueIdentifier>{f329123a-e34b-421b-941e-d062441b03b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\PnHead\util">
+      <UniqueIdentifier>{bb4d8db6-191d-4fca-95b1-2764da24de02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\PnLib\util">
+      <UniqueIdentifier>{585b7691-300e-492d-8c62-178d14c6f358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\PnHead\exreader">
+      <UniqueIdentifier>{4123f141-cdf2-4c54-b59e-acd5fbc29307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\PnHead\pnstr">
+      <UniqueIdentifier>{94f30771-b838-4f4b-94b1-df805bf226bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,15 +66,6 @@
     <ClCompile Include="glad.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="BoundaryTag.cpp">
-      <Filter>ソース ファイル\PnLib</Filter>
-    </ClCompile>
-    <ClCompile Include="TLSFmemory.cpp">
-      <Filter>ソース ファイル\PnLib</Filter>
-    </ClCompile>
-    <ClCompile Include="readtxt.cpp">
-      <Filter>ソース ファイル\PnLib</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>ソース ファイル\GLI</Filter>
     </ClCompile>
@@ -60,34 +75,40 @@
     <ClCompile Include="glfw_Window.cpp">
       <Filter>ソース ファイル\GLI</Filter>
     </ClCompile>
-    <ClCompile Include="readDocument.cpp">
-      <Filter>ソース ファイル\PnLib</Filter>
-    </ClCompile>
-    <ClCompile Include="BitMap64.cpp">
-      <Filter>ソース ファイル\PnLib</Filter>
+    <ClCompile Include="BoundaryTag.cpp">
+      <Filter>ソース ファイル\PnLib\exmemory</Filter>
     </ClCompile>
     <ClCompile Include="ObjectPool.cpp">
+      <Filter>ソース ファイル\PnLib\exmemory</Filter>
+    </ClCompile>
+    <ClCompile Include="TLSFmemory.cpp">
+      <Filter>ソース ファイル\PnLib\exmemory</Filter>
+    </ClCompile>
+    <ClCompile Include="readDocument.cpp">
+      <Filter>ソース ファイル\PnLib\exreader</Filter>
+    </ClCompile>
+    <ClCompile Include="readtxt.cpp">
+      <Filter>ソース ファイル\PnLib\exreader</Filter>
+    </ClCompile>
+    <ClCompile Include="Structure.cpp">
+      <Filter>ソース ファイル\PnLib\pnstr</Filter>
+    </ClCompile>
+    <ClCompile Include="BitMap64.cpp">
+      <Filter>ソース ファイル\PnLib\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Chanck.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
+    </ClCompile>
+    <ClCompile Include="bit_tree.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="bit.cpp">
+      <Filter>ソース ファイル\PnLib\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pronet.h">
       <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="BoundaryTag.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
-    </ClInclude>
-    <ClInclude Include="MemoryAllocaterTester.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
-    </ClInclude>
-    <ClInclude Include="readtxt.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
-    </ClInclude>
-    <ClInclude Include="TLSFmemory.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
     </ClInclude>
     <ClInclude Include="glfw_Window.h">
       <Filter>ヘッダー ファイル\GLI</Filter>
@@ -98,26 +119,56 @@
     <ClInclude Include="Object.h">
       <Filter>ヘッダー ファイル\GLI</Filter>
     </ClInclude>
-    <ClInclude Include="pnTlsf.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectPool.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
-    </ClInclude>
-    <ClInclude Include="readDocument.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
-    </ClInclude>
     <ClInclude Include="Uniform.h">
       <Filter>ヘッダー ファイル\GLI</Filter>
     </ClInclude>
-    <ClInclude Include="BitMap64.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
+    <ClInclude Include="MemoryAllocaterTester.h">
+      <Filter>ヘッダー ファイル\PnHead\exmemory</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundaryTag.h">
+      <Filter>ヘッダー ファイル\PnHead\exmemory</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPool.h">
+      <Filter>ヘッダー ファイル\PnHead\exmemory</Filter>
     </ClInclude>
     <ClInclude Include="ObjectPoolArray.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
+      <Filter>ヘッダー ファイル\PnHead\exmemory</Filter>
     </ClInclude>
     <ClInclude Include="ObjectPoolList.h">
+      <Filter>ヘッダー ファイル\PnHead\exmemory</Filter>
+    </ClInclude>
+    <ClInclude Include="pnTlsf.h">
+      <Filter>ヘッダー ファイル\PnHead\exmemory</Filter>
+    </ClInclude>
+    <ClInclude Include="pronet_memory.h">
+      <Filter>ヘッダー ファイル\PnHead\exmemory</Filter>
+    </ClInclude>
+    <ClInclude Include="TLSFmemory.h">
+      <Filter>ヘッダー ファイル\PnHead\exmemory</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>ヘッダー ファイル\PnHead\util</Filter>
+    </ClInclude>
+    <ClInclude Include="BitMap64.h">
+      <Filter>ヘッダー ファイル\PnHead\util</Filter>
+    </ClInclude>
+    <ClInclude Include="readDocument.h">
+      <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
+    </ClInclude>
+    <ClInclude Include="readtxt.h">
+      <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
+    </ClInclude>
+    <ClInclude Include="Structure.h">
+      <Filter>ヘッダー ファイル\PnHead\pnstr</Filter>
+    </ClInclude>
+    <ClInclude Include="Chanck.h">
       <Filter>ヘッダー ファイル\PnHead</Filter>
+    </ClInclude>
+    <ClInclude Include="bit.h">
+      <Filter>ヘッダー ファイル\PnHead\util</Filter>
+    </ClInclude>
+    <ClInclude Include="bit_tree.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +186,9 @@
     </None>
     <None Include="vertex_shader.vert">
       <Filter>ソース ファイル\Shader</Filter>
+    </None>
+    <None Include="sample.pnmap2">
+      <Filter>リソース ファイル</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

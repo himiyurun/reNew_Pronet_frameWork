@@ -16,6 +16,7 @@ ChanckMapping {
 Chanck {
 	Shaders 1
 	Objs 1
+	Map sample.pnmap
 
 	Shader {
 		sample.pnsm		

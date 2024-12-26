@@ -133,8 +133,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bit.cpp" />
     <ClCompile Include="BitMap64.cpp" />
+    <ClCompile Include="bit_tree.cpp" />
     <ClCompile Include="BoundaryTag.cpp" />
+    <ClCompile Include="Chanck.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="glfw_Window.cpp" />
     <ClCompile Include="main.cpp" />
@@ -144,11 +147,15 @@
     <ClCompile Include="readDocument.cpp" />
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Structure.cpp" />
     <ClCompile Include="TLSFmemory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bit.h" />
     <ClInclude Include="BitMap64.h" />
+    <ClInclude Include="bit_tree.h" />
     <ClInclude Include="BoundaryTag.h" />
+    <ClInclude Include="Chanck.h" />
     <ClInclude Include="glfw_Window.h" />
     <ClInclude Include="MemoryAllocaterTester.h" />
     <ClInclude Include="Object.h" />
@@ -156,10 +163,12 @@
     <ClInclude Include="ObjectPoolArray.h" />
     <ClInclude Include="ObjectPoolList.h" />
     <ClInclude Include="pnTlsf.h" />
+    <ClInclude Include="pronet_memory.h" />
     <ClInclude Include="Pronet.h" />
     <ClInclude Include="readDocument.h" />
     <ClInclude Include="readtxt.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Structure.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TLSFmemory.h" />
     <ClInclude Include="Uniform.h" />
@@ -167,6 +176,7 @@
   <ItemGroup>
     <None Include="fragment_shader.frag" />
     <None Include="LoadFileList.fi" />
+    <None Include="sample.pnmap2" />
     <None Include="sample.pnsm" />
     <None Include="test.str2v" />
     <None Include="vertex_shader.vert" />

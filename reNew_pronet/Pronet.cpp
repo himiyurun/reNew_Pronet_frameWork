@@ -15,23 +15,30 @@ PronetManager::PronetManager(glfw_windowCreateInfo* windowInfo, const char* load
 
 PronetManager::~PronetManager()
 {
+	str.reset();
 	objPool.back(&object);
 	shdPool.back(&shader);
 }
 
-void PronetManager::load()
+void PronetManager::load(Structure2vParamCreateInfo* strInfo)
 {
 	pronet::PronetReadLoadFileList::PronetLoadChanckInfo info = file_reader.getLoadFile(0, &vertsPool, &indexPool);
 	InitShader(info.shaders[0].vsrc.c_str(), info.shaders[0].fsrc.c_str());
-	InitObj(&info.objs[0], GL_TRUE);
+	InitObj();
+	initStr(strInfo, &info.objs[0], 1, 1);
+}
+
+void PronetManager::initStr(Structure2vParamCreateInfo* strInfo, ObjectInfo2v* objInfo, uint32_t shd_index, uint32_t tex_index)
+{
+	str.update(strInfo, objInfo, shd_index, tex_index);
 }
 
 void PronetManager::process()
 {
-	shader[0].use();
+	shader[str.shader()].use();
 	winParamUbo.bind();
 
 	winParamUbo.Update(&param, 1);
 
-	object[0].draw();
+	str.draw();
 }

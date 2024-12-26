@@ -15,8 +15,9 @@ namespace pronet {
 	class ObjectPool_Array {
 		std::vector<T, pnTlsfInsertSTLtype<T>> valPool;
 		BitMap64 is_used;
-
+		//	再利用可能なカレント
 		uint32_t pointer;
+		//	実際のサイズ、小さい場合は空になり次第解放
 		uint32_t bufsize;
 
 	public:
@@ -86,17 +87,22 @@ void pronet::ObjectPool_Array<T>::back(PoolArray<T>* p)
 	std::cout << p->index << " " << bit_size << std::endl;
 	is_used.write_Bit_0(p->index, bit_size);
 
+	/*
 	size_t idx(p->index * 4);
 	for (int i = 0; i < p->size; i++) {
 		assert(idx < valPool.size() && "Error : ObjectPoolArray : out of range");
-		valPool[idx].reset();
+		//valPool[idx].reset();
 		idx++;
 	}
+	*/
 
 	p->data = nullptr;
 	p->index = 0;
 	p->size = 0;
+
+#ifdef _POOL_DEBUG
 	is_used.printBit();
+#endif
 }
 
 template<typename T>

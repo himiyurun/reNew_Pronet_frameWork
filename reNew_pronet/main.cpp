@@ -1,42 +1,28 @@
-#include <memory>
-#include <stdlib.h>
-#include <crtdbg.h>
 
 #define PRONET_2D
 #define _POOL_DEBUG
 
 #include "Pronet.h"
-#include "readDocument.h"
-#include "ObjectPoolArray.h"
+#include "bit.h"
+#include "bit_tree.h"
 
-void libInit() {
+void libInit() 
+{
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	if (!glfwInit()) {
 		std::cerr << "Error : Can't Initlize GLFW" << std::endl;
 		exit(1);
 	}
 }
 
-constexpr glm::vec2 rectangleVertex[] = {
-	{ -0.5f,  0.5f },
-	{ -0.5f, -0.5f },
-	{  0.5f, -0.5f },
-	{  0.5f,  0.5f }
-};
-
-constexpr GLuint rectangleIndex[] = {
-	0, 1, 2, 0, 3, 2
-};
-
 int main() {
-
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
 	libInit();
-
+	
 	glfw_windowCreateInfo winInfo = {};
 	winInfo.width = 640;
 	winInfo.height = 480;
-	winInfo.title = "syu-thingumoruka-";
+	winInfo.title = "test_game";
 	winInfo.monitor = nullptr;
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -45,8 +31,19 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	PronetFrameWorkMain game(&winInfo, "LoadFileList.fi");
 
+	Structure2vParamCreateInfo info;
+	pronet::bit_tree<6> s(false, 128);
+	size_t ss;
+	s.rigist(&ss);
+	std::cout << "ss : " << ss << std::endl;
+	s.printAllBit();
+	s.rigist(&ss);
+	std::cout << "ss : " << ss << std::endl;
+	s.rigist(&ss);
+	std::cout << "ss : " << ss << std::endl;
+
 	try {
-		game.load();
+		game.load(&info);
 		game.run();
 	}
 	catch (const std::exception& e) {

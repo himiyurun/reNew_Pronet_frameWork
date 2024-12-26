@@ -12,6 +12,7 @@ struct ShaderMakeInfo {
 
 enum ShaderBlock {
 	PNGL_WINDOW_PARAM,
+	PN_GAME_OBJECT_PARAM,
 	SHADER_BLOCK_SIZE,
 	SHADER_BLOCK_INFO_END
 };

@@ -9,21 +9,23 @@ namespace pronet {
 		size_t index;	//	ビットマップのインデックス
 		size_t size;	//	実際のサイズ
 
-		PoolArray(T* data = nullptr, size_t size = 0) 
-			: data(data)
-			, index(0)
-			, size(size)
+		//	コンストラクタ
+		PoolArray(T* data = nullptr, size_t index = 0, size_t size = 0) : data(data), index(index), size(size) {}
+
+		//	コピーコンストラクタ
+		PoolArray(const PoolArray& o) : data(o.data), index(o.index), size(o.size) {}
+
+		// ムーブコンストラクタ
+		PoolArray(PoolArray&& o) noexcept
+			: data(o.data), index(o.index), size(o.size)
 		{
+			o.data = nullptr;
+			o.index = 0;
+			o.size = 0;
 		}
 
-		PoolArray(PoolArray&& o) noexcept {
-			o = *this;
-			this->data = nullptr;
-			this->index = 0;
-			this->size = 0;
-		}
-
-		PoolArray& operator=(const PoolArray& o) {
+		// コピー代入演算子
+		PoolArray& operator=(const PoolArray<T>& o) {
 			if (this != &o) {
 				this->data = o.data;
 				this->index = o.index;
