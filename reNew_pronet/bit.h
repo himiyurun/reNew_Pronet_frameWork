@@ -35,6 +35,12 @@ namespace pronet {
 	//	area : 抽出したい領域の大きさ
 	uint64_t _bit_extract_area(uint64_t n, size_t buf_size, size_t start, size_t area);
 
+	//	指定した位置のビットを取得する関数
+	//	n : 取得したい変数
+	//	size : 変数のビット数
+	//	start : 取得するの位置
+	bool _bit_get_status(uint64_t n, size_t size, size_t point);
+
 	//	指定した領域に0を書き込む
 	//	n : 書き込みたい変数
 	//	size : 変数のビット数

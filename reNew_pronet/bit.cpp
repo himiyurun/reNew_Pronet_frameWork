@@ -35,13 +35,22 @@ bool pronet::_bit_find_one_from(uint64_t n, size_t size, size_t start, size_t* i
 
 uint64_t pronet::_bit_extract_area(uint64_t n, size_t buf_size, size_t start, size_t area)
 {
-	assert(start + area < buf_size && "Error : _bit_extract_area : out of range");
+	assert(start + area <= buf_size && "Error : _bit_extract_area : out of range");
 	//	最大値にする
 	//	変数のサイズからエリアを引いた分、左に動かし1を引くことでマスクを作る
 	//	area 分ずらすことで右端が area 分のビットを0にする
 	//	ビット反転させてマスクを作る
 	uint64_t buf(~(~(uint64_t)(0) & (((1ULL << (UNSIGNED_INT_64 - area)) - 1) << area)));
 	return (n >> start) & buf;
+}
+
+bool pronet::_bit_get_status(uint64_t n, size_t size, size_t point)
+{
+	assert(point < size && "Error : _bit_get_status : out of range");
+	if (1 & (n >> point))
+		return true;
+	else
+		return false;
 }
 
 void pronet::_bit_write_zero_area(uint64_t* n, size_t buf_size, size_t start, size_t area)

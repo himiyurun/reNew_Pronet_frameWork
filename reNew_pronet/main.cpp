@@ -3,7 +3,7 @@
 #define _POOL_DEBUG
 
 #include "Pronet.h"
-#include "bit.h"
+#include "Timer.h"
 #include "bit_tree.h"
 
 void libInit() 
@@ -32,15 +32,25 @@ int main() {
 	PronetFrameWorkMain game(&winInfo, "LoadFileList.fi");
 
 	Structure2vParamCreateInfo info;
-	pronet::bit_tree<6> s(false, 128);
-	size_t ss;
-	s.rigist(&ss);
-	std::cout << "ss : " << ss << std::endl;
-	s.printAllBit();
-	s.rigist(&ss);
-	std::cout << "ss : " << ss << std::endl;
-	s.rigist(&ss);
-	std::cout << "ss : " << ss << std::endl;
+	pronet::bit_tree<6> s(false, 120);
+	size_t ss[12];
+	for (int i = 0; i < 12; i++) {
+		s.rigist(&ss[i]);
+	}
+	{
+		Timer sec;
+		for (int i = 0; i < 12; i++) {
+
+			s.unrigist(ss[i]);
+		}
+	}
+	for (int i = 0; i < 12; i++) {
+		s.rigist(&ss[i]);
+	}
+	for (int i = 0; i < 12; i++) {
+		Timer sec;
+		s.unrigist_auto();
+	}
 
 	try {
 		game.load(&info);

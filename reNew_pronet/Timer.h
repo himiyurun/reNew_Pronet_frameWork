@@ -51,5 +51,6 @@ public:
         durTime = endTime - begTime;
 
         std::cout << "duration time : " << durTime << "." << durMilli.count() << durMicro.count() << std::endl;
+        std::cout << "end" << std::endl;
     }
 };
