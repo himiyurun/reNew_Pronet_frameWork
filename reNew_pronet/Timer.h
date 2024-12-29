@@ -14,12 +14,14 @@ class Timer
     const std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> begTimeMill;
     const time_t begTime;
 
+    const char* process_name;
 public:
 
-    Timer()
+    Timer(const char* process_name = nullptr)
         : begTimeMicro(std::chrono::time_point_cast<std::chrono::microseconds>(std::chrono::system_clock::now()))
         , begTimeMill(std::chrono::time_point_cast<std::chrono::milliseconds>(std::chrono::system_clock::now()))
         , begTime(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()))
+        , process_name(process_name)
     {
     }
 
@@ -50,7 +52,8 @@ public:
         durMilli = abs(std::chrono::duration_cast<std::chrono::milliseconds>(endTimeMill - begTimeMicro));
         durTime = endTime - begTime;
 
+        if (process_name)
+            std::cout << process_name << " ";
         std::cout << "duration time : " << durTime << "." << durMilli.count() << durMicro.count() << std::endl;
-        std::cout << "end" << std::endl;
     }
 };

@@ -2,9 +2,10 @@
 #define PRONET_2D
 #define _POOL_DEBUG
 
+#include <ctime>
 #include "Pronet.h"
 #include "Timer.h"
-#include "bit_tree.h"
+#include "ObjectPool.h"
 
 void libInit() 
 {
@@ -32,25 +33,6 @@ int main() {
 	PronetFrameWorkMain game(&winInfo, "LoadFileList.fi");
 
 	Structure2vParamCreateInfo info;
-	pronet::bit_tree<6> s(false, 120);
-	size_t ss[12];
-	for (int i = 0; i < 12; i++) {
-		s.rigist(&ss[i]);
-	}
-	{
-		Timer sec;
-		for (int i = 0; i < 12; i++) {
-
-			s.unrigist(ss[i]);
-		}
-	}
-	for (int i = 0; i < 12; i++) {
-		s.rigist(&ss[i]);
-	}
-	for (int i = 0; i < 12; i++) {
-		Timer sec;
-		s.unrigist_auto();
-	}
 
 	try {
 		game.load(&info);

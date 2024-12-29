@@ -4,6 +4,16 @@
 #include "ObjectPoolList.h"
 #include "Object.h"
 
+//	オブジェクトをshared_ptr管理にすれば全て解決
+//	境界線オブジェクト、生成するチャンクのオブジェクトファイルのインデックスによりオブジェクトを割り当てる。
+//	ノーマルオブジェクト、生成するチャンクのオブジェクトファイルのインデックスにより
+
+struct Structure2vCreateInfo {
+	size_t buffer_object_index;
+	size_t shader_index;
+	Structure2vParamCreateInfo param;
+};
+
 struct Structure2vParamCreateInfo {
 	GLfloat location[2];	//	オブジェクトの位置
 	GLfloat col_pos[2];		//	当たり判定をとる左上のオブジェクト座標

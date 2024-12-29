@@ -78,9 +78,6 @@
     <ClCompile Include="BoundaryTag.cpp">
       <Filter>ソース ファイル\PnLib\exmemory</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectPool.cpp">
-      <Filter>ソース ファイル\PnLib\exmemory</Filter>
-    </ClCompile>
     <ClCompile Include="TLSFmemory.cpp">
       <Filter>ソース ファイル\PnLib\exmemory</Filter>
     </ClCompile>
@@ -99,11 +96,11 @@
     <ClCompile Include="Chanck.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
-    <ClCompile Include="bit_tree.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="bit.cpp">
       <Filter>ソース ファイル\PnLib\util</Filter>
+    </ClCompile>
+    <ClCompile Include="loadPronetMap2.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +165,9 @@
       <Filter>ヘッダー ファイル\PnHead\util</Filter>
     </ClInclude>
     <ClInclude Include="bit_tree.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="loadPronetMap2.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
