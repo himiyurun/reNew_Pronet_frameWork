@@ -1,9 +1,9 @@
-
 #define PRONET_2D
 #define _POOL_DEBUG
 
 #include "Pronet.h"
 #include "ObjectPool.h"
+#include "loadPronetMap2.h"
 
 void libInit() 
 {

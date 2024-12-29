@@ -19,6 +19,7 @@ bool pronet::loadPronetMap2::get_map_info(const char* name, PoolArray<Structure2
         throw std::runtime_error("pronetmapfile can't close!");
         return false;
     }
+    std::cout << "read_end" << std::endl;
     return true;
 }
 
@@ -56,7 +57,7 @@ bool pronet::loadPronetMap2::type_is()
     return false;
 }
 
-void pronet::loadPronetMap2::get_struct(PoolArray<Structure2vCreateInfo> *info)
+void pronet::loadPronetMap2::get_struct(PoolArray<Structure2vCreateInfo>& info)
 {
     size_t str_size(0);
     
@@ -65,38 +66,37 @@ void pronet::loadPronetMap2::get_struct(PoolArray<Structure2vCreateInfo> *info)
     iss >> script;
     script_func("size", [this, &str_size]() {
         iss >> str_size;
+        std::cout << "size : " << str_size << std::endl;
         });
     if (str_size == 0) return;
     clear_string();
 
-    *info = pool.get(str_size);
+    info = pool.get(str_size);
     for (size_t i = 0; i < str_size; i++) {
         line_getting_by_text();
-        iss >> (*info)[i].shader_index          //  シェーダーのインデックス
-            >> (*info)[i].buffer_object_index   //  バッファオブジェクトのインデックス
-            >> (*info)[i].param.location[0]     //  ワールド座標系のx座標
-            >> (*info)[i].param.location[1]     //  ワールド座標系のy座標
-            >> (*info)[i].param.col_pos[0]      //  当たり判定をとる左上のオブジェクト座標系のx座標
-            >> (*info)[i].param.col_pos[1]      //  当たり判定をとる左上のオブジェクト座標系のy座標
-            >> (*info)[i].param.col_size[0]     //  当たり判定をとるx方向の大きさ
-            >> (*info)[i].param.col_size[1]     //  当たり判定をとるy方向の大きさ
-            >> (*info)[i].param.rotate;         //  シェーダの角度を
+        iss >> info[i].shader_index          //  シェーダーのインデックス
+            >> info[i].buffer_object_index   //  バッファオブジェクトのインデックス
+            >> info[i].param.location[0]     //  ワールド座標系のx座標
+            >> info[i].param.location[1]     //  ワールド座標系のy座標
+            >> info[i].param.col_pos[0]      //  当たり判定をとる左上のオブジェクト座標系のx座標
+            >> info[i].param.col_pos[1]      //  当たり判定をとる左上のオブジェクト座標系のy座標
+            >> info[i].param.col_size[0]     //  当たり判定をとるx方向の大きさ
+            >> info[i].param.col_size[1]     //  当たり判定をとるy方向の大きさ
+            >> info[i].param.rotate;         //  シェーダの角度を
         clear_string();
     }
 }
 
-void pronet::loadPronetMap2::structure_by_script(const char* text, PoolArray<Structure2vCreateInfo>* info)
+void pronet::loadPronetMap2::structure_by_script(const char* text, PoolArray<Structure2vCreateInfo>& info)
 {
-    script_func(text, [this, info]() {
-        clear_string();
-        line_getting_by_text();
+    script_func(text, [this, &info]() {
         iss >> script;
-        if (strcmp("{", script.c_str())) {
-            while (strcmp("}", script.c_str()) != 0) {
-                get_struct(info);
-                line_getting_by_text();
-                iss >> script;
-            }
+        std::cout << script << std::endl;
+        if (strcmp("{", script.c_str()) == 0) {
+            get_struct(info);
+            line_getting_by_text();
+            iss >> script;
+            std::cout << "script : " << line << std::endl;
         }
         });
 }
@@ -109,26 +109,26 @@ void pronet::loadPronetMap2::line_getting_by_text()
 
 void pronet::loadPronetMap2::get_script(PoolArray<Structure2vCreateInfo> info[5])
 {
-    if (!type_is()) {
-        throw std::logic_error("file type is not correct!!");
-    }
-
     while (!ifs.eof()) {
         line_getting_by_text();
         iss >> script;
+        std::cout << script << std::endl;
         switch (script[0]) {
         case 'B':
             break;
         case 'M':
             break;
         case 'b':
-            structure_by_script("b_up", &info[CHANCK_BOUNDARY_UP]);
-            structure_by_script("b_down", &info[CHANCK_BOUNDARY_DOWN]);
-            structure_by_script("b_right", &info[CHANCK_BOUNDARY_RIGHT]);
-            structure_by_script("b_left", &info[CHANCK_BOUNDARY_LEFT]);
+            structure_by_script("b_up", info[CHANCK_BOUNDARY_UP]);
+            structure_by_script("b_down", info[CHANCK_BOUNDARY_DOWN]);
+            structure_by_script("b_right", info[CHANCK_BOUNDARY_RIGHT]);
+            structure_by_script("b_left", info[CHANCK_BOUNDARY_LEFT]);
             break;
         case 's':
-            structure_by_script("str", &info[CHANCK_NATIVE]);
+            structure_by_script("str", info[CHANCK_NATIVE]);
+            break;
+        case '/':
+            script_func("//", [](){});
             break;
         default:
             break;

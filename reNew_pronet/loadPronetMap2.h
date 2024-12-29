@@ -46,9 +46,9 @@ namespace pronet{
 		//	ファイルのタイプが合っているか
 		bool type_is();
 		//	ストラクチャ関数内の調査を行う
-		void get_struct(PoolArray<Structure2vCreateInfo> *info);
+		void get_struct(PoolArray<Structure2vCreateInfo>& info);
 		//	ストラクチャの割り当てを行う
-		void structure_by_script(const char* text, PoolArray<Structure2vCreateInfo>* info);
+		void structure_by_script(const char* text, PoolArray<Structure2vCreateInfo>& info);
 		//	行ごとに文字を読み込む
 		void line_getting_by_text();
 		//	ファイルを読み込んでそれに応じた処理を行う

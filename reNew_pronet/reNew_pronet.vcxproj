@@ -187,6 +187,7 @@
     <Text Include="AllocaterTesterLog112420241128.txt" />
     <Text Include="AllocaterTesterLog11620241128.txt" />
     <Text Include="AllocaterTesterLog130920241126.txt" />
+    <Text Include="log20241230.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

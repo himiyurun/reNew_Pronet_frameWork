@@ -82,7 +82,8 @@ namespace pronet {
 		poolObject_shared_ptr(ObjectPool<T, N>* pool = nullptr)
 		{
 			if (pool != nullptr) {
-				sp = std::shared_ptr<Pool_Object<T>>(new Pool_Object<T>(pool->pop()), Deleter(pool));
+				Pool_Object<T> buf = pool->pop();
+				sp = std::shared_ptr<Pool_Object<T>>(new Pool_Object<T>(buf), Deleter(pool));
 			}
 		}
 
