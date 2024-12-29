@@ -24,6 +24,10 @@ namespace pronet {
 		T* operator->() {
 			return data;
 		}
+
+		T* operator()() {
+			return data;
+		}
 	};
 
 	template<class T, std::size_t N>

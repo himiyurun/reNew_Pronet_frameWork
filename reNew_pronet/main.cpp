@@ -2,9 +2,7 @@
 #define PRONET_2D
 #define _POOL_DEBUG
 
-#include <ctime>
 #include "Pronet.h"
-#include "Timer.h"
 #include "ObjectPool.h"
 
 void libInit() 
@@ -30,7 +28,7 @@ int main() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	PronetFrameWorkMain game(&winInfo, "LoadFileList.fi");
+	PronetManager<6, 6> game(&winInfo, "LoadFileList.fi");
 
 	Structure2vParamCreateInfo info;
 

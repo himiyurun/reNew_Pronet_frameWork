@@ -7,8 +7,19 @@
 #include <functional>
 
 #include "Structure.h"
+#include "ObjectPoolArray.h"
+#include "ObjectPoolList.h"
 
 namespace pronet{
+	enum loadChankDirection {
+		CHANCK_NATIVE,
+		CHANCK_BOUNDARY_UP,
+		CHANCK_BOUNDARY_DOWN,
+		CHANCK_BOUNDARY_RIGHT,
+		CHANCK_BOUNDARY_LEFT,
+		CHANCK_DIRECTION_SIZE
+	};
+
 	class loadPronetMap2
 	{
 		std::ifstream ifs;
@@ -17,18 +28,31 @@ namespace pronet{
 		std::istringstream iss;
 
 		const char* file_name;
+
+		static pronet::ObjectPool_Array<Structure2vCreateInfo> pool;
+
 	public:
+		loadPronetMap2();
+
 		//	マップファイルを読み込みストラクチャの配置を取得する
-		bool get_map_info(const char* name, std::unique_ptr<Structure2vCreateInfo>& info);
+		bool get_map_info(const char* name, PoolArray<Structure2vCreateInfo> info[5]);
+
+		//	ストラクチャの配置の情報をプールに返却する
+		void return_create_info(PoolArray<Structure2vCreateInfo> info[5]);
 
 	private:
 		//	ファイルを開く
 		bool read_file_init(const char* name);
-
 		//	ファイルのタイプが合っているか
 		bool type_is();
+		//	ストラクチャ関数内の調査を行う
+		void get_struct(PoolArray<Structure2vCreateInfo> *info);
+		//	ストラクチャの割り当てを行う
+		void structure_by_script(const char* text, PoolArray<Structure2vCreateInfo>* info);
+		//	行ごとに文字を読み込む
+		void line_getting_by_text();
 		//	ファイルを読み込んでそれに応じた処理を行う
-		void get_script(std::unique_ptr<Structure2vCreateInfo>& info);
+		void get_script(PoolArray<Structure2vCreateInfo> info[5]);
 		
 		//	ファイルを閉じる
 		bool file_close();

@@ -22,11 +22,10 @@ namespace pronet {
 	* ・参照する。元オブジェクトは生存範囲を外れるため削除だがメモリ自体は確保されたまま
 	*/
 
+	template<std::size_t VBOLV, std::size_t SHDLV>
 	class Chanck_2D
 	{
-		PoolArray<Structure2v> structure;
-		PoolArray<Object> buffer_pool;
-		PoolArray<Shader> shader;
+		PoolArray<Structure2v<VBOLV, SHDLV>> structure;
 	
 	public:
 		Chanck_2D();

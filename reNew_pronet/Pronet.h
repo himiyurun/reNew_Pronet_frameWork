@@ -7,23 +7,18 @@
 #include "readDocument.h"
 #include "Structure.h"
 
-#define PronetFrameWorkMain Pronet_Manager_main
-
-using Pronet_Manager_main = class PronetManager;
-
 //	ウインドウのパラメーターを送信するユニフォームバッファオブジェクト
+template<std::size_t VBOLV, std::size_t SHDLV>
 class PronetManager : public glfw_Window, pnTlsf {
 	pronet::PronetReadLoadFileList file_reader;
 
 	GLint dimentionSize;
 
-	pronet::PoolArray<Shader> shader;
-	pronet::PoolArray<Object> object;
-	pronet::ObjectPool_Array<Object> objPool;
-	pronet::ObjectPool_Array<Shader> shdPool;
+	pronet::ObjectPool<Object, VBOLV> objPool;
+	pronet::ObjectPool<Shader, SHDLV> shdPool;
 	pronet::ObjectPool_Array<glm::vec2> vertsPool;
 	pronet::ObjectPool_Array<uint32_t> indexPool;
-	Structure2v str;
+	Structure2v<VBOLV, SHDLV> str;
 
 	pronet::Uniform<WindowParam> winParamUbo;
 
@@ -37,18 +32,74 @@ public:
 	//	デストラクタ
 	~PronetManager();
 
+	pronet::poolObject_shared_ptr<Shader, SHDLV> InitShader(const char* vsrc, const char* fsrc);
+
+	pronet::poolObject_shared_ptr<Object, VBOLV> InitObj(ObjectInfo2v* objInfo, GLboolean index_used);
+
+	void initStr(Structure2vParamCreateInfo* strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index);
+
 	void load(Structure2vParamCreateInfo* strInfo);
 	
-	void InitShader(const char* vsrc, const char* fsrc) {
-		shader[0].init(vsrc, fsrc);
-	}
-
-	void InitObj() {
-		str.init(&object[0]);
-	}
-
-	void initStr(Structure2vParamCreateInfo* strInfo, ObjectInfo2v* objInfo, uint32_t shd_index, uint32_t tex_index);
-
 	//	ループ内で実行する処理
 	virtual void process();
 };
+
+template<std::size_t VBOLV, std::size_t SHDLV>
+pronet::poolObject_shared_ptr<Shader, SHDLV> PronetManager<VBOLV, SHDLV>::InitShader(const char* vsrc, const char* fsrc)
+{
+	pronet::poolObject_shared_ptr<Shader, SHDLV> shader(&shdPool);
+	shader->init(vsrc, fsrc);
+	return shader;
+}
+
+template<std::size_t VBOLV, std::size_t SHDLV>
+pronet::poolObject_shared_ptr<Object, VBOLV> PronetManager<VBOLV, SHDLV>::InitObj(ObjectInfo2v* objInfo, GLboolean index_used)
+{
+	pronet::poolObject_shared_ptr<Object, VBOLV> object(&objPool);
+	object->init(dimentionSize, objInfo, index_used);
+	return object;
+}
+
+template<std::size_t VBOLV, std::size_t SHDLV>
+void PronetManager<VBOLV, SHDLV>::initStr(Structure2vParamCreateInfo* strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index)
+{
+	str.init(strInfo, object, shader, tex_index);
+}
+
+template<std::size_t VBOLV, std::size_t SHDLV>
+PronetManager<VBOLV, SHDLV>::PronetManager(glfw_windowCreateInfo* windowInfo, const char* loadfilelist_name)
+	: glfw_Window(windowInfo)
+	, file_reader(loadfilelist_name, &dimentionSize)
+	, objPool()
+	, shdPool()
+	, vertsPool(64)
+	, indexPool(32)
+	, winParamUbo("window")
+{
+}
+
+template<std::size_t VBOLV, std::size_t SHDLV>
+PronetManager<VBOLV, SHDLV>::~PronetManager()
+{
+	str.reset();
+}
+
+template<std::size_t VBOLV, std::size_t SHDLV>
+void PronetManager<VBOLV, SHDLV>::load(Structure2vParamCreateInfo* strInfo)
+{
+	pronet::PronetReadLoadFileList::PronetLoadChanckInfo info = file_reader.getLoadFile(0, &vertsPool, &indexPool);
+	pronet::poolObject_shared_ptr<Shader, SHDLV> so = InitShader(info.shaders[0].vsrc.c_str(), info.shaders[0].fsrc.c_str());
+	pronet::poolObject_shared_ptr<Object, VBOLV> oo = InitObj(&info.objs[0], GL_TRUE);
+	initStr(strInfo, oo, so, 1);
+}
+
+template<std::size_t VBOLV, std::size_t SHDLV>
+void PronetManager<VBOLV, SHDLV>::process()
+{
+	str.use();
+	winParamUbo.bind();
+
+	winParamUbo.Update(&param, 1);
+
+	str.draw();
+}
