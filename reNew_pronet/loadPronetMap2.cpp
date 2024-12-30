@@ -5,7 +5,7 @@ pronet::loadPronetMap2::loadPronetMap2()
 {
 }
 
-bool pronet::loadPronetMap2::get_map_info(const char* name, PoolArray<Structure2vCreateInfo> info[5])
+bool pronet::loadPronetMap2::get_mapInfo(const char* name, PoolArray<Structure2vCreateInfo> info[5])
 {
     if (!read_file_init(name)) {
         return false;

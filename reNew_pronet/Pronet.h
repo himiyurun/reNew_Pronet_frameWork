@@ -36,7 +36,7 @@ public:
 
 	pronet::poolObject_shared_ptr<Object, VBOLV> InitObj(ObjectInfo2v* objInfo, GLboolean index_used);
 
-	void initStr(Structure2vParamCreateInfo* strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index);
+	void initStr(Structure2vParamCreateInfo* strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object, const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index);
 
 	void load(Structure2vParamCreateInfo* strInfo);
 	
@@ -61,7 +61,7 @@ pronet::poolObject_shared_ptr<Object, VBOLV> PronetManager<VBOLV, SHDLV>::InitOb
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
-void PronetManager<VBOLV, SHDLV>::initStr(Structure2vParamCreateInfo* strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index)
+void PronetManager<VBOLV, SHDLV>::initStr(Structure2vParamCreateInfo* strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object, const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index)
 {
 	str.init(strInfo, object, shader, tex_index);
 }
@@ -70,8 +70,6 @@ template<std::size_t VBOLV, std::size_t SHDLV>
 PronetManager<VBOLV, SHDLV>::PronetManager(glfw_windowCreateInfo* windowInfo, const char* loadfilelist_name)
 	: glfw_Window(windowInfo)
 	, file_reader(loadfilelist_name, &dimentionSize)
-	, objPool()
-	, shdPool()
 	, vertsPool(64)
 	, indexPool(32)
 	, winParamUbo("window")
@@ -87,7 +85,8 @@ PronetManager<VBOLV, SHDLV>::~PronetManager()
 template<std::size_t VBOLV, std::size_t SHDLV>
 void PronetManager<VBOLV, SHDLV>::load(Structure2vParamCreateInfo* strInfo)
 {
-	pronet::PronetReadLoadFileList::PronetLoadChanckInfo info = file_reader.getLoadFile(0, &vertsPool, &indexPool);
+	pronet::PronetReadLoadFileList::PronetLoadChanckInfo info = file_reader.get_pnLCI(0, &vertsPool, &indexPool);
+	std::cout << "init" << std::endl;
 	pronet::poolObject_shared_ptr<Shader, SHDLV> so = InitShader(info.shaders[0].vsrc.c_str(), info.shaders[0].fsrc.c_str());
 	pronet::poolObject_shared_ptr<Object, VBOLV> oo = InitObj(&info.objs[0], GL_TRUE);
 	initStr(strInfo, oo, so, 1);

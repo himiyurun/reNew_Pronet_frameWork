@@ -8,6 +8,60 @@
 
 namespace pronet {
 	template<typename T>
+	class poolArray_unique_ptr
+	{
+		struct _Deleter {
+			ObjectPool_Array<T>* _pool;
+			
+			_Deleter(pronet::ObjectPool_Array<T>* pool) noexcept :_pool(pool) {}
+
+			void operator()(PoolArray<T>* ptr) {
+				_pool->back(ptr);
+				std::cout << "custom_unique_ptr_return object" << std::endl;
+			}
+		};
+
+		std::unique_ptr<PoolArray<T>, _Deleter> sp;
+
+	public:
+
+		poolArray_unique_ptr(size_t n = 0, ObjectPool_Array<T>*pool = nullptr)
+			: sp(pool ? (new PoolArray<T>(pool->get(n))) : (nullptr), _Deleter(pool)) {}
+
+		//	スマートポインタを返す
+		std::unique_ptr<PoolArray<T>> operator()() const { return sp; }
+		//	内部のオブジェクトを返す
+		T& operator[](size_t n) const {
+			if (sp)
+				return sp->operator[](n);
+			else
+				throw std::runtime_error("poolArray_unique_ptr is null. you must call .reset");
+		}
+		//	メモリを開放する
+		void reset() { sp.reset(); }
+
+		void realloc(size_t n, ObjectPool_Array<T>* pool) {
+			sp = std::unique_ptr<PoolArray<T>, _Deleter>(new PoolArray<T>(pool->get(n)), _Deleter(pool));
+		}
+
+		explicit operator bool() {
+			if (sp)
+				return true;
+			else
+				return false;
+		}
+
+		poolArray_unique_ptr<PoolArray<T>>& operator=(const poolArray_unique_ptr<PoolArray<T>>& o) {
+			if (this != &o) {
+				this->sp = std::move(o.sp);
+			}
+			return *this;
+		}
+
+		PoolArray<T>* operator->() const { return sp.operator->(); }
+	};
+	
+	template<typename T>
 	class poolArray_shared_ptr
 	{
 		std::shared_ptr<PoolArray<T>> sp;
@@ -48,7 +102,7 @@ namespace pronet {
 		}
 
 		T& operator[](size_t n) {
-			return sp->data[n];
+			return sp->operator[](n);
 		}
 
 		void reset() {

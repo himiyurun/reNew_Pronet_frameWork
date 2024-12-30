@@ -84,7 +84,6 @@ template<typename T>
 void pronet::ObjectPool_Array<T>::back(PoolArray<T>* p)
 {
 	size_t bit_size(p->size / 4);
-	std::cout << p->index << " " << bit_size << std::endl;
 	is_used.write_Bit_0(p->index, bit_size);
 
 	/*

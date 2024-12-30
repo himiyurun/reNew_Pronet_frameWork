@@ -3,7 +3,6 @@
 
 #include "Pronet.h"
 #include "ObjectPool.h"
-#include "loadPronetMap2.h"
 
 void libInit() 
 {

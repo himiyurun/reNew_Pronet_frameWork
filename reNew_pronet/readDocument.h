@@ -8,13 +8,15 @@
 
 #include <glm/vec2.hpp>
 
-#include "ObjectPoolArray.h"
+#include "pronet_memory.h"
+#include "loadPronetMap2.h"
 #include "Object.h"
 #include "Shader.h"
+#include "Structure.h"
 
 namespace pronet 
 {
-	class PronetReadObject2v : public pnTlsf
+	class PronetReadObject2v
 	{
 		const char* name;
 		std::string data;
@@ -27,14 +29,13 @@ namespace pronet
 		size_t vertexcount;
 		size_t indexcount;
 		size_t nowVao;
-
 	public:
 
 		PronetReadObject2v();
 
 		~PronetReadObject2v();
 
-		virtual bool readFile(const char* name, ObjectInfo2v* info, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
+		virtual bool read_pnObject2v(const char* name, ObjectInfo2v* info, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
 
 	private:
 
@@ -57,24 +58,19 @@ namespace pronet
 		const char* name;
 
 		std::string src;
-
 		std::ifstream file;
-
 		std::istringstream iss;
-
 		std::string script;
 
 		uint8_t points;
-
-		uint8_t size;
-
+		unsigned short size;
 	public:
 
 		readShaderMake();
 
 		~readShaderMake();
 
-		virtual void readFile(const char* name, std::unique_ptr<ShaderMakeInfo[]>& info);
+		virtual void read_ShaderMake(const char* name, pronet::poolArray_unique_ptr<ShaderMakeInfo>* info, pronet::ObjectPool_Array<ShaderMakeInfo>* pool);
 
 	private:
 
@@ -89,36 +85,38 @@ namespace pronet
 		void clear();
 	};
 
-	class PronetReadLoadFileList {
+	class PronetReadLoadFileList 
+		: public PronetReadObject2v, readShaderMake, loadPronetMap2 
+	{
 		const char* name;
-
-		PronetReadObject2v objfile;
-		readShaderMake shaderfile;
-
+		//	オブジェクトの情報を保存する構造体のプール
+		ObjectPool_Array<ObjectInfo2v> _obj_infop;
+		ObjectPool_Array<ShaderMakeInfo> _shd_infop;
+		//	頂点を一時的に確保する配列
+		//	カウント用の変数
 		uint8_t current;
 		uint8_t points;
 		size_t geometory;
-
+		//	ファイルの読み込みや文字列解析に使用するストリームやストリング
 		std::ifstream file;
 		std::string line;
 		std::string script;
 		std::istringstream iss;
-
+		//	読み込む大きさを保存する変数
 		uint16_t chanckSize;
 		uint32_t shaderSize;
 		uint32_t objectSize;
-
 	public:
 		struct PronetLoadChanckInfo {
-			std::unique_ptr<ShaderMakeInfo[]> shaders;
-			std::unique_ptr<ObjectInfo2v[]> objs;
+			poolArray_unique_ptr<ShaderMakeInfo> shaders;
+			poolArray_unique_ptr<ObjectInfo2v> objs;
 		};
 
 		PronetReadLoadFileList(const char* name, int* dimentionSize);
 
 		~PronetReadLoadFileList();
 
-		PronetLoadChanckInfo getLoadFile(uint32_t chanck_Index, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
+		PronetLoadChanckInfo get_pnLCI(uint32_t chanck_Index, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
 
 	private:
 

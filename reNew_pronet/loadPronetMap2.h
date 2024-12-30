@@ -35,7 +35,7 @@ namespace pronet{
 		loadPronetMap2();
 
 		//	マップファイルを読み込みストラクチャの配置を取得する
-		bool get_map_info(const char* name, PoolArray<Structure2vCreateInfo> info[5]);
+		bool get_mapInfo(const char* name, PoolArray<Structure2vCreateInfo> info[5]);
 
 		//	ストラクチャの配置の情報をプールに返却する
 		void return_create_info(PoolArray<Structure2vCreateInfo> info[5]);

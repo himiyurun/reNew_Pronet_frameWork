@@ -39,6 +39,8 @@ namespace pronet {
 			assert(data && "Error : PoolArray.operator[](size_t) : data is null");
 			if (n < size)
 				return data[n];
+			else
+				throw std::out_of_range("PoolArray.operator[](size_t) out of range");
 		}
 
 		const T& operator[](size_t n) const
@@ -46,6 +48,8 @@ namespace pronet {
 			assert(data && "Error : PoolArray.operator[](size_t) : data is null");
 			if (n < size)
 				return data[n];
+			else
+				throw std::out_of_range("PoolArray.operator[](size_t) out of range");
 		}
 	};
 }

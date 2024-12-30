@@ -20,7 +20,7 @@ pronet::PronetReadObject2v::~PronetReadObject2v()
 {
 }
 
-bool pronet::PronetReadObject2v::readFile(const char* name, ObjectInfo2v *info, pronet::ObjectPool_Array<glm::vec2> *vertsPool, pronet::ObjectPool_Array<uint32_t> *indexPool)
+bool pronet::PronetReadObject2v::read_pnObject2v(const char* name, ObjectInfo2v *info, pronet::ObjectPool_Array<glm::vec2> *vertsPool, pronet::ObjectPool_Array<uint32_t> *indexPool)
 {
 	this->name = name;
 	file.open(name, std::ios::in);
@@ -189,9 +189,12 @@ pronet::readShaderMake::~readShaderMake()
 {
 }
 
-void pronet::readShaderMake::readFile(const char* name, std::unique_ptr<ShaderMakeInfo[]>& info)
+void pronet::readShaderMake::read_ShaderMake(
+	const char* name, 
+	pronet::poolArray_unique_ptr<ShaderMakeInfo>* info, 
+	pronet::ObjectPool_Array<ShaderMakeInfo>* pool)
 {
-	info.reset();
+	if (!info)throw std::bad_alloc();
 	points = 0;
 	size = 0;
 
@@ -218,17 +221,19 @@ void pronet::readShaderMake::readFile(const char* name, std::unique_ptr<ShaderMa
 		iss >> script;
 		switch (script[0]) {
 		case 'V':
-			scriptFunc("Vertex", [this, &info]() {
-				if (info.get() == nullptr) thMsg("Shader Count is out of lange");
+			//	バーテックスシェーダーの読み込み
+			scriptFunc("Vertex", [this, info]() {
+				if (!info) thMsg("Shader Count is out of lange");
 				std::cout << "Vertex" << std::endl;
-				iss >> info[points].vsrc;
+				iss >> info->operator[](points).vsrc;
 				});
 			break;
 		case 'F':
-			scriptFunc("Fragment", [this, &info]() {
-				if (info.get() == nullptr) thMsg("Shader Count is out of lange");
+			//	フラグメントシェーダーの読み込み
+			scriptFunc("Fragment", [this, info]() {
+				if (!info) thMsg("Shader Count is out of lange");
 				std::cout << "Fragment" << std::endl;
-				iss >> info[points].fsrc;
+				iss >> info->operator[](points).fsrc;
 				});
 			break;
 		case 'u':
@@ -236,23 +241,24 @@ void pronet::readShaderMake::readFile(const char* name, std::unique_ptr<ShaderMa
 		case '{':
 			break;
 		case '}':
+			//	1組のシェーダの読み込みの終了
 			points++;
-			if (points >= size) {
+			if (points > size) {
 				thMsg("Shader count is out of lange!");
 			}
 			break;
 		case 'S':
-			scriptFunc("Shaders", [this, &info]() {
+			//	シェーダーのサイズを取得
+			scriptFunc("Shaders", [this, info, pool]() {
 				iss >> size;
-				info = std::make_unique<ShaderMakeInfo[]>(size);
-				std::cout << "Found Shaders" << std::endl;
+				info->realloc(static_cast<size_t>(size), pool);
+				std::cout << "Found Shaders " << info->operator->()->size << std::endl;
 				});
 			break;
 		default:
 			break;
 		}
 	}
-
 	clear();
 }
 
@@ -306,9 +312,7 @@ void pronet::readShaderMake::clear()
 */
 
 pronet::PronetReadLoadFileList::PronetReadLoadFileList(const char* name, int* dimentionSize)
-	: objfile()
-	, shaderfile()
-	, name(name)
+	: name(name)
 	, current(0)
 	, points(0)
 	, geometory(0)
@@ -358,7 +362,8 @@ pronet::PronetReadLoadFileList::~PronetReadLoadFileList()
 	clear();
 }
 
-pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getLoadFile(uint32_t chanck_Index, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool)
+pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::get_pnLCI(
+	uint32_t chanck_Index, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool)
 {
 	if (chanck_Index >= chanckSize) {
 		clear();
@@ -381,7 +386,8 @@ pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileL
 	return getParam(vertsPool, indexPool);
 }
 
-inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getParam(pronet::ObjectPool_Array<glm::vec2> *objPool, pronet::ObjectPool_Array<uint32_t> *shdPool)
+inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getParam(
+	pronet::ObjectPool_Array<glm::vec2> *objPool, pronet::ObjectPool_Array<uint32_t> *shdPool)
 {
 	PronetLoadChanckInfo info;
 	uint32_t objSize, shaderSize;
@@ -393,10 +399,10 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 		switch (script[0]) {
 		case 'O':
 			scriptFunc("Objs", [this, &info, &objSize] {
-				if (info.objs == nullptr) {
+				if (!info.objs) {
 					iss >> objSize;
-					info.objs = std::make_unique<ObjectInfo2v[]>(objSize);
-					std::cout << "objsize : " << objSize << std::endl;
+					info.objs.realloc(objSize, &_obj_infop);
+					std::cout << "objsize : " << info.objs->size << std::endl;
 				}
 #ifdef _DEBUG
 				else {
@@ -414,7 +420,7 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 					std::getline(file, line);
 					iss.str(line);
 					iss >> script;
-					objfile.readFile(script.c_str(),&info.objs[i], objPool, shdPool);
+					read_pnObject2v(script.c_str(),&info.objs[i], objPool, shdPool);
 				}
 				std::getline(file, line);
 				if (strcmp(line.c_str(), "}") == 0) {
@@ -424,9 +430,10 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 			break;
 		case 'S':
 			scriptFunc("Shaders", [this, &info, &shaderSize] {
-				if (info.shaders == nullptr) {
+				if (!info.shaders) {
 					iss >> shaderSize;
-					info.shaders = std::make_unique<ShaderMakeInfo[]>(shaderSize);
+					info.shaders.realloc(shaderSize, &_shd_infop);
+					std::cout << "shader size : " << info.shaders->size << std::endl;
 				}
 #ifdef _DEBUG
 				else {
@@ -444,7 +451,8 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 					std::getline(file, line);
 					iss.str(line);
 					iss >> script;
-					shaderfile.readFile(script.c_str(), info.shaders);
+					read_ShaderMake(script.c_str(), &info.shaders, &_shd_infop);
+					std::cout << "read finish " << script << std::endl;
 				}
 				std::getline(file, line);
 				if (strcmp(line.c_str(), "}") == 0) {
