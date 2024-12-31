@@ -100,8 +100,8 @@ inline void pronet::PronetReadObject2v::getVerts(const char* script, ObjectInfo2
 	}
 	else if (strcmp(script, "verts") == 0) {
 		iss >> info->vertexcount;
-		info->verts = vertsPool->get(info->vertexcount);
-		info->uv = vertsPool->get(info->vertexcount);
+		info->verts.realloc(info->vertexcount, vertsPool);
+		info->uv.realloc(info->vertexcount, vertsPool);
 	}
 	else if (strcmp(script, "vArray") == 0){
 		iss >> vaocount;
@@ -119,7 +119,7 @@ inline void pronet::PronetReadObject2v::getIndex(const char* script, ObjectInfo2
 	}
 	else if (strcmp(script, "indices") == 0) {
 		iss >> info->indexcount;
-		info->index = indexPool->get(info->indexcount);;
+		info->index.realloc(info->indexcount, indexPool);
 	}
 	else {
 
@@ -313,12 +313,9 @@ void pronet::readShaderMake::clear()
 
 pronet::PronetReadLoadFileList::PronetReadLoadFileList(const char* name, int* dimentionSize)
 	: name(name)
-	, current(0)
-	, points(0)
-	, geometory(0)
-	, chanckSize(0)
-	, shaderSize(0)
-	, objectSize(0)
+	, vertPool(64), indexPool(32)
+	, current(0), points(0), geometory(0)
+	, chanckSize(0), shaderSize(0), objectSize(0)
 {
 	file.open(name, std::ios::in);
 	if (!file.is_open()) {
@@ -362,8 +359,7 @@ pronet::PronetReadLoadFileList::~PronetReadLoadFileList()
 	clear();
 }
 
-pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::get_pnLCI(
-	uint32_t chanck_Index, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool)
+pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::get_pnLCI(uint32_t chanck_Index)
 {
 	if (chanck_Index >= chanckSize) {
 		clear();
@@ -383,11 +379,10 @@ pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileL
 	}
 	std::cout << "finish" << std::endl;
 
-	return getParam(vertsPool, indexPool);
+	return getParam();
 }
 
-inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getParam(
-	pronet::ObjectPool_Array<glm::vec2> *objPool, pronet::ObjectPool_Array<uint32_t> *shdPool)
+inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileList::getParam()
 {
 	PronetLoadChanckInfo info;
 	uint32_t objSize, shaderSize;
@@ -410,7 +405,7 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 				}
 #endif
 				});
-			scriptFunc("Object", [this, &info, &objCurrent, objSize, objPool, shdPool] {
+			scriptFunc("Object", [this, &info, &objCurrent, objSize] {
 #ifdef _DEBUG
 				if (objSize == 0) {
 					std::cerr << "MSG : Shader size may be wrong!" << std::endl;
@@ -420,7 +415,7 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 					std::getline(file, line);
 					iss.str(line);
 					iss >> script;
-					read_pnObject2v(script.c_str(),&info.objs[i], objPool, shdPool);
+					read_pnObject2v(script.c_str(),&info.objs[i], &vertPool, &indexPool);
 				}
 				std::getline(file, line);
 				if (strcmp(line.c_str(), "}") == 0) {

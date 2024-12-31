@@ -16,8 +16,6 @@ class PronetManager : public glfw_Window, pnTlsf {
 
 	pronet::ObjectPool<Object, VBOLV> objPool;
 	pronet::ObjectPool<Shader, SHDLV> shdPool;
-	pronet::ObjectPool_Array<glm::vec2> vertsPool;
-	pronet::ObjectPool_Array<uint32_t> indexPool;
 	Structure2v<VBOLV, SHDLV> str;
 
 	pronet::Uniform<WindowParam> winParamUbo;
@@ -70,8 +68,6 @@ template<std::size_t VBOLV, std::size_t SHDLV>
 PronetManager<VBOLV, SHDLV>::PronetManager(glfw_windowCreateInfo* windowInfo, const char* loadfilelist_name)
 	: glfw_Window(windowInfo)
 	, file_reader(loadfilelist_name, &dimentionSize)
-	, vertsPool(64)
-	, indexPool(32)
 	, winParamUbo("window")
 {
 }
@@ -85,8 +81,8 @@ PronetManager<VBOLV, SHDLV>::~PronetManager()
 template<std::size_t VBOLV, std::size_t SHDLV>
 void PronetManager<VBOLV, SHDLV>::load(Structure2vParamCreateInfo* strInfo)
 {
-	pronet::PronetReadLoadFileList::PronetLoadChanckInfo info = file_reader.get_pnLCI(0, &vertsPool, &indexPool);
-	std::cout << "init" << std::endl;
+	pronet::PronetReadLoadFileList::PronetLoadChanckInfo info = file_reader.get_pnLCI(0);
+	std::cout << info.objs
 	pronet::poolObject_shared_ptr<Shader, SHDLV> so = InitShader(info.shaders[0].vsrc.c_str(), info.shaders[0].fsrc.c_str());
 	pronet::poolObject_shared_ptr<Object, VBOLV> oo = InitObj(&info.objs[0], GL_TRUE);
 	initStr(strInfo, oo, so, 1);

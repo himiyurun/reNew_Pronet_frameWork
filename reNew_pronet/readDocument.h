@@ -8,7 +8,6 @@
 
 #include <glm/vec2.hpp>
 
-#include "pronet_memory.h"
 #include "loadPronetMap2.h"
 #include "Object.h"
 #include "Shader.h"
@@ -93,6 +92,9 @@ namespace pronet
 		ObjectPool_Array<ObjectInfo2v> _obj_infop;
 		ObjectPool_Array<ShaderMakeInfo> _shd_infop;
 		//	頂点を一時的に確保する配列
+		ObjectPool_Array<glm::vec2> vertPool;
+		ObjectPool_Array<uint32_t> indexPool;
+
 		//	カウント用の変数
 		uint8_t current;
 		uint8_t points;
@@ -116,11 +118,11 @@ namespace pronet
 
 		~PronetReadLoadFileList();
 
-		PronetLoadChanckInfo get_pnLCI(uint32_t chanck_Index, pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
+		PronetLoadChanckInfo get_pnLCI(uint32_t chanck_Index);
 
 	private:
 
-		inline PronetLoadChanckInfo getParam(pronet::ObjectPool_Array<glm::vec2>* vertsPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
+		inline PronetLoadChanckInfo getParam();
 
 		inline bool type_correct(const char* script);
 
