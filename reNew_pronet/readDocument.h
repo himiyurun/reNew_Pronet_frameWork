@@ -89,11 +89,11 @@ namespace pronet
 	{
 		const char* name;
 		//	オブジェクトの情報を保存する構造体のプール
-		ObjectPool_Array<ObjectInfo2v> _obj_infop;
-		ObjectPool_Array<ShaderMakeInfo> _shd_infop;
+		static ObjectPool_Array<ObjectInfo2v> _obj_infop;
+		static ObjectPool_Array<ShaderMakeInfo> _shd_infop;
 		//	頂点を一時的に確保する配列
-		ObjectPool_Array<glm::vec2> vertPool;
-		ObjectPool_Array<uint32_t> indexPool;
+		static ObjectPool_Array<glm::vec2> vertPool;
+		static ObjectPool_Array<uint32_t> indexPool;
 
 		//	カウント用の変数
 		uint8_t current;
@@ -112,6 +112,7 @@ namespace pronet
 		struct PronetLoadChanckInfo {
 			poolArray_unique_ptr<ShaderMakeInfo> shaders;
 			poolArray_unique_ptr<ObjectInfo2v> objs;
+			poolArray_unique_ptr<Structure2vCreateInfo> strs[5];
 		};
 
 		PronetReadLoadFileList(const char* name, int* dimentionSize);

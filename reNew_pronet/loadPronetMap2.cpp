@@ -5,7 +5,7 @@ pronet::loadPronetMap2::loadPronetMap2()
 {
 }
 
-bool pronet::loadPronetMap2::get_mapInfo(const char* name, PoolArray<Structure2vCreateInfo> info[5])
+bool pronet::loadPronetMap2::get_mapInfo(const char* name, poolArray_unique_ptr<Structure2vCreateInfo> info[5])
 {
     if (!read_file_init(name)) {
         return false;
@@ -57,7 +57,7 @@ bool pronet::loadPronetMap2::type_is()
     return false;
 }
 
-void pronet::loadPronetMap2::get_struct(PoolArray<Structure2vCreateInfo>& info)
+void pronet::loadPronetMap2::get_struct(poolArray_unique_ptr<Structure2vCreateInfo>& info)
 {
     size_t str_size(0);
     
@@ -66,12 +66,12 @@ void pronet::loadPronetMap2::get_struct(PoolArray<Structure2vCreateInfo>& info)
     iss >> script;
     script_func("size", [this, &str_size]() {
         iss >> str_size;
-        std::cout << "size : " << str_size << std::endl;
+        std::cout << "str_size : " << str_size << std::endl;
         });
     if (str_size == 0) return;
     clear_string();
 
-    info = pool.get(str_size);
+    info.realloc(str_size, &pool);
     for (size_t i = 0; i < str_size; i++) {
         line_getting_by_text();
         iss >> info[i].shader_index          //  シェーダーのインデックス
@@ -82,21 +82,19 @@ void pronet::loadPronetMap2::get_struct(PoolArray<Structure2vCreateInfo>& info)
             >> info[i].param.col_pos[1]      //  当たり判定をとる左上のオブジェクト座標系のy座標
             >> info[i].param.col_size[0]     //  当たり判定をとるx方向の大きさ
             >> info[i].param.col_size[1]     //  当たり判定をとるy方向の大きさ
-            >> info[i].param.rotate;         //  シェーダの角度を
+            >> info[i].param.rotate;         //  オブジェクトの角度
         clear_string();
     }
 }
 
-void pronet::loadPronetMap2::structure_by_script(const char* text, PoolArray<Structure2vCreateInfo>& info)
+void pronet::loadPronetMap2::structure_by_script(const char* text, poolArray_unique_ptr<Structure2vCreateInfo>& info)
 {
     script_func(text, [this, &info]() {
         iss >> script;
-        std::cout << script << std::endl;
         if (strcmp("{", script.c_str()) == 0) {
             get_struct(info);
             line_getting_by_text();
             iss >> script;
-            std::cout << "script : " << line << std::endl;
         }
         });
 }
@@ -107,12 +105,11 @@ void pronet::loadPronetMap2::line_getting_by_text()
     iss.str(line);
 }
 
-void pronet::loadPronetMap2::get_script(PoolArray<Structure2vCreateInfo> info[5])
+void pronet::loadPronetMap2::get_script(poolArray_unique_ptr<Structure2vCreateInfo> info[5])
 {
     while (!ifs.eof()) {
         line_getting_by_text();
         iss >> script;
-        std::cout << script << std::endl;
         switch (script[0]) {
         case 'B':
             break;

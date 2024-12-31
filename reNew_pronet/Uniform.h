@@ -3,28 +3,45 @@
 #include <memory>
 #include <glad/glad.h>
 
+typedef struct {
+	GLfloat size[2];			//	ウインドウのサイズ
+	GLfloat nowPosition[2];		//	マウスの現在の位置
+	GLfloat lastPosition[2];	//	マウスの図形をつかんだときの位置（つかんでいないときは0）
+	GLfloat scale;				//	ウインドウのスケール
+} WindowParam;					//	ウインドウの各種パラメーターを格納する構造体
+
+struct Structure2v_Param {
+	GLfloat location[2];	//	オブジェクトの位置
+	GLfloat rotate;			//	オブジェクトの角度
+
+	Structure2v_Param() : location{ 0.0f, 0.0f }, rotate(0.0f) {}
+};
+
 namespace pronet {
-	template<typename T>
 	class Uniform
 	{
 		struct UniformBuffer {
 			GLuint ubo;
+			GLsizeiptr data_size;
 
-			UniformBuffer(const T* data = nullptr, GLsizeiptr size = 1) {
+			UniformBuffer(GLsizeiptr data_size, const void* data = nullptr, GLsizeiptr size = 1)
+				: data_size(data_size)
+			{
 				glGenBuffers(1, &ubo);
 				glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-				glBufferData(GL_UNIFORM_BUFFER, sizeof(T) * size, data, GL_DYNAMIC_DRAW);
+				glBufferData(GL_UNIFORM_BUFFER, data_size * size, data, GL_DYNAMIC_DRAW);
 			}
 
-			void Init(const T* data = nullptr, GLsizeiptr size = 1) {
+			void Init(const void* data = nullptr, GLsizeiptr size = 1) {
 				Clear();
 				glGenBuffers(1, &ubo);
 				glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-				glBufferData(GL_UNIFORM_BUFFER, sizeof(T) * size, data, GL_DYNAMIC_DRAW);
+				glBufferData(GL_UNIFORM_BUFFER, data_size * size, data, GL_DYNAMIC_DRAW);
 			}
 
 			void Clear() {
-				glDeleteBuffers(1, &ubo);
+				if (!glIsBuffer(ubo))
+					glDeleteBuffers(1, &ubo);
 			}
 
 			~UniformBuffer() {
@@ -38,9 +55,9 @@ namespace pronet {
 
 	public:
 
-		Uniform(const char* name, const T* data = nullptr, GLsizeiptr size = 1)
+		Uniform(const char* name, GLsizeiptr data_size, const void* data = nullptr, GLsizeiptr size = 1)
 			: BlockName(name)
-			, buffer(new UniformBuffer(data, size))
+			, buffer(new UniformBuffer(data_size, data, size))
 			, BlockID(0xffffffff)
 		{
 		}
@@ -49,24 +66,33 @@ namespace pronet {
 
 		}
 
-		bool Init(GLuint program, const T* data = nullptr, GLsizeiptr size = 1) {
+		//	uboの再初期化を行う
+		void Init(const void* data = nullptr, GLsizeiptr size = 1) {
 			buffer->Init(data, size);
-			BlockID = glGetUniformBlockIndex(program, BlockName);
-			if (BlockID == 0xffffffff) {
+		}
+
+		//	uniform_block と指定のインデックスのバッファをバインドする
+		bool ub_binding(GLuint program, GLuint select) const {
+			GLuint block_id(glGetUniformBlockIndex(program, BlockName));
+			if (block_id == 0xffffffff) {
 				return false;
 			}
-			glUniformBlockBinding(program, BlockID, 0);
+			glUniformBlockBinding(program, block_id, select);
 			return true;
 		}
 
-		void Update(const T* data, GLsizeiptr size = 1) {
+		//	uboのパラメータの更新を行う
+		void Update(const void* data, GLsizeiptr size = 1) {
 			glBindBuffer(GL_UNIFORM_BUFFER, buffer->ubo);
-			glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(T) * size, data);
+			glBufferSubData(GL_UNIFORM_BUFFER, 0, buffer->data_size * size, data);
 		}
 
-		void bind() const {
-			glBindBufferBase(GL_UNIFORM_BUFFER, 0, buffer->ubo);
+		//	バッファをバインドする
+		void bind(GLuint select) const {
+			glBindBufferBase(GL_UNIFORM_BUFFER, select, buffer->ubo);
 		}
+
+
 	};
 }
 

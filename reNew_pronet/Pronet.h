@@ -55,6 +55,7 @@ pronet::poolObject_shared_ptr<Object, VBOLV> PronetManager<VBOLV, SHDLV>::InitOb
 {
 	pronet::poolObject_shared_ptr<Object, VBOLV> object(&objPool);
 	object->init(dimentionSize, objInfo, index_used);
+	objInfo->reset();
 	return object;
 }
 
@@ -82,7 +83,6 @@ template<std::size_t VBOLV, std::size_t SHDLV>
 void PronetManager<VBOLV, SHDLV>::load(Structure2vParamCreateInfo* strInfo)
 {
 	pronet::PronetReadLoadFileList::PronetLoadChanckInfo info = file_reader.get_pnLCI(0);
-	std::cout << info.objs
 	pronet::poolObject_shared_ptr<Shader, SHDLV> so = InitShader(info.shaders[0].vsrc.c_str(), info.shaders[0].fsrc.c_str());
 	pronet::poolObject_shared_ptr<Object, VBOLV> oo = InitObj(&info.objs[0], GL_TRUE);
 	initStr(strInfo, oo, so, 1);

@@ -7,8 +7,6 @@
 #include <functional>
 
 #include "Structure.h"
-#include "ObjectPoolArray.h"
-#include "ObjectPoolList.h"
 
 namespace pronet{
 	enum loadChankDirection {
@@ -35,7 +33,7 @@ namespace pronet{
 		loadPronetMap2();
 
 		//	マップファイルを読み込みストラクチャの配置を取得する
-		bool get_mapInfo(const char* name, PoolArray<Structure2vCreateInfo> info[5]);
+		bool get_mapInfo(const char* name, poolArray_unique_ptr<Structure2vCreateInfo> info[5]);
 
 		//	ストラクチャの配置の情報をプールに返却する
 		void return_create_info(PoolArray<Structure2vCreateInfo> info[5]);
@@ -46,13 +44,13 @@ namespace pronet{
 		//	ファイルのタイプが合っているか
 		bool type_is();
 		//	ストラクチャ関数内の調査を行う
-		void get_struct(PoolArray<Structure2vCreateInfo>& info);
+		void get_struct(poolArray_unique_ptr<Structure2vCreateInfo>& info);
 		//	ストラクチャの割り当てを行う
-		void structure_by_script(const char* text, PoolArray<Structure2vCreateInfo>& info);
+		void structure_by_script(const char* text, poolArray_unique_ptr<Structure2vCreateInfo>& info);
 		//	行ごとに文字を読み込む
 		void line_getting_by_text();
 		//	ファイルを読み込んでそれに応じた処理を行う
-		void get_script(PoolArray<Structure2vCreateInfo> info[5]);
+		void get_script(poolArray_unique_ptr<Structure2vCreateInfo> info[5]);
 		
 		//	ファイルを閉じる
 		bool file_close();

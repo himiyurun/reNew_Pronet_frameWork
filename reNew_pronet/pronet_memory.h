@@ -16,6 +16,7 @@ namespace pronet {
 			_Deleter(pronet::ObjectPool_Array<T>* pool) noexcept :_pool(pool) {}
 
 			void operator()(PoolArray<T>* ptr) {
+				std::cout << "back size : " << ptr->size << std::endl;
 				_pool->back(ptr);
 				std::cout << "custom_unique_ptr_return object" << std::endl;
 			}
@@ -27,6 +28,8 @@ namespace pronet {
 
 		poolArray_unique_ptr(size_t n = 0, ObjectPool_Array<T>*pool = nullptr)
 			: sp(pool ? (new PoolArray<T>(pool->get(n))) : (nullptr), _Deleter(pool)) {}
+
+		poolArray_unique_ptr(poolArray_unique_ptr&& o) noexcept : sp(std::move(o.sp)) {}
 
 		//	スマートポインタを返す
 		std::unique_ptr<PoolArray<T>> operator()() const { return sp; }
@@ -41,6 +44,7 @@ namespace pronet {
 		void reset() { sp.reset(); }
 
 		void realloc(size_t n, ObjectPool_Array<T>* pool) {
+			std::cout << "realloc size : " << n << std::endl;
 			sp = std::unique_ptr<PoolArray<T>, _Deleter>(new PoolArray<T>(pool->get(n)), _Deleter(pool));
 		}
 

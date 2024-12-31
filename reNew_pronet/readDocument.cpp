@@ -76,9 +76,6 @@ void pronet::PronetReadObject2v::getFromText(const std::string text, ObjectInfo2
 	case 'i':
 		getIndex(buf.c_str(), info, indexPool);
 		break;
-	case 's':
-		getShader(buf.c_str(), info);
-		break;
 	case '}':
 		nowVao++;
 		break;
@@ -139,7 +136,7 @@ inline void pronet::PronetReadObject2v::getShader(const char* script, ObjectInfo
 {
 	if (!script)return;
 	if (strcmp(script, "shader") == 0) {
-		iss >> info[nowVao].shader_index;
+		//iss >> info[nowVao].shader_index;
 	}
 }
 
@@ -310,10 +307,13 @@ void pronet::readShaderMake::clear()
 * 
 * 
 */
+pronet::ObjectPool_Array<ShaderMakeInfo> pronet::PronetReadLoadFileList::_shd_infop(64);
+pronet::ObjectPool_Array<ObjectInfo2v> pronet::PronetReadLoadFileList::_obj_infop(32);
+pronet::ObjectPool_Array<glm::vec2> pronet::PronetReadLoadFileList::vertPool(64);
+pronet::ObjectPool_Array<uint32_t> pronet::PronetReadLoadFileList::indexPool(32);
 
 pronet::PronetReadLoadFileList::PronetReadLoadFileList(const char* name, int* dimentionSize)
 	: name(name)
-	, vertPool(64), indexPool(32)
 	, current(0), points(0), geometory(0)
 	, chanckSize(0), shaderSize(0), objectSize(0)
 {
@@ -377,7 +377,6 @@ pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLoadFileL
 			points++;
 			});
 	}
-	std::cout << "finish" << std::endl;
 
 	return getParam();
 }
@@ -455,7 +454,11 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 				}
 				});
 			break;
-		case 'T':
+		case 'M':
+			scriptFunc("Map", [this, &info] {
+				iss >> script;
+				get_mapInfo(script.c_str(), info.strs);
+				});
 			break;
 		default:
 			break;

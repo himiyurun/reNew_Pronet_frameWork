@@ -16,7 +16,14 @@ struct ObjectInfo2v{
 	pronet::poolArray_unique_ptr<glm::vec2> uv;
 	GLsizei indexcount;
 	pronet::poolArray_unique_ptr<uint32_t> index;
-	uint8_t shader_index;
+
+	void reset() {
+		vertexcount = 0;
+		verts.reset();
+		uv.reset();
+		indexcount = 0;
+		index.reset();
+	}
 };
 
 //	オブジェクトクラス

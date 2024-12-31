@@ -4,6 +4,7 @@
 #include "pronet_memory.h"
 #include "Object.h"
 #include "Shader.h"
+#include "Uniform.h"
 
 //	オブジェクトをshared_ptr管理にすれば全て解決
 //	境界線オブジェクト、生成するチャンクのオブジェクトファイルのインデックスによりオブジェクトを割り当てる。
@@ -20,13 +21,6 @@ struct Structure2vCreateInfo {
 	size_t shader_index;
 	size_t buffer_object_index;
 	Structure2vParamCreateInfo param;
-};
-
-struct Structure2v_Param {
-	GLfloat location[2];	//	オブジェクトの位置
-	GLfloat rotate;			//	オブジェクトの角度
-
-	Structure2v_Param() : location{ 0.0f, 0.0f }, rotate(0.0f) {}
 };
 
 template<std::size_t VBOLV, std::size_t SHDLV>

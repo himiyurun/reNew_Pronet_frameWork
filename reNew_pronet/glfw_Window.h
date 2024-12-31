@@ -4,6 +4,7 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Uniform.h"
 
 struct glfw_windowCreateInfo 
 {
@@ -12,13 +13,6 @@ struct glfw_windowCreateInfo
 	int height;
 	GLFWmonitor* monitor;
 };
-
-typedef struct {
-	GLfloat size[2];			//	ウインドウのサイズ
-	GLfloat nowPosition[2];		//	マウスの現在の位置
-	GLfloat lastPosition[2];	//	マウスの図形をつかんだときの位置（つかんでいないときは0）
-	GLfloat scale;				//	ウインドウのスケール
-} WindowParam;
 
 class glfw_Window
 {
