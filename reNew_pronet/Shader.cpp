@@ -2,6 +2,7 @@
 
 Shader::Shader()
 	: program(0)
+	, Block()
 {
 }
 
@@ -46,6 +47,10 @@ GLboolean Shader::init(const char* vsrc, const char* fsrc)
 		glDeleteProgram(program);
 		program = 0;
 		return false;
+	}
+	pronet::getBlockBindInfo(program, Block);
+	for (int i = 0; i < SHADER_BLOCK_SIZE; i++) {
+		std::cout << "ubo(" << i << ") " << Block[i] << std::endl;
 	}
 
 	return true;

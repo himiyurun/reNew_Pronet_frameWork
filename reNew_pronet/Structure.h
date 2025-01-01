@@ -20,6 +20,7 @@ struct Structure2vParamCreateInfo {
 struct Structure2vCreateInfo {
 	size_t shader_index;
 	size_t buffer_object_index;
+	size_t texture_index;
 	Structure2vParamCreateInfo param;
 };
 
@@ -56,6 +57,7 @@ public:
 	//	Žg—p’†‚©‚ðŽæ“¾‚·‚é
 	bool is_used() const;
 
+	[[nodiscard]] const Structure2v_Param* parameter() const { return &param; }
 	[[nodiscard]] uint32_t texture() const { return (texture_index - 1); }
 };
 

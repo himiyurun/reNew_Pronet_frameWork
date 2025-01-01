@@ -1,11 +1,11 @@
 #pragma once
 #include "Uniform.h"
 #include "Shader.h"
-#include "Object.h"
-#include "ObjectPoolArray.h"
 #include "glfw_Window.h"
 #include "readDocument.h"
 #include "Structure.h"
+
+static const size_t strLv = 6;
 
 //	ウインドウのパラメーターを送信するユニフォームバッファオブジェクト
 template<std::size_t VBOLV, std::size_t SHDLV>
@@ -16,12 +16,9 @@ class PronetManager : public glfw_Window, pnTlsf {
 
 	pronet::ObjectPool<Object, VBOLV> objPool;
 	pronet::ObjectPool<Shader, SHDLV> shdPool;
-	Structure2v<VBOLV, SHDLV> str;
-
-	pronet::Uniform<WindowParam> winParamUbo;
-
+	pronet::ObjectPool<Structure2v<VBOLV, SHDLV>, strLv> strPool;
+	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>> strs;
 public:
-
 	//	コンストラクタ
 	//	windowInfo : 作成するウインドウの情報
 	//	dimentionSize : 作成するゲームの次元
@@ -34,7 +31,7 @@ public:
 
 	pronet::poolObject_shared_ptr<Object, VBOLV> InitObj(ObjectInfo2v* objInfo, GLboolean index_used);
 
-	void initStr(Structure2vParamCreateInfo* strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object, const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index);
+	pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> initStr(Structure2vParamCreateInfo* strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object, const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index);
 
 	void load(Structure2vParamCreateInfo* strInfo);
 	
@@ -60,41 +57,55 @@ pronet::poolObject_shared_ptr<Object, VBOLV> PronetManager<VBOLV, SHDLV>::InitOb
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
-void PronetManager<VBOLV, SHDLV>::initStr(Structure2vParamCreateInfo* strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object, const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index)
+pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> PronetManager<VBOLV, SHDLV>::initStr(Structure2vParamCreateInfo* strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object, const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index)
 {
-	str.init(strInfo, object, shader, tex_index);
+	pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> structure(&strPool);
+	structure->init(strInfo, object, shader, tex_index);
+	return structure;
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
 PronetManager<VBOLV, SHDLV>::PronetManager(glfw_windowCreateInfo* windowInfo, const char* loadfilelist_name)
 	: glfw_Window(windowInfo)
 	, file_reader(loadfilelist_name, &dimentionSize)
-	, winParamUbo("window")
 {
+	pronet::initUniformBlock();
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
 PronetManager<VBOLV, SHDLV>::~PronetManager()
 {
-	str.reset();
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
 void PronetManager<VBOLV, SHDLV>::load(Structure2vParamCreateInfo* strInfo)
 {
 	pronet::PronetReadLoadFileList::PronetLoadChanckInfo info = file_reader.get_pnLCI(0);
-	pronet::poolObject_shared_ptr<Shader, SHDLV> so = InitShader(info.shaders[0].vsrc.c_str(), info.shaders[0].fsrc.c_str());
-	pronet::poolObject_shared_ptr<Object, VBOLV> oo = InitObj(&info.objs[0], GL_TRUE);
-	initStr(strInfo, oo, so, 1);
+	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Shader, SHDLV>> so(info.shaders->size);
+	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Object, VBOLV>> oo(info.objs->size);
+	for (size_t i = 0; i < info.shaders->size; i++) {
+		so[i] = InitShader(info.shaders[i].vsrc.c_str(), info.shaders[i].fsrc.c_str());
+	}
+	for (size_t i = 0; i < info.objs->size; i++) {
+		oo[i] = InitObj(&info.objs[i], GL_TRUE);
+	}
+	strs.realloc(info.strs[pronet::CHANCK_NATIVE]->size);
+	for (size_t i = 0; i < info.strs[pronet::CHANCK_NATIVE]->size; i++) {
+		strs[i] = initStr(&info.strs[pronet::CHANCK_NATIVE][i].param, 
+			oo[info.strs[pronet::CHANCK_NATIVE][i].buffer_object_index], 
+			so[info.strs[pronet::CHANCK_NATIVE][i].shader_index],
+			info.strs[pronet::CHANCK_NATIVE][i].texture_index);
+	}
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
 void PronetManager<VBOLV, SHDLV>::process()
 {
-	str.use();
-	winParamUbo.bind();
-
-	winParamUbo.Update(&param, 1);
-
-	str.draw();
+	pronet::updateApplicationUniformParam(&param);
+	
+	for (auto a : strs) {
+		a->use();
+		pronet::updateGameObjectUniformParam(a->parameter());
+		a->draw();
+	}
 }

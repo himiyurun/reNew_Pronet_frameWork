@@ -99,11 +99,14 @@
     <ClCompile Include="bit.cpp">
       <Filter>ソース ファイル\PnLib\util</Filter>
     </ClCompile>
-    <ClCompile Include="loadPronetMap2.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="loader.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniform.cpp">
+      <Filter>ソース ファイル\GLI</Filter>
+    </ClCompile>
+    <ClCompile Include="loadPronetMap2.cpp">
+      <Filter>ソース ファイル\PnLib\exreader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

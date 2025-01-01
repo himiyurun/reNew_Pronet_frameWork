@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
+#include <array>
 #include <memory>
+#include <cassert>
 #include <glad/glad.h>
 
 typedef struct {
@@ -17,6 +19,13 @@ struct Structure2v_Param {
 	Structure2v_Param() : location{ 0.0f, 0.0f }, rotate(0.0f) {}
 };
 
+enum ShaderBlock {
+	PNGL_WINDOW_PARAM,
+	PN_GAME_STRUCTURE_PARAM,
+	SHADER_BLOCK_SIZE,
+	SHADER_BLOCK_INFO_END
+};
+
 namespace pronet {
 	class Uniform
 	{
@@ -24,16 +33,17 @@ namespace pronet {
 			GLuint ubo;
 			GLsizeiptr data_size;
 
-			UniformBuffer(GLsizeiptr data_size, const void* data = nullptr, GLsizeiptr size = 1)
-				: data_size(data_size)
+			UniformBuffer(GLsizeiptr _data_size, const void* data = nullptr, GLsizeiptr size = 1)
+				: data_size(_data_size)
 			{
 				glGenBuffers(1, &ubo);
 				glBindBuffer(GL_UNIFORM_BUFFER, ubo);
 				glBufferData(GL_UNIFORM_BUFFER, data_size * size, data, GL_DYNAMIC_DRAW);
 			}
 
-			void Init(const void* data = nullptr, GLsizeiptr size = 1) {
+			void Init(GLsizeiptr _data_size, const void* data = nullptr, GLsizeiptr size = 1) {
 				Clear();
+				data_size = _data_size;
 				glGenBuffers(1, &ubo);
 				glBindBuffer(GL_UNIFORM_BUFFER, ubo);
 				glBufferData(GL_UNIFORM_BUFFER, data_size * size, data, GL_DYNAMIC_DRAW);
@@ -42,6 +52,7 @@ namespace pronet {
 			void Clear() {
 				if (!glIsBuffer(ubo))
 					glDeleteBuffers(1, &ubo);
+				data_size = 0;
 			}
 
 			~UniformBuffer() {
@@ -55,44 +66,58 @@ namespace pronet {
 
 	public:
 
-		Uniform(const char* name, GLsizeiptr data_size, const void* data = nullptr, GLsizeiptr size = 1)
+		Uniform(const char* name = nullptr, GLsizeiptr data_size = 0, const void* data = nullptr, GLsizeiptr size = 1)
 			: BlockName(name)
-			, buffer(new UniformBuffer(data_size, data, size))
+			, buffer((name == nullptr && data_size == 0) ? nullptr : new UniformBuffer(data_size, data, size))
 			, BlockID(0xffffffff)
-		{
-		}
+		{}
 
-		~Uniform() {
-
-		}
+		~Uniform() {}
 
 		//	uboの再初期化を行う
-		void Init(const void* data = nullptr, GLsizeiptr size = 1) {
-			buffer->Init(data, size);
+		void Init(const char* name, GLsizeiptr _data_size, const void* data = nullptr, GLsizeiptr size = 1) {
+			BlockName = name;
+			if (buffer) buffer.reset();
+			buffer = std::make_shared<UniformBuffer>(_data_size, data, size);
 		}
 
 		//	uniform_block と指定のインデックスのバッファをバインドする
-		bool ub_binding(GLuint program, GLuint select) const {
+		bool ub_binding(GLuint program, GLuint &block_ID) const {
+			assert(buffer && "assertion Error : uniform_buffer have not initlize!");
 			GLuint block_id(glGetUniformBlockIndex(program, BlockName));
 			if (block_id == 0xffffffff) {
 				return false;
 			}
-			glUniformBlockBinding(program, block_id, select);
+			glUniformBlockBinding(program, block_id, block_id);
+			block_ID = block_id;
 			return true;
 		}
 
 		//	uboのパラメータの更新を行う
 		void Update(const void* data, GLsizeiptr size = 1) {
+			assert(buffer && "assertion Error : uniform_buffer have not initlize!");
 			glBindBuffer(GL_UNIFORM_BUFFER, buffer->ubo);
 			glBufferSubData(GL_UNIFORM_BUFFER, 0, buffer->data_size * size, data);
 		}
 
 		//	バッファをバインドする
 		void bind(GLuint select) const {
+			assert(buffer && "assertion Error : uniform_buffer have not initlize!");
 			glBindBufferBase(GL_UNIFORM_BUFFER, select, buffer->ubo);
 		}
-
-
 	};
-}
 
+	//	UniformBufferObject を配列で管理
+	static std::array<Uniform, SHADER_BLOCK_SIZE> unf;
+
+	//	UnfiromBlockObject を初期化する
+	void initUniformBlock();
+	//	その UniformBlock が存在するのかを確認する
+	void getBlockBindInfo(GLuint program, size_t buf[SHADER_BLOCK_SIZE]);
+	//	指定した UniformBlock をアップデートする
+	void updateGameObjectUniformParam(const Structure2v_Param* strParam);
+	//	アプリケーションに関連するパラメーターを更新する
+	void updateApplicationUniformParam(const WindowParam* windowParam);
+	//	UniformObject をアップデートしてバインドする
+	void bindUniformObject(const size_t buf[SHADER_BLOCK_SIZE]);
+}

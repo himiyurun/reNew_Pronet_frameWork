@@ -76,6 +76,7 @@ void pronet::loadPronetMap2::get_struct(poolArray_unique_ptr<Structure2vCreateIn
         line_getting_by_text();
         iss >> info[i].shader_index          //  シェーダーのインデックス
             >> info[i].buffer_object_index   //  バッファオブジェクトのインデックス
+            >> info[i].texture_index         //  テクスチャのインデックス
             >> info[i].param.location[0]     //  ワールド座標系のx座標
             >> info[i].param.location[1]     //  ワールド座標系のy座標
             >> info[i].param.col_pos[0]      //  当たり判定をとる左上のオブジェクト座標系のx座標
