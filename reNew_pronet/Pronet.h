@@ -1,9 +1,7 @@
 #pragma once
-#include "Uniform.h"
-#include "Shader.h"
-#include "glfw_Window.h"
 #include "readDocument.h"
-#include "Structure.h"
+#include "glfw_Window.h"
+#include "Chanck.h"
 
 static const size_t strLv = 6;
 
@@ -17,7 +15,7 @@ class PronetManager : public glfw_Window, pnTlsf {
 	pronet::ObjectPool<Object, VBOLV> objPool;
 	pronet::ObjectPool<Shader, SHDLV> shdPool;
 	pronet::ObjectPool<Structure2v<VBOLV, SHDLV>, strLv> strPool;
-	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>> strs;
+	std::array<pronet::Chanck_2D<VBOLV, SHDLV>, CHANCK_LOAD_SIZE> chanck;
 public:
 	//	コンストラクタ
 	//	windowInfo : 作成するウインドウの情報
@@ -33,7 +31,7 @@ public:
 
 	pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> initStr(Structure2vParamCreateInfo* strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object, const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index);
 
-	void load(Structure2vParamCreateInfo* strInfo);
+	void load();
 	
 	//	ループ内で実行する処理
 	virtual void process();
@@ -75,37 +73,48 @@ PronetManager<VBOLV, SHDLV>::PronetManager(glfw_windowCreateInfo* windowInfo, co
 template<std::size_t VBOLV, std::size_t SHDLV>
 PronetManager<VBOLV, SHDLV>::~PronetManager()
 {
+	chanck[0].reset();
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
-void PronetManager<VBOLV, SHDLV>::load(Structure2vParamCreateInfo* strInfo)
+void PronetManager<VBOLV, SHDLV>::load()
 {
 	pronet::PronetReadLoadFileList::PronetLoadChanckInfo info = file_reader.get_pnLCI(0);
 	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Shader, SHDLV>> so(info.shaders->size);
 	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Object, VBOLV>> oo(info.objs->size);
+	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>> str;
 	for (size_t i = 0; i < info.shaders->size; i++) {
 		so[i] = InitShader(info.shaders[i].vsrc.c_str(), info.shaders[i].fsrc.c_str());
 	}
 	for (size_t i = 0; i < info.objs->size; i++) {
 		oo[i] = InitObj(&info.objs[i], GL_TRUE);
 	}
-	strs.realloc(info.strs[pronet::CHANCK_NATIVE]->size);
+	str.realloc(info.strs[pronet::CHANCK_NATIVE]->size);
 	for (size_t i = 0; i < info.strs[pronet::CHANCK_NATIVE]->size; i++) {
-		strs[i] = initStr(&info.strs[pronet::CHANCK_NATIVE][i].param, 
+		str[i] = initStr(&info.strs[pronet::CHANCK_NATIVE][i].param, 
 			oo[info.strs[pronet::CHANCK_NATIVE][i].buffer_object_index], 
 			so[info.strs[pronet::CHANCK_NATIVE][i].shader_index],
 			info.strs[pronet::CHANCK_NATIVE][i].texture_index);
 	}
+
+	pronet::ChanckObjectSizeDirectionInfo size_dir;
+	if (info.strs[pronet::CHANCK_NATIVE])
+		size_dir.native = info.strs[pronet::CHANCK_NATIVE]->size;
+	if (info.strs[pronet::CHANCK_BOUNDARY_UP])
+		size_dir.up = info.strs[pronet::CHANCK_BOUNDARY_UP]->size;
+	if (info.strs[pronet::CHANCK_BOUNDARY_DOWN])
+		size_dir.down = info.strs[pronet::CHANCK_BOUNDARY_DOWN]->size;
+	if (info.strs[pronet::CHANCK_BOUNDARY_RIGHT])
+		size_dir.right = info.strs[pronet::CHANCK_BOUNDARY_RIGHT]->size;
+	if (info.strs[pronet::CHANCK_BOUNDARY_LEFT])
+		size_dir.left = info.strs[pronet::CHANCK_BOUNDARY_LEFT]->size;
+	chanck[0].init(str, &size_dir);
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
 void PronetManager<VBOLV, SHDLV>::process()
 {
 	pronet::updateApplicationUniformParam(&param);
-	
-	for (auto a : strs) {
-		a->use();
-		pronet::updateGameObjectUniformParam(a->parameter());
-		a->draw();
-	}
+	pronet::updateFrameCounter();
+	chanck[0].draw();
 }

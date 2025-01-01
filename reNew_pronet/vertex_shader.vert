@@ -21,5 +21,5 @@ vec2 scaling() {
 
 void main()
 {
-	gl_Position = position * vec4(scaling(), 1.0, 1.0) + vec4(str.location,vec2(0.0));
+	gl_Position = (position + vec4(str.location,vec2(0.0))) * vec4(scaling(), 1.0, 1.0);
 }

@@ -66,7 +66,6 @@ void pronet::loadPronetMap2::get_struct(poolArray_unique_ptr<Structure2vCreateIn
     iss >> script;
     script_func("size", [this, &str_size]() {
         iss >> str_size;
-        std::cout << "str_size : " << str_size << std::endl;
         });
     if (str_size == 0) return;
     clear_string();

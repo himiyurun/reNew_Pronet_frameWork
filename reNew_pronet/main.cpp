@@ -1,8 +1,9 @@
 #define PRONET_2D
 #define _POOL_DEBUG
+#define STRUCTURE_POOL_BIT_MAP_LEVEL	(6)
+#define CHANCK_LOAD_SIZE	(1)
 
 #include "Pronet.h"
-#include "ObjectPool.h"
 
 void libInit() 
 {
@@ -29,10 +30,8 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	PronetManager<6, 6> game(&winInfo, "LoadFileList.fi");
 
-	Structure2vParamCreateInfo info;
-
 	try {
-		game.load(&info);
+		game.load();
 		game.run();
 	}
 	catch (const std::exception& e) {

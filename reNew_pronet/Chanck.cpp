@@ -1,10 +1,11 @@
 #include "Chanck.h"
-template<std::size_t VBOLV, std::size_t SHDLV>
-pronet::Chanck_2D<VBOLV, SHDLV>::Chanck_2D()
+
+void pronet::updateFrameCounter()
 {
+	frame_counter++;
 }
 
-template<std::size_t VBOLV, std::size_t SHDLV>
-pronet::Chanck_2D<VBOLV, SHDLV>::~Chanck_2D()
+size_t pronet::getFrameCount()
 {
+	return frame_counter;
 }

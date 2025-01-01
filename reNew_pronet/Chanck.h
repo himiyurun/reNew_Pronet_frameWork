@@ -1,6 +1,5 @@
 #pragma once
 #include "pronet_memory.h"
-#include "ObjectPoolList.h"
 #include "Structure.h"
 #include "Shader.h"
 
@@ -24,15 +23,124 @@ namespace pronet {
 
 	constexpr size_t strLv = 6;
 
+	static size_t frame_counter = 0;
+
+	enum CHANK_DIR {
+		PRONET_CHANCK_NATIVE,
+		PRONET_CHANCK_UP,
+		PRONET_CHANCK_DOWN,
+		PRONET_CHANCK_RIGHT,
+		PRONET_CHANCK_LEFT,
+		PRONET_CHANCK_UP_RIGHT,
+		PRONET_CHANCK_UP_LEFT,
+		PRONET_CHANCK_DOWN_RIGHT,
+		PRONET_CHANCK_DOWN_LEFT,
+		PRONET_CHANCK_DIRECTION_SIZE
+	};
+
+	struct ChanckObjectSizeDirectionInfo {
+		size_t native;		//	チャンクだけに属するオブジェクトの数
+		size_t up;			//	上の境界とかぶるオブジェクトの数
+		size_t down;		//	下の境界とかぶるオブジェクトの数
+		size_t right;		//	右の境界とかぶるオブジェクトの数
+		size_t left;		//	左の境界とかぶるオブジェクトの数
+		size_t up_right;	//	右上の境界とかぶるオブジェクトの数
+		size_t up_left;		//	左上の境界とかぶるオブジェクトの数
+		size_t down_right;	//	右下の境界とかぶるオブジェクトの数
+		size_t down_left;	//	左下の境界とかぶるオブジェクトの数
+	};
+
+	void updateFrameCounter();
+
+	size_t getFrameCount();
+
 	template<std::size_t VBOLV, std::size_t SHDLV>
 	class Chanck_2D
 	{
 		pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>> structures;
-	
+		std::array<size_t, PRONET_CHANCK_DIRECTION_SIZE> obj_size;
+
+		using str_sp = pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>>;
+
 	public:
 		Chanck_2D();
 
 		~Chanck_2D();
+
+		void init(str_sp& strs, ChanckObjectSizeDirectionInfo* info);
+
+		void reset();
+
+		void draw() const;
+
+	private:
+
+		void init_chanck_direction_object_size(ChanckObjectSizeDirectionInfo* info);
+
+		void reset_chanck_direction_object_size();
 	};
+
+	template<std::size_t VBOLV, std::size_t SHDLV>
+	pronet::Chanck_2D<VBOLV, SHDLV>::Chanck_2D()
+		: obj_size()
+	{
+	}
+
+	template<std::size_t VBOLV, std::size_t SHDLV>
+	pronet::Chanck_2D<VBOLV, SHDLV>::~Chanck_2D()
+	{
+	}
+
+	template<std::size_t VBOLV, std::size_t SHDLV>
+	void pronet::Chanck_2D<VBOLV, SHDLV>::init(str_sp& strs, ChanckObjectSizeDirectionInfo* info)
+	{
+		structures = strs;
+		init_chanck_direction_object_size(info);
+	}
+
+	template<std::size_t VBOLV, std::size_t SHDLV>
+	void pronet::Chanck_2D<VBOLV, SHDLV>::reset()
+	{
+		structures.reset();
+		reset_chanck_direction_object_size();
+	}
+
+	template<std::size_t VBOLV, std::size_t SHDLV>
+	void pronet::Chanck_2D<VBOLV, SHDLV>::draw() const
+	{
+		for (auto a : structures) {
+			a->use();
+			updateGameObjectUniformParam(a->parameter());
+			a->draw(getFrameCount());
+		}
+	}
+
+	template<std::size_t VBOLV, std::size_t SHDLV>
+	void pronet::Chanck_2D<VBOLV, SHDLV>::init_chanck_direction_object_size(ChanckObjectSizeDirectionInfo* info)
+	{
+		obj_size[PRONET_CHANCK_NATIVE] = info->native;
+		obj_size[PRONET_CHANCK_UP] = info->up;
+		obj_size[PRONET_CHANCK_DOWN] = info->down;
+		obj_size[PRONET_CHANCK_RIGHT] = info->right;
+		obj_size[PRONET_CHANCK_LEFT] = info->left;
+		obj_size[PRONET_CHANCK_UP_RIGHT] = info->up_right;
+		obj_size[PRONET_CHANCK_UP_LEFT] = info->up_left;
+		obj_size[PRONET_CHANCK_DOWN_RIGHT] = info->down_right;
+		obj_size[PRONET_CHANCK_DOWN_LEFT] = info->down_left;
+	}
+
+	template<std::size_t VBOLV, std::size_t SHDLV>
+	void pronet::Chanck_2D<VBOLV, SHDLV>::reset_chanck_direction_object_size()
+	{
+		obj_size[PRONET_CHANCK_NATIVE] = 0;
+		obj_size[PRONET_CHANCK_UP] = 0;
+		obj_size[PRONET_CHANCK_DOWN] = 0;
+		obj_size[PRONET_CHANCK_RIGHT] = 0;
+		obj_size[PRONET_CHANCK_LEFT] = 0;
+		obj_size[PRONET_CHANCK_UP_RIGHT] = 0;
+		obj_size[PRONET_CHANCK_UP_LEFT] = 0;
+		obj_size[PRONET_CHANCK_DOWN_RIGHT] = 0;
+		obj_size[PRONET_CHANCK_DOWN_LEFT] = 0;
+	}
 }
 

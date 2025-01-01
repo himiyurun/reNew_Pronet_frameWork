@@ -35,6 +35,9 @@ class Structure2v
 	Structure2v_Param param;
 	GLfloat col_pos[2];		//	当たり判定をとる左上のオブジェクト座標
 	GLfloat col_size[2];	//	当たり判定をとるサイズ
+	
+	//	フレームカウンタ
+	size_t frame_counter;
 
 public:
 	//	コンストラクタ
@@ -53,7 +56,7 @@ public:
 	//	シェーダー使用する
 	void use() const;
 	//	描画する
-	void draw() const;
+	void draw(size_t _frame_count);
 	//	使用中かを取得する
 	bool is_used() const;
 
@@ -68,6 +71,7 @@ Structure2v<VBOLV, SHDLV>::Structure2v()
 	, texture_index(0)
 	, col_pos{ 0.0f, 0.0f }
 	, col_size{ 0.0f, 0.0f }
+	, frame_counter(0)
 {
 }
 
@@ -123,8 +127,10 @@ void Structure2v<VBOLV, SHDLV>::use() const
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
-void Structure2v<VBOLV, SHDLV>::draw() const
+void Structure2v<VBOLV, SHDLV>::draw(size_t _frame_count)
 {
+	if (frame_counter == _frame_count) { return; }
+	frame_counter = _frame_count;
 	buffer_object->draw();
 }
 

@@ -93,9 +93,6 @@
     <ClCompile Include="BitMap64.cpp">
       <Filter>ソース ファイル\PnLib\util</Filter>
     </ClCompile>
-    <ClCompile Include="Chanck.cpp">
-      <Filter>ソース ファイル\PnLib</Filter>
-    </ClCompile>
     <ClCompile Include="bit.cpp">
       <Filter>ソース ファイル\PnLib\util</Filter>
     </ClCompile>
@@ -107,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="loadPronetMap2.cpp">
       <Filter>ソース ファイル\PnLib\exreader</Filter>
+    </ClCompile>
+    <ClCompile Include="Chanck.cpp">
+      <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
