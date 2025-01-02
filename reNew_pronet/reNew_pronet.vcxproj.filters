@@ -181,7 +181,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="test.str2v">
+    <None Include="game_object1.str2v">
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="sample.pnsm">
@@ -200,6 +200,9 @@
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="sample.mapbmp">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="game_object2.str2v">
       <Filter>リソース ファイル</Filter>
     </None>
   </ItemGroup>

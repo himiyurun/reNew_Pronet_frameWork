@@ -37,7 +37,7 @@ namespace pronet {
 			if (sp)
 				return sp.get()[n];
 			else
-				throw std::runtime_error("pnTlsf_unique_ptr is null. you must call .reset");
+				throw std::runtime_error("pnTlsf_unique_ptr is null. you must call .realloc");
 		}
 		//	ƒƒ‚ƒŠ‚ğŠJ•ú‚·‚é
 		void reset() { sp.reset(); }
@@ -101,13 +101,16 @@ namespace pronet {
 			if (sp)
 				return sp->operator[](n);
 			else
-				throw std::runtime_error("poolArray_unique_ptr is null. you must call .reset");
+				throw std::runtime_error("poolArray_unique_ptr is null. you must call .realloc");
 		}
 		//	ƒƒ‚ƒŠ‚ğŠJ•ú‚·‚é
 		void reset() { sp.reset(); }
 
 		void realloc(size_t n, ObjectPool_Array<T>* pool) {
+			std::cout << "realloc pool array up : " << n << std::endl;
 			sp = std::unique_ptr<PoolArray<T>, _Deleter>(new PoolArray<T>(pool->get(n)), _Deleter(pool));
+			if (!sp)
+				throw std::runtime_error("ObjectPool_Array allocation failed!");
 		}
 
 		explicit operator bool() {

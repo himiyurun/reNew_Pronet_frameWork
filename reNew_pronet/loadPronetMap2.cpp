@@ -7,6 +7,7 @@ pronet::loadPronetMap2::loadPronetMap2()
 
 bool pronet::loadPronetMap2::get_mapInfo(const char* name, poolArray_unique_ptr<Structure2vCreateInfo> info[5])
 {
+    std::cout << "Log : pronet_map_file " << name << " is read begin" << std::endl;
     if (!read_file_init(name)) {
         return false;
     }

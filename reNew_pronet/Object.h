@@ -26,6 +26,8 @@ struct ObjectInfo2v{
 	}
 };
 
+void print_ObjectInfo2v(const ObjectInfo2v* const info);
+
 //	オブジェクトクラス
 //	vaoやvboを管理する
 class Object
@@ -50,19 +52,24 @@ public:
 
 	~Object();
 
-	void init(GLint size, ObjectInfo2v *info, GLboolean index_used);
+	void init(GLint size, const ObjectInfo2v *const info, GLboolean index_used);
 
 	void reset();
 
 	virtual void bind() const {
+		std::cout << "vao : " << vao << std::endl;
+		std::cout << "vbo : " << vbo << std::endl;
+		std::cout << "ibo : " << ibo << std::endl;
 		glBindVertexArray(vao);
 	}
 
 	virtual void excute() const {
-		if (index_used)
-			glDrawElements(GL_TRIANGLES, indexcount, GL_UNSIGNED_INT, nullptr);
-		else
+		if (index_used) {
+			glDrawElements(GL_TRIANGLES, indexcount, GL_UNSIGNED_INT, 0);
+		}
+		else {
 			glDrawArrays(GL_LINE_LOOP, 0, vertexcount);
+		}
 	}
 
 	void draw() const {

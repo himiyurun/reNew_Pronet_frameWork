@@ -121,6 +121,7 @@ T* pronet::ObjectPool_Array<T>::search_pool_block(size_t size, size_t* indices)
 
 	index = search_bit_area(size);
 	if (index == 0xffffffff) {
+		std::cerr << "ObjectPool_Array is Full. you should call .resize" << std::endl;
 		return nullptr;
 	}
 	*indices = index;

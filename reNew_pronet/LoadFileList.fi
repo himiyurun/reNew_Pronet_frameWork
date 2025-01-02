@@ -15,14 +15,15 @@ ChanckMapping {
 
 Chanck {
 	Shaders 1
-	Objs 1
+	Objs 2
 
 	Shader {
 		sample.pnsm		
 	}
 
 	Object {
-		test.str2v
+		game_object1.str2v
+		game_object2.str2v
 	}
 
 	Map sample.pnmap2

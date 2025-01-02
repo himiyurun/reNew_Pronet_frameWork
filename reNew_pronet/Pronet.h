@@ -16,6 +16,7 @@ class PronetManager : public glfw_Window, pnTlsf {
 	pronet::ObjectPool<Shader, SHDLV> shdPool;
 	pronet::ObjectPool<Structure2v<VBOLV, SHDLV>, strLv> strPool;
 	std::array<pronet::Chanck_2D<VBOLV, SHDLV>, CHANCK_LOAD_SIZE> chanck;
+	Structure2v<VBOLV, SHDLV> strna;
 public:
 	//	コンストラクタ
 	//	windowInfo : 作成するウインドウの情報
@@ -49,6 +50,7 @@ template<std::size_t VBOLV, std::size_t SHDLV>
 pronet::poolObject_shared_ptr<Object, VBOLV> PronetManager<VBOLV, SHDLV>::InitObj(ObjectInfo2v* objInfo, GLboolean index_used)
 {
 	pronet::poolObject_shared_ptr<Object, VBOLV> object(&objPool);
+	print_ObjectInfo2v(objInfo);
 	object->init(dimentionSize, objInfo, index_used);
 	objInfo->reset();
 	return object;
@@ -80,17 +82,21 @@ template<std::size_t VBOLV, std::size_t SHDLV>
 void PronetManager<VBOLV, SHDLV>::load()
 {
 	pronet::PronetReadLoadFileList::PronetLoadChanckInfo info = file_reader.get_pnLCI(0);
-	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Shader, SHDLV>> so(info.shaders->size);
-	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Object, VBOLV>> oo(info.objs->size);
+	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Shader, SHDLV>> so;
+	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Object, VBOLV>> oo;
 	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>> str;
-	for (size_t i = 0; i < info.shaders->size; i++) {
+	so.realloc(info.shaders->size);
+	oo.realloc(info.objs->size);
+	for (size_t i = 0; i < so.size(); i++) {
 		so[i] = InitShader(info.shaders[i].vsrc.c_str(), info.shaders[i].fsrc.c_str());
 	}
-	for (size_t i = 0; i < info.objs->size; i++) {
+	for (size_t i = 0; i < oo.size(); i++) {
 		oo[i] = InitObj(&info.objs[i], GL_TRUE);
 	}
 	str.realloc(info.strs[pronet::CHANCK_NATIVE]->size);
 	for (size_t i = 0; i < info.strs[pronet::CHANCK_NATIVE]->size; i++) {
+		std::cout << "buffer_object_index : " << info.strs[pronet::CHANCK_NATIVE][i].buffer_object_index << std::endl
+			<< "shader_index : " << info.strs[pronet::CHANCK_NATIVE][i].shader_index << std::endl;
 		str[i] = initStr(&info.strs[pronet::CHANCK_NATIVE][i].param, 
 			oo[info.strs[pronet::CHANCK_NATIVE][i].buffer_object_index], 
 			so[info.strs[pronet::CHANCK_NATIVE][i].shader_index],
@@ -109,6 +115,8 @@ void PronetManager<VBOLV, SHDLV>::load()
 	if (info.strs[pronet::CHANCK_BOUNDARY_LEFT])
 		size_dir.left = info.strs[pronet::CHANCK_BOUNDARY_LEFT]->size;
 	chanck[0].init(str, &size_dir);
+
+	strna.init(&info.strs[pronet::CHANCK_NATIVE][1].param, oo[1], so[0], 1);
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
@@ -117,4 +125,7 @@ void PronetManager<VBOLV, SHDLV>::process()
 	pronet::updateApplicationUniformParam(&param);
 	pronet::updateFrameCounter();
 	chanck[0].draw();
+	strna.use();
+	pronet::updateGameObjectUniformParam(strna.parameter());
+	strna.draw(pronet::getFrameCount());
 }

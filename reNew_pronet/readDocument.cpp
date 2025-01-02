@@ -92,11 +92,12 @@ inline void pronet::PronetReadObject2v::getVerts(const char* script, ObjectInfo2
 {
 	if (!script)return;
 	if (strcmp(script, "vp") == 0) {
-		iss >> info->verts[points].x >> info[nowVao].verts[points].y;
+		iss >> info->verts[points].x >> info->verts[points].y;
 		points++;
 	}
 	else if (strcmp(script, "verts") == 0) {
 		iss >> info->vertexcount;
+		std::cout << "vertexcount : " << info->vertexcount << std::endl;
 		info->verts.realloc(info->vertexcount, vertsPool);
 		info->uv.realloc(info->vertexcount, vertsPool);
 	}
@@ -127,7 +128,7 @@ inline void pronet::PronetReadObject2v::getUv(const char* script, ObjectInfo2v* 
 {
 	if (!script)return;
 	if (strcmp(script, "uvp") == 0) {
-		iss >> info[nowVao].uv[points].x >> info[nowVao].uv[points].y;
+		iss >> info->uv[points].x >> info->uv[points].y;
 		points++;
 	}
 }
@@ -415,6 +416,9 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 					iss.str(line);
 					iss >> script;
 					read_pnObject2v(script.c_str(),&info.objs[i], &vertPool, &indexPool);
+					std::cout << "read finish " << script << std::endl;
+					iss.clear();
+					script.clear();
 				}
 				std::getline(file, line);
 				if (strcmp(line.c_str(), "}") == 0) {
@@ -457,6 +461,7 @@ inline pronet::PronetReadLoadFileList::PronetLoadChanckInfo pronet::PronetReadLo
 		case 'M':
 			scriptFunc("Map", [this, &info] {
 				iss >> script;
+				std::cout << "map file is start" << std::endl;
 				get_mapInfo(script.c_str(), info.strs);
 				});
 			break;
