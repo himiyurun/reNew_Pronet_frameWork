@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <utility>
 #include <memory>
 
 #include "ObjectPoolArray.h"
@@ -11,12 +12,11 @@ namespace pronet {
 	template<typename T>
 	class pnTlsf_unique_ptr : public pnTlsf {
 		struct _Deleter : public pnTlsf {
-			_Deleter()
-			
-			{}
+			_Deleter() {}
 
 			void operator()(T* ptr){
 				delete_type<T>(ptr);
+				std::cout << "pn_Tlsf unique_ptr return object" << std::endl;
 			}
 		};
 		std::unique_ptr<T, _Deleter> sp;
@@ -81,7 +81,7 @@ namespace pronet {
 
 			void operator()(PoolArray<T>* ptr) {
 				_pool->back(ptr);
-				std::cout << "custom_unique_ptr_return object" << std::endl;
+				std::cout << "object_pool_array unique_ptr return object" << std::endl;
 			}
 		};
 
@@ -95,7 +95,7 @@ namespace pronet {
 		poolArray_unique_ptr(poolArray_unique_ptr&& o) noexcept : sp(std::move(o.sp)) {}
 
 		//	スマートポインタを返す
-		std::unique_ptr<PoolArray<T>> operator()() const { return sp; }
+		std::unique_ptr<PoolArray<T>, _Deleter>& operator()() { return sp; }
 		//	内部のオブジェクトを返す
 		T& operator[](size_t n) const {
 			if (sp)
@@ -107,7 +107,6 @@ namespace pronet {
 		void reset() { sp.reset(); }
 
 		void realloc(size_t n, ObjectPool_Array<T>* pool) {
-			std::cout << "realloc pool array up : " << n << std::endl;
 			sp = std::unique_ptr<PoolArray<T>, _Deleter>(new PoolArray<T>(pool->get(n)), _Deleter(pool));
 			if (!sp)
 				throw std::runtime_error("ObjectPool_Array allocation failed!");
@@ -120,7 +119,7 @@ namespace pronet {
 				return false;
 		}
 
-		poolArray_unique_ptr<PoolArray<T>>& operator=(const poolArray_unique_ptr<PoolArray<T>>& o) noexcept {
+		poolArray_unique_ptr<T>& operator=(const poolArray_unique_ptr<T>& o) noexcept {
 			if (this != &o) {
 				this->sp = std::move(o.sp);
 			}
@@ -148,7 +147,7 @@ namespace pronet {
 			//	オーバーロードされたオブジェクト返却の処理
 			void operator()(PoolArray<T>* ptr) {
 				_pool->back(ptr);
-				std::cout << "custom shared ptr return object" << std::endl;
+				std::cout << "object_pool_array shared ptr return object" << std::endl;
 			}
 		};
 
@@ -198,7 +197,7 @@ namespace pronet {
 				Pool_Object<T> buf = std::move(*ptr);
 				buf->reset();
 				_pool->push(ptr);
-				std::cout << "custom shared ptr return object" << std::endl;
+				std::cout << "pool_object shared ptr return object" << std::endl;
 			}
 		};
 

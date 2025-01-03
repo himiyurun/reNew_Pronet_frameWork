@@ -176,12 +176,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment_shader.frag" />
+    <None Include="fragment_shader2.frag" />
     <None Include="game_object2.str2v" />
     <None Include="LoadFileList.fi" />
     <None Include="sample.mapbmp" />
     <None Include="sample.pnmap2" />
     <None Include="sample.pnsm" />
     <None Include="game_object1.str2v" />
+    <None Include="sample2.pnsm" />
     <None Include="vertex_shader.vert" />
   </ItemGroup>
   <ItemGroup>

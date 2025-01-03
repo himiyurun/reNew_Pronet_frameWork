@@ -32,6 +32,8 @@ namespace pronet {
 		void back(PoolArray<T>* p);
 		//	プールのサイズを変更する
 		void resize(size_t size);
+		//	ビットマップを描画する
+		void printBitMap() const;
 
 	private:
 		//	適したブロックをプールから探す
@@ -112,6 +114,12 @@ void pronet::ObjectPool_Array<T>::resize(size_t size)
 	}
 	size_t prevSize(valPool.size());
 	valPool.resize(size_Alingment(size));
+}
+
+template<typename T>
+inline void pronet::ObjectPool_Array<T>::printBitMap() const
+{
+	is_used.printBit();
 }
 
 template<typename T>

@@ -69,7 +69,7 @@ namespace pronet
 
 		~readShaderMake();
 
-		virtual void read_ShaderMake(const char* name, pronet::poolArray_unique_ptr<ShaderMakeInfo>* info, pronet::ObjectPool_Array<ShaderMakeInfo>* pool);
+		virtual void read_ShaderMake(const char* name, ShaderMakeInfo* info);
 
 	private:
 
@@ -119,11 +119,11 @@ namespace pronet
 
 		~PronetReadLoadFileList();
 
-		PronetLoadChanckInfo get_pnLCI(uint32_t chanck_Index);
+		void get_pnLCI(uint32_t chanck_Index, PronetLoadChanckInfo &info);
 
 	private:
 
-		inline PronetLoadChanckInfo getParam();
+		inline void getParam(PronetLoadChanckInfo& info);
 
 		inline bool type_correct(const char* script);
 

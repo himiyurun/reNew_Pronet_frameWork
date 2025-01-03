@@ -95,10 +95,6 @@ namespace pronet {
 	void pronet::Chanck_2D<VBOLV, SHDLV>::init(str_sp& strs, ChanckObjectSizeDirectionInfo* info)
 	{
 		structures = strs;
-		for (auto a : structures) {
-			const Structure2v_Param* const b = a->parameter();
-			std::cout << "location : " << b->location[0] << ", " << b->location[1] << ", rotate : " << b->rotate << std::endl;
-		}
 		init_chanck_direction_object_size(info);
 	}
 

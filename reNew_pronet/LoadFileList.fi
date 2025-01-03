@@ -14,11 +14,12 @@ ChanckMapping {
 }
 
 Chanck {
-	Shaders 1
+	Shaders 2
 	Objs 2
 
 	Shader {
-		sample.pnsm		
+		sample.pnsm
+		sample2.pnsm
 	}
 
 	Object {

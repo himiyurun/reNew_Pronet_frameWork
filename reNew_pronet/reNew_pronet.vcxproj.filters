@@ -205,6 +205,12 @@
     <None Include="game_object2.str2v">
       <Filter>リソース ファイル</Filter>
     </None>
+    <None Include="sample2.pnsm">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="fragment_shader2.frag">
+      <Filter>ソース ファイル\Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="AllocaterTesterLog.txt">

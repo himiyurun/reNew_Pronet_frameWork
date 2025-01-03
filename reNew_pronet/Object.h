@@ -57,9 +57,6 @@ public:
 	void reset();
 
 	virtual void bind() const {
-		std::cout << "vao : " << vao << std::endl;
-		std::cout << "vbo : " << vbo << std::endl;
-		std::cout << "ibo : " << ibo << std::endl;
 		glBindVertexArray(vao);
 	}
 
