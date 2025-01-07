@@ -108,6 +108,9 @@
     <ClCompile Include="Chanck.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pronet.h">
@@ -179,6 +182,9 @@
     <ClInclude Include="loadPronetMap2.h">
       <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="game_object1.str2v">
@@ -209,6 +215,15 @@
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="fragment_shader2.frag">
+      <Filter>ソース ファイル\Shader</Filter>
+    </None>
+    <None Include="player.fi">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="player.pnsm">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="player.vert">
       <Filter>ソース ファイル\Shader</Filter>
     </None>
   </ItemGroup>

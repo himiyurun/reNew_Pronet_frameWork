@@ -15,7 +15,7 @@ Object::~Object()
 	reset();
 }
 
-void Object::init(GLint size, const ObjectInfo2v *const info, GLboolean index_used)
+void Object::init(GLint size, const ObjectInfo2v *const info, GLboolean index_used, GLboolean texture_used)
 {
 	vertexcount = info->vertexcount;
 	this->index_used = index_used;

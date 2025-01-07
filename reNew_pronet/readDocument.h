@@ -84,6 +84,25 @@ namespace pronet
 		void clear();
 	};
 
+	class PronetReadPlayerInfo : public PronetReadObject2v, readShaderMake {
+		std::ifstream ifs;
+		std::istringstream iss;
+		std::string line;
+		std::string script;
+	public:
+		PronetReadPlayerInfo(const char* name = nullptr, Player2vCreateInfo* info = nullptr, pronet::ObjectPool_Array<glm::vec2>* vertPool = nullptr, pronet::ObjectPool_Array<uint32_t>* const indexPool = nullptr);
+		~PronetReadPlayerInfo();
+
+		bool get_PlayerInfo(const char* name, Player2vCreateInfo* const info, pronet::ObjectPool_Array<glm::vec2>* vertPool, pronet::ObjectPool_Array<uint32_t>* indexPool);
+	private:
+		void get_Param(Player2vCreateInfo* const info);
+
+		bool type_is_correct(const char* script);
+		inline void scriptFunc(const char* text, std::function<void()> func);
+		inline void clear();
+		inline void flash();
+	};
+
 	class PronetReadLoadFileList 
 		: public PronetReadObject2v, readShaderMake, loadPronetMap2 
 	{
@@ -108,6 +127,8 @@ namespace pronet
 		uint16_t chanckSize;
 		uint32_t shaderSize;
 		uint32_t objectSize;
+		//	プレイヤーの読み込みを行う
+		PronetReadPlayerInfo player;
 	public:
 		struct PronetLoadChanckInfo {
 			poolArray_unique_ptr<ShaderMakeInfo> shaders;
@@ -115,11 +136,13 @@ namespace pronet
 			poolArray_unique_ptr<Structure2vCreateInfo> strs[5];
 		};
 
-		PronetReadLoadFileList(const char* name, int* dimentionSize);
+		PronetReadLoadFileList(const char* name, int *const dimentionSize);
 
 		~PronetReadLoadFileList();
 
 		void get_pnLCI(uint32_t chanck_Index, PronetLoadChanckInfo &info);
+
+		void get_pnPlayer(const char* name, Player2vCreateInfo* const info);
 
 	private:
 

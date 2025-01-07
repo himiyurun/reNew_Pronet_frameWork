@@ -1,0 +1,10 @@
+#Pronet_2D_PLAYER
+
+Position 0.0 0.0
+Rotate 0.0
+
+Col_Pos -0.5 0.5
+Col_Size 1.0 1.0
+
+Object game_object1.str2v
+Shader player.pnsm

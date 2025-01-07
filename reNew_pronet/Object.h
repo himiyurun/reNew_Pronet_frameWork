@@ -11,6 +11,8 @@
 //	indexcount : 頂点インデックスの個数
 //	index : 頂点インデックスの配列ポインタ
 struct ObjectInfo2v{
+	GLboolean index_used;
+	GLboolean texture_used;
 	GLsizei vertexcount;
 	pronet::poolArray_unique_ptr<glm::vec2> verts;
 	pronet::poolArray_unique_ptr<glm::vec2> uv;
@@ -18,6 +20,8 @@ struct ObjectInfo2v{
 	pronet::poolArray_unique_ptr<uint32_t> index;
 
 	void reset() {
+		index_used = false;
+		texture_used = false;
 		vertexcount = 0;
 		verts.reset();
 		uv.reset();
@@ -52,7 +56,7 @@ public:
 
 	~Object();
 
-	void init(GLint size, const ObjectInfo2v *const info, GLboolean index_used);
+	void init(GLint size, const ObjectInfo2v *const info, GLboolean index_used, GLboolean texture_used);
 
 	void reset();
 

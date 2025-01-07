@@ -12,16 +12,23 @@ typedef struct {
 	GLfloat scale;				//	ウインドウのスケール
 } WindowParam;					//	ウインドウの各種パラメーターを格納する構造体
 
-struct Structure2v_Param {
+struct Structure2vParam {
 	GLfloat location[2];	//	オブジェクトの位置
 	GLfloat rotate;			//	オブジェクトの角度
 
-	Structure2v_Param() : location{ 0.0f, 0.0f }, rotate(0.0f) {}
+	Structure2vParam() : location{ 0.0f, 0.0f }, rotate(0.0f) {}
 };
+
+typedef struct {
+	GLfloat position[2];	//	プレイヤーの位置
+	GLfloat rotate;			//	プレイヤーの回転角
+	GLuint motion_id;		//	プレイヤーのモーションのID
+}Player2vParam;
 
 enum ShaderBlock {
 	PNGL_WINDOW_PARAM,
 	PN_GAME_STRUCTURE_PARAM,
+	PN_GAME_PLAYER_PARAM,
 	SHADER_BLOCK_SIZE,
 	SHADER_BLOCK_INFO_END
 };
@@ -114,8 +121,10 @@ namespace pronet {
 	void initUniformBlock();
 	//	その UniformBlock が存在するのかを確認する
 	void getBlockBindInfo(GLuint program, size_t buf[SHADER_BLOCK_SIZE]);
+	//	プレイヤーのパラメーターの UniformBlock	をアップデートする
+	void updatePlayer2vUniformParam(const Player2vParam* const playerParam);
 	//	指定した UniformBlock をアップデートする
-	void updateGameObjectUniformParam(const Structure2v_Param* strParam);
+	void updateGameObjectUniformParam(const Structure2vParam* strParam);
 	//	アプリケーションに関連するパラメーターを更新する
 	void updateApplicationUniformParam(const WindowParam* windowParam);
 	//	UniformObject をアップデートしてバインドする

@@ -4,7 +4,8 @@ using namespace pronet;
 void pronet::initUniformBlock()
 {
 	unf[PNGL_WINDOW_PARAM].Init("window", sizeof(WindowParam));
-	unf[PN_GAME_STRUCTURE_PARAM].Init("structure", sizeof(Structure2v_Param));
+	unf[PN_GAME_STRUCTURE_PARAM].Init("structure", sizeof(Structure2vParam));
+	unf[PN_GAME_PLAYER_PARAM].Init("player", sizeof(Player2vParam));
 }
 
 void pronet::getBlockBindInfo(GLuint program, size_t buf[SHADER_BLOCK_SIZE])
@@ -21,7 +22,12 @@ void pronet::getBlockBindInfo(GLuint program, size_t buf[SHADER_BLOCK_SIZE])
 	if (max_block_id < SHADER_BLOCK_SIZE) buf[max_block_id + 1] = SHADER_BLOCK_INFO_END;
 }
 
-void pronet::updateGameObjectUniformParam(const Structure2v_Param* strParam)
+void pronet::updatePlayer2vUniformParam(const Player2vParam* const playerParam)
+{
+	unf[PN_GAME_PLAYER_PARAM].Update(playerParam);
+}
+
+void pronet::updateGameObjectUniformParam(const Structure2vParam* strParam)
 {
 	unf[PN_GAME_STRUCTURE_PARAM].Update(strParam);
 }

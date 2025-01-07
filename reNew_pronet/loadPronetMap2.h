@@ -7,6 +7,7 @@
 #include <functional>
 
 #include "Structure.h"
+#include "Player.h"
 
 namespace pronet{
 	enum loadChankDirection {

@@ -16,12 +16,9 @@ struct glfw_windowCreateInfo
 
 class glfw_Window
 {
-	GLFWwindow* const window;
-
 protected:
-
+	GLFWwindow* const window;
 	WindowParam param;
-
 	GLint keyStatus;
 
 public:

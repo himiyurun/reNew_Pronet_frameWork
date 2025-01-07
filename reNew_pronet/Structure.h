@@ -32,7 +32,7 @@ class Structure2v
 	uint32_t texture_index;	//	テクスチャの番号
 	
 	//	パラメーター
-	Structure2v_Param param;
+	Structure2vParam param;
 	GLfloat col_pos[2];		//	当たり判定をとる左上のオブジェクト座標
 	GLfloat col_size[2];	//	当たり判定をとるサイズ
 	
@@ -47,7 +47,7 @@ public:
 
 	//	初期化を行う
 	//	new_object : 確保したオブジェクトのポインタ
-	void init(Structure2vParamCreateInfo* strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index);
+	void init(const Structure2vParamCreateInfo *const strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index);
 
 	//	このクラスを初期の状態に戻す
 	void reset();
@@ -60,7 +60,7 @@ public:
 	//	使用中かを取得する
 	bool is_used() const;
 
-	[[nodiscard]] const Structure2v_Param* parameter() const { return &param; }
+	[[nodiscard]] const Structure2vParam* parameter() const { return &param; }
 	[[nodiscard]] uint32_t texture() const { return (texture_index - 1); }
 };
 
@@ -81,14 +81,12 @@ Structure2v<VBOLV, SHDLV>::~Structure2v()
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
-void Structure2v<VBOLV, SHDLV>::init(Structure2vParamCreateInfo* strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index)
+void Structure2v<VBOLV, SHDLV>::init(const Structure2vParamCreateInfo *const strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index)
 {
 	if (object() == nullptr)
 		throw std::bad_alloc();
 	if (shader() == nullptr)
 		throw std::bad_alloc();
-	if (tex_index == 0)
-		throw std::runtime_error("tex_index is 0 Structure.update");
 
 	//	パラメーターの代入
 	param.location[0] = strInfo->location[0]; param.location[1] = strInfo->location[1];

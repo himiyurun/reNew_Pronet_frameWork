@@ -143,6 +143,7 @@
     <ClCompile Include="loadPronetMap2.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="readDocument.cpp" />
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ObjectPoolArray.h" />
     <ClInclude Include="ObjectPoolList.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="pnTlsf.h" />
     <ClInclude Include="pronet_memory.h" />
     <ClInclude Include="Pronet.h" />
@@ -179,6 +181,9 @@
     <None Include="fragment_shader2.frag" />
     <None Include="game_object2.str2v" />
     <None Include="LoadFileList.fi" />
+    <None Include="player.fi" />
+    <None Include="player.pnsm" />
+    <None Include="player.vert" />
     <None Include="sample.mapbmp" />
     <None Include="sample.pnmap2" />
     <None Include="sample.pnsm" />

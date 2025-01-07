@@ -37,7 +37,6 @@ GLboolean Shader::init(const char* vsrc, const char* fsrc)
 		}
 		glDeleteShader(fobj);
 	}
-
 	glBindAttribLocation(program, 0, "position");
 	glBindFragDataLocation(program, 0, "fragment");
 
