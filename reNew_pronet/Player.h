@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Shader.h"
 #include "Uniform.h"
+#include "collib.h"
 
 namespace pronet {
 	typedef struct {
@@ -30,8 +31,12 @@ namespace pronet {
 		void reset();
 
 		void draw() const;
-		
+
 		[[nodiscard]] const Player2vParam* parameter() const { return &param; }
+		[[nodiscard]] const float* position() const { return param.position; }
+		[[nodiscard]] Collusion_Point getColInfoPoint() const { return Collusion_Point(col_pos[0], col_pos[1]); }
+		[[nodiscard]] Collusion_Quad getColInfoQuad() const { return Collusion_Quad(col_pos[0], col_pos[1], col_size[0], col_size[1]); }
+		[[nodiscard]] Collusion_Circle getColInfoCircle() const { return Collusion_Circle(col_pos[0], col_pos[1], col_size[0]); }
 
 	private:
 

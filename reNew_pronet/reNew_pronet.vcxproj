@@ -137,6 +137,8 @@
     <ClCompile Include="BitMap64.cpp" />
     <ClCompile Include="BoundaryTag.cpp" />
     <ClCompile Include="Chanck.cpp" />
+    <ClCompile Include="collib.cpp" />
+    <ClCompile Include="Collusion_4tree.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="glfw_Window.cpp" />
     <ClCompile Include="loader.cpp" />
@@ -156,6 +158,8 @@
     <ClInclude Include="bit_tree.h" />
     <ClInclude Include="BoundaryTag.h" />
     <ClInclude Include="Chanck.h" />
+    <ClInclude Include="collib.h" />
+    <ClInclude Include="Collision_4tree.h" />
     <ClInclude Include="glfw_Window.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="loadPronetMap2.h" />
@@ -165,6 +169,8 @@
     <ClInclude Include="ObjectPoolArray.h" />
     <ClInclude Include="ObjectPoolList.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="colCell.h" />
+    <ClInclude Include="pnMath.h" />
     <ClInclude Include="pnTlsf.h" />
     <ClInclude Include="pronet_memory.h" />
     <ClInclude Include="Pronet.h" />
@@ -182,6 +188,7 @@
     <None Include="game_object2.str2v" />
     <None Include="LoadFileList.fi" />
     <None Include="player.fi" />
+    <None Include="player.frag" />
     <None Include="player.pnsm" />
     <None Include="player.vert" />
     <None Include="sample.mapbmp" />

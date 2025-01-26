@@ -23,6 +23,7 @@ void pronet::Player::init(const GLint size, Player2vCreateInfo* const info)
 	param.position[0] = info->position[0]; param.position[1] = info->position[1];
 	param.rotate = info->rotate;
 	param.motion_id = 0;
+	param.intersect = false;
 
 	info->_obj.reset();
 }
@@ -36,6 +37,7 @@ void pronet::Player::reset()
 	param.position[0] = 0.f; param.position[1] = 0.f;
 	param.rotate = 0.f;
 	param.motion_id = 0;
+	param.intersect = false;
 }
 
 void pronet::Player::draw() const

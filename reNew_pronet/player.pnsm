@@ -4,5 +4,5 @@ Shaders 1
 
 unit {
 	Vertex player.vert
-	Fragment fragment_shader.frag
+	Fragment player.frag
 }

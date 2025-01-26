@@ -23,6 +23,7 @@ typedef struct {
 	GLfloat position[2];	//	プレイヤーの位置
 	GLfloat rotate;			//	プレイヤーの回転角
 	GLuint motion_id;		//	プレイヤーのモーションのID
+	GLboolean intersect;
 }Player2vParam;
 
 enum ShaderBlock {

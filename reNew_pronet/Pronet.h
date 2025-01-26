@@ -55,10 +55,12 @@ template<std::size_t VBOLV, std::size_t SHDLV>
 void PronetManager<VBOLV, SHDLV>::process()
 {
 	static GLfloat velocity(0.05f);
-
+	static GLfloat last_pos[2];
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	last_pos[0] = player.param.position[0];
+	last_pos[1] = player.param.position[1];
 	if (glfwGetKey(window, GLFW_KEY_W)) {
 		player.param.position[1] += velocity;
 	}
@@ -70,6 +72,17 @@ void PronetManager<VBOLV, SHDLV>::process()
 	}
 	else if (glfwGetKey(window, GLFW_KEY_D)) {
 		player.param.position[0] += velocity;
+	}
+
+	if (chanck[0].Intersect(player.getColInfoQuad(), player.position())) {
+		/*
+		player.param.position[0] = last_pos[0];
+		player.param.position[1] = last_pos[1];
+		*/
+		player.param.intersect = true;
+	}
+	else {
+		player.param.intersect = false;
 	}
 
 	pronet::updateApplicationUniformParam(&param);

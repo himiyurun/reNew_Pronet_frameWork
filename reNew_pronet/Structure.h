@@ -5,6 +5,7 @@
 #include "Object.h"
 #include "Shader.h"
 #include "Uniform.h"
+#include "collib.h"
 
 //	オブジェクトをshared_ptr管理にすれば全て解決
 //	境界線オブジェクト、生成するチャンクのオブジェクトファイルのインデックスによりオブジェクトを割り当てる。
@@ -30,12 +31,12 @@ class Structure2v
 	pronet::poolObject_shared_ptr<Object, VBOLV> buffer_object;	//	バッファオブジェクト
 	pronet::poolObject_shared_ptr<Shader, SHDLV> shader_object;	//	シェーダーのインデックス、チャンクごとに管理
 	uint32_t texture_index;	//	テクスチャの番号
-	
+
 	//	パラメーター
 	Structure2vParam param;
 	GLfloat col_pos[2];		//	当たり判定をとる左上のオブジェクト座標
 	GLfloat col_size[2];	//	当たり判定をとるサイズ
-	
+
 	//	フレームカウンタ
 	size_t frame_counter;
 
@@ -47,7 +48,7 @@ public:
 
 	//	初期化を行う
 	//	new_object : 確保したオブジェクトのポインタ
-	void init(const Structure2vParamCreateInfo *const strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index);
+	void init(const Structure2vParamCreateInfo* const strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index);
 
 	//	このクラスを初期の状態に戻す
 	void reset();
@@ -61,7 +62,11 @@ public:
 	bool is_used() const;
 
 	[[nodiscard]] const Structure2vParam* parameter() const { return &param; }
+	[[nodiscard]] const float* location() const { return param.location; }
 	[[nodiscard]] uint32_t texture() const { return (texture_index - 1); }
+	[[nodiscard]] Collusion_Point getColInfoPoint() const { return Collusion_Point(col_pos[0], col_pos[1]); }
+	[[nodiscard]] Collusion_Quad getColInfoQuad() const { return Collusion_Quad(col_pos[0], col_pos[1], col_size[0], col_size[1]); }
+	[[nodiscard]] Collusion_Circle getColInfoCircle() const { return Collusion_Circle(col_pos[0], col_pos[1], col_size[0]); }
 };
 
 template<std::size_t VBOLV, std::size_t SHDLV>

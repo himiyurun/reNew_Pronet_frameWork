@@ -12,9 +12,8 @@ layout(std140) uniform player {
 	vec2 position;
 	float rotate;
 	uint motion_id;
+	bool intersect;
 }ply;
-
-uniform vec2 location;
 
 vec2 scaling() {
 	return vec2(win.scale / win.size);
