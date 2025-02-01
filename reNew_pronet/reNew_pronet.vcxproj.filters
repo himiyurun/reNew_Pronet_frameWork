@@ -120,7 +120,7 @@
     <ClCompile Include="collib.cpp">
       <Filter>ソース ファイル\PnLib\col</Filter>
     </ClCompile>
-    <ClCompile Include="Collusion_4tree.cpp">
+    <ClCompile Include="pnMath.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -194,9 +194,6 @@
     <ClInclude Include="loadPronetMap2.h">
       <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="collib.h">
       <Filter>ヘッダー ファイル\PnHead\col</Filter>
     </ClInclude>
@@ -208,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="pnMath.h">
       <Filter>ヘッダー ファイル\PnHead\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\PnHead</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +251,12 @@
       <Filter>ソース ファイル\Shader</Filter>
     </None>
     <None Include="player.frag">
+      <Filter>ソース ファイル\Shader</Filter>
+    </None>
+    <None Include="debug_c4t.vert">
+      <Filter>ソース ファイル\Shader</Filter>
+    </None>
+    <None Include="debug_c4t.frag">
       <Filter>ソース ファイル\Shader</Filter>
     </None>
   </ItemGroup>

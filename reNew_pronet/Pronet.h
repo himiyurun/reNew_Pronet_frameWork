@@ -2,6 +2,7 @@
 #include "loader.h"
 #include "Player.h"
 #include "glfw_Window.h"
+#include "Collision_4tree.h"
 
 static const size_t strLv = 6;
 
@@ -11,8 +12,9 @@ class PronetManager : public glfw_Window {
 	GLint dimentionSize;
 	pronet::loader<VBOLV, SHDLV> loader_object;
 	pronet::Player player;
-
 	std::array<pronet::Chanck_2D<VBOLV, SHDLV>, CHANCK_LOAD_SIZE> chanck;
+
+	pronet::Collision_4tree<int> test;
 public:
 	//	コンストラクタ
 	//	windowInfo : 作成するウインドウの情報
@@ -34,6 +36,7 @@ PronetManager<VBOLV, SHDLV>::PronetManager(glfw_windowCreateInfo* windowInfo, co
 	, loader_object(&dimentionSize, loadfilelist_name)
 {
 	pronet::initUniformBlock();
+	test.init(4, -2.5, 2.5f, 5.f, 5.f);
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
@@ -85,9 +88,12 @@ void PronetManager<VBOLV, SHDLV>::process()
 		player.param.intersect = false;
 	}
 
+	test.rs(player);
+
 	pronet::updateApplicationUniformParam(&param);
 	pronet::updatePlayer2vUniformParam(player.parameter());
 	pronet::updateFrameCounter();
 	chanck[0].draw();
 	player.draw();
+	test.debug_draw();
 }

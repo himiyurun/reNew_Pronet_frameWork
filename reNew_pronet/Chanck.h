@@ -121,7 +121,7 @@ namespace pronet {
 	inline bool Chanck_2D<VBOLV, SHDLV>::Intersect(const Collusion_Quad& _player_col, const float _pos[2]) const
 	{
 		for (const auto& a : structures) {
-			if (pnObjectCollusion(_player_col, _pos, a->getColInfoQuad(), a->location())) {
+			if (pnObjectCollision(_player_col, _pos, a->getColInfoQuad(), a->location())) {
 				return true;
 			}
 		}

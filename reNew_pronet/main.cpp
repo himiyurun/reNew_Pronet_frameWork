@@ -4,6 +4,7 @@
 #define CHANCK_LOAD_SIZE	(1)
 
 #include "Pronet.h"
+#include "Collision_4tree.h"
 
 void libInit() 
 {

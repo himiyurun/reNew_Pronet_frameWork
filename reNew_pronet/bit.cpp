@@ -68,3 +68,18 @@ void pronet::_bit_write_one_area(uint64_t* n, size_t buf_size, size_t start, siz
 		*n |= 1ULL << (start + i);
 	}
 }
+
+uint32_t pronet::_bit_separate_16(uint16_t _num)
+{
+	uint32_t out(_num);
+	out = (out | (out << 8)) & 0x00ff00ff;
+	out = (out | (out << 4)) & 0x0f0f0f0f;
+	out = (out | (out << 2)) & 0x33333333;
+	out = (out | (out << 1)) & 0x55555555;
+	return out;
+}
+
+uint32_t pronet::_bit_mix_32(uint32_t _n1, uint32_t _n2)
+{
+	return (_n1 | (_n2 << 1));
+}

@@ -57,6 +57,7 @@ public:
 	~Object();
 
 	void init(GLint size, const ObjectInfo2v *const info, GLboolean index_used, GLboolean texture_used);
+	void init(GLint size, GLsizei vertcount, const glm::vec2* vertex, GLsizei indcount, const GLuint* index);
 
 	void reset();
 
@@ -76,6 +77,16 @@ public:
 	void draw() const {
 		bind();
 		excute();
+	}
+
+	void draw(GLenum _param) const {
+		bind();
+		if (index_used) {
+			glDrawElements(_param, indexcount, GL_UNSIGNED_INT, 0);
+		}
+		else {
+			glDrawArrays(_param, 0, vertexcount);
+		}
 	}
 };
 

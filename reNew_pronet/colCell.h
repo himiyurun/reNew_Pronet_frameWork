@@ -25,14 +25,38 @@ namespace pronet {
 		void push_object(_Ty _obj);
 		void clear_object();
 
-		[[nodiscard]] ColCell<_Ty>* next_object(size_t n) const {
+		[[nodiscard]] ColCell<_Ty>* select(size_t n) const {
 			if (n < 4)
 				return kids[n];
 			else
 				throw std::out_of_range("out of range : ColCell.next_object(size_t)");
 		}
+		[[nodiscard]] ColCell<_Ty>* select_rap(size_t n) const {
+			return kids[n % 4];
+		}
+
+		[[nodiscard]] bool empty() const {
+			if (!kids[0] && !kids[1] && !kids[2] && !kids[3] &&
+				!prev)
+			{
+				return true;
+			}
+			return false;
+		}
+		[[nodiscard]] bool have_prev() const {
+			if (prev)
+				return true;
+			else
+				return false;
+		}
+		[[nodiscard]] bool have_kids() const {
+			if (kids[0] && kids[1] && kids[2] && kids[3])
+				return true;
+			else
+				return false;
+		}
 		[[nodiscard]] ColCell<_Ty>* prev_object() const { return prev; }
-		[[nodiscard]] const std::vector<_Ty>& get() const { return data; }
+		[[nodiscard]] const std::vector<_Ty, pnTlsfInsertSTLpointer<_Ty>>& get() const { return data; }
 	};
 
 	template<class _Ty>
@@ -60,7 +84,8 @@ namespace pronet {
 	template<class _Ty>
 	inline void ColCell<_Ty>::delete_cell()
 	{
-		size = 0.f;
+		size[0] = 0.f;
+		size[1] = 0.f;
 		prev = nullptr;
 		kids[0] = nullptr;
 		kids[1] = nullptr;

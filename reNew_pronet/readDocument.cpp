@@ -118,6 +118,9 @@ inline void pronet::PronetReadObject2v::getIndex(const char* script, ObjectInfo2
 		iss >> info->indexcount;
 		info->index.realloc(info->indexcount, indexPool);
 	}
+	else if (strcmp(script, "index_used") == 0) {
+		iss >> info->index_used;
+	}
 	else {
 
 	}

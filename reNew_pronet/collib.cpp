@@ -1,16 +1,16 @@
 #include "collib.h"
 
-bool pnObjectCollusion(const Collusion_Point& _original, const float _original_world_position[2], const Collusion_Quad& _object, const float _object_world_position[2])
+bool pnObjectCollision(const Collusion_Point& _original, const float _original_world_position[2], const Collusion_Quad& _object, const float _object_world_position[2])
 {
 	return false;
 }
 
-bool pnObjectCollusion(const Collusion_Point& _original, const float _original_world_position[2], const Collusion_Circle& _object, const float _object_world_position[2])
+bool pnObjectCollision(const Collusion_Point& _original, const float _original_world_position[2], const Collusion_Circle& _object, const float _object_world_position[2])
 {
 	return false;
 }
 
-bool pnObjectCollusion(const Collusion_Quad& _original, const float _original_world_position[2], const Collusion_Quad& _object, const float _object_world_position[2])
+bool pnObjectCollision(const Collusion_Quad& _original, const float _original_world_position[2], const Collusion_Quad& _object, const float _object_world_position[2])
 {
 	if (_original_world_position[0] + _original.pos[0] + _original.size[0] > _object_world_position[0] + _object.pos[0] && 
 		_original_world_position[0] + _original.pos[0] < _object_world_position[0] + _object.pos[0] + _object.size[0] &&
@@ -22,22 +22,22 @@ bool pnObjectCollusion(const Collusion_Quad& _original, const float _original_wo
 	return false;
 }
 
-bool pnObjectCollusion(const Collusion_Quad& _original, const float _original_world_position[2], const Collusion_Point& _object, const float _object_world_position[2])
+bool pnObjectCollision(const Collusion_Quad& _original, const float _original_world_position[2], const Collusion_Point& _object, const float _object_world_position[2])
 {
 	return false;
 }
 
-bool pnObjectCollusion(const Collusion_Quad& _original, const float _original_world_position[2], const Collusion_Circle& _object, const float _object_world_position[2])
+bool pnObjectCollision(const Collusion_Quad& _original, const float _original_world_position[2], const Collusion_Circle& _object, const float _object_world_position[2])
 {
 	return false;
 }
 
-bool pnObjectCollusion(const Collusion_Circle& _original, const float _original_world_position[2], const Collusion_Point& _object, const float _object_world_position[2])
+bool pnObjectCollision(const Collusion_Circle& _original, const float _original_world_position[2], const Collusion_Point& _object, const float _object_world_position[2])
 {
 	return false;
 }
 
-bool pnObjectCollusion(const Collusion_Circle& _original, const float _original_world_position[2], const Collusion_Circle& _object, const float _object_world_position[2])
+bool pnObjectCollision(const Collusion_Circle& _original, const float _original_world_position[2], const Collusion_Circle& _object, const float _object_world_position[2])
 {
 	return false;
 }

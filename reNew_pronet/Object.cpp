@@ -38,6 +38,29 @@ void Object::init(GLint size, const ObjectInfo2v *const info, GLboolean index_us
 	}
 }
 
+void Object::init(GLint size, GLsizei vertcount, const glm::vec2* vertex, GLsizei indcount, const GLuint* index)
+{
+	index_used = true;
+	vertexcount = vertcount;
+
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * vertexcount, vertex, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, size, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(0);
+
+	if (this->index_used) {
+		indexcount = indcount;
+		glGenBuffers(1, &ibo);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::vec2) * indexcount, index, GL_STATIC_DRAW);
+	}
+}
+
 void Object::reset()
 {
 	if (vao != 0) {

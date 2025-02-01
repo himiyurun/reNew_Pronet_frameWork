@@ -138,7 +138,6 @@
     <ClCompile Include="BoundaryTag.cpp" />
     <ClCompile Include="Chanck.cpp" />
     <ClCompile Include="collib.cpp" />
-    <ClCompile Include="Collusion_4tree.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="glfw_Window.cpp" />
     <ClCompile Include="loader.cpp" />
@@ -146,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="pnMath.cpp" />
     <ClCompile Include="readDocument.cpp" />
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -183,6 +183,8 @@
     <ClInclude Include="Uniform.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="debug_c4t.frag" />
+    <None Include="debug_c4t.vert" />
     <None Include="fragment_shader.frag" />
     <None Include="fragment_shader2.frag" />
     <None Include="game_object2.str2v" />
