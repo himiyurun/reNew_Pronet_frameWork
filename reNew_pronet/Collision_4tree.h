@@ -16,6 +16,7 @@ namespace pronet {
 		float position[2];
 		float max_size[2];
 		float min_w[2];
+		size_t max_cell;
 		std::vector<ColCell<_Ty>, pnTlsfInsertSTLtype<_Ty>> cells;
 		ColCell<_Ty>* begin;
 		size_t level;
@@ -45,11 +46,10 @@ namespace pronet {
 
 		void rs(const Player& _ply) const {
 			const Collusion_Quad col(_ply.getColInfoQuad());
-			const float* position(_ply.position());
+			const float* const position(_ply.position());
 			uint32_t morton_num_tl(get_morton_2D(col.pos[0] + position[0], col.pos[1] + position[1]));
-			uint32_t morton_num_rd(get_morton_2D(col.pos[0] + col.size[0] + position[0], col.pos[1] + col.size[1] + position[1]));
+			uint32_t morton_num_rd(get_morton_2D(col.pos[0] + col.size[0] + position[0], col.pos[1] - col.size[1] + position[1]));
 			uint8_t lv(get_rigist_level(morton_num_tl, morton_num_rd));
-			std::cout << "level : " << (unsigned)lv << std::endl;
 		}
 
 		//	デバッグ用に分割しているところを描画する
@@ -91,6 +91,7 @@ namespace pronet {
 		: position{ 0.f, 0.f }
 		, max_size{ 0.f, 0.f }, min_w{ 0.f, 0.f }
 		, begin(nullptr), level(0)
+		, max_cell(0)
 	{
 		if (_lv) {
 			init(_lv, _xpos, _ypos, _xsize, _ysize);
@@ -114,6 +115,7 @@ namespace pronet {
 		max_size[1] = _ysize;
 		min_w[0] = _xsize / (1 << (level - 1));
 		min_w[1] = _ysize / (1 << (level - 1));
+		max_cell = 1 << (level - 1);
 		cells.resize(gp_total(0x01, 0x04, _lv));
 		assembley_tree();
 
@@ -244,14 +246,16 @@ namespace pronet {
 	{
 		uint64_t tl(0), rd(0);
 		uint8_t nlv = 0;
-		while (tl == rd) {
+		do {
 			tl = _bit_extract_area(_sep_tl, UNSIGNED_INT_32, nlv * 2, 2);
 			rd = _bit_extract_area(_sep_rd, UNSIGNED_INT_32, nlv * 2, 2);
 			nlv++;
+			/*
 			if (nlv >= level) {
 				throw std::out_of_range("this object cannot belong to this Cell : Collision_4tree.get_rigist_level(uint32_t, uint32_t)");
 			}
-		}
+			*/
+		} while (tl != rd);
 		return nlv;
 	}
 
@@ -273,8 +277,7 @@ namespace pronet {
 	inline uint32_t Collision_4tree<_Ty>::get_morton_2D(float _x, float _y) const
 	{
 		uint16_t x((uint16_t)((_x - position[0]) / min_w[0]));
-		uint16_t y((uint16_t)(-1.f * (_y - position[1]) / min_w[1]));
-		std::cout << "x : " << x << ", y : " << y << std::endl;
+		uint16_t y(max_cell - (uint16_t)((_y - position[1] + max_size[1]) / min_w[1]) - 1);
 		return _bit_mix_32(_bit_separate_16(x), _bit_separate_16(y));
 	}
 
