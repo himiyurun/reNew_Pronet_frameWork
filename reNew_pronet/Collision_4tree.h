@@ -34,18 +34,14 @@ namespace pronet {
 		//	_ysize : 縦方向のサイズ
 		void init(std::size_t _lv, float _xpos, float _ypos, float _xsize, float _ysize);
 		
-		void all() {
-			search_all(0, begin, Player());
-		}
-		
 		//	すべてのツリーの要素をクリアする
 		void clear_all();
 		
 		//	オブジェクトを特定のレベルに割り当てる
-		void rigist(_Ty _obj);
+		bool rigist(_Ty _obj);
 
 		//	当たり判定をとる
-		void intersect(const Player& _ply) const;
+		bool intersect(const Player& _ply) const;
 
 		//	デバッグ用に分割しているところを描画する
 		void debug_draw() const;
@@ -55,14 +51,17 @@ namespace pronet {
 	private:
 		//	オブジェクトの持つ空間すべてで処理を行う
 		//	_beg : 対象のオブジェクト
-		void search_all(ColCell<_Ty>* const _beg, const Player& _ply);
+		bool search_all(ColCell<_Ty>* const _beg, const Player& _ply) const;
 		
 		//	空間の配列を木構造にマップする
 		void assembley_tree();
 		
 		//	総当たりの場合に実行する処理
-		void search_all_process(const Player& _ply, ColCell<_Ty>* const _ptr);
+		bool search_all_process(const Player& _ply, ColCell<_Ty>* const _ptr) const;
 		
+		//	レベルとインデックスを求める
+		[[nodiscard]] bool get_level_and_index(Collusion_Quad _col, const float _position[2], uint8_t& _lv, uint32_t& _index) const;
+
 		//	所属するレベルを求める
 		[[nodiscard]] uint8_t get_rigist_level(uint32_t _sep_tl, uint32_t _sep_rd) const;
 		
@@ -92,6 +91,7 @@ namespace pronet {
 			init(_lv, _xpos, _ypos, _xsize, _ysize);
 		}
 	}
+
 	template<typename _Ty>
 	inline Collision_4tree<_Ty>::~Collision_4tree()
 	{
@@ -130,7 +130,7 @@ namespace pronet {
 			width = 1 << (level - i - 1);
 			cellw = 1 << (i);
 			for (size_t j = 0; j < (1 << (i * 2)); j++) {
-				indices[cc++] = ((j% cellw) + (j / cellw) * mw) * width;
+				indices[cc++] = ((j % cellw) + (j / cellw) * mw) * width;
 				indices[cc++] = ((j % cellw + 1) + (j / cellw) * mw) * width;
 
 				indices[cc++] = ((j % cellw + 1) + (j / cellw) * mw) * width;
@@ -158,8 +158,8 @@ namespace pronet {
 		while (!stack.empty()) {
 			ptr = stack.front();
 			stack.pop();
-			
-			const auto& data = ptr->get();
+
+			auto& data = ptr->get();
 			data.clear();
 
 			if (ptr->have_kids()) {
@@ -171,36 +171,24 @@ namespace pronet {
 	}
 
 	template<>
-	void Collision_4tree<Structure2v<6, 6>*>::rigist(Structure2v<6, 6>* _obj)
-	{
-		const Collusion_Quad col = _obj->getColInfoQuad();
-		const float* const position = _obj->location();
-		uint32_t morton_num_tl(get_morton_2D(col.pos[0] + position[0], col.pos[1] + position[1]));
-		uint32_t morton_num_rd(get_morton_2D(col.pos[0] + col.size[0] + position[0], col.pos[1] - col.size[1] + position[1]));
-		uint8_t lv(get_rigist_level(morton_num_tl, morton_num_rd));
-
-		ColCell<Structure2v<6, 6>*>* ptr(begin);
-		for (uint8_t i = level; i >= lv; i--) {
-			ptr = ptr->select(_bit_extract_area(morton_num_tl, UNSIGNED_INT_32, (i - 1) * 2, 2));
-		}
-		ptr->push_object(_obj);
-	}
+	bool Collision_4tree<Structure2v<6, 6>*>::rigist(Structure2v<6, 6>* _obj);
 
 	template<typename _Ty>
-	inline void Collision_4tree<_Ty>::intersect(const Player& _ply) const
+	inline bool Collision_4tree<_Ty>::intersect(const Player& _ply) const
 	{
-		const Collusion_Quad col = _ply.getColInfoQuad();
-		const float* const position = _ply.position();
-		uint32_t morton_num_tl(get_morton_2D(col.pos[0] + position[0], col.pos[1] + position[1]));
-		uint32_t morton_num_rd(get_morton_2D(col.pos[0] + col.size[0] + position[0], col.pos[1] - col.size[1] + position[1]));
-		uint8_t lv(get_rigist_level(morton_num_tl, morton_num_rd));
+		uint32_t index;
+		uint8_t lv;
+		if (!get_level_and_index(_ply.getColInfoQuad(), _ply.position(), lv, index))
+			return false;
 
 		ColCell<_Ty>* ptr(begin);
-		for (uint8_t i = level; i >= lv; i--) {
-			ptr = ptr->select(_bit_extract_area(morton_num_tl, UNSIGNED_INT_32, (i - 1) * 2, 2));
-			ptr->search_all_process(_ply, ptr);
+		for (uint8_t i = level; i > lv; i--) {
+			ptr = ptr->select(_bit_extract_area(index, UNSIGNED_INT_32, (i - 2) * 2, 2));
+			if (search_all_process(_ply, ptr)) {
+				return true;
+			}
 		}
-		search_all(ptr, _ply);
+		return search_all(ptr, _ply);
 	}
 
 	template<typename _Ty>
@@ -212,63 +200,44 @@ namespace pronet {
 	}
 
 	template<typename _Ty>
-	inline void Collision_4tree<_Ty>::search_all(ColCell<_Ty>* const _beg, const Player& _ply)
+	inline bool Collision_4tree<_Ty>::search_all(ColCell<_Ty>* const _beg, const Player& _ply) const
 	{
 		std::deque<ColCell<_Ty>*, pnTlsfInsertSTLpointer<ColCell<_Ty>*>> custom_deque;
 		std::queue<ColCell<_Ty>*, std::deque<ColCell<_Ty>*, pnTlsfInsertSTLpointer<ColCell<_Ty>*>>> stack(custom_deque);
-		stack.push(_beg);
-		
-		ColCell<_Ty>* ptr(nullptr);
+
+		ColCell<_Ty>* ptr(_beg);
+		if (ptr->have_kids()) {
+			for (uint8_t i = 0; i < 4; i++) {
+				stack.push(ptr->select(i));
+			}
+		}
 		while (!stack.empty()) {
 			ptr = stack.front();
 			stack.pop();
-			search_all_process(_ply, ptr);
+			if (search_all_process(_ply, ptr)) {
+				return true;
+			}
+
 			if (ptr->have_kids()) {
 				for (uint8_t i = 0; i < 4; i++) {
 					stack.push(ptr->select(i));
 				}
 			}
 		}
+		return false;
 	}
 
 	template<typename _Ty>
-	inline void Collision_4tree<_Ty>::assembley_tree()
+	bool Collision_4tree<_Ty>::get_level_and_index(Collusion_Quad _col, const float _position[2], uint8_t& _lv, uint32_t& _index) const
 	{
-		size_t level_max_size = 1;
-		size_t array_pointer = 1;
-		//	リンクするオブジェクトの配列の位置
-		size_t link_array_pointer = 5;
-		//	再帰関数を使って、木を組み立てる
-		cells[0].make_cell(max_size[0], max_size[1], nullptr, 
-			setup_tree_stage(1, level, &cells[0], array_pointer), setup_tree_stage(1, level, &cells[0], array_pointer), 
-			setup_tree_stage(1, level, &cells[0], array_pointer), setup_tree_stage(1, level, &cells[0], array_pointer));
-		begin = &cells[0];
-	}
+		uint32_t morton_num_tl(get_morton_2D(_col.pos[0] + _position[0], _col.pos[1] + _position[1]));
+		uint32_t morton_num_rd(get_morton_2D(_col.pos[0] + _col.size[0] + _position[0], _col.pos[1] - _col.size[1] + _position[1]));
+		if (morton_num_rd == 0xffffffff || morton_num_rd == 0xffffffff)
+			return false;
 
-	template<typename _Ty>
-	inline void Collision_4tree<_Ty>::search_all_process(const Player& _ply, ColCell<_Ty>* const _ptr) {}
-
-	template<>
-	void Collision_4tree<Structure2v<6, 6>*>::search_all_process(const Player& _ply, ColCell<Structure2v<6, 6>*>* const _ptr)
-	{
-		for (const auto& a : _ptr->get()) {
-			pnObjectCollision(_ply.getColInfoQuad(), _ply.position(), a->getColInfoQuad(), a->location());
-		}
-	}
-
-	template<>
-	void Collision_4tree<int>::search_all_process(const Player& _ply, ColCell<int>* const _ptr)
-	{
-		/*
-		for (size_t i = 0; i < _ptr->get().size() + 1; i++) {
-			_ptr->push_object(i);
-		}
-
-		for (const auto& a : _ptr->get()) {
-			std::cout << "num " << a << std::endl;
-		}
-		*/
-		std::cout << "hello" << std::endl;
+		_index = morton_num_tl;
+		_lv = get_rigist_level(morton_num_tl, morton_num_rd);
+		return true;
 	}
 
 	template<typename _Ty>
@@ -280,11 +249,6 @@ namespace pronet {
 			tl = _bit_extract_area(_sep_tl, UNSIGNED_INT_32, nlv * 2, 2);
 			rd = _bit_extract_area(_sep_rd, UNSIGNED_INT_32, nlv * 2, 2);
 			nlv++;
-			/*
-			if (nlv >= level) {
-				throw std::out_of_range("this object cannot belong to this Cell : Collision_4tree.get_rigist_level(uint32_t, uint32_t)");
-			}
-			*/
 		} while (tl != rd);
 		return nlv;
 	}
@@ -294,6 +258,10 @@ namespace pronet {
 	{
 		uint16_t x((uint16_t)((_x - position[0]) / min_w[0]));
 		uint16_t y(max_cell - (uint16_t)((_y - position[1] + max_size[1]) / min_w[1]) - 1);
+		if (x >= max_cell)
+			return 0xffffffff;
+		if (y >= max_cell) 
+			return 0xffffffff;
 		return _bit_mix_32(_bit_separate_16(x), _bit_separate_16(y));
 	}
 
@@ -324,6 +292,23 @@ namespace pronet {
 	}
 
 	template<typename _Ty>
+	inline void Collision_4tree<_Ty>::assembley_tree()
+	{
+		size_t level_max_size = 1;
+		size_t array_pointer = 1;
+		//	リンクするオブジェクトの配列の位置
+		size_t link_array_pointer = 5;
+		//	再帰関数を使って、木を組み立てる
+		cells[0].make_cell(max_size[0], max_size[1], nullptr,
+			setup_tree_stage(1, level, &cells[0], array_pointer), setup_tree_stage(1, level, &cells[0], array_pointer),
+			setup_tree_stage(1, level, &cells[0], array_pointer), setup_tree_stage(1, level, &cells[0], array_pointer));
+		begin = &cells[0];
+	}
+
+	template<>
+	bool Collision_4tree<Structure2v<6, 6>*>::search_all_process(const Player& _ply, ColCell<Structure2v<6, 6>*>* const _ptr) const;
+
+	template<typename _Ty>
 	inline ColCell<_Ty>* Collision_4tree<_Ty>::setup_tree_stage(size_t _lv, size_t _lv_max, ColCell<_Ty>* _this, size_t& _mem_pos)
 	{
 		size_t now(_mem_pos);
@@ -331,7 +316,7 @@ namespace pronet {
 		if (++_lv < _lv_max) {
 			_mem_pos++;
 			//	子オブジェクトを持つ場合は、先に子オブジェクトを再帰的に作る
-			cells[now].make_cell(max_size[0] / (1 << _lv), max_size[1] / (1 << _lv), _this, 
+			cells[now].make_cell(max_size[0] / (1 << _lv), max_size[1] / (1 << _lv), _this,
 				setup_tree_stage(_lv, _lv_max, &cells[now], _mem_pos), setup_tree_stage(_lv, _lv_max, &cells[now], _mem_pos),
 				setup_tree_stage(_lv, _lv_max, &cells[now], _mem_pos), setup_tree_stage(_lv, _lv_max, &cells[now], _mem_pos));
 		}
@@ -344,4 +329,3 @@ namespace pronet {
 		return &cells[now];
 	}
 }
-

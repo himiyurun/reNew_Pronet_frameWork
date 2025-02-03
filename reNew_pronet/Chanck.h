@@ -73,7 +73,7 @@ namespace pronet {
 
 		void draw() const;
 
-		bool Intersect(const Collusion_Quad& _player_col, const float _pos[2]) const;
+		bool Intersect(const Player& _ply) const;
 
 	private:
 
@@ -99,7 +99,7 @@ namespace pronet {
 		structures = strs;
 		init_chanck_direction_object_size(info);
 		cells.init(4, -5.f, 5.f, 10.f, 10.f);
-		for (auto& a : strs) {
+		for (auto& a : structures) {
 			cells.rigist(a().get()->data);
 		}
 	}
@@ -119,17 +119,13 @@ namespace pronet {
 			updateGameObjectUniformParam(a->parameter());
 			a->draw(getFrameCount());
 		}
+		cells.debug_draw();
 	}
 
 	template<std::size_t VBOLV, std::size_t SHDLV>
-	inline bool Chanck_2D<VBOLV, SHDLV>::Intersect(const Collusion_Quad& _player_col, const float _pos[2]) const
+	inline bool Chanck_2D<VBOLV, SHDLV>::Intersect(const Player& _ply) const
 	{
-		for (const auto& a : structures) {
-			if (pnObjectCollision(_player_col, _pos, a->getColInfoQuad(), a->location())) {
-				return true;
-			}
-		}
-		return false;
+		return cells.intersect(_ply);
 	}
 
 	template<std::size_t VBOLV, std::size_t SHDLV>

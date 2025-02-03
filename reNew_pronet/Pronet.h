@@ -74,15 +74,9 @@ void PronetManager<VBOLV, SHDLV>::process()
 		player.param.position[0] += velocity;
 	}
 
-	if (chanck[0].Intersect(player.getColInfoQuad(), player.position())) {
-		/*
+	if (chanck[0].Intersect(player)) {
 		player.param.position[0] = last_pos[0];
 		player.param.position[1] = last_pos[1];
-		*/
-		player.param.intersect = true;
-	}
-	else {
-		player.param.intersect = false;
 	}
 
 	pronet::updateApplicationUniformParam(&param);

@@ -102,9 +102,6 @@
     <ClCompile Include="bit.cpp">
       <Filter>ソース ファイル\PnLib\util</Filter>
     </ClCompile>
-    <ClCompile Include="loader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Uniform.cpp">
       <Filter>ソース ファイル\GLI</Filter>
     </ClCompile>
@@ -122,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="pnMath.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision_4tree.cpp">
+      <Filter>ソース ファイル\PnLib\col</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

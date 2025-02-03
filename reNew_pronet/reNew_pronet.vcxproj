@@ -138,9 +138,9 @@
     <ClCompile Include="BoundaryTag.cpp" />
     <ClCompile Include="Chanck.cpp" />
     <ClCompile Include="collib.cpp" />
+    <ClCompile Include="Collision_4tree.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="glfw_Window.cpp" />
-    <ClCompile Include="loader.cpp" />
     <ClCompile Include="loadPronetMap2.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
