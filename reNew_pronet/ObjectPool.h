@@ -1,154 +1,118 @@
 #pragma once
 #include <iostream>
 #include <stdexcept>
-#include <vector>
 
+#include "bit_tree.h"
 #include "pnTlsf.h"
 
 namespace pronet {
 
 	template<class T>
-	class ObjectPool : public pnTlsf
-	{
-		std::vector<T, pnTlsfInsertSTLtype<T>> objpool;
-		std::vector<T*, pnTlsfInsertSTLpointer<T*>> objlist;
+	struct Pool_Object {
+		size_t index;
+		T* data;
 
-		uint32_t pointer;
-		uint32_t bufsize;
-		uint32_t usedSize;
+		Pool_Object(size_t index = 0, T* data = nullptr) : index(index), data(data) {}
 
-	public:
-
-		ObjectPool(uint32_t size = 0)
-			: objpool(0), objlist(0)
-			, pointer(0), bufsize(size), usedSize(0)
-		{
-			resize(size);
+		template<class T>
+		Pool_Object(Pool_Object&& o) noexcept
+			: index(o.index), data(o.data) {
+			o.index = 0;
+			o.data = nullptr;
 		}
 
-		~ObjectPool() {
+		T* operator->() {
+			return data;
 		}
 
-		T* pop() {
-			if (usedSize == bufsize) {
-				resize(bufsize * 2);
-			}
-
-			T* buf = nullptr;
-			for (int i = 0; i < bufsize; i++) {
-				if (objlist[pointer]) {
-					buf = objlist[pointer];
-					objlist[pointer] = nullptr;
-					usedSize++;
-					pointer++;
-					break;
-				}
-				pointer++;
-				if (pointer >= objlist.size()) {
-					pointer = 0;
-				}
-			}
-			return buf;
-		}
-
-		void push(T** ptr) {
-			if (!ptr) {
-				throw std::runtime_error("return pool obj is null");
-			}
-
-			for ( T* &a : objlist ) {
-				if (!a) {
-					a = *ptr;
-					*ptr = nullptr;
-					usedSize--;
-				}
-			}
-		}
-
-	private :
-
-		void resize(uint32_t size) {
-			objpool.resize(size);
-			objlist.resize(size);
-
-			static uint32_t pointer(0);
-			pointer = 0;
-			for (T*& list : objlist) {
-				objlist[pointer] = &objpool[pointer];
-			}
-			bufsize = size;
+		T* operator()() {
+			return data;
 		}
 	};
 
-	template<typename T>
-	class ValPool : public pnTlsf {
-		std::vector<T, pnTlsfInsertSTLtype<T>> valPool;
-		std::vector<bool, pnTlsfInsertSTLpointer<bool>> valList;
+	template<class T, std::size_t N>
+	class ObjectPool
+	{
+		std::vector<T, pnTlsfInsertSTLtype<T>> objpool;
+		pronet::bit_tree<N> bit_map;
 
-		uint32_t pointer;
-		uint32_t bufsize;
-		uint32_t usedSize;
+		size_t buf_size;
 
 	public:
 
-		ValPool(uint32_t size = 0)
-			: valPool(0), valList(0)
-			, pointer(0), bufsize(size), usedSize(0)
-		{
-			resize(size);
-		}
+		ObjectPool(uint32_t size = 32);
 
-		~ValPool() {
-		}
+		~ObjectPool();
 
-		T* pop() {
-			if (usedSize == bufsize) {
-				resize(bufsize * 2);
-			}
+		pronet::Pool_Object<T> pop();
 
-			T* buf = nullptr;
-			for (int i = 0; i < bufsize; i++) {
-				if (valList[pointer]) {
-					buf = valList[pointer];
-					valList[pointer] = nullptr;
-					usedSize++;
-					pointer++;
-					break;
-				}
-				pointer++;
-				if (pointer >= valList.size()) {
-					pointer = 0;
-				}
-			}
-			return buf;
-		}
+		void push(Pool_Object<T>* ptr);
 
-		void push(T** ptr) {
-			if (!ptr) {
-				throw std::runtime_error("return pool obj is null");
-			}
-
-			for (T*& a : valList) {
-				if (!a) {
-					a = *ptr;
-					*ptr = nullptr;
-					usedSize--;
-				}
-			}
-		}
+		bool get_bit_to_pool_status() const;
+		[[nodiscard]] size_t size() const { return buf_size; }
 
 	private:
 
-		void resize(uint32_t size) {
-			valPool.resize(size);
-			valList.resize(size);
-
-			static uint32_t pointer(0);
-			pointer = 0;
-			for (T*& list : valList) {
-				valList[pointer] = &valPool[pointer];
-			}
-			bufsize = size;
-		}
+		void resize(uint32_t size);
 	};
+}
+
+
+template<class T, std::size_t N>
+inline pronet::ObjectPool<T, N>::ObjectPool(uint32_t size)
+	: objpool(0)
+	, bit_map(false, 0), buf_size(size)
+{
+	resize(size);
+}
+
+template<class T, std::size_t N>
+pronet::ObjectPool<T, N>::~ObjectPool()
+{
+}
+
+template<class T, std::size_t N>
+pronet::Pool_Object<T> pronet::ObjectPool<T, N>::pop()
+{
+	Pool_Object<T> buf;
+	if (bit_map.rigist(&buf.index)) {
+		buf.data = &objpool[buf.index];
+	}
+	else {
+		resize(buf_size + (1 << N));
+		if (!bit_map.rigist(&buf.index)) {
+			throw std::runtime_error("resize process might be failed");
+		}
+		buf.data = &objpool[buf.index];
+	}
+	return buf;
+}
+
+template<class T, std::size_t N>
+void pronet::ObjectPool<T, N>::push(pronet::Pool_Object<T>* ptr)
+{
+	if (!ptr) {
+		throw std::runtime_error("return pool obj is null");
+	}
+
+	ptr->data->reset();
+	bit_map.unrigist(ptr->index);
+	ptr->index = 0;
+	ptr->data = 0;
+}
+
+template<class T, std::size_t N>
+bool pronet::ObjectPool<T, N>::get_bit_to_pool_status() const
+{
+	std::cout << "bit map" << std::endl;
+	bit_map.printAllBit();
+	return true;
+}
+
+template<class T, std::size_t N>
+void pronet::ObjectPool<T, N>::resize(uint32_t size)
+{
+	objpool.resize(size);
+	bit_map.resize(size);
+	buf_size = size;
 }

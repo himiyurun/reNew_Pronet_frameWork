@@ -1,5 +1,4 @@
 #pragma once
-#include <functional>
 #include <glad/glad.h>
 
 #include "readtxt.h"
@@ -10,32 +9,29 @@ struct ShaderMakeInfo {
 	std::string fsrc;
 };
 
-enum ShaderBlock {
-	PNGL_WINDOW_PARAM,
-	SHADER_BLOCK_SIZE,
-	SHADER_BLOCK_INFO_END
-};
-
 class Shader
 {
 	GLuint program;
 
-	uint8_t Block[SHADER_BLOCK_SIZE];
+	size_t Block[SHADER_BLOCK_SIZE];
 
 public:
 	Shader();
 
 	~Shader();
 
-	GLboolean Init(const char* vsrc, const char* fsrc);
+	GLboolean init(const char* vsrc, const char* fsrc);
 
-	void Reset();
+	void reset();
 
 	GLboolean ProgramInfo(GLuint program) const;
 
 	GLboolean ShaderInfo(GLuint shader, const char* name) const;
 
-	void use() const { glUseProgram(program); }
+	void use() const { 
+		glUseProgram(program);
+		pronet::bindUniformObject(Block);
+	}
 
 	[[nodiscard]]GLuint getProgram() const { return program; }
 };

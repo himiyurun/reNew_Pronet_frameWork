@@ -2,6 +2,7 @@
 
 Shader::Shader()
 	: program(0)
+	, Block()
 {
 }
 
@@ -9,7 +10,7 @@ Shader::~Shader()
 {
 }
 
-GLboolean Shader::Init(const char* vsrc, const char* fsrc)
+GLboolean Shader::init(const char* vsrc, const char* fsrc)
 {
 	program = glCreateProgram();
 	if (vsrc) {
@@ -36,7 +37,6 @@ GLboolean Shader::Init(const char* vsrc, const char* fsrc)
 		}
 		glDeleteShader(fobj);
 	}
-
 	glBindAttribLocation(program, 0, "position");
 	glBindFragDataLocation(program, 0, "fragment");
 
@@ -47,11 +47,12 @@ GLboolean Shader::Init(const char* vsrc, const char* fsrc)
 		program = 0;
 		return false;
 	}
+	pronet::getBlockBindInfo(program, Block);
 
 	return true;
 }
 
-void Shader::Reset()
+void Shader::reset()
 {
 	if (program != 0) {
 		glDeleteProgram(program);

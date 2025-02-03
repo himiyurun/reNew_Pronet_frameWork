@@ -1,56 +1,37 @@
-#include <memory>
-#include <stdlib.h>
-#include <crtdbg.h>
-
 #define PRONET_2D
+#define _POOL_DEBUG
+#define STRUCTURE_POOL_BIT_MAP_LEVEL	(6)
+#define CHANCK_LOAD_SIZE	(1)
 
 #include "Pronet.h"
-#include "readDocument.h"
 
-void libInit() {
+void libInit() 
+{
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	if (!glfwInit()) {
 		std::cerr << "Error : Can't Initlize GLFW" << std::endl;
 		exit(1);
 	}
 }
 
-constexpr glm::vec2 rectangleVertex[] = {
-	{ -0.5f,  0.5f },
-	{ -0.5f, -0.5f },
-	{  0.5f, -0.5f },
-	{  0.5f,  0.5f }
-};
-
-constexpr GLuint rectangleIndex[] = {
-	0, 1, 2, 0, 3, 2
-};
-
 int main() {
-
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
 	libInit();
-
+	
 	glfw_windowCreateInfo winInfo = {};
 	winInfo.width = 640;
 	winInfo.height = 480;
-	winInfo.title = "syu-thingumoruka-";
+	winInfo.title = "test_game";
 	winInfo.monitor = nullptr;
+
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	PronetFrameWorkMain game(&winInfo, 2);
-
-	ObjectInfo2v objInfo{};
-
-	int size;
-	pronet::PronetReadLoadFileList listfile("sample.fi", &size);
-	pronet::PronetReadLoadFileList::PronetLoadChanckInfo mainInfo(listfile.getLoadFile(0));
+	PronetManager<6, 6> game(&winInfo, "LoadFileList.fi");
 
 	try {
-		game.InitShader(mainInfo.shaders[0][0].vsrc.c_str(), mainInfo.shaders[0][0].fsrc.c_str());
-		game.InitObj(&mainInfo.objs[0][0], GL_TRUE);
+		game.load();
 		game.run();
 	}
 	catch (const std::exception& e) {

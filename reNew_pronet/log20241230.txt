@@ -1,0 +1,209 @@
+0:47 でビルドが開始されました...
+1>------ ビルド開始: プロジェクト: reNew_pronet, 構成: Release x64 ------
+1>main.cpp
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(20,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(45,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(67,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(89,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(105,19): warning C4267: '=': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(116,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(131,19): warning C4267: '=': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(64,23): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>    C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(64,23):
+1>    テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(31,22):
+1>        コンパイル対象の クラス テンプレート インスタンス化 'PronetManager<6,6>' のリファレンスを確認してください
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(71,2):
+1>        クラス テンプレート メンバー関数 'PronetManager<6,6>::PronetManager(glfw_windowCreateInfo *,const char *)' のコンパイル中
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(31,26):
+1>            'main' の 'PronetManager<6,6>::PronetManager' への最初の参照を参照してください
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(62,2):
+1>        クラス テンプレート メンバー関数 'pronet::ObjectPool_Array<glm::vec2>::ObjectPool_Array(size_t)' のコンパイル中
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(82,19): warning C4267: '引数': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>    C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(82,19):
+1>    テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(63,2):
+1>        クラス テンプレート メンバー関数 'pronet::ObjectPool<Object,6>::ObjectPool(uint32_t)' のコンパイル中
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(76,1):
+1>        クラス テンプレート メンバー関数 'pronet::Pool_Object<T> pronet::ObjectPool<T,6>::pop(void)' のコンパイル中
+1>        with
+1>        [
+1>            T=Object
+1>        ]
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(85,32):
+1>            'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' の 'pronet::ObjectPool<Object,6>::pop' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(58,53):
+1>            'PronetManager<6,6>::InitObj' の 'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(92,50):
+1>            'PronetManager<6,6>::load' の 'PronetManager<6,6>::InitObj' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(36,12):
+1>            'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(100,14): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>    C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(100,14):
+1>    テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(76,1):
+1>        クラス テンプレート メンバー関数 'pronet::Pool_Object<T> pronet::ObjectPool<T,6>::pop(void)' のコンパイル中
+1>        with
+1>        [
+1>            T=Object
+1>        ]
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(85,32):
+1>            'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' の 'pronet::ObjectPool<Object,6>::pop' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(58,53):
+1>            'PronetManager<6,6>::InitObj' の 'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(92,50):
+1>            'PronetManager<6,6>::load' の 'PronetManager<6,6>::InitObj' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(36,12):
+1>            'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(80,2):
+1>        クラス テンプレート メンバー関数 'void pronet::bit_tree<6>::resize(size_t)' のコンパイル中
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(116,16):
+1>            'pronet::ObjectPool<Object,6>::resize' の 'pronet::bit_tree<6>::resize' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(66,8):
+1>            'pronet::ObjectPool<Object,6>::ObjectPool' の 'pronet::ObjectPool<Object,6>::resize' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(73,11):
+1>            'PronetManager<6,6>::PronetManager' の 'pronet::ObjectPool<Object,6>::ObjectPool' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(31,26):
+1>            'main' の 'PronetManager<6,6>::PronetManager' への最初の参照を参照してください
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(270,14): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>    C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(270,14):
+1>    テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(80,2):
+1>        クラス テンプレート メンバー関数 'void pronet::bit_tree<6>::resize(size_t)' のコンパイル中
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(116,16):
+1>            'pronet::ObjectPool<Object,6>::resize' の 'pronet::bit_tree<6>::resize' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(66,8):
+1>            'pronet::ObjectPool<Object,6>::ObjectPool' の 'pronet::ObjectPool<Object,6>::resize' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(73,11):
+1>            'PronetManager<6,6>::PronetManager' の 'pronet::ObjectPool<Object,6>::ObjectPool' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(31,26):
+1>            'main' の 'PronetManager<6,6>::PronetManager' への最初の参照を参照してください
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(266,2):
+1>        クラス テンプレート メンバー関数 'void pronet::bit_tree<6>::unlock_bit_map(uint8_t,size_t)' のコンパイル中
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(45,68): warning C4267: '引数': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>    C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(45,68):
+1>    テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(18,36):
+1>        コンパイル対象の クラス テンプレート インスタンス化 'pronet::ObjectPool<Shader,6>' のリファレンスを確認してください
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(36,42):
+1>        コンパイル対象の クラス テンプレート インスタンス化 'std::vector<T,pnTlsfInsertSTLtype<T>>' のリファレンスを確認してください
+1>        with
+1>        [
+1>            T=Shader
+1>        ]
+1>        C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\vector(435,26):
+1>        コンパイル対象の エイリアス テンプレート インスタンス化 'std::_Rebind_alloc_t<_Alloc,_Ty>' のリファレンスを確認してください
+1>        with
+1>        [
+1>            _Alloc=pnTlsfInsertSTLtype<Shader>,
+1>            _Ty=Shader
+1>        ]
+1>        C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xmemory(746,69):
+1>        コンパイル対象の クラス テンプレート インスタンス化 'std::allocator_traits<_Alloc>' のリファレンスを確認してください
+1>        with
+1>        [
+1>            _Alloc=pnTlsfInsertSTLtype<Shader>
+1>        ]
+1>        C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xmemory(723,27):
+1>        コンパイル対象の クラス テンプレート インスタンス化 'std::_Normal_allocator_traits<_Alloc>' のリファレンスを確認してください
+1>        with
+1>        [
+1>            _Alloc=pnTlsfInsertSTLtype<Shader>
+1>        ]
+1>        C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xmemory(529,45):
+1>        コンパイル対象の クラス テンプレート インスタンス化 'pnTlsfInsertSTLtype<T>' のリファレンスを確認してください
+1>        with
+1>        [
+1>            T=Shader
+1>        ]
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(112,26):
+1>        クラス テンプレート メンバー関数 'Shader *pnTlsfInsertSTLtype<T>::allocate(pnTlsfInsertSTLtype<T>::size_type)' のコンパイル中
+1>        with
+1>        [
+1>            T=Shader
+1>        ]
+1>            C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\xmemory(2182,9):
+1>            'std::_Allocate_at_least_helper' の 'pnTlsfInsertSTLtype<T>::allocate' への最初の参照を参照してください
+1>        with
+1>        [
+1>            T=Shader
+1>        ]
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(114,10):
+1>        コンパイル対象の関数 テンプレート インスタンス化 'T *pnTlsf::new_type<Shader>(size_t)' のリファレンスを確認してください
+1>        with
+1>        [
+1>            T=Shader
+1>        ]
+1>C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(248,19): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+1>(ソース ファイル 'main.cpp' をコンパイルしています)
+1>    C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(248,19):
+1>    テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(21,28):
+1>        コンパイル対象の クラス テンプレート インスタンス化 'Structure2v<6,6>' のリファレンスを確認してください
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Structure.h(35,47):
+1>        コンパイル対象の クラス テンプレート インスタンス化 'pronet::poolObject_shared_ptr<Object,6>' のリファレンスを確認してください
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(82,3):
+1>        クラス テンプレート メンバー関数 'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr(pronet::ObjectPool<Object,6> *)' のコンパイル中
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(58,53):
+1>            'PronetManager<6,6>::InitObj' の 'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(92,50):
+1>            'PronetManager<6,6>::load' の 'PronetManager<6,6>::InitObj' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(36,12):
+1>            'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(64,10):
+1>        クラス 'pronet::poolObject_shared_ptr<Object,6>::Deleter' のコンパイル中
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(74,9):
+1>        クラス テンプレート メンバー関数 'void pronet::poolObject_shared_ptr<Object,6>::Deleter::operator ()(pronet::Pool_Object<T> *)' のコンパイル中
+1>        with
+1>        [
+1>            T=Object
+1>        ]
+1>            C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.42.34433\include\memory(1222,29):
+1>            'std::_Ref_count_resource<_Ux *,pronet::poolObject_shared_ptr<Object,6>::Deleter>::_Destroy' の 'pronet::poolObject_shared_ptr<Object,6>::Deleter::operator ()' への最初の参照を参照してください
+1>        with
+1>        [
+1>            _Ux=pronet::Pool_Object<Object>
+1>        ]
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(93,1):
+1>        クラス テンプレート メンバー関数 'void pronet::ObjectPool<Object,6>::push(pronet::Pool_Object<T> *)' のコンパイル中
+1>        with
+1>        [
+1>            T=Object
+1>        ]
+1>        C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(246,2):
+1>        クラス テンプレート メンバー関数 'bool pronet::bit_tree<6>::serch_block_index(bool,size_t,size_t,size_t *) const' のコンパイル中
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(235,4):
+1>            'pronet::bit_tree<6>::search_free_block' の 'pronet::bit_tree<6>::serch_block_index' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(113,3):
+1>            'pronet::bit_tree<6>::rigist' の 'pronet::bit_tree<6>::search_free_block' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(78,2):
+1>            'pronet::ObjectPool<Object,6>::pop' の 'pronet::bit_tree<6>::rigist' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(85,32):
+1>            'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' の 'pronet::ObjectPool<Object,6>::pop' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(58,53):
+1>            'PronetManager<6,6>::InitObj' の 'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(92,50):
+1>            'PronetManager<6,6>::load' の 'PronetManager<6,6>::InitObj' への最初の参照を参照してください
+1>            C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(36,12):
+1>            'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+1>コード生成しています。
+1>0 of 1309 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+1>  0 functions were new in current compilation
+1>  0 functions had inline decision re-evaluated but remain unchanged
+1>コード生成が終了しました。
+1>reNew_pronet.vcxproj -> C:\Users\rayrk\source\repos\himiyurun\reNew_Pronet_frameWork\x64\Release\reNew_pronet.exe
+1>プロジェクト "reNew_pronet.vcxproj" のビルドが終了しました。
+========== ビルド: 成功 1、失敗 0、最新の状態 0、スキップ 0 ==========
+=========== ビルド は 0:47 で完了し、01.470 秒 掛かりました ==========

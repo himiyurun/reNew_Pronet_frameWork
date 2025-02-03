@@ -100,7 +100,7 @@ namespace pronet {
 					std::cout << "0";
 				}
 			}
-			std::cout << std::endl << std::endl;
+			std::cout << std::endl;
 		}
 
 		//	パリティションビットの中身を描画

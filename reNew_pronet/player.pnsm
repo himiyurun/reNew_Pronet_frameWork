@@ -1,0 +1,8 @@
+#Pronet Shader Make
+
+Shaders 1
+
+unit {
+	Vertex player.vert
+	Fragment player.frag
+}

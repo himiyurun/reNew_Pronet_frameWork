@@ -8,6 +8,11 @@ layout(std140) uniform window {
 	float scale;
 }win;
 
+layout(std140) uniform structure {
+	vec2 location;
+	float rotate;
+}str;
+
 uniform vec2 location;
 
 vec2 scaling() {
@@ -16,5 +21,5 @@ vec2 scaling() {
 
 void main()
 {
-	gl_Position = position * vec4(scaling(), 1.0, 1.0) + vec4(win.nowPos,vec2(0.0));
+	gl_Position = (position + vec4(str.location,vec2(0.0))) * vec4(scaling(), 1.0, 1.0);
 }

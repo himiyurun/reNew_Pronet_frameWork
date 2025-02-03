@@ -3,7 +3,7 @@
 
 #include "TLSFmemory.h"
 
-#define POOL_SIZE_BIT	(11)
+#define POOL_SIZE_BIT	(20)
 #define POOL_INDEX_BIT	(4)
 
 static pronet::TLSFmemory mainMemory(POOL_SIZE_BIT, POOL_INDEX_BIT);
@@ -11,34 +11,6 @@ static pronet::TLSFmemory mainMemory(POOL_SIZE_BIT, POOL_INDEX_BIT);
 class pnTlsf {
 
 public:
-	/*
-	void* operator new(size_t size) {
-		void* ptr = mainMemory.allocate(size);
-		std::cout << "operator new" << std::endl;
-		if (!ptr)
-			throw std::bad_alloc();
-		return ptr;
-	}
-
-	void* operator new[](size_t size) {
-		void* ptr = mainMemory.allocate(size);
-		std::cout << "operator new[]" << std::endl;
-		if (!ptr)
-			throw std::bad_alloc();
-		return ptr;
-	}
-
-	void operator delete(void* p) {
-		std::cout << "operator delete" << std::endl;
-		mainMemory.deallocate(p);
-	}
-
-	void operator delete[](void* p) {
-		std::cout << "operator delete[]" << std::endl;
-		mainMemory.deallocate(p);
-	}
-	*/
-
 	template<class T>
 	inline T* new_type(size_t size)
 	{
@@ -110,12 +82,10 @@ public :
 	pnTlsfInsertSTLtype(const pnTlsfInsertSTLtype<U>&) {}
 
 	[[nodiscard]] value_ptr allocate(size_type n) {
-		std::cout << "Class allocate : " << n << std::endl;
 		return new_type<value_type>(n);
 	}
 
 	void deallocate(value_ptr p, size_type n) {
-		std::cout << "Class deallocate" << std::endl;
 		delete_type<value_type>(p);
 	}
 };
@@ -134,12 +104,10 @@ public:
 	pnTlsfInsertSTLpointer(const pnTlsfInsertSTLpointer<U>&) {}
 
 	[[nodiscard]] value_ptr allocate(size_type n) {
-		std::cout << "Class allocate : " << n << std::endl;
 		return new_pointer<value_type>(n);
 	}
 
 	void deallocate(value_ptr p, size_type n) {
-		std::cout << "Class deallocate" << std::endl;
 		delete_pointer<value_type>(p);
 	}
 };
