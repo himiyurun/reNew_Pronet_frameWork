@@ -1,7 +1,6 @@
 #pragma once
 #include "pronet_memory.h"
-#include "Structure.h"
-#include "Shader.h"
+#include "Collision_4tree.h"
 
 namespace pronet {
 	/*
@@ -59,6 +58,7 @@ namespace pronet {
 	{
 		pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>> structures;
 		std::array<size_t, PRONET_CHANCK_DIRECTION_SIZE> obj_size;
+		Collision_4tree<Structure2v<VBOLV, SHDLV>*> cells;
 
 		using str_sp = pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>>;
 
@@ -98,6 +98,10 @@ namespace pronet {
 	{
 		structures = strs;
 		init_chanck_direction_object_size(info);
+		cells.init(4, -5.f, 5.f, 10.f, 10.f);
+		for (auto& a : strs) {
+			cells.rigist(a().get()->data);
+		}
 	}
 
 	template<std::size_t VBOLV, std::size_t SHDLV>

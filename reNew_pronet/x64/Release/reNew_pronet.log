@@ -1,0 +1,726 @@
+﻿  Chanck.cpp
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(20,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'Chanck.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(45,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'Chanck.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(67,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'Chanck.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(89,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'Chanck.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(105,19): warning C4267: '=': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'Chanck.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(116,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'Chanck.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(131,19): warning C4267: '=': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'Chanck.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(183,18): warning C4267: '初期化中': 'size_t' から 'uint8_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'Chanck.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(296,13): warning C4267: '初期化中': 'size_t' から 'uint16_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'Chanck.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(296,13):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(174,50):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::Collision_4tree<Structure2v<6,6> *>' のリファレンスを確認してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(294,2):
+  	クラス テンプレート メンバー関数 'uint32_t pronet::Collision_4tree<Structure2v<6,6> *>::get_morton_2D(float,float) const' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(178,25):
+  		'pronet::Collision_4tree<Structure2v<6,6> *>::rigist' の 'pronet::Collision_4tree<Structure2v<6,6> *>::get_morton_2D' への最初の参照を参照してください
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(59,68): warning C4267: '引数': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'Chanck.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(59,68):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(184,10):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::ColCell<_Ty>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\colCell.h(13,49):
+  	コンパイル対象の クラス テンプレート インスタンス化 'std::vector<_Ty,pnTlsfInsertSTLpointer<_Ty>>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(442,26):
+  	コンパイル対象の エイリアス テンプレート インスタンス化 'std::_Rebind_alloc_t<_Alloc,_Ty>' のリファレンスを確認してください
+          with
+          [
+              _Alloc=pnTlsfInsertSTLpointer<Structure2v<6,6> *>,
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(442,50):
+  	コンパイル対象の クラス テンプレート インスタンス化 'std::allocator_traits<_Alloc>' のリファレンスを確認してください
+          with
+          [
+              _Alloc=pnTlsfInsertSTLpointer<Structure2v<6,6> *>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(746,27):
+  	コンパイル対象の クラス テンプレート インスタンス化 'std::_Normal_allocator_traits<_Alloc>' のリファレンスを確認してください
+          with
+          [
+              _Alloc=pnTlsfInsertSTLpointer<Structure2v<6,6> *>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(552,1):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pnTlsfInsertSTLpointer<_Ty>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(136,26):
+  	クラス テンプレート メンバー関数 'Structure2v<6,6> **pnTlsfInsertSTLpointer<_Ty>::allocate(pnTlsfInsertSTLpointer<_Ty>::size_type)' のコンパイル中
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  		C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(2207,9):
+  		'std::_Allocate_at_least_helper' の 'pnTlsfInsertSTLpointer<_Ty>::allocate' への最初の参照を参照してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(138,10):
+  	コンパイル対象の関数 テンプレート インスタンス化 'T **pnTlsf::new_pointer<Structure2v<6,6>*>(size_t)' のリファレンスを確認してください
+          with
+          [
+              T=Structure2v<6,6> *
+          ]
+  
+  loader.cpp
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(20,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'loader.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(45,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'loader.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(67,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'loader.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(89,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'loader.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(105,19): warning C4267: '=': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'loader.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(116,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'loader.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(131,19): warning C4267: '=': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'loader.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(183,18): warning C4267: '初期化中': 'size_t' から 'uint8_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'loader.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(296,13): warning C4267: '初期化中': 'size_t' から 'uint16_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'loader.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(296,13):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(174,50):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::Collision_4tree<Structure2v<6,6> *>' のリファレンスを確認してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(294,2):
+  	クラス テンプレート メンバー関数 'uint32_t pronet::Collision_4tree<Structure2v<6,6> *>::get_morton_2D(float,float) const' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(178,25):
+  		'pronet::Collision_4tree<Structure2v<6,6> *>::rigist' の 'pronet::Collision_4tree<Structure2v<6,6> *>::get_morton_2D' への最初の参照を参照してください
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(59,68): warning C4267: '引数': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'loader.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(59,68):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(184,10):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::ColCell<_Ty>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\colCell.h(13,49):
+  	コンパイル対象の クラス テンプレート インスタンス化 'std::vector<_Ty,pnTlsfInsertSTLpointer<_Ty>>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(442,26):
+  	コンパイル対象の エイリアス テンプレート インスタンス化 'std::_Rebind_alloc_t<_Alloc,_Ty>' のリファレンスを確認してください
+          with
+          [
+              _Alloc=pnTlsfInsertSTLpointer<Structure2v<6,6> *>,
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(442,50):
+  	コンパイル対象の クラス テンプレート インスタンス化 'std::allocator_traits<_Alloc>' のリファレンスを確認してください
+          with
+          [
+              _Alloc=pnTlsfInsertSTLpointer<Structure2v<6,6> *>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(746,27):
+  	コンパイル対象の クラス テンプレート インスタンス化 'std::_Normal_allocator_traits<_Alloc>' のリファレンスを確認してください
+          with
+          [
+              _Alloc=pnTlsfInsertSTLpointer<Structure2v<6,6> *>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(552,1):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pnTlsfInsertSTLpointer<_Ty>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(136,26):
+  	クラス テンプレート メンバー関数 'Structure2v<6,6> **pnTlsfInsertSTLpointer<_Ty>::allocate(pnTlsfInsertSTLpointer<_Ty>::size_type)' のコンパイル中
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  		C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(2207,9):
+  		'std::_Allocate_at_least_helper' の 'pnTlsfInsertSTLpointer<_Ty>::allocate' への最初の参照を参照してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(138,10):
+  	コンパイル対象の関数 テンプレート インスタンス化 'T **pnTlsf::new_pointer<Structure2v<6,6>*>(size_t)' のリファレンスを確認してください
+          with
+          [
+              T=Structure2v<6,6> *
+          ]
+  
+  main.cpp
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(20,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(45,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(67,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(89,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(105,19): warning C4267: '=': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(116,20): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\BitMap64.h(131,19): warning C4267: '=': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(183,18): warning C4267: '初期化中': 'size_t' から 'uint8_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(296,13): warning C4267: '初期化中': 'size_t' から 'uint16_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(296,13):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(174,50):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::Collision_4tree<Structure2v<6,6> *>' のリファレンスを確認してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(294,2):
+  	クラス テンプレート メンバー関数 'uint32_t pronet::Collision_4tree<Structure2v<6,6> *>::get_morton_2D(float,float) const' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(178,25):
+  		'pronet::Collision_4tree<Structure2v<6,6> *>::rigist' の 'pronet::Collision_4tree<Structure2v<6,6> *>::get_morton_2D' への最初の参照を参照してください
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(60,20): warning C4267: '引数': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(60,20):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(31,22):
+  	コンパイル対象の クラス テンプレート インスタンス化 'PronetManager<6,6>' のリファレンスを確認してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(33,2):
+  	クラス テンプレート メンバー関数 'PronetManager<6,6>::PronetManager(glfw_windowCreateInfo *,const char *)' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(31,26):
+  		'main' の 'PronetManager<6,6>::PronetManager' への最初の参照を参照してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(57,2):
+  	クラス テンプレート メンバー関数 'void pronet::loader<6,6>::load_chanck(size_t,uint8_t,pronet::Chanck_2D<6,6> &)' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(51,27):
+  		'PronetManager<6,6>::load' の 'pronet::loader<6,6>::load_chanck' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(34,12):
+  		'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(76,40): warning C4267: '引数': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(130,26): warning C4267: '引数': 'size_t' から 'uint8_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(130,26):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Object.h(17,42):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::poolArray_unique_ptr<glm::vec2>' のリファレンスを確認してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(88,43):
+  	コンパイル対象の クラス テンプレート インスタンス化 'std::unique_ptr<pronet::PoolArray<T>,pronet::poolArray_unique_ptr<T>::_Deleter>' のリファレンスを確認してください
+          with
+          [
+              T=glm::vec2
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(3205,66):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::poolArray_unique_ptr<glm::vec2>::_Deleter' のリファレンスを確認してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(82,9):
+  	クラス テンプレート メンバー関数 'void pronet::poolArray_unique_ptr<glm::vec2>::_Deleter::operator ()(pronet::PoolArray<T> *)' のコンパイル中
+          with
+          [
+              T=glm::vec2
+          ]
+  		C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(3315,33):
+  		'std::unique_ptr<pronet::PoolArray<T>,pronet::poolArray_unique_ptr<T>::_Deleter>::reset' の 'pronet::poolArray_unique_ptr<glm::vec2>::_Deleter::operator ()' への最初の参照を参照してください
+          with
+          [
+              T=glm::vec2
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(107,26):
+  		'pronet::poolArray_unique_ptr<glm::vec2>::reset' の 'std::unique_ptr<pronet::PoolArray<T>,pronet::poolArray_unique_ptr<T>::_Deleter>::reset' への最初の参照を参照してください
+          with
+          [
+              T=glm::vec2
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Object.h(26,14):
+  		'ObjectInfo2v::reset' の 'pronet::poolArray_unique_ptr<glm::vec2>::reset' への最初の参照を参照してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(83,5):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::ObjectPool_Array<T>' のリファレンスを確認してください
+          with
+          [
+              T=glm::vec2
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(87,1):
+  	クラス テンプレート メンバー関数 'void pronet::ObjectPool_Array<T>::back(pronet::PoolArray<T> *)' のコンパイル中
+          with
+          [
+              T=glm::vec2
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(83,16):
+  		'pronet::poolArray_unique_ptr<glm::vec2>::_Deleter::operator ()' の 'pronet::ObjectPool_Array<T>::back' への最初の参照を参照してください
+          with
+          [
+              T=glm::vec2
+          ]
+  		C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(3315,33):
+  		'std::unique_ptr<pronet::PoolArray<T>,pronet::poolArray_unique_ptr<T>::_Deleter>::reset' の 'pronet::poolArray_unique_ptr<glm::vec2>::_Deleter::operator ()' への最初の参照を参照してください
+          with
+          [
+              T=glm::vec2
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(107,26):
+  		'pronet::poolArray_unique_ptr<glm::vec2>::reset' の 'std::unique_ptr<pronet::PoolArray<T>,pronet::poolArray_unique_ptr<T>::_Deleter>::reset' への最初の参照を参照してください
+          with
+          [
+              T=glm::vec2
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Object.h(26,14):
+  		'ObjectInfo2v::reset' の 'pronet::poolArray_unique_ptr<glm::vec2>::reset' への最初の参照を参照してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(78,1):
+  	クラス テンプレート メンバー関数 'pronet::PoolArray<T> pronet::ObjectPool_Array<T>::get(size_t)' のコンパイル中
+          with
+          [
+              T=glm::vec2
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(93,8):
+  		'pronet::poolArray_unique_ptr<glm::vec2>::poolArray_unique_ptr' の 'pronet::ObjectPool_Array<T>::get' への最初の参照を参照してください
+          with
+          [
+              T=glm::vec2
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Object.h(31,1):
+  		'ObjectInfo2v::ObjectInfo2v' の 'pronet::poolArray_unique_ptr<glm::vec2>::poolArray_unique_ptr' への最初の参照を参照してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(127,1):
+  	クラス テンプレート メンバー関数 'T *pronet::ObjectPool_Array<T>::search_pool_block(size_t,size_t *)' のコンパイル中
+          with
+          [
+              T=glm::vec2
+          ]
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(45,68): warning C4267: '引数': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(45,68):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(57,2):
+  	クラス テンプレート メンバー関数 'void pronet::loader<6,6>::load_chanck(size_t,uint8_t,pronet::Chanck_2D<6,6> &)' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(51,27):
+  		'PronetManager<6,6>::load' の 'pronet::loader<6,6>::load_chanck' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(34,12):
+  		'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(63,59):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Shader,6>>' のリファレンスを確認してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(26,3):
+  	クラス テンプレート メンバー関数 'pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Shader,6>>::pnTlsf_unique_ptr(size_t)' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(63,65):
+  		'pronet::loader<6,6>::load_chanck' の 'pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<Shader,6>>::pnTlsf_unique_ptr' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(51,27):
+  		'PronetManager<6,6>::load' の 'pronet::loader<6,6>::load_chanck' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(34,12):
+  		'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(27,14):
+  	コンパイル対象の関数 テンプレート インスタンス化 'T *pnTlsf::new_type<T>(size_t)' のリファレンスを確認してください
+          with
+          [
+              T=pronet::poolObject_shared_ptr<Shader,6>
+          ]
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(152,10): warning C4267: 'return': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(152,10):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(127,1):
+  	クラス テンプレート メンバー関数 'T *pronet::ObjectPool_Array<T>::search_pool_block(size_t,size_t *)' のコンパイル中
+          with
+          [
+              T=glm::vec2
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(142,1):
+  	クラス テンプレート メンバー関数 'uint32_t pronet::ObjectPool_Array<T>::search_bit_area(uint8_t)' のコンパイル中
+          with
+          [
+              T=glm::vec2
+          ]
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(157,11): warning C4267: 'return': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(167,11): warning C4267: 'return': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPoolArray.h(172,12): warning C4267: 'return': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(113,16): warning C4334: '<<': 32 ビット シフトの結果が暗黙的に 64 ビットに変換されました (64 ビット シフトに意図的に変換しようとしましたか?)
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(113,16):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(41,1):
+  	クラス テンプレート メンバー関数 'PronetManager<6,6>::~PronetManager(void)' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(31,26):
+  		'main' の 'PronetManager<6,6>::~PronetManager' への最初の参照を参照してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Chanck.h(87,3):
+  	クラス テンプレート メンバー関数 'pronet::Chanck_2D<6,6>::Chanck_2D(void)' のコンパイル中
+  		C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\array(578,1):
+  		'std::array<pronet::Chanck_2D<6,6>,1>::array' の 'pronet::Chanck_2D<6,6>::Chanck_2D' への最初の参照を参照してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(86,3):
+  	クラス テンプレート メンバー関数 'pronet::Collision_4tree<Structure2v<6,6> *>::Collision_4tree(size_t,float,float,float,float)' のコンパイル中
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(102,2):
+  	クラス テンプレート メンバー関数 'void pronet::Collision_4tree<Structure2v<6,6> *>::init(size_t,float,float,float,float)' のコンパイル中
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(130,14): warning C4334: '<<': 32 ビット シフトの結果が暗黙的に 64 ビットに変換されました (64 ビット シフトに意図的に変換しようとしましたか?)
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(131,14): warning C4334: '<<': 32 ビット シフトの結果が暗黙的に 64 ビットに変換されました (64 ビット シフトに意図的に変換しようとしましたか?)
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(132,30): warning C4334: '<<': 32 ビット シフトの結果が暗黙的に 64 ビットに変換されました (64 ビット シフトに意図的に変換しようとしましたか?)
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(133,53): warning C4267: '=': 'size_t' から '_Ty' に変換しました。データが失われているかもしれません。
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(133,53): warning C4267:         with
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(133,53): warning C4267:         [
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(133,53): warning C4267:             _Ty=GLuint
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(133,53): warning C4267:         ]
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(134,58): warning C4267: '=': 'size_t' から '_Ty' に変換しました。データが失われているかもしれません。
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(134,58): warning C4267:         with
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(134,58): warning C4267:         [
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(134,58): warning C4267:             _Ty=GLuint
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(134,58): warning C4267:         ]
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(136,58): warning C4267: '=': 'size_t' から '_Ty' に変換しました。データが失われているかもしれません。
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(136,58): warning C4267:         with
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(136,58): warning C4267:         [
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(136,58): warning C4267:             _Ty=GLuint
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(136,58): warning C4267:         ]
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(137,62): warning C4267: '=': 'size_t' から '_Ty' に変換しました。データが失われているかもしれません。
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(137,62): warning C4267:         with
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(137,62): warning C4267:         [
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(137,62): warning C4267:             _Ty=GLuint
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(137,62): warning C4267:         ]
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(139,62): warning C4267: '=': 'size_t' から '_Ty' に変換しました。データが失われているかもしれません。
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(139,62): warning C4267:         with
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(139,62): warning C4267:         [
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(139,62): warning C4267:             _Ty=GLuint
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(139,62): warning C4267:         ]
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(140,58): warning C4267: '=': 'size_t' から '_Ty' に変換しました。データが失われているかもしれません。
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(140,58): warning C4267:         with
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(140,58): warning C4267:         [
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(140,58): warning C4267:             _Ty=GLuint
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(140,58): warning C4267:         ]
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(142,58): warning C4267: '=': 'size_t' から '_Ty' に変換しました。データが失われているかもしれません。
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(142,58): warning C4267:         with
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(142,58): warning C4267:         [
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(142,58): warning C4267:             _Ty=GLuint
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(142,58): warning C4267:         ]
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(143,54): warning C4267: '=': 'size_t' から '_Ty' に変換しました。データが失われているかもしれません。
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(143,54): warning C4267:         with
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(143,54): warning C4267:         [
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(143,54): warning C4267:             _Ty=GLuint
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(143,54): warning C4267:         ]
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(146,59): warning C4267: '引数': 'size_t' から 'GLsizei' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(146,28): warning C4267: '引数': 'size_t' から 'GLsizei' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(82,19): warning C4267: '引数': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(82,19):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(101,2):
+  	クラス テンプレート メンバー関数 'pronet::poolObject_shared_ptr<Object,6> pronet::loader<6,6>::init_object(ObjectInfo2v *const ,bool,bool) const' のコンパイル中
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(102,48):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::ObjectPool<T,6>' のリファレンスを確認してください
+          with
+          [
+              T=Object
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(76,1):
+  	クラス テンプレート メンバー関数 'pronet::Pool_Object<T> pronet::ObjectPool<T,6>::pop(void)' のコンパイル中
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(208,30):
+  		'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' の 'pronet::ObjectPool<T,6>::pop' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(102,46):
+  		'pronet::loader<6,6>::init_object' の 'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(67,14):
+  		'pronet::loader<6,6>::load_chanck' の 'pronet::loader<6,6>::init_object' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(51,27):
+  		'PronetManager<6,6>::load' の 'pronet::loader<6,6>::load_chanck' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(34,12):
+  		'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(59,68): warning C4267: '引数': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(59,68):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Collision_4tree.h(184,10):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pronet::ColCell<_Ty>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\colCell.h(13,49):
+  	コンパイル対象の クラス テンプレート インスタンス化 'std::vector<_Ty,pnTlsfInsertSTLpointer<_Ty>>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(442,26):
+  	コンパイル対象の エイリアス テンプレート インスタンス化 'std::_Rebind_alloc_t<_Alloc,_Ty>' のリファレンスを確認してください
+          with
+          [
+              _Alloc=pnTlsfInsertSTLpointer<Structure2v<6,6> *>,
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\vector(442,50):
+  	コンパイル対象の クラス テンプレート インスタンス化 'std::allocator_traits<_Alloc>' のリファレンスを確認してください
+          with
+          [
+              _Alloc=pnTlsfInsertSTLpointer<Structure2v<6,6> *>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(746,27):
+  	コンパイル対象の クラス テンプレート インスタンス化 'std::_Normal_allocator_traits<_Alloc>' のリファレンスを確認してください
+          with
+          [
+              _Alloc=pnTlsfInsertSTLpointer<Structure2v<6,6> *>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(552,1):
+  	コンパイル対象の クラス テンプレート インスタンス化 'pnTlsfInsertSTLpointer<_Ty>' のリファレンスを確認してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(136,26):
+  	クラス テンプレート メンバー関数 'Structure2v<6,6> **pnTlsfInsertSTLpointer<_Ty>::allocate(pnTlsfInsertSTLpointer<_Ty>::size_type)' のコンパイル中
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  		C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xmemory(2207,9):
+  		'std::_Allocate_at_least_helper' の 'pnTlsfInsertSTLpointer<_Ty>::allocate' への最初の参照を参照してください
+          with
+          [
+              _Ty=Structure2v<6,6> *
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pnTlsf.h(138,10):
+  	コンパイル対象の関数 テンプレート インスタンス化 'T **pnTlsf::new_pointer<Structure2v<6,6>*>(size_t)' のリファレンスを確認してください
+          with
+          [
+              T=Structure2v<6,6> *
+          ]
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(100,14): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(100,14):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(76,1):
+  	クラス テンプレート メンバー関数 'pronet::Pool_Object<T> pronet::ObjectPool<T,6>::pop(void)' のコンパイル中
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(208,30):
+  		'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' の 'pronet::ObjectPool<T,6>::pop' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(102,46):
+  		'pronet::loader<6,6>::init_object' の 'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(67,14):
+  		'pronet::loader<6,6>::load_chanck' の 'pronet::loader<6,6>::init_object' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(51,27):
+  		'PronetManager<6,6>::load' の 'pronet::loader<6,6>::load_chanck' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(34,12):
+  		'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(63,2):
+  	クラス テンプレート メンバー関数 'pronet::ObjectPool<T,6>::ObjectPool(uint32_t)' のコンパイル中
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(50,66):
+  		'void __cdecl `dynamic initializer for 'private: static pronet::ObjectPool<Object,6> pronet::loader<6,6>::obj_pool''(void)' の 'pronet::ObjectPool<T,6>::ObjectPool' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(80,2):
+  	クラス テンプレート メンバー関数 'void pronet::bit_tree<6>::resize(size_t)' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(116,16):
+  		'pronet::ObjectPool<T,6>::resize' の 'pronet::bit_tree<6>::resize' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(82,9):
+  		'pronet::ObjectPool<T,6>::pop' の 'pronet::ObjectPool<T,6>::resize' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(208,30):
+  		'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' の 'pronet::ObjectPool<T,6>::pop' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(102,46):
+  		'pronet::loader<6,6>::init_object' の 'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(67,14):
+  		'pronet::loader<6,6>::load_chanck' の 'pronet::loader<6,6>::init_object' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(51,27):
+  		'PronetManager<6,6>::load' の 'pronet::loader<6,6>::load_chanck' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(34,12):
+  		'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(248,19): warning C4267: '初期化中': 'size_t' から 'uint32_t' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(248,19):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(93,1):
+  	クラス テンプレート メンバー関数 'void pronet::ObjectPool<T,6>::push(pronet::Pool_Object<T> *)' のコンパイル中
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(199,16):
+  		'pronet::poolObject_shared_ptr<Object,6>::Deleter::operator ()' の 'pronet::ObjectPool<T,6>::push' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\memory(1240,29):
+  		'std::_Ref_count_resource<_UxptrOrNullptr,_Dx>::_Destroy' の 'pronet::poolObject_shared_ptr<Object,6>::Deleter::operator ()' への最初の参照を参照してください
+          with
+          [
+              _UxptrOrNullptr=pronet::Pool_Object<Object> *,
+              _Dx=pronet::poolObject_shared_ptr<Object,6>::Deleter
+          ]
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(246,2):
+  	クラス テンプレート メンバー関数 'bool pronet::bit_tree<6>::serch_block_index(bool,size_t,size_t,size_t *) const' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(235,4):
+  		'pronet::bit_tree<6>::search_free_block' の 'pronet::bit_tree<6>::serch_block_index' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(113,3):
+  		'pronet::bit_tree<6>::rigist' の 'pronet::bit_tree<6>::search_free_block' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(78,2):
+  		'pronet::ObjectPool<T,6>::pop' の 'pronet::bit_tree<6>::rigist' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(208,30):
+  		'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' の 'pronet::ObjectPool<T,6>::pop' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(102,46):
+  		'pronet::loader<6,6>::init_object' の 'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(67,14):
+  		'pronet::loader<6,6>::load_chanck' の 'pronet::loader<6,6>::init_object' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(51,27):
+  		'PronetManager<6,6>::load' の 'pronet::loader<6,6>::load_chanck' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(34,12):
+  		'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+  
+C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(270,14): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  (ソース ファイル 'main.cpp' をコンパイルしています)
+  C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(270,14):
+  テンプレートインスタンス化コンテキスト (最初に最も古いもの) は
+  	C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(266,2):
+  	クラス テンプレート メンバー関数 'void pronet::bit_tree<6>::unlock_bit_map(uint8_t,size_t)' のコンパイル中
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\bit_tree.h(82,17):
+  		'pronet::bit_tree<6>::resize' の 'pronet::bit_tree<6>::unlock_bit_map' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(116,16):
+  		'pronet::ObjectPool<T,6>::resize' の 'pronet::bit_tree<6>::resize' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\ObjectPool.h(82,9):
+  		'pronet::ObjectPool<T,6>::pop' の 'pronet::ObjectPool<T,6>::resize' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\pronet_memory.h(208,30):
+  		'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' の 'pronet::ObjectPool<T,6>::pop' への最初の参照を参照してください
+          with
+          [
+              T=Object
+          ]
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(102,46):
+  		'pronet::loader<6,6>::init_object' の 'pronet::poolObject_shared_ptr<Object,6>::poolObject_shared_ptr' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\loader.h(67,14):
+  		'pronet::loader<6,6>::load_chanck' の 'pronet::loader<6,6>::init_object' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\Pronet.h(51,27):
+  		'PronetManager<6,6>::load' の 'pronet::loader<6,6>::load_chanck' への最初の参照を参照してください
+  		C:\Users\A20046\source\repos\himiyurun\reNew_Pronet_frameWork\reNew_pronet\main.cpp(34,12):
+  		'main' の 'PronetManager<6,6>::load' への最初の参照を参照してください
+  
+loader.obj : error LNK2005: "private: void __cdecl pronet::Collision_4tree<int>::search_all_process(class pronet::Player const &,class pronet::ColCell<int> * const)" (?search_all_process@?$Collision_4tree@H@pronet@@AEAAXAEBVPlayer@2@QEAV?$ColCell@H@2@@Z) は既に Chanck.obj で定義されています。
+loader.obj : error LNK2005: "private: void __cdecl pronet::Collision_4tree<class Structure2v<6,6> *>::search_all_process(class pronet::Player const &,class pronet::ColCell<class Structure2v<6,6> *> * const)" (?search_all_process@?$Collision_4tree@PEAV?$Structure2v@$05$05@@@pronet@@AEAAXAEBVPlayer@2@QEAV?$ColCell@PEAV?$Structure2v@$05$05@@@2@@Z) は既に Chanck.obj で定義されています。
+loader.obj : error LNK2005: "public: void __cdecl pronet::Collision_4tree<class Structure2v<6,6> *>::rigist(class Structure2v<6,6> *)" (?rigist@?$Collision_4tree@PEAV?$Structure2v@$05$05@@@pronet@@QEAAXPEAV?$Structure2v@$05$05@@@Z) は既に Chanck.obj で定義されています。
+main.obj : error LNK2005: "private: void __cdecl pronet::Collision_4tree<int>::search_all_process(class pronet::Player const &,class pronet::ColCell<int> * const)" (?search_all_process@?$Collision_4tree@H@pronet@@AEAAXAEBVPlayer@2@QEAV?$ColCell@H@2@@Z) は既に Chanck.obj で定義されています。
+main.obj : error LNK2005: "private: void __cdecl pronet::Collision_4tree<class Structure2v<6,6> *>::search_all_process(class pronet::Player const &,class pronet::ColCell<class Structure2v<6,6> *> * const)" (?search_all_process@?$Collision_4tree@PEAV?$Structure2v@$05$05@@@pronet@@AEAAXAEBVPlayer@2@QEAV?$ColCell@PEAV?$Structure2v@$05$05@@@2@@Z) は既に Chanck.obj で定義されています。
+main.obj : error LNK2005: "public: void __cdecl pronet::Collision_4tree<class Structure2v<6,6> *>::rigist(class Structure2v<6,6> *)" (?rigist@?$Collision_4tree@PEAV?$Structure2v@$05$05@@@pronet@@QEAAXPEAV?$Structure2v@$05$05@@@Z) は既に Chanck.obj で定義されています。
+C:\Users\A20046\Source\Repos\himiyurun\reNew_Pronet_frameWork\x64\Release\reNew_pronet.exe : fatal error LNK1169: 1 つ以上の複数回定義されているシンボルが見つかりました。
