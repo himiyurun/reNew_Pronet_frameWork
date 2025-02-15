@@ -150,6 +150,7 @@
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="TLSFmemory.cpp" />
+    <ClCompile Include="tlsf.cpp" />
     <ClCompile Include="Uniform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +181,7 @@
     <ClInclude Include="Structure.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TLSFmemory.h" />
+    <ClInclude Include="tlsf.h" />
     <ClInclude Include="Uniform.h" />
   </ItemGroup>
   <ItemGroup>

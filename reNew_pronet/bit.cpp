@@ -11,12 +11,33 @@ void pronet::print_bit(uint64_t n, uint8_t size)
 	std::cout << std::endl;
 }
 
+void pronet::_bit_print(uint64_t _n)
+{
+	print_bit(_n, UNSIGNED_INT_64);
+}
+
+void pronet::_bit_print(uint32_t _n)
+{
+	print_bit(_n, UNSIGNED_INT_32);
+}
+
+void pronet::_bit_print(uint16_t _n)
+{
+	print_bit(_n, UNSIGNED_INT_16);
+}
+
+void pronet::_bit_print(uint8_t _n)
+{
+	print_bit(_n, UNSIGNED_INT_8);
+}
+
 bool pronet::_bit_find_zero_from(uint64_t n, size_t size, size_t start, size_t* idx)
 {
 	unsigned long index(0);
 	assert(start < size && "Error : _bit_find_zero_from : out of range");
-	if (_BitScanForward64(&index, ~(n >> start))) {
-		*idx = index + start;
+	//	ビットをそのままずらすと新しく生成されたビットは0になり正確に測定できないのでマスクを使って必要ないところを隠す
+	if (_BitScanForward64(&index, ~(n) & ~((1ULL << start) - 1))) {
+		*idx = index;
 		return true;
 	}
 	return false;
@@ -26,7 +47,32 @@ bool pronet::_bit_find_one_from(uint64_t n, size_t size, size_t start, size_t* i
 {
 	unsigned long index(0);
 	assert(start < size && "Error : _bit_find_one_from : out of range");
+	//	ビットをそのままずらすと新しく生成されたビットは0になり引っかからないので正確に測定することができるのでこちらはビットをずらす
 	if (_BitScanForward64(&index, n >> start)) {
+		*idx = index + start;
+		return true;
+	}
+	return false;
+}
+
+bool pronet::_bit_find_zero_from_reverse(uint64_t n, size_t size, size_t start, size_t* const idx)
+{
+	unsigned long index(0);
+	assert(start < size && "Error : _bit_find_zero_from : out of range");
+	//	ビットをそのままずらすと新しく生成されたビットは0になり正確に測定できないのでマスクを使って必要ないところを隠す
+	if (_BitScanReverse64(&index, ~(n) & ~((1ULL << start) - 1))) {
+		*idx = index;
+		return true;
+	}
+	return false;
+}
+
+bool pronet::_bit_find_one_from_reverse(uint64_t n, size_t size, size_t start, size_t* const idx)
+{
+	unsigned long index(0);
+	assert(start < size && "Error : _bit_find_one_from : out of range");
+	//	ビットをそのままずらすと新しく生成されたビットは0になり引っかからないので正確に測定することができるのでこちらはビットをずらす
+	if (_BitScanReverse64(&index, n >> start)) {
 		*idx = index + start;
 		return true;
 	}

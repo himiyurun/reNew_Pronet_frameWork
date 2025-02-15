@@ -123,6 +123,9 @@
     <ClCompile Include="Collision_4tree.cpp">
       <Filter>ソース ファイル\PnLib\col</Filter>
     </ClCompile>
+    <ClCompile Include="tlsf.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pronet.h">
@@ -208,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\PnHead</Filter>
+    </ClInclude>
+    <ClInclude Include="tlsf.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
