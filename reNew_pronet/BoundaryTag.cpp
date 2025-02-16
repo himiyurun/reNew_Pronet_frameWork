@@ -75,6 +75,37 @@ void pronet::BoundaryTagBegin::marge(BoundaryTagBegin* next)
 	}
 }
 
+void pronet::BoundaryTagBegin::attach(BoundaryTagBegin* const _next)
+{
+	if (_next) {
+		_next->setPrev(this);
+	}
+	setNext(_next);
+}
+
+void pronet::BoundaryTagBegin::detach(BoundaryTagBegin*& _tag)
+{
+	if (next) {
+		BoundaryTagBegin* const nl = next;
+		nl->setPrev(prev);
+	}
+
+	if (prev) {
+		BoundaryTagBegin* const pl = prev;
+		pl->setNext(next);
+	}
+	else {
+		if (next) {
+			_tag = next;
+		}
+		else {
+			_tag = nullptr;
+		}
+	}
+	next = nullptr;
+	prev = nullptr;
+}
+
 BoundaryTagBegin* pronet::BoundaryTagBegin::getNext() const
 {
 	uint8_t* ptr = reinterpret_cast<uint8_t*>(const_cast<BoundaryTagBegin*>(this));

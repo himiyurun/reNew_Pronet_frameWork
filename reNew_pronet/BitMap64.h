@@ -44,6 +44,18 @@ namespace pronet {
 				return false;
 		}
 
+		uint64_t extract_area(size_t _start, size_t _area) const {
+			size_t current(getCurrent(_start));
+			size_t offset(getIndex(_start));
+			size_t maxonce(64 - offset);
+			if (offset + _area < maxonce) {
+				return _bit_extract_area(bit[current], UNSIGNED_INT_64, offset, _area);
+			}
+			uint64_t extractedl(_bit_extract_area(bit[current], UNSIGNED_INT_64, _start, maxonce));
+			uint64_t extractedr(_bit_extract_area(bit[current + 1], UNSIGNED_INT_64, 0, _area - maxonce));
+			return (extractedr << maxonce) | extractedl;
+		}
+
 		//	‰‚ß‚Ì0‚ðŽæ“¾‚·‚é
 		bool find_zero_first(size_t* const _i) const {
 			size_t current(getCurrent(*_i));

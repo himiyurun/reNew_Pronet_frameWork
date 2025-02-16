@@ -31,10 +31,10 @@ TLSFmemory::TLSFmemory(uint32_t n = 7, uint8_t divsize = 4)
 
 pronet::TLSFmemory::~TLSFmemory()
 {
-	static uint8_t* ptr(nullptr);
-	static BoundaryTagBegin* begin(nullptr);
-	static BoundaryTagEnd* end(nullptr);
-	static uint32_t count(0);
+	uint8_t* ptr(nullptr);
+	BoundaryTagBegin* begin(nullptr);
+	BoundaryTagEnd* end(nullptr);
+	uint32_t count(0);
 
 	count = 0;
 

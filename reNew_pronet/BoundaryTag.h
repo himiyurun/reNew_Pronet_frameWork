@@ -38,6 +38,11 @@ namespace pronet {
 		void setNext(BoundaryTagBegin* new_next) { next = new_next; }
 		void setPrev(BoundaryTagBegin* new_prev) { prev = new_prev; }
 
+		//	レジスト時にリンクを作成する
+		void attach(BoundaryTagBegin* const _next);
+		//	アンレジスト時にリンクを解除する
+		void detach(BoundaryTagBegin*& _tag);
+
 		[[nodiscard]] BoundaryTagEnd* endTag(){
 			uint8_t* p = reinterpret_cast<uint8_t*>(this);
 			return reinterpret_cast<BoundaryTagEnd*>(p + sizeof(*this) + size);

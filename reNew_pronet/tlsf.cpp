@@ -1,9 +1,9 @@
 #include "tlsf.h"
-
+/*
 pronet::tlsf_set::tlsf_set(uint8_t _div_size, uint8_t _lsb)
-	: fli_(0)
-	, sli_(_div_size * (_lsb + 1U))
+	: fli_(0), sli_(_div_size * (_lsb + 1))
 	, bitdiv_(_div_size), bitsiz_(1ULL << _div_size)
+	, fliLv_(_lsb), minFli_(1ULL << _div_size)
 {
 }
 
@@ -13,6 +13,14 @@ pronet::tlsf_set::~tlsf_set()
 
 void pronet::tlsf_set::rigist(size_t _size)
 {
+	uint8_t fli(0), sli(0);
+	if (_size >= bitsiz_) {
+		calcIndex(fli, sli, _size);
+	}
+	else {
+
+	}
+	calcIndex(fli, sli, _size);
 }
 
 void pronet::tlsf_set::unrigist(uint8_t fli, uint8_t sli)
@@ -39,3 +47,4 @@ void pronet::tlsf_set::calcSLI(uint8_t& _sli, uint8_t _fli, size_t _size) const
 	shift = _fli - bitdiv_;
 	_sli = (_size & ~(1 << _fli)) >> (shift);
 }
+*/
