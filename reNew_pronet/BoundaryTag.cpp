@@ -95,12 +95,10 @@ void pronet::BoundaryTagBegin::detach(BoundaryTagBegin*& _tag)
 		pl->setNext(next);
 	}
 	else {
-		if (next) {
+		if (next)
 			_tag = next;
-		}
-		else {
+		else
 			_tag = nullptr;
-		}
 	}
 	next = nullptr;
 	prev = nullptr;
@@ -109,7 +107,6 @@ void pronet::BoundaryTagBegin::detach(BoundaryTagBegin*& _tag)
 BoundaryTagBegin* pronet::BoundaryTagBegin::getNext() const
 {
 	uint8_t* ptr = reinterpret_cast<uint8_t*>(const_cast<BoundaryTagBegin*>(this));
-	//	Šë‚È‚¢II ‚½‚Ô‚ñ‰ğŒˆ
 	ptr += size + tagSize;
 	return reinterpret_cast<BoundaryTagBegin*>(ptr);
 }
