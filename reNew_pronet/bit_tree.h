@@ -106,6 +106,7 @@ namespace pronet {
 			}
 			level++;
 		}
+
 		//	未使用の部分をマスクする				
 		size_t miss_size(tree[0].size() * UNSIGNED_INT_64 - size);
 		assert(miss_size =< 64 && "Error : bit_tree.resize : miss_size is lager than UNSIGNED_INT_64 bufsize");
@@ -175,12 +176,14 @@ namespace pronet {
 			current = (index >> i) / UNSIGNED_INT_64;
 			now_index = (index >> i) % UNSIGNED_INT_64;
 			if (!val) {
-				if (tree[i][index >> i])
+				if (tree[i][index >> i]) {
 					tree[i].write_Bit_0(index >> i, 1);
+				}
 			}
 			else {
-				if (!tree[i][index >> i])
+				if (!tree[i][index >> i]) {
 					tree[i].write_Bit_1(index >> i, 1);
+				}
 			}
 		}
 		return true;
@@ -289,11 +292,9 @@ namespace pronet {
 
 	template<std::size_t N>
 	inline void bit_tree<N>::unlock_bit_map(uint8_t level, size_t size)
-	{
-		if (tree_size == 0) return;
-		
+	{	
 		//	マスクしていた部分をアンレジストして開放する
-		for (int i = tree_size; i < (tree[0].size() * UNSIGNED_INT_64); i++) {
+		for (size_t i = tree_size; i < (tree[0].size() * UNSIGNED_INT_64); i++) {
 			unrigist(i);
 		}
 	}
