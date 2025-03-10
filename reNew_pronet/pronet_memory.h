@@ -71,6 +71,65 @@ namespace pronet {
 		[[nodiscard]] size_t size() const { return buf_size; }
 	};
 
+	template<class _Ty, std::size_t _N>
+	class poolObject_unique_ptr 
+	{
+		struct _Deleter {
+			ObjectPool<_Ty, _N>* pool_;
+
+			_Deleter(pronet::ObjectPool<_Ty, _N>* _pool) noexcept :pool_(_pool) {}
+
+			void operator()(Pool_Object<_Ty>* _ptr) {
+				pool_->push(_ptr);
+				std::cout << "object_pool_array unique_ptr return object" << std::endl;
+			}
+		};
+
+		std::unique_ptr<Pool_Object<_Ty>, _Deleter> sp_;
+
+	public:
+
+		poolObject_unique_ptr(ObjectPool<_Ty, _N>* _pool = nullptr)
+			: sp_(_pool ? (new Pool_Object<_Ty>(_pool->pop())) : (nullptr), _Deleter(_pool)) {
+		}
+
+		poolObject_unique_ptr(poolObject_unique_ptr&& o) noexcept : sp_(std::move(o.sp_)) {}
+
+		//	スマートポインタを返す
+		std::unique_ptr<Pool_Object<_Ty>, _Deleter>& operator()() { return sp_; }
+		//	内部のオブジェクトを返す
+		explicit operator _Ty&() {
+			if (sp_)
+				return sp_->operator->();
+			else
+				throw std::runtime_error("poolObject_unique_ptr is null. you must call .realloc");
+		}
+		//	メモリを開放する
+		void reset() { sp_.reset(); }
+
+		void realloc(ObjectPool<_Ty, _N>* _pool) {
+			sp_ = std::unique_ptr<Pool_Object<_Ty>, _Deleter>(new Pool_Object<_Ty>(_pool->pop()), _Deleter(_pool));
+			if (!sp_)
+				throw std::runtime_error("ObjectPool_Array allocation failed!");
+		}
+
+		explicit operator bool() {
+			if (sp_)
+				return true;
+			else
+				return false;
+		}
+
+		poolObject_unique_ptr<_Ty, _N>& operator=(const poolObject_unique_ptr<_Ty, _N>& o) noexcept {
+			if (this != &o) {
+				this->sp_ = std::move(o.sp_);
+			}
+			return *this;
+		}
+
+		Pool_Object<_Ty>* operator->() const { return sp_.operator->(); }
+	};
+
 	template<typename T>
 	class poolArray_unique_ptr
 	{

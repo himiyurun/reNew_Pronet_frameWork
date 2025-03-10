@@ -11,8 +11,8 @@ namespace pronet {
 
 		uint8_t bitdiv_;			//	SLIのインデックスのビット数
 		size_t bitsiz_;				//	SLIのインデックスに分類できる最小値
+		uint64_t bitmsk_;			//	SLIのインデックスを割り出すマスク
 		uint8_t fliLv_;				//	FLIのレベルの数
-		uint8_t minFli_;			//	FLIの最小値
 	public:
 		tlsf_set(uint8_t _div_size, uint8_t _lsb);
 		~tlsf_set();
@@ -36,6 +36,10 @@ namespace pronet {
 		//	_sli : セカンドレベルインデックス
 		//	_size : 計算するメモリブロックのサイズ
 		void calcTlsfIndex(uint8_t& _fli, uint8_t& _sli, size_t _size) const;
+		//	レジスト可能なサイズかを確かめる
+		[[nodiscard]] bool rigistable(size_t _size) const { return (_size >= bitsiz_); }
+		//	ビットマップを描画
+		void print_bmp() const;
 	private:
 		//	メモリブロック不足が発生しないように1つ上のインデックスになるようにアラインメントをかける
 		void align_idx(uint8_t& _fli, uint8_t& _sli) const;
@@ -54,9 +58,9 @@ namespace pronet {
 	template<class _Ty>
 	inline tlsf_set<_Ty>::tlsf_set(uint8_t _div_size, uint8_t _lsb)
 		: data_((_lsb + 1) << _div_size, nullptr)
-		, fli_(0), sli_(((_div_size* (_lsb + 1)) >> BITCOUNT_OF_64) + 1)
-		, bitdiv_(_div_size), bitsiz_(1ULL << _div_size)
-		, fliLv_(_lsb), minFli_(1ULL << _div_size)
+		, fli_(0), sli_((((1 << _div_size)* (_lsb + 1)) >> BITCOUNT_OF_64) + 1)
+		, bitdiv_(_div_size), bitsiz_(1ULL << _div_size), bitmsk_((1ULL << _div_size) - 1)
+		, fliLv_(_lsb)
 	{
 	}
 
@@ -73,7 +77,7 @@ namespace pronet {
 			calcTlsfIndex(fli, sli, _size);
 		}
 		else {
-			fli = minFli_;
+			fli = bitdiv_;
 		}
 
 		if (!_bit_get_status(fli, UNSIGNED_INT_64, fli))
@@ -96,7 +100,6 @@ namespace pronet {
 		size_t index(calcIndex(fli, sli));
 		delink(_obj, index);
 		del_bmp(fli, sli, index);
-		
 	}
 
 	template<class _Ty>
@@ -123,7 +126,7 @@ namespace pronet {
 		if (_bit_get_status(fli_, UNSIGNED_INT_64, fli)) {
 			if (sli_.find_one_from(calcIndex(fli, sli), &sli)) {
 				_fli = fli;
-				_sli = sli & BITMASK_OF_64;
+				_sli = sli & bitmsk_;
 				return true;
 			}
 			else {
@@ -138,7 +141,7 @@ namespace pronet {
 			throw std::logic_error("Not working TLSFrigist system!!");
 		}
 		_fli = fli;
-		_sli = sli & BITMASK_OF_64;
+		_sli = sli & bitmsk_;
 		return true;
 	}
 
@@ -149,6 +152,22 @@ namespace pronet {
 		_BitScanReverse(&index, _size);
 		_fli = (uint8_t)index;
 		calcSLI(_sli, _fli, _size);
+	}
+
+	template<class _Ty>
+	inline void tlsf_set<_Ty>::print_bmp() const
+	{
+		std::cout << "FLI : ";
+		_bit_print(fli_);
+		for (uint8_t i = 0; i < fliLv_; i++) {
+			for (size_t j = 0; j < bitsiz_; j++) {
+				if (sli_[i * bitsiz_ + j])
+					std::cout << "1";
+				else
+					std::cout << "0";
+			}
+			std::cout << '\n';
+		}
 	}
 
 	template<class _Ty>
@@ -171,6 +190,7 @@ namespace pronet {
 	template<class _Ty>
 	inline void tlsf_set<_Ty>::del_bmp(uint8_t _fli, uint8_t _sli, size_t _index)
 	{
+		std::cout << "fli : " << (unsigned)_fli << ", sli : " << (unsigned)_sli << ", div : " << bitsiz_ << std::endl;
 		if (!data_[_index]) {
 			sli_.write_Bit_0(((uint64_t)_fli << bitdiv_) + _sli, 1);
 			if (!sli_.extract_area((uint64_t)_fli << bitdiv_, bitsiz_)) {
@@ -202,8 +222,8 @@ namespace pronet {
 
 		uint8_t bitdiv_;			//	SLIのインデックスのビット数
 		size_t bitsiz_;				//	SLIのインデックスに分類できる最小値
+		uint64_t bitmsk_;			//	SLIのインデックスを割り出すマスク
 		uint8_t fliLv_;				//	FLIのレベルの数
-		uint8_t minFli_;			//	FLIの最小値
 	public:
 		tlsf_set_noalign(uint8_t _div_size, uint8_t _lsb);
 		~tlsf_set_noalign();
@@ -227,6 +247,8 @@ namespace pronet {
 		//	_sli : セカンドレベルインデックス
 		//	_size : 計算するメモリブロックのサイズ
 		void calcTlsfIndex(uint8_t& _fli, uint8_t& _sli, size_t _size) const;
+		//	レジスト可能なサイズかを確かめる
+		[[nodiscard]] bool rigistable(size_t _size) const { return (_size >= bitsiz_); }
 		//	ビットマップを描画
 		void print_bmp() const;
 	private:
@@ -248,8 +270,8 @@ namespace pronet {
 	inline tlsf_set_noalign<_Ty>::tlsf_set_noalign(uint8_t _div_size, uint8_t _lsb)
 		: data_((uint64_t)(_lsb + 1) << _div_size, nullptr)
 		, fli_(0), sli_((((1 << _div_size) * (_lsb + 1)) >> BITCOUNT_OF_64) + 1)
-		, bitdiv_(_div_size), bitsiz_(1ULL << _div_size)
-		, fliLv_(_lsb), minFli_(1ULL << _div_size)
+		, bitdiv_(_div_size), bitsiz_(1ULL << _div_size), bitmsk_((1ULL << _div_size) - 1)
+		, fliLv_(_lsb)
 	{
 	}
 
@@ -264,10 +286,11 @@ namespace pronet {
 		uint8_t fli(0), sli(0);
 		if (_size >= bitsiz_) {
 			calcTlsfIndex(fli, sli, _size);
+			std::cout << "size : " << _size << ", fli : " << (unsigned)fli << ", sli : " << (unsigned)sli << std::endl;
 		}
 		else {
 			size_t idx(0);
-			_bit_find_one_from(_size, sizeof(size_t) * 8, 0, &idx);
+			_bit_find_one_from_reverse(_size, sizeof(size_t) * 8, 0, &idx);
 			fli = idx;
 		}
 
@@ -287,8 +310,20 @@ namespace pronet {
 	inline void tlsf_set_noalign<_Ty>::unrigist(_Ty* const _obj, size_t _size)
 	{
 		uint8_t fli(0), sli(0);
-		calcTlsfIndex(fli, sli, _size);
+		if (_size >= bitsiz_) {
+			calcTlsfIndex(fli, sli, _size);
+			std::cout << "size : " << _size << ", fli : " << (unsigned)fli << ", sli : " << (unsigned)sli << std::endl;
+		}
+		else {
+			size_t idx(0);
+			_bit_find_one_from_reverse(_size, sizeof(size_t) * 8, 0, &idx);
+			fli = idx;
+		}
 		size_t index(calcIndex(fli, sli));
+
+		if (!data_[index]) {
+			throw std::runtime_error("This Object have already delinked!!");
+		}
 		delink(_obj, index);
 		del_bmp(fli, sli, index);
 	}
@@ -300,7 +335,7 @@ namespace pronet {
 		if (!search(fli, sli, _size)) {
 			return nullptr;
 		}
-		std::cout << "fli : " << (unsigned)fli << ", sli : " << (unsigned)sli << std::endl;
+
 		size_t index(calcIndex(fli, sli));
 		_Ty* obj = data_[index];
 		delink(obj, index);
@@ -313,12 +348,16 @@ namespace pronet {
 	{
 		uint8_t f(0), s(0);
 		calcTlsfIndex(f, s, _size);
-		align_idx(f, s);
+		if (_size >= bitsiz_)
+			align_idx(f, s);
+		else
+			s = 0;
+		std::cout << "fli : " << (unsigned)f << ", sli : " << (unsigned)s << std::endl;
 		size_t fli(f), sli(s);
 		if (_bit_get_status(fli_, UNSIGNED_INT_64, fli)) {
 			if (sli_.find_one_from(calcIndex(fli, sli), &sli)) {
 				_fli = fli;
-				_sli = sli & BITMASK_OF_64;
+				_sli = (sli & bitmsk_);
 				return true;
 			}
 			else {
@@ -333,7 +372,7 @@ namespace pronet {
 			throw std::logic_error("Not working TLSFrigist system!!");
 		}
 		_fli = fli;
-		_sli = sli & BITMASK_OF_64;
+		_sli = (sli & bitmsk_);
 		return true;
 	}
 

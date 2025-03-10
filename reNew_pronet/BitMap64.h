@@ -13,7 +13,7 @@ namespace pronet {
 
 	public:
 		//	コンストラクタ
-		BitMap64(size_t size)
+		BitMap64(size_t size = 0)
 			: bit(size, 0)
 		{
 		}
@@ -48,7 +48,7 @@ namespace pronet {
 			size_t current(getCurrent(_start));
 			size_t offset(getIndex(_start));
 			size_t maxonce(64 - offset);
-			if (offset + _area < maxonce) {
+			if (offset + _area <= UNSIGNED_INT_64) {
 				return _bit_extract_area(bit[current], UNSIGNED_INT_64, offset, _area);
 			}
 			uint64_t extractedl(_bit_extract_area(bit[current], UNSIGNED_INT_64, _start, maxonce));
@@ -88,7 +88,7 @@ namespace pronet {
 			size_t offset(getIndex(_start));
 			size_t index(0);
 
-			assert(start < bit.size() * 64 && "Error : BitMap64.find_zero_from : out of range");
+			assert(_start < bit.size() * 64 && "Error : BitMap64.find_zero_from : out of range");
 			
 			if (_bit_find_zero_from(bit[current], UNSIGNED_INT_64, offset, &index)) {
 				*_idx = index + ((uint64_t)current << BITCOUNT_OF_64);
@@ -110,7 +110,7 @@ namespace pronet {
 			size_t offset(getIndex(_start));
 			size_t index(0);
 
-			assert(start < bit.size() * 64 && "Error : BitMap64.find_one_from : out of range");
+			assert(_start < bit.size() * 64 && "Error : BitMap64.find_one_from : out of range");
 
 			if (_bit_find_one_from(bit[current], UNSIGNED_INT_64, offset, &index)) {
 				*_idx = index + ((uint64_t)current << BITCOUNT_OF_64);
@@ -126,15 +126,53 @@ namespace pronet {
 			return false;
 		}
 
+		bool find_zero_from_reverse(size_t _start, size_t* const _idx) const {
+			size_t current(getCurrent(_start));
+			size_t offset(getIndex(_start));
+			size_t index(0);
+
+			assert(_start < bit.size() * 64 && "Error : BitMap64.find_zero_from_reverse : out of range");
+
+			if (_bit_find_zero_from_reverse(bit[current] << offset, UNSIGNED_INT_64, 0, &index)) {
+				*_idx = index - offset + ((uint64_t)current << BITCOUNT_OF_64);
+				return true;
+			}
+			for (size_t i = --current; i < current; i--) {
+				if (_bit_find_zero_from_reverse(bit[i], UNSIGNED_INT_64, 0, &index)) {
+					*_idx = index + ((uint64_t)i << BITCOUNT_OF_64);
+					return true;
+				}
+			}
+		}
+
+		bool find_one_from_reverse(size_t _start, size_t* const _idx) const {
+			size_t current(getCurrent(_start));
+			size_t offset(getIndex(_start));
+			size_t index(0);
+
+			assert(_start < bit.size() * 64 && "Error : BitMap64.find_zero_from_reverse : out of range");
+
+			if (_bit_find_one_from_reverse(bit[current] << offset, UNSIGNED_INT_64, 0, &index)) {
+				*_idx = index - offset + ((uint64_t)current << BITCOUNT_OF_64);
+				return true;
+			}
+			for (size_t i = --current; i < current; i--) {
+				if (_bit_find_one_from_reverse(bit[i], UNSIGNED_INT_64, 0, &index)) {
+					*_idx = index + ((uint64_t)i << BITCOUNT_OF_64);
+					return true;
+				}
+			}
+		}
+
 		void write_Bit_1(size_t _start, size_t _size) {
 			size_t current(getCurrent(_start));
 			size_t index(getIndex(_start));
 			size_t area(_size);
 			size_t maxonce(64 - index);
 
-			assert(start < bit.size() * 64 && "Error : BitMap64.write_Bit : out of range");
+			assert(_start < (bit.size() * 64) && "Error : BitMap64.write_Bit : out of range");
 
-			if (_size < maxonce) {
+			if (_size <= maxonce) {
 				_bit_write_one_area(&bit[current], UNSIGNED_INT_64, index, _size);
 				return;
 			}
@@ -158,9 +196,9 @@ namespace pronet {
 			size_t area(_size);
 			size_t maxonce(64 - index);
 
-			assert(start < bit.size() * 64 && "Error : BitMap64.write_Bit : out of range");
+			assert(_start < bit.size() * 64 && "Error : BitMap64.write_Bit : out of range");
 
-			if (_size < maxonce) {
+			if (_size <= maxonce) {
 				_bit_write_zero_area(&bit[current], UNSIGNED_INT_64, index, _size);
 				return;
 			}
@@ -179,6 +217,9 @@ namespace pronet {
 
 		void resize(size_t size) {
 			bit.resize(size, 0);
+		}
+		void resize(size_t _size, uint64_t _val) {
+			bit.resize(_size, _val);
 		}
 
 		void printBit() const {

@@ -150,7 +150,6 @@
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="TLSFmemory.cpp" />
-    <ClCompile Include="tlsf.cpp" />
     <ClCompile Include="Uniform.cpp" />
   </ItemGroup>
   <ItemGroup>

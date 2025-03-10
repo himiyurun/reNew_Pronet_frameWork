@@ -31,13 +31,13 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	PronetManager<6, 6> game(&winInfo, "LoadFileList.fi");
 
-	pronet::tlsf_set_noalign<pronet::BoundaryTagBegin> test(5, 8);
-	pronet::BoundaryTagBegin tag(26, false);
-	test.rigist(&tag, tag.bufSize());
-	test.print_bmp();
-	pronet::BoundaryTagBegin* ptr = test.locate(33);
-	test.unrigist(&tag, tag.bufSize());
-	test.print_bmp();
+	pronet::ObjectPool<Object, 6> test(2);
+	test.get_bit_to_pool_status();
+	std::unique_ptr<pronet::poolObject_unique_ptr<Object, 6>[]> test1(new pronet::poolObject_unique_ptr<Object, 6>[4]);
+	for (int i = 0; i < 4; i++) {
+		test1[i].realloc(&test);
+		test.get_bit_to_pool_status();
+	}
 
 	try {
 		game.load();
