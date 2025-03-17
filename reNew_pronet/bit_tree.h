@@ -109,7 +109,8 @@ namespace pronet {
 
 		//	未使用の部分をマスクする				
 		size_t miss_size(tree[0].size() * UNSIGNED_INT_64 - size);
-		assert(miss_size =< 64 && "Error : bit_tree.resize : miss_size is lager than UNSIGNED_INT_64 bufsize");
+		std::cout << "miss size : " << miss_size << std::endl;
+		assert((miss_size <= 64) && "Error : bit_tree.resize : miss_size is lager than UNSIGNED_INT_64 bufsize");
 		for (size_t i = size; i < (tree[0].size() * UNSIGNED_INT_64); i++) {
 			if (!val)
 				write_index_one_from(i);
@@ -122,7 +123,7 @@ namespace pronet {
 	template<std::size_t N>
 	inline void bit_tree<N>::compress(size_t* const _idx, size_t _cmpsize) const
 	{
-		size_t index;
+		size_t index(0);
 		_bit_find_one_from_reverse(_cmpsize, UNSIGNED_INT_64, 0, &index);
 		if (index >= N)
 			index = N - 1;

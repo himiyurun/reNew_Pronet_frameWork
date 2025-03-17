@@ -101,7 +101,7 @@ namespace pronet {
 		//	セルの初期化がメモリリークを一定確率で引き起こす可能性大
 		cells.init(4, -5.f, 5.f, 10.f, 10.f);
 		for (auto& a : structures) {
-			cells.rigist(a().get()->data);
+			cells.rigist(a.get());
 		}
 	}
 

@@ -143,6 +143,7 @@ namespace pronet {
 					return true;
 				}
 			}
+			return false;
 		}
 
 		bool find_one_from_reverse(size_t _start, size_t* const _idx) const {
@@ -162,6 +163,7 @@ namespace pronet {
 					return true;
 				}
 			}
+			return false;
 		}
 
 		void write_Bit_1(size_t _start, size_t _size) {

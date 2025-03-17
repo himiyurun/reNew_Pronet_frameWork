@@ -489,7 +489,6 @@ void pronet::PronetReadLoadFileList::get_pnLCI(uint32_t chanck_Index, PronetLoad
 			points++;
 			});
 	}
-
 	getParam(info);
 }
 

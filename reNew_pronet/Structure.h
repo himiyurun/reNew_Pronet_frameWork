@@ -134,7 +134,7 @@ void Structure2v<VBOLV, SHDLV>::draw(size_t _frame_count)
 {
 	if (frame_counter == _frame_count) { return; }
 	frame_counter = _frame_count;
-	buffer_object->draw();
+	buffer_object->draw();	
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>

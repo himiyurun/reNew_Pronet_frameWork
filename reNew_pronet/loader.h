@@ -32,15 +32,14 @@ namespace pronet {
 		(const char* const _vsrc, const char* const _fsrc) const;
 
 		poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> init_structure
-		(const Structure2vParamCreateInfo *const strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object, 
-			const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index) const;
+		(const Structure2vParamCreateInfo* const strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object
+			, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index) const;
 	private:
 
 		//static ObjectPool_Array<poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>> sp_array;
 
 		static ObjectPool<Object, VBOLV> obj_pool;
 		static ObjectPool<Shader, SHDLV> shd_pool;
-
 		static ObjectPool<Structure2v<VBOLV, SHDLV>, strLv> str_pool;
 	};
 
@@ -62,6 +61,7 @@ namespace pronet {
 		pnTlsf_unique_ptr<poolObject_shared_ptr<Object, VBOLV>> object(info.objs->size);
 		pnTlsf_unique_ptr<poolObject_shared_ptr<Shader, SHDLV>> shader(info.shaders->size);
 		pnTlsf_unique_ptr<poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>> structures(info.strs[pronet::CHANCK_NATIVE]->size);
+		
 		//	èâä˙âªÇçsÇ§
 		for (size_t i = 0; i < info.objs->size; i++) {
 			object[i] = init_object(&info.objs[i], GL_TRUE, GL_TRUE);
@@ -69,6 +69,7 @@ namespace pronet {
 		for (size_t i = 0; i < info.shaders->size; i++) {
 			shader[i] = init_shader(info.shaders[i].vsrc.c_str(), info.shaders[i].fsrc.c_str());
 		}
+
 		for (size_t i = 0; i < info.strs[pronet::CHANCK_NATIVE]->size; i++) {
 			structures[i] = init_structure(&info.strs[pronet::CHANCK_NATIVE][i].param,
 				object[info.strs[pronet::CHANCK_NATIVE][i].buffer_object_index],
@@ -114,7 +115,7 @@ namespace pronet {
 	}
 
 	template<std::size_t VBOLV, std::size_t SHDLV>
-	inline poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> loader<VBOLV, SHDLV>::init_structure(const Structure2vParamCreateInfo *const strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object, const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index) const
+	inline poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> loader<VBOLV, SHDLV>::init_structure(const Structure2vParamCreateInfo *const strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index) const
 	{
 		poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> structure(&str_pool);
 		structure->init(strInfo, object, shader, tex_index);

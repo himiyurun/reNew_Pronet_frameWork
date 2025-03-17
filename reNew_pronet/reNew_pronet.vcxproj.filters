@@ -111,17 +111,17 @@
     <ClCompile Include="Chanck.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="collib.cpp">
       <Filter>ソース ファイル\PnLib\col</Filter>
     </ClCompile>
-    <ClCompile Include="pnMath.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Collision_4tree.cpp">
       <Filter>ソース ファイル\PnLib\col</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\PnLib</Filter>
+    </ClCompile>
+    <ClCompile Include="pnMath.cpp">
+      <Filter>ソース ファイル\PnLib\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +164,6 @@
     <ClInclude Include="bit.h">
       <Filter>ヘッダー ファイル\PnHead\util</Filter>
     </ClInclude>
-    <ClInclude Include="loader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="TLSFmemory.h">
       <Filter>ヘッダー ファイル\PnHead\exmemory\Allocater</Filter>
     </ClInclude>
@@ -197,20 +194,23 @@
     <ClInclude Include="collib.h">
       <Filter>ヘッダー ファイル\PnHead\col</Filter>
     </ClInclude>
-    <ClInclude Include="Collision_4tree.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="colCell.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
-    </ClInclude>
     <ClInclude Include="pnMath.h">
       <Filter>ヘッダー ファイル\PnHead\util</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\PnHead</Filter>
     </ClInclude>
+    <ClInclude Include="colCell.h">
+      <Filter>ヘッダー ファイル\PnHead\col</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision_4tree.h">
+      <Filter>ヘッダー ファイル\PnHead\col</Filter>
+    </ClInclude>
     <ClInclude Include="tlsf.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\PnHead\util</Filter>
+    </ClInclude>
+    <ClInclude Include="loader.h">
+      <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

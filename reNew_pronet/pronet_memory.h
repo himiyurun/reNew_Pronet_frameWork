@@ -9,6 +9,22 @@
 #include "pnTlsf.h"
 
 namespace pronet {
+	/*
+	void _print_memory(const void* _ptr, size_t size) {
+		uint8_t* ptr = reinterpret_cast<uint8_t*>(ptr);
+		for (size_t i = 0; i < size; i++) {
+			for (size_t i = 0; i < UNSIGNED_INT_8; i++) {
+				if (*ptr & (static_cast<uint64_t>(1) << i))
+					std::cout << "1";
+				else
+					std::cout << "0";
+			}
+			ptr++;
+		}
+		std::cout << '\n';
+	}
+	*/
+
 	template<typename T>
 	class pnTlsf_unique_ptr : public pnTlsf {
 		struct _Deleter : public pnTlsf {
@@ -153,6 +169,10 @@ namespace pronet {
 
 		poolArray_unique_ptr(poolArray_unique_ptr&& o) noexcept : sp(std::move(o.sp)) {}
 
+		~poolArray_unique_ptr() {
+			sp.reset();
+		}
+
 		//	スマートポインタを返す
 		std::unique_ptr<PoolArray<T>, _Deleter>& operator()() { return sp; }
 		//	内部のオブジェクトを返す
@@ -216,6 +236,10 @@ namespace pronet {
 			if (size > 0 && pool != nullptr)
 				sp = std::shared_ptr<PoolArray<T>>(new PoolArray<T>(pool->get(size)), Deleter(pool));
 		}
+		
+		~poolArray_shared_ptr() {
+			sp.reset();
+		}
 
 		PoolArray<T> operator()() const {
 			return sp;
@@ -264,20 +288,44 @@ namespace pronet {
 		poolObject_shared_ptr(ObjectPool<T, N>* pool = nullptr)
 		{
 			if (pool != nullptr) {
-				Pool_Object<T> buf = pool->pop();
-				sp = std::shared_ptr<Pool_Object<T>>(new Pool_Object<T>(buf), Deleter(pool));
+				sp = std::shared_ptr<Pool_Object<T>>(new Pool_Object<T>(pool->pop()), Deleter(pool));
 			}
 		}
 
-		std::shared_ptr<Pool_Object<T>> operator()() {
+		template<class T, std::size_t N>
+		poolObject_shared_ptr(poolObject_shared_ptr<T, N>& o) noexcept
+		{
+			sp = o.sp;
+			std::cout << sp.use_count() << std::endl;
+		}
+
+		~poolObject_shared_ptr() {
+			sp.reset();
+		}
+
+		void realloc(ObjectPool<T, N>* _pool) {
+			sp.reset();
+			sp = std::shared_ptr<Pool_Object<T>>(new Pool_Object<T>(_pool->pop()), Deleter(_pool));
+			if (!sp)
+				throw std::runtime_error("ObjectPoo allocation failed!");
+		}
+
+		std::shared_ptr<Pool_Object<T>> operator()() const {
 			return sp;
 		}
 
-		T* operator->() const {
-			return sp->data;
+		explicit operator bool() const {
+			return sp.operator bool();
 		}
 
-		poolObject_shared_ptr<Pool_Object<T>, N>& operator=(const poolArray_shared_ptr<Pool_Object<T>>& o) {
+		T* get() const { return sp->operator->(); }
+
+		T* operator->() const {
+			//_print_memory(this, sizeof(*this));
+			return sp->operator->();
+		}
+
+		poolObject_shared_ptr<T, N>& operator=(const poolObject_shared_ptr& o) {
 			if (this != &o) {
 				this->sp = o.sp;
 			}
@@ -285,7 +333,21 @@ namespace pronet {
 		}
 
 		T& operator[](size_t n) {
-			return sp->data[n];
+			return sp->operator->()[n];
+		}
+
+		bool get_index() const {
+			Pool_Object<T>* const ptr = sp.get();
+			std::cout << "index : " << ptr->index << std::endl;
+			//std::cout << "count : " << this->sp.use_count() << std::endl;
+			if (sp) {
+				std::cout << "exsist" << std::endl;
+				return true;
+			}
+			else {
+				std::cout << "null" << std::endl;
+				return false;
+			}
 		}
 
 		void reset() {
