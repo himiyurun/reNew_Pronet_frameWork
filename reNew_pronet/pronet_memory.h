@@ -296,7 +296,6 @@ namespace pronet {
 		poolObject_shared_ptr(poolObject_shared_ptr<T, N>& o) noexcept
 		{
 			sp = o.sp;
-			std::cout << sp.use_count() << std::endl;
 		}
 
 		~poolObject_shared_ptr() {

@@ -88,19 +88,25 @@ namespace pronet {
 		uint8_t level(0);
 		size_t resized(0);
 		for (auto &a : tree) {
-			if (((size + UNSIGNED_INT_64 - 1) >> level) > UNSIGNED_INT_64 * a.size()) {
-				resized = ((size >> level) + UNSIGNED_INT_64 - 1) / UNSIGNED_INT_64;
-				//	ツリーのサイズを変更する
-				if (!val) {
-					if (resized)
+			resized = ((size >> level) + UNSIGNED_INT_64 - 1) / UNSIGNED_INT_64;
+			//	ツリーのサイズを変更する
+			if (!val) {
+				if (resized) {
+					if (resized != a.size())
 						a.resize(resized, 0);
-					else
-						a.resize(1, 0);
 				}
 				else {
-					if (resized)
+					if (1 != a.size())
+						a.resize(1, 0);
+				}
+			}
+			else {
+				if (resized) {
+					if (resized != a.size())
 						a.resize(resized, ~(0));
-					else
+				}
+				else {
+					if (1 != a.size())
 						a.resize(1, ~(0));
 				}
 			}
@@ -109,7 +115,6 @@ namespace pronet {
 
 		//	未使用の部分をマスクする				
 		size_t miss_size(tree[0].size() * UNSIGNED_INT_64 - size);
-		std::cout << "miss size : " << miss_size << std::endl;
 		assert((miss_size <= 64) && "Error : bit_tree.resize : miss_size is lager than UNSIGNED_INT_64 bufsize");
 		for (size_t i = size; i < (tree[0].size() * UNSIGNED_INT_64); i++) {
 			if (!val)
@@ -127,25 +132,33 @@ namespace pronet {
 		_bit_find_one_from_reverse(_cmpsize, UNSIGNED_INT_64, 0, &index);
 		if (index >= N)
 			index = N - 1;
-		size_t divpos(tree_size >> index);
+		//	探索する右端、最大サイズ
+		size_t divposr((tree_size + ((1 << index) - 1)) >> index);
+		//	探索する左端、最大サイズ内に収まるLSB
+		size_t divposl(0);
 		for (size_t i = index; i > 0; i--) {
-			if (tree[i].find_one_from_reverse(divpos, &divpos)) {
-				divpos++;
+			if (tree[i].find_one_from_reverse_llim(divposl, divposr, &divposl)) {
+				//	範囲内のLSBを検索する
 			}
-			divpos << 1;
+			//	左端を次のレベルのインデックスに変換する
+			divposl = (divposl << 1);
+			//	右端を次のレベルのインデックスに再計算する。変換だと範囲外と混在しているときに範囲外も含まれてしまうため
+			divposr = (tree_size + ((1 << (i - 1)) - 1)) >> (i - 1);
 		}
-		if (tree[0].find_one_from_reverse(divpos, &divpos)) {
-			divpos++;
+		//	最下位レベルで求めた範囲で検索を行う
+		if (tree[0].find_one_from_reverse_llim(divposl, divposr, &divposl)) {
+			divposl++;
 		}
 		else {
+			printAllBit();
 			throw std::logic_error("bit_tree mustn't work properly!! : bit_tree.compress(size_t*const,size_t)");
 		}
 
-		if (tree_size - divpos > _cmpsize) {
+		if (tree_size - divposl > _cmpsize) {
 			*_idx = tree_size - _cmpsize;
 		}
 		else {
-			*_idx = divpos;
+			*_idx = divposl;
 		}
 	}
 

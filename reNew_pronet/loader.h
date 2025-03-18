@@ -68,6 +68,7 @@ namespace pronet {
 		}
 		for (size_t i = 0; i < info.shaders->size; i++) {
 			shader[i] = init_shader(info.shaders[i].vsrc.c_str(), info.shaders[i].fsrc.c_str());
+			std::cout << "i : " << i << std::endl;
 		}
 
 		for (size_t i = 0; i < info.strs[pronet::CHANCK_NATIVE]->size; i++) {

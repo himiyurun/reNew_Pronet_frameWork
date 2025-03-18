@@ -110,8 +110,9 @@ void pronet::ObjectPool<T, N>::push(pronet::Pool_Object<T>* ptr)
 	ptr->index = 0;
 	ptr->data = nullptr;
 	used_size--;
-	if (used_size)
+	if (used_size) {
 		compre();
+	}
 	else
 		resize(buf_size / 2);
 }
@@ -127,11 +128,11 @@ bool pronet::ObjectPool<T, N>::get_bit_to_pool_status() const
 template<class T, std::size_t N>
 void pronet::ObjectPool<T, N>::resize(size_t size)
 {
-	std::cout << "resize : " << size << ", prev size : " << buf_size << std::endl;
 	objpool.resize(size);
 	bit_map.resize(size);
 	buf_size = size;
 	pool_top = objpool.data();
+	std::cout << "resize : " << size << ", prev size : " << buf_size << std::endl;
 }
 
 template<class T, std::size_t N>
@@ -139,15 +140,14 @@ inline void pronet::ObjectPool<T, N>::compre()
 {
 	if (!is_compred())
 		return;
-	std::cout << "compare" << std::endl;
 	size_t index(0);
 	size_t cmp_size(buf_size / 2);
 	assert(cmp_size && "Error : diff size is 0 : ObjectPool.compare()");
 	//	ˆ³k‚Å‚«‚éÅ‘åƒTƒCƒY‚ð‹‚ß‚é
-	std::cout << "wish size : " << cmp_size << std::endl;
 	bit_map.compress(&index, cmp_size);
 	std::cout << "compress_size : " << index << std::endl;
-	resize(index);
+	if (index != buf_size)
+		resize(index);
 }
 
 template<class T, std::size_t N>

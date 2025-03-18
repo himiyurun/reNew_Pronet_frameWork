@@ -126,12 +126,12 @@ namespace pronet {
 			return false;
 		}
 
-		bool find_zero_from_reverse(size_t _start, size_t* const _idx) const {
+		bool find_zero_from_reverse_l(size_t _start, size_t* const _idx) const {
 			size_t current(getCurrent(_start));
-			size_t offset(getIndex(_start));
+			size_t offset(UNSIGNED_INT_64 - getIndex(_start) - 1);
 			size_t index(0);
 
-			assert(_start < bit.size() * 64 && "Error : BitMap64.find_zero_from_reverse : out of range");
+			assert(_start < bit.size() * 64 && "Error : BitMap64.find_zero_from_reverse_l : out of range");
 
 			if (_bit_find_zero_from_reverse(bit[current] << offset, UNSIGNED_INT_64, 0, &index)) {
 				*_idx = index - offset + ((uint64_t)current << BITCOUNT_OF_64);
@@ -146,12 +146,95 @@ namespace pronet {
 			return false;
 		}
 
-		bool find_one_from_reverse(size_t _start, size_t* const _idx) const {
-			size_t current(getCurrent(_start));
-			size_t offset(getIndex(_start));
+		bool find_zero_from_reverse_r(size_t _start, size_t* const _idx) const {
+			size_t current(getCurrent((bit.size() * UNSIGNED_INT_64) - _start - 1));
+			size_t offset(bit.size() - getIndex(_start) - 1);
 			size_t index(0);
 
-			assert(_start < bit.size() * 64 && "Error : BitMap64.find_zero_from_reverse : out of range");
+			assert(_start < bit.size() * 64 && "Error : BitMap64.find_one_from_reverse_r : out of range");
+
+			if (_bit_find_zero_from_reverse(bit[current] << offset, UNSIGNED_INT_64, 0, &index)) {
+				*_idx = index - offset + ((uint64_t)current << BITCOUNT_OF_64);
+				return true;
+			}
+			for (size_t i = --current; i < current; i--) {
+				if (_bit_find_zero_from_reverse(bit[i], UNSIGNED_INT_64, 0, &index)) {
+					*_idx = index + ((uint64_t)i << BITCOUNT_OF_64);
+					return true;
+				}
+			}
+			return false;
+		}
+
+		bool find_one_from_reverse_l(size_t _start, size_t* const _idx) const {
+			size_t current(getCurrent(_start));
+			size_t offset(bit.size() - getIndex(_start) - 1);
+			size_t index(0);
+
+			assert(_start < bit.size() * 64 && "Error : BitMap64.find_one_from_reverse_l : out of range");
+
+			if (_bit_find_one_from_reverse(bit[current] << offset, UNSIGNED_INT_64, 0, &index)) {
+				*_idx = index - offset + ((uint64_t)current << BITCOUNT_OF_64);
+				return true;
+			}
+			for (size_t i = --current; i < current; i--) {
+				if (_bit_find_one_from_reverse(bit[i], UNSIGNED_INT_64, 0, &index)) {
+					*_idx = index + ((uint64_t)i << BITCOUNT_OF_64);
+					return true;
+				}
+			}
+			return false;
+		}
+
+		//	範囲内で検索する
+		bool find_one_from_reverse_llim(size_t _start, size_t _limit, size_t* const _idx) const {
+			//	左端のインデックス
+			size_t current(getCurrent(_start));
+			size_t offset(getIndex(_start));
+			//	右端のインデックス
+			size_t current_lim(getCurrent(_limit));
+			size_t offset_lim(getIndex(_limit));
+			size_t index(0);
+
+			assert(_start < bit.size() * 64 && "Error : BitMap64.find_one_from_reverse_llim : out of range");
+			assert(current_lim >= current && "Error : BitMap64.find_one_from_reverse_llim : current is too small!!");
+			
+			//	カレントが同じとき、オフセットの差分の範囲内で検索する
+			if (current == current_lim) {
+				assert(offset_lim >= offset && "Error : BitMap64.find_one_from_reverse_llim : offset is too small!!");
+				if (_bit_find_one_from_reverse(_bit_extract_area(bit[current], UNSIGNED_INT_64, offset, offset_lim - offset), UNSIGNED_INT_64, 0, &index)) {
+					*_idx = index + offset + ((uint64_t)current << BITCOUNT_OF_64);
+					return true;
+				}
+				return false;
+			}
+
+			//	カレントが異なるとき、まずはリミットのオフセットとカレントで検索する
+			if (_bit_find_one_from_reverse(_bit_extract_area(bit[current_lim], UNSIGNED_INT_64, 0, offset_lim), UNSIGNED_INT_64, 0, &index)) {
+				*_idx = index + ((uint64_t)current_lim << BITCOUNT_OF_64);
+				return true;
+			}
+			//	スタートのカレントとリミットのカレント以外は全範囲検索する必要があるので検索する。
+			for (size_t i = --current_lim; i > current; i--) {
+				if (_bit_find_one_from_reverse(bit[i], UNSIGNED_INT_64, 0, &index)) {
+					*_idx = index + ((uint64_t)i << BITCOUNT_OF_64);
+					return true;
+				}
+			}
+			//	スタートのカレントは左側をマスクするのでデフォルトのマスクを使える
+			if (_bit_find_one_from_reverse(bit[current], UNSIGNED_INT_64, offset, &index)) {
+				*_idx = index + ((uint64_t)current << BITCOUNT_OF_64);
+				return true;
+			}
+			return false;
+		}
+
+		bool find_one_from_reverse_r(size_t _start, size_t* const _idx) const {
+			size_t current(getCurrent((bit.size() * UNSIGNED_INT_64) - _start - 1));
+			size_t offset(bit.size() - getIndex(_start) - 1);
+			size_t index(0);
+
+			assert(_start < bit.size() * 64 && "Error : BitMap64.find_one_from_reverse_r : out of range");
 
 			if (_bit_find_one_from_reverse(bit[current] << offset, UNSIGNED_INT_64, 0, &index)) {
 				*_idx = index - offset + ((uint64_t)current << BITCOUNT_OF_64);
