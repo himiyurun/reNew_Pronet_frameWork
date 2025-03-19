@@ -148,7 +148,7 @@ namespace pronet {
 
 		bool find_zero_from_reverse_r(size_t _start, size_t* const _idx) const {
 			size_t current(getCurrent((bit.size() * UNSIGNED_INT_64) - _start - 1));
-			size_t offset(bit.size() - getIndex(_start) - 1);
+			size_t offset(UNSIGNED_INT_64 - getIndex(_start) - 1);
 			size_t index(0);
 
 			assert(_start < bit.size() * 64 && "Error : BitMap64.find_one_from_reverse_r : out of range");
@@ -168,11 +168,11 @@ namespace pronet {
 
 		bool find_one_from_reverse_l(size_t _start, size_t* const _idx) const {
 			size_t current(getCurrent(_start));
-			size_t offset(bit.size() - getIndex(_start) - 1);
+			size_t offset(UNSIGNED_INT_64 - getIndex(_start) - 1);
 			size_t index(0);
 
 			assert(_start < bit.size() * 64 && "Error : BitMap64.find_one_from_reverse_l : out of range");
-
+			std::cout << "start : " << _start << ", current : " << current << ", offset : " << offset << std::endl;
 			if (_bit_find_one_from_reverse(bit[current] << offset, UNSIGNED_INT_64, 0, &index)) {
 				*_idx = index - offset + ((uint64_t)current << BITCOUNT_OF_64);
 				return true;
@@ -231,7 +231,7 @@ namespace pronet {
 
 		bool find_one_from_reverse_r(size_t _start, size_t* const _idx) const {
 			size_t current(getCurrent((bit.size() * UNSIGNED_INT_64) - _start - 1));
-			size_t offset(bit.size() - getIndex(_start) - 1);
+			size_t offset(UNSIGNED_INT_64 - getIndex(_start) - 1);
 			size_t index(0);
 
 			assert(_start < bit.size() * 64 && "Error : BitMap64.find_one_from_reverse_r : out of range");

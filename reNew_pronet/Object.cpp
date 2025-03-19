@@ -25,7 +25,7 @@ void Object::init(GLint size, const ObjectInfo2v *const info, GLboolean index_us
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * vertexcount, info->verts->data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * vertexcount, &info->verts[0], GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, size, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
@@ -34,7 +34,7 @@ void Object::init(GLint size, const ObjectInfo2v *const info, GLboolean index_us
 		indexcount = info->indexcount;
 		glGenBuffers(1, &ibo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::vec2) * indexcount, info->index->data, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::vec2) * indexcount, &info->index[0], GL_STATIC_DRAW);
 	}
 }
 
