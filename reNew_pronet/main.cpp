@@ -4,7 +4,6 @@
 #define CHANCK_LOAD_SIZE	(1)
 
 #include "Pronet.h"
-#include "tlsf.h"
 
 void libInit() 
 {
@@ -124,6 +123,7 @@ int main() {
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Error : " << e.what() << std::endl;
+		getchar();
 		return EXIT_FAILURE;
 	}
 	return EXIT_SUCCESS;

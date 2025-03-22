@@ -6,6 +6,7 @@ void pronet::initUniformBlock()
 	unf[PNGL_WINDOW_PARAM].Init("window", sizeof(WindowParam));
 	unf[PN_GAME_STRUCTURE_PARAM].Init("structure", sizeof(Structure2vParam));
 	unf[PN_GAME_PLAYER_PARAM].Init("player", sizeof(Player2vParam));
+	unf[GAME_BULLET_PARAM].Init("bullet", sizeof(BulletParam));
 }
 
 void pronet::getBlockBindInfo(GLuint program, size_t buf[SHADER_BLOCK_SIZE])
@@ -35,6 +36,11 @@ void pronet::updateGameObjectUniformParam(const Structure2vParam* strParam)
 void pronet::updateApplicationUniformParam(const WindowParam* windowParam)
 {
 	unf[PNGL_WINDOW_PARAM].Update(windowParam);
+}
+
+void pronet::updateUniformBlock(ShaderBlock _param, const void* const _ptr)
+{
+	unf[_param].Update(_ptr);
 }
 
 void pronet::bindUniformObject(const size_t buf[SHADER_BLOCK_SIZE])

@@ -123,6 +123,12 @@
     <ClCompile Include="pnMath.cpp">
       <Filter>ソース ファイル\PnLib\util</Filter>
     </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>ソース ファイル\PnLib\pnstr</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>ソース ファイル\PnLib\pnstr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pronet.h">
@@ -212,6 +218,12 @@
     <ClInclude Include="loader.h">
       <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>ヘッダー ファイル\PnHead\pnstr</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>ヘッダー ファイル\PnHead\pnstr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="game_object1.str2v">
@@ -260,6 +272,12 @@
       <Filter>リソース ファイル\Shader</Filter>
     </None>
     <None Include="debug_c4t.frag">
+      <Filter>リソース ファイル\Shader</Filter>
+    </None>
+    <None Include="bullet.vert">
+      <Filter>リソース ファイル\Shader</Filter>
+    </None>
+    <None Include="bullet.frag">
       <Filter>リソース ファイル\Shader</Filter>
     </None>
   </ItemGroup>

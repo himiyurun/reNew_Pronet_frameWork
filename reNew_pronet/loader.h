@@ -32,8 +32,8 @@ namespace pronet {
 		(const char* const _vsrc, const char* const _fsrc) const;
 
 		poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> init_structure
-		(const Structure2vParamCreateInfo* const strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object
-			, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index) const;
+		(const Structure2vParamCreateInfo* const strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object
+			, const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index) const;
 	private:
 
 		//static ObjectPool_Array<poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv>> sp_array;
@@ -115,7 +115,7 @@ namespace pronet {
 	}
 
 	template<std::size_t VBOLV, std::size_t SHDLV>
-	inline poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> loader<VBOLV, SHDLV>::init_structure(const Structure2vParamCreateInfo *const strInfo, pronet::poolObject_shared_ptr<Object, VBOLV> object, pronet::poolObject_shared_ptr<Shader, SHDLV> shader, uint32_t tex_index) const
+	inline poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> loader<VBOLV, SHDLV>::init_structure(const Structure2vParamCreateInfo *const strInfo, const pronet::poolObject_shared_ptr<Object, VBOLV>& object, const pronet::poolObject_shared_ptr<Shader, SHDLV>& shader, uint32_t tex_index) const
 	{
 		poolObject_shared_ptr<Structure2v<VBOLV, SHDLV>, strLv> structure(&str_pool);
 		structure->init(strInfo, object, shader, tex_index);
