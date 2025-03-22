@@ -28,9 +28,6 @@
     <Filter Include="リソース ファイル\MemoryAllocaterLog">
       <UniqueIdentifier>{7d25417c-60d4-4b90-a208-525c2606eb14}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Shader">
-      <UniqueIdentifier>{3468d990-bed4-48d7-a6bf-b6be6f7619bb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\PnLib\exmemory">
       <UniqueIdentifier>{9373ef29-0c38-4efe-be4a-648d48a85101}</UniqueIdentifier>
     </Filter>
@@ -66,6 +63,9 @@
     </Filter>
     <Filter Include="ソース ファイル\PnLib\col">
       <UniqueIdentifier>{35a93905-11e3-4a43-9db9-0998961d46b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\Shader">
+      <UniqueIdentifier>{3468d990-bed4-48d7-a6bf-b6be6f7619bb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -111,17 +111,29 @@
     <ClCompile Include="Chanck.cpp">
       <Filter>ソース ファイル\PnLib</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="collib.cpp">
       <Filter>ソース ファイル\PnLib\col</Filter>
     </ClCompile>
-    <ClCompile Include="pnMath.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Collision_4tree.cpp">
       <Filter>ソース ファイル\PnLib\col</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\PnLib</Filter>
+    </ClCompile>
+    <ClCompile Include="pnMath.cpp">
+      <Filter>ソース ファイル\PnLib\util</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>ソース ファイル\PnLib\pnstr</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>ソース ファイル\PnLib\pnstr</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="readBMP.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +176,6 @@
     <ClInclude Include="bit.h">
       <Filter>ヘッダー ファイル\PnHead\util</Filter>
     </ClInclude>
-    <ClInclude Include="loader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="TLSFmemory.h">
       <Filter>ヘッダー ファイル\PnHead\exmemory\Allocater</Filter>
     </ClInclude>
@@ -197,17 +206,35 @@
     <ClInclude Include="collib.h">
       <Filter>ヘッダー ファイル\PnHead\col</Filter>
     </ClInclude>
-    <ClInclude Include="Collision_4tree.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="colCell.h">
-      <Filter>ヘッダー ファイル\PnHead</Filter>
-    </ClInclude>
     <ClInclude Include="pnMath.h">
       <Filter>ヘッダー ファイル\PnHead\util</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\PnHead</Filter>
+    </ClInclude>
+    <ClInclude Include="colCell.h">
+      <Filter>ヘッダー ファイル\PnHead\col</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision_4tree.h">
+      <Filter>ヘッダー ファイル\PnHead\col</Filter>
+    </ClInclude>
+    <ClInclude Include="tlsf.h">
+      <Filter>ヘッダー ファイル\PnHead\util</Filter>
+    </ClInclude>
+    <ClInclude Include="loader.h">
+      <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>ヘッダー ファイル\PnHead\pnstr</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>ヘッダー ファイル\PnHead\pnstr</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="readBMP.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,10 +248,10 @@
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="fragment_shader.frag">
-      <Filter>ソース ファイル\Shader</Filter>
+      <Filter>リソース ファイル\Shader</Filter>
     </None>
     <None Include="vertex_shader.vert">
-      <Filter>ソース ファイル\Shader</Filter>
+      <Filter>リソース ファイル\Shader</Filter>
     </None>
     <None Include="sample.pnmap2">
       <Filter>リソース ファイル</Filter>
@@ -239,7 +266,7 @@
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="fragment_shader2.frag">
-      <Filter>ソース ファイル\Shader</Filter>
+      <Filter>リソース ファイル\Shader</Filter>
     </None>
     <None Include="player.fi">
       <Filter>リソース ファイル</Filter>
@@ -248,16 +275,22 @@
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="player.vert">
-      <Filter>ソース ファイル\Shader</Filter>
+      <Filter>リソース ファイル\Shader</Filter>
     </None>
     <None Include="player.frag">
-      <Filter>ソース ファイル\Shader</Filter>
+      <Filter>リソース ファイル\Shader</Filter>
     </None>
     <None Include="debug_c4t.vert">
-      <Filter>ソース ファイル\Shader</Filter>
+      <Filter>リソース ファイル\Shader</Filter>
     </None>
     <None Include="debug_c4t.frag">
-      <Filter>ソース ファイル\Shader</Filter>
+      <Filter>リソース ファイル\Shader</Filter>
+    </None>
+    <None Include="bullet.vert">
+      <Filter>リソース ファイル\Shader</Filter>
+    </None>
+    <None Include="bullet.frag">
+      <Filter>リソース ファイル\Shader</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

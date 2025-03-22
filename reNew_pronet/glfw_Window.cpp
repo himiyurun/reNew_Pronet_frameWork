@@ -2,7 +2,7 @@
 
 glfw_Window::glfw_Window(glfw_windowCreateInfo* windowinfo) noexcept
 	: window(glfwCreateWindow(windowinfo->width, windowinfo->height, windowinfo->title, windowinfo->monitor, nullptr))
-	, keyStatus(GLFW_RELEASE)
+	, keyStatus(GLFW_RELEASE), swapStatus(false)
 {
 	if (window == nullptr) {
 		std::cerr << "Error : window is null" << std::endl;
@@ -54,6 +54,11 @@ void glfw_Window::bindWindowPram(GLuint sizeLoc, GLuint scaleLoc) const
 	glUniform1f(scaleLoc, param.scale);
 }
 
+void glfw_Window::setSwapEventsStatus(bool _status)
+{
+	swapStatus = _status;
+}
+
 void glfw_Window::run()
 {
 	while (!glfwWindowShouldClose(window)) {
@@ -63,10 +68,15 @@ void glfw_Window::run()
 
 		glfwSwapBuffers(window);
 
-		if (keyStatus == GLFW_RELEASE)
-			glfwWaitEvents();
-		else
+		if (swapStatus) {
 			glfwPollEvents();
+		}
+		else {
+			if (keyStatus == GLFW_RELEASE)
+				glfwWaitEvents();
+			else
+				glfwPollEvents();
+		}
 	}
 }
 

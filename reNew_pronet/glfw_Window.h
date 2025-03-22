@@ -20,6 +20,7 @@ protected:
 	GLFWwindow* const window;
 	WindowParam param;
 	GLint keyStatus;
+	GLboolean swapStatus;
 
 public:
 
@@ -32,12 +33,16 @@ public:
 	//	scaleLoc : ウインドウスケールの uniform変数の場所、float型
 	void bindWindowPram(GLuint sizeLoc, GLuint scaleLoc) const;
 
+	void setSwapEventsStatus(bool _status);
+
 	void run();
 
 	virtual void process()
 	{
 		std::cout << "Hello World!!" << std::endl;
 	};
+
+	[[nodiscard]] bool swapStat() const { return swapStatus; }
 
 private:
 

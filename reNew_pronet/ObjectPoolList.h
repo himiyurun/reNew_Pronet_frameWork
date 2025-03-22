@@ -5,12 +5,12 @@
 namespace pronet {
 	template<typename T>
 	struct PoolArray {
-		T* data;		//	プールのポインタ
+		T** data;		//	プールのポインタ
 		size_t index;	//	ビットマップのインデックス
 		size_t size;	//	実際のサイズ
 
 		//	コンストラクタ
-		PoolArray(T* data = nullptr, size_t index = 0, size_t size = 0) : data(data), index(index), size(size) {}
+		PoolArray(T** data = nullptr, size_t index = 0, size_t size = 0) : data(data), index(index), size(size) {}
 
 		//	コピーコンストラクタ
 		PoolArray(const PoolArray& o) : data(o.data), index(o.index), size(o.size) {}
@@ -22,7 +22,7 @@ namespace pronet {
 			o.data = nullptr;
 			o.index = 0;
 			o.size = 0;
-		}
+		}	
 
 		// コピー代入演算子
 		PoolArray& operator=(const PoolArray<T>& o) {
@@ -38,7 +38,7 @@ namespace pronet {
 		{
 			assert(data && "Error : PoolArray.operator[](size_t) : data is null");
 			if (n < size)
-				return data[n];
+				return (*data)[n + index];
 			else
 				throw std::out_of_range("PoolArray.operator[](size_t) out of range");
 		}
@@ -47,7 +47,7 @@ namespace pronet {
 		{
 			assert(data && "Error : PoolArray.operator[](size_t) : data is null");
 			if (n < size)
-				return data[n];
+				return (*data)[n + index];
 			else
 				throw std::out_of_range("PoolArray.operator[](size_t) out of range");
 		}

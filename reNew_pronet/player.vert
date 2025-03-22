@@ -15,11 +15,24 @@ layout(std140) uniform player {
 	bool intersect;
 }ply;
 
-vec2 scaling() {
+vec2 scaling2v() {
 	return vec2(win.scale / win.size);
+}
+
+vec4 scaling4v() {
+	return vec4(vec2(win.scale / win.size), 1.0, 1.0);
+}
+
+void scaleWindows() {
+	gl_Position *= scaling4v();
+}
+
+mat2 rotatef(float _rad) {
+	return mat2(cos(_rad), -sin(_rad), sin(_rad), cos(_rad));
 }
 
 void main()
 {
-	gl_Position = (position + vec4(ply.position, 0.0, 0.0)) * vec4(scaling(), 1.0, 1.0);
+	gl_Position = (position + vec4(ply.position, 0.0, 0.0));
+	scaleWindows();
 }

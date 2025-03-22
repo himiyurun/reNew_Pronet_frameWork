@@ -19,6 +19,17 @@ namespace pronet {
 		uint32_t pointer;
 		//	実際のサイズ、小さい場合は空になり次第解放
 		uint32_t bufsize;
+		//	使用されているサイズ
+		uint32_t usedsize;
+		//	平均サイズ
+		uint32_t avgsize;
+		uint32_t avgcount;
+		//	連続してオブジェクトを確保した回数
+		uint32_t getcount;
+		//	連続してオブジェクトを解放した回数
+		uint32_t backcount;
+		//	配列の先頭のポインタ
+		T* pool_top;
 
 	public:
 		//	コンストラクタ
@@ -36,8 +47,9 @@ namespace pronet {
 		void printBitMap() const;
 
 	private:
+		inline void compress();
 		//	適したブロックをプールから探す
-		T* search_pool_block(size_t size, size_t* indices);
+		T** search_pool_block(size_t size, size_t* indices);
 		//	ビットマップを使用して検索する
 		inline uint32_t search_bit_area(uint8_t size);
 		//	ポインタ（カレント）をリセットする
@@ -56,14 +68,23 @@ namespace pronet {
 		void printIs_used() const;
 		//	ビットを描画する
 		void printBit(uint64_t num, uint8_t size) const;
+
+		[[nodiscard]] bool is_compress() const { 
+			if (avgcount) {
+				if ((usedsize * 4) < (avgsize / avgcount))
+					return true;
+			}
+			return false;
+		}
 	};
 }
 
 template<typename T>
 pronet::ObjectPool_Array<T>::ObjectPool_Array(size_t size)
 	: valPool(0)
-	, is_used(0)
-	, pointer(0), bufsize(size)
+	, pointer(0), bufsize(size), usedsize(0)
+	, avgsize(0), avgcount(0), getcount(0), backcount(0)
+	, pool_top(nullptr)
 {
 	resize(size);
 }
@@ -76,17 +97,30 @@ pronet::ObjectPool_Array<T>::~ObjectPool_Array()
 template<typename T>
 pronet::PoolArray<T> pronet::ObjectPool_Array<T>::get(size_t size)
 {
+	if (backcount != 0) {
+		avgsize += usedsize;
+		avgcount++;
+		backcount = 0;
+	}
 	PoolArray<T> info;
 	info.data = search_pool_block(size_dived_size(size), &info.index);
 	info.size = size;
+	usedsize++;
+	getcount++;
 	return info;
 }
 
 template<typename T>
 void pronet::ObjectPool_Array<T>::back(PoolArray<T>* p)
 {
+	if (getcount != 0) {
+		avgsize += usedsize;
+		avgcount++;
+		getcount = 0;
+		compress();
+	}
 	size_t bit_size(p->size / 4);
-	is_used.write_Bit_0(p->index, bit_size);
+	is_used.write_Bit_0(p->index / 4, bit_size);
 
 	/*
 	size_t idx(p->index * 4);
@@ -96,10 +130,11 @@ void pronet::ObjectPool_Array<T>::back(PoolArray<T>* p)
 		idx++;
 	}
 	*/
-
 	p->data = nullptr;
 	p->index = 0;
 	p->size = 0;
+	usedsize--;
+	backcount++;
 
 #ifdef _POOL_DEBUG
 	is_used.printBit();
@@ -113,7 +148,13 @@ void pronet::ObjectPool_Array<T>::resize(size_t size)
 		is_used.resize(paritition_size_Alignment(size));
 	}
 	size_t prevSize(valPool.size());
-	valPool.resize(size_Alingment(size));
+	size_t prevSizeIndex(prevSize / 4);
+	size_t nextSize(size_Alingment(size));
+	size_t nextSizeIndex(nextSize / 4);
+	is_used.write_Bit_0(prevSizeIndex, UNSIGNED_INT_64 - (prevSizeIndex % UNSIGNED_INT_64));
+	valPool.resize(nextSize);
+	is_used.write_Bit_1(nextSizeIndex, UNSIGNED_INT_64 - (nextSizeIndex % UNSIGNED_INT_64));
+	pool_top = valPool.data();
 }
 
 template<typename T>
@@ -123,18 +164,47 @@ inline void pronet::ObjectPool_Array<T>::printBitMap() const
 }
 
 template<typename T>
-T* pronet::ObjectPool_Array<T>::search_pool_block(size_t size, size_t* indices)
+inline void pronet::ObjectPool_Array<T>::compress()
+{
+	if (!is_compress())
+		return;
+
+	uint32_t cmpsize(usedsize * 2);
+	size_t index(0);
+	is_used.find_one_from_reverse_l((bufsize / 4) - 1, &index);
+	index = (++index) * 4;
+	is_used.printBit();
+	
+	if (index < cmpsize) {
+		if (bufsize != index)
+			resize(index);
+	}
+	else {
+		if (bufsize != cmpsize)
+			resize(cmpsize);
+	}
+}
+
+template<typename T>
+T** pronet::ObjectPool_Array<T>::search_pool_block(size_t size, size_t* indices)
 {
 	uint32_t index(0);
-
 	index = search_bit_area(size);
 	if (index == 0xffffffff) {
-		std::cerr << "ObjectPool_Array is Full. you should call .resize" << std::endl;
-		return nullptr;
-	}
-	*indices = index;
+		if (size >= bufsize * 2)
+			resize(size * 2);
+		else
+			resize(bufsize * 2);
 
-	return &valPool[index * 4];
+		index = search_bit_area(size);
+		if (index == 0xffffffff) {
+			throw std::logic_error("ObjectPool_Array is not work properly : ObjectPool_Array.search_pool_block(size_t, size_t*)");
+		}
+		std::cerr << "ObjectPool_Array is Full. you called .resize" << std::endl;
+	}
+	*indices = index * 4;
+
+	return &pool_top;
 }
 
 template<typename T>
@@ -181,12 +251,7 @@ uint32_t pronet::ObjectPool_Array<T>::search_bit_area(uint8_t size)
 template<typename T>
 size_t pronet::ObjectPool_Array<T>::size_Alingment(size_t size) const
 {
-	if (size % POOL_DIVIED_SIZE == 0) {
-		return size;
-	}
-	else {
-		return POOL_DIVIED_SIZE * ((size / POOL_DIVIED_SIZE) + 1);
-	}
+	return (size + POOL_DIVIED_SIZE - 1) & ~(0x03);
 }
 
 template<typename T>

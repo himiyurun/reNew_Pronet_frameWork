@@ -13,20 +13,39 @@ namespace pronet {
 	//	n : 描画したい変数
 	//	size : 変数のビット数
 	void print_bit(uint64_t n, uint8_t size);
+	void _bit_print(uint64_t _n);
+	void _bit_print(uint32_t _n);
+	void _bit_print(uint16_t _n);
+	void _bit_print(uint8_t _n);
+
 
 	//	変数のビットの最小のビットの0を検索する関数、見つからなかったら false を返す
 	//	n : 対象の変数
 	//	size : 変数のビット数
 	//	start : 検索を始める位置
 	//	idx : インデックスを格納する変数、見つからなかったら操作が行われない
-	bool _bit_find_zero_from(uint64_t n, size_t size, size_t start, size_t* idx);
+	bool _bit_find_zero_from(uint64_t n, size_t size, size_t start, size_t* const idx);
 
 	//	変数のビットの最小のビットの1を検索する関数、見つからなかったら false を返す
 	//	n : 対象の変数
 	//	size : 変数のビット数
 	//	start : 検索を始める位置
 	//	idx : インデックスを格納する変数、見つからなかったら操作が行われない
-	bool _bit_find_one_from(uint64_t n, size_t size, size_t start, size_t* idx);
+	bool _bit_find_one_from(uint64_t n, size_t size, size_t start, size_t* const idx);
+
+	//	変数のビットの末尾の0を検索する関数、見つからなかったら false を返す
+	//	n : 対象の変数
+	//	size : 変数のビット数
+	//	start : 検索を始める位置
+	//	idx : インデックスを格納する変数、見つからなかったら操作が行われない
+	bool _bit_find_zero_from_reverse(uint64_t n, size_t size, size_t start, size_t* const idx);
+
+	//	変数のビットの末尾の0を検索する関数、見つからなかったら false を返す
+	//	n : 対象の変数
+	//	size : 変数のビット数
+	//	start : 検索を始める位置
+	//	idx : インデックスを格納する変数、見つからなかったら操作が行われない
+	bool _bit_find_one_from_reverse(uint64_t n, size_t size, size_t start, size_t* const idx);
 
 	//	指定した領域のビットを抽出する関数
 	//	n : 抽出したい変数

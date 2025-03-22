@@ -2,7 +2,7 @@
 #include <array>
 #include <vector>
 
-#include "bit.h"
+#include "BitMap64.h"
 
 namespace pronet {
 	//	N : ツリーのレベル
@@ -12,10 +12,10 @@ namespace pronet {
 	//	N : ツリーのレベル
 	class bit_tree
 	{
-		std::array<std::vector<uint64_t>, N> tree;
-
+		std::array<BitMap64, N> tree;
+		//	データの数
 		size_t tree_size;
-
+		//	入力する値のモード
 		bool val;
 
 	public:
@@ -27,6 +27,11 @@ namespace pronet {
 		//	ビットマップのサイズを変更する
 		//	size : 変更したいサイズ
 		void resize(size_t size);
+
+		//	一番後ろにある要素のインデックスを取得する
+		//	idx : インデックスのポインタ
+		//	cmpsize : 圧縮するサイズ
+		void compress(size_t* const _idx, size_t _cmpsize) const;
 
 		//	指定されたインデックスにレジストする
 		//	index : インデックス
@@ -80,24 +85,38 @@ namespace pronet {
 	{
 		//	使用する部分を開放する
 		unlock_bit_map(0, size);
-
 		uint8_t level(0);
-		for (std::vector<uint64_t> &a : tree) {
-
-			if (((size + UNSIGNED_INT_64 - 1) >> level) > UNSIGNED_INT_64 * a.size()) {
-				//	ツリーのサイズを変更する
-				if (val == false)
-					a.resize(((size >> level) + UNSIGNED_INT_64 - 1) / UNSIGNED_INT_64, 0);
-				else
-					a.resize(((size >> level) + UNSIGNED_INT_64 - 1) / UNSIGNED_INT_64, ~(0));
+		size_t resized(0);
+		for (auto &a : tree) {
+			resized = ((size >> level) + UNSIGNED_INT_64 - 1) / UNSIGNED_INT_64;
+			//	ツリーのサイズを変更する
+			if (!val) {
+				if (resized) {
+					if (resized != a.size())
+						a.resize(resized, 0);
+				}
+				else {
+					if (1 != a.size())
+						a.resize(1, 0);
+				}
+			}
+			else {
+				if (resized) {
+					if (resized != a.size())
+						a.resize(resized, ~(0));
+				}
+				else {
+					if (1 != a.size())
+						a.resize(1, ~(0));
+				}
 			}
 			level++;
 		}
 
 		//	未使用の部分をマスクする				
 		size_t miss_size(tree[0].size() * UNSIGNED_INT_64 - size);
-		assert(miss_size < 64 && "Error : bit_tree.resize : miss_size is lager than UNSIGNED_INT_64 bufsize");
-		for (int i = size; i < (tree[0].size() * UNSIGNED_INT_64); i++) {
+		assert((miss_size <= 64) && "Error : bit_tree.resize : miss_size is lager than UNSIGNED_INT_64 bufsize");
+		for (size_t i = size; i < (tree[0].size() * UNSIGNED_INT_64); i++) {
 			if (!val)
 				write_index_one_from(i);
 			else
@@ -107,12 +126,48 @@ namespace pronet {
 	}
 
 	template<std::size_t N>
+	inline void bit_tree<N>::compress(size_t* const _idx, size_t _cmpsize) const
+	{
+		size_t index(0);
+		_bit_find_one_from_reverse(_cmpsize, UNSIGNED_INT_64, 0, &index);
+		if (index >= N)
+			index = N - 1;
+		//	探索する右端、最大サイズ
+		size_t divposr((tree_size + ((1 << index) - 1)) >> index);
+		//	探索する左端、最大サイズ内に収まるLSB
+		size_t divposl(0);
+		for (size_t i = index; i > 0; i--) {
+			if (tree[i].find_one_from_reverse_llim(divposl, divposr, &divposl)) {
+				//	範囲内のLSBを検索する
+			}
+			//	左端を次のレベルのインデックスに変換する
+			divposl = (divposl << 1);
+			//	右端を次のレベルのインデックスに再計算する。変換だと範囲外と混在しているときに範囲外も含まれてしまうため
+			divposr = (tree_size + ((1 << (i - 1)) - 1)) >> (i - 1);
+		}
+		//	最下位レベルで求めた範囲で検索を行う
+		if (tree[0].find_one_from_reverse_llim(divposl, divposr, &divposl)) {
+			divposl++;
+		}
+		else {
+			printAllBit();
+			throw std::logic_error("bit_tree mustn't work properly!! : bit_tree.compress(size_t*const,size_t)");
+		}
+
+		if (tree_size - divposl > _cmpsize) {
+			*_idx = tree_size - _cmpsize;
+		}
+		else {
+			*_idx = divposl;
+		}
+	}
+
+	template<std::size_t N>
 	inline bool bit_tree<N>::rigist(size_t *index)
 	{
 		size_t idx(0);
 		if (!search_free_block(&idx))
 			return false;
-
 		assert(idx < tree_size && "Error : bit_tree.rigist(size_t) : out of range It must be bug!!");
 
 		if (!val)
@@ -135,12 +190,14 @@ namespace pronet {
 			current = (index >> i) / UNSIGNED_INT_64;
 			now_index = (index >> i) % UNSIGNED_INT_64;
 			if (!val) {
-				if (_bit_get_status(tree[i][current], UNSIGNED_INT_64, now_index))
-					_bit_write_zero_area(&tree[i][current], UNSIGNED_INT_64, now_index, 1);
+				if (tree[i][index >> i]) {
+					tree[i].write_Bit_0(index >> i, 1);
+				}
 			}
 			else {
-				if (!_bit_get_status(tree[i][current], UNSIGNED_INT_64, now_index))
-					_bit_write_one_area(&tree[i][current], UNSIGNED_INT_64, now_index, 1);
+				if (!tree[i][index >> i]) {
+					tree[i].write_Bit_1(index >> i, 1);
+				}
 			}
 		}
 		return true;
@@ -152,49 +209,42 @@ namespace pronet {
 		uint8_t level(N - 1);
 		size_t index(0);
 		bool unrigist_status(false);
-		//	最上位レベルから、使用中のブロックを求められる場合は、先頭にアンレジストする
-		for (uint64_t a : tree[level]) {
-			if (!val) {
-				if (_bit_find_one_from(a, UNSIGNED_INT_64, 0, &index)) {
-					if ((index << level) < tree_size) {
-						unrigist(index << level);
-						unrigist_status = true;
-						return unrigist_status;
-					}
+		if (!val) {
+			if (tree[level].find_one_first(&index)) {
+				if ((index << level) < tree_size) {
+					unrigist(index << level);
+					unrigist_status = true;
+					return unrigist_status;
 				}
 			}
-			else {
-				if (_bit_find_zero_from(a, UNSIGNED_INT_64, 0, &index)) {
-					if ((index << level) < tree_size) {
-						unrigist(index << level);
-						unrigist_status = true;
-						return unrigist_status;
-					}
+		}
+		else {
+			if (tree[level].find_zero_first(&index)) {
+				if ((index << level) < tree_size) {
+					unrigist(index << level);
+					unrigist_status = true;
+					return unrigist_status;
 				}
 			}
 		}
 
-		uint32_t current(0);
-		//	見つからない場合は線形検索を行う
-		for (uint64_t a : tree[0]) {
-			if (!val) {
-				if (_bit_find_one_from(a, UNSIGNED_INT_64, 0, &index)) {
-					if ((index + current * UNSIGNED_INT_64) < tree_size) {
-						unrigist_status = unrigist(index);
-						return unrigist_status;
-					}
+		if (!val) {
+			if (tree[0].find_one_first(&index)) {
+				if (index < tree_size) {
+					unrigist_status = unrigist(index);
+					return unrigist_status;
 				}
 			}
-			else {
-				if (_bit_find_one_from(a, UNSIGNED_INT_64, 0, &index)) {
-					if ((index + current * UNSIGNED_INT_64) < tree_size) {
-						unrigist_status = unrigist(index);
-						return unrigist_status;
-					}
-				}
-			}
-			current++;
 		}
+		else {
+			if (tree[0].find_zero_first(&index)) {
+				if (index < tree_size) {
+					unrigist_status = unrigist(index);
+					return unrigist_status;
+				}
+			}
+		}
+
 		if (idx)
 			*idx = index;
 		return unrigist_status;
@@ -204,10 +254,8 @@ namespace pronet {
 	inline void bit_tree<N>::printAllBit() const
 	{
 		if (tree_size == 0) std::cerr << "tree_size is 0" << std::endl;
-		for (std::vector<uint64_t> a : tree) {
-			for (uint64_t b : a) {
-				print_bit(b, UNSIGNED_INT_64);
-			}
+		for (const auto& a : tree) {
+			a.printBit();
 		}
 	}
 
@@ -215,23 +263,20 @@ namespace pronet {
 	inline bool bit_tree<N>::search_free_block(size_t* idx) const
 	{
 		//	最上位レベルのどこに属しているのかを求める
-		uint8_t level(N - 1);
+		size_t level(N - 1);
 		size_t index(0);
-		for (uint64_t a : tree[level]) {
-			if (!val) {
-				if (_bit_find_zero_from(a, UNSIGNED_INT_64, 0, &index))
-					break;
-			}
-			else {
-				if (_bit_find_one_from(a, UNSIGNED_INT_64, 0, &index))
-					break;
-			}
+		if (!val) {
+			if (!tree[level].find_zero_first(&index))
+				return false;
 		}
-
+		else {
+			if (!tree[level].find_one_first(&index))
+				return false;
+		}
 		level--;
 		
 		//	最下位レベルのインデックスを求める
-		for (int i = level - 1; i >= 0; i--) {
+		for (size_t i = level; i >= 0 && i < N; i--) {
 			if (!serch_block_index(val, i, index, &index)) {
 				return false;
 			}
@@ -245,29 +290,25 @@ namespace pronet {
 	inline bool bit_tree<N>::serch_block_index(bool val, size_t level, size_t index, size_t* next_idx) const
 	{
 		//	1段階下のレベルのインデックスを取得
-		uint32_t current((index << 1) / UNSIGNED_INT_64);
 		size_t begin((index << 1) % UNSIGNED_INT_64);
 		//	空いている位置を突き止める
 		if (!val) {
-			if (!_bit_find_zero_from(tree[level][current], UNSIGNED_INT_64, begin, next_idx))
+			if (!tree[level].find_zero_from(begin, next_idx))
 				return false;
 		}
 		else {
-			if (!_bit_find_one_from(tree[level][current], UNSIGNED_INT_64, begin, next_idx))
+			if (!tree[level].find_zero_from(begin, next_idx))
 				return false;
 		}
-		*next_idx += current * UNSIGNED_INT_64;
 
 		return true;
 	}
 
 	template<std::size_t N>
 	inline void bit_tree<N>::unlock_bit_map(uint8_t level, size_t size)
-	{
-		if (tree_size == 0) return;
-		
+	{	
 		//	マスクしていた部分をアンレジストして開放する
-		for (int i = tree_size; i < (tree[0].size() * UNSIGNED_INT_64); i++) {
+		for (size_t i = tree_size; i < (tree[0].size() * UNSIGNED_INT_64); i++) {
 			unrigist(i);
 		}
 	}
@@ -281,18 +322,14 @@ namespace pronet {
 		size_t next_index(idx);
 		uint64_t bit_area;
 
-		_bit_write_one_area(&tree[0][idx / UNSIGNED_INT_64], UNSIGNED_INT_64, idx % UNSIGNED_INT_64, 1);
-		for (int i = 1; i < N; i++) {
-			//	インデックスを計算し、それがuint64_t型の配列のどの位置なのかを計算
-			now_index = (idx >> (i - 1)) / UNSIGNED_INT_64;
-			next_index = (idx >> i) / UNSIGNED_INT_64;
+		tree[0].write_Bit_0(idx, 1);
+		for (size_t i = 1; i < N; i++) {
 			//	指定された範囲のインデックスを取得して、要素がいっぱいになっていないかを確認
 			//	1つ下の段階のビットマップ2つを抽出して、比較することで使用中にするか判断する
-			bit_area = _bit_extract_area(tree[i - 1][now_index], UNSIGNED_INT_64, ((idx >> i) * 2) % UNSIGNED_INT_64, 2);
-
+			bit_area = tree[i - 1].extract_area(idx >> i, 2);
 			if (bit_area == 0) {
-				assert(_bit_get_status(tree[i][(next_index) / UNSIGNED_INT_64], UNSIGNED_INT_64, (idx >> i) % UNSIGNED_INT_64) && "Error : bit_tree.write_zero_from : It is zero");
-				_bit_write_zero_area(&tree[i][(next_index) / UNSIGNED_INT_64], UNSIGNED_INT_64, (idx >> i) % UNSIGNED_INT_64, 1);
+				assert(tree[i][idx >> i] && "Error : bit_tree.write_zero_from : It is zero");
+				tree[i].write_Bit_0(idx >> i, 1);
 			}
 			level++;
 		}
@@ -309,18 +346,17 @@ namespace pronet {
 		//	マスクを作成
 		uint64_t area_mask(_bit_extract_area(~(0ULL), UNSIGNED_INT_64, 0, 2));
 
-		_bit_write_one_area(&tree[0][idx / UNSIGNED_INT_64], UNSIGNED_INT_64, idx % UNSIGNED_INT_64, 1);
-		for (int i = 1; i < N; i++) {
-			//	インデックスを計算し、それがuint64_t型の配列のどの位置なのかを計算
-			now_index = (idx >> (i - 1)) / UNSIGNED_INT_64;
-			next_index = (idx >> i) / UNSIGNED_INT_64;
+		tree[0].write_Bit_1(idx, 1);
+		for (size_t i = 1; i < N; i++) {
 			//	指定された範囲のインデックスを取得して、要素がいっぱいになっていないかを確認
 			//	1つ下の段階のビットマップ2つを抽出して、比較することで使用中にするか判断する
-			bit_area = _bit_extract_area(tree[i - 1][now_index], UNSIGNED_INT_64, ((idx >> i) * 2) % UNSIGNED_INT_64, 2);
-
-			if (bit_area == area_mask) {
-				assert(!_bit_get_status(tree[i][next_index / UNSIGNED_INT_64], UNSIGNED_INT_64, (idx >> i) % UNSIGNED_INT_64) && "Error : bit_tree.write_one_from : It is one");
-				_bit_write_one_area(&tree[i][next_index], UNSIGNED_INT_64, (idx >> i) % UNSIGNED_INT_64, 1);
+			bit_area = tree[i - 1].extract_area((idx >> i) * 2, 2);
+			if (bit_area == 0x03) {
+				assert(!tree[i][idx >> i] && "Error : bit_tree.write_one_from : It is one");
+				tree[i].write_Bit_1(idx >> i, 1);
+			}
+			else {
+				break;
 			}
 
 			level++;

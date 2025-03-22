@@ -136,6 +136,8 @@
     <ClCompile Include="bit.cpp" />
     <ClCompile Include="BitMap64.cpp" />
     <ClCompile Include="BoundaryTag.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="Chanck.cpp" />
     <ClCompile Include="collib.cpp" />
     <ClCompile Include="Collision_4tree.cpp" />
@@ -146,9 +148,11 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="pnMath.cpp" />
+    <ClCompile Include="readBMP.cpp" />
     <ClCompile Include="readDocument.cpp" />
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TLSFmemory.cpp" />
     <ClCompile Include="Uniform.cpp" />
   </ItemGroup>
@@ -157,6 +161,8 @@
     <ClInclude Include="BitMap64.h" />
     <ClInclude Include="bit_tree.h" />
     <ClInclude Include="BoundaryTag.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Chanck.h" />
     <ClInclude Include="collib.h" />
     <ClInclude Include="Collision_4tree.h" />
@@ -174,15 +180,20 @@
     <ClInclude Include="pnTlsf.h" />
     <ClInclude Include="pronet_memory.h" />
     <ClInclude Include="Pronet.h" />
+    <ClInclude Include="readBMP.h" />
     <ClInclude Include="readDocument.h" />
     <ClInclude Include="readtxt.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Structure.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TLSFmemory.h" />
+    <ClInclude Include="tlsf.h" />
     <ClInclude Include="Uniform.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bullet.frag" />
+    <None Include="bullet.vert" />
     <None Include="debug_c4t.frag" />
     <None Include="debug_c4t.vert" />
     <None Include="fragment_shader.frag" />

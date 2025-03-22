@@ -4,6 +4,7 @@
 #include <memory>
 #include <cassert>
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 
 typedef struct {
 	GLfloat size[2];			//	ウインドウのサイズ
@@ -26,13 +27,32 @@ typedef struct {
 	GLboolean intersect;
 }Player2vParam;
 
+typedef struct {
+	glm::vec2 pos_;		//	発射する角度
+	float beg_rad_;		//	発射する角度
+	float radius_;		//	始点からの距離
+}BulletDataParam;
+
+typedef struct {
+	glm::vec2 position_;
+	float degrees_;
+}BulletParam;
+
 enum ShaderBlock {
 	PNGL_WINDOW_PARAM,
 	PN_GAME_STRUCTURE_PARAM,
 	PN_GAME_PLAYER_PARAM,
+	GAME_BULLET_DATA_PARAM,
+	GAME_BULLET_PARAM,
 	SHADER_BLOCK_SIZE,
 	SHADER_BLOCK_INFO_END
 };
+
+#define PRONET_GL_WINDOW_PARAMETER			PNGL_WINDOW_PARAM
+#define PRONET_GAME_STRUCTURE_PARAMETER		PN_GAME_STRUCTURE_PARAM
+#define PRONET_GAME_PLAYER_PARAMETER		PN_GAME_PLAYER_PARAM
+#define GAME_BULLET_DATA_PARAMETER			GAME_BULLET_DATA_PARAM
+#define GAME_BULLET_PARAMETER				GAME_BULLET_PARAM
 
 namespace pronet {
 	class Uniform
@@ -128,6 +148,8 @@ namespace pronet {
 	void updateGameObjectUniformParam(const Structure2vParam* strParam);
 	//	アプリケーションに関連するパラメーターを更新する
 	void updateApplicationUniformParam(const WindowParam* windowParam);
+	//	指定されたユニフォームブロックのパラメーターを更新
+	void updateUniformBlock(ShaderBlock _param, const void* const _ptr);
 	//	UniformObject をアップデートしてバインドする
 	void bindUniformObject(const size_t buf[SHADER_BLOCK_SIZE]);
 }

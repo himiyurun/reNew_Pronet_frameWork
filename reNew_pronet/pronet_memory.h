@@ -9,6 +9,22 @@
 #include "pnTlsf.h"
 
 namespace pronet {
+	/*
+	void _print_memory(const void* _ptr, size_t size) {
+		uint8_t* ptr = reinterpret_cast<uint8_t*>(ptr);
+		for (size_t i = 0; i < size; i++) {
+			for (size_t i = 0; i < UNSIGNED_INT_8; i++) {
+				if (*ptr & (static_cast<uint64_t>(1) << i))
+					std::cout << "1";
+				else
+					std::cout << "0";
+			}
+			ptr++;
+		}
+		std::cout << '\n';
+	}
+	*/
+
 	template<typename T>
 	class pnTlsf_unique_ptr : public pnTlsf {
 		struct _Deleter : public pnTlsf {
@@ -71,6 +87,65 @@ namespace pronet {
 		[[nodiscard]] size_t size() const { return buf_size; }
 	};
 
+	template<class _Ty, std::size_t _N>
+	class poolObject_unique_ptr 
+	{
+		struct _Deleter {
+			ObjectPool<_Ty, _N>* pool_;
+
+			_Deleter(pronet::ObjectPool<_Ty, _N>* _pool) noexcept :pool_(_pool) {}
+
+			void operator()(Pool_Object<_Ty>* _ptr) {
+				pool_->push(_ptr);
+				std::cout << "object_pool_array unique_ptr return object" << std::endl;
+			}
+		};
+
+		std::unique_ptr<Pool_Object<_Ty>, _Deleter> sp_;
+
+	public:
+
+		poolObject_unique_ptr(ObjectPool<_Ty, _N>* _pool = nullptr)
+			: sp_(_pool ? (new Pool_Object<_Ty>(_pool->pop())) : (nullptr), _Deleter(_pool)) {
+		}
+
+		poolObject_unique_ptr(poolObject_unique_ptr&& o) noexcept : sp_(std::move(o.sp_)) {}
+
+		//	スマートポインタを返す
+		std::unique_ptr<Pool_Object<_Ty>, _Deleter>& operator()() { return sp_; }
+		//	内部のオブジェクトを返す
+		explicit operator _Ty&() {
+			if (sp_)
+				return sp_->operator->();
+			else
+				throw std::runtime_error("poolObject_unique_ptr is null. you must call .realloc");
+		}
+		//	メモリを開放する
+		void reset() { sp_.reset(); }
+
+		void realloc(ObjectPool<_Ty, _N>* _pool) {
+			sp_ = std::unique_ptr<Pool_Object<_Ty>, _Deleter>(new Pool_Object<_Ty>(_pool->pop()), _Deleter(_pool));
+			if (!sp_)
+				throw std::runtime_error("ObjectPool_Array allocation failed!");
+		}
+
+		explicit operator bool() {
+			if (sp_)
+				return true;
+			else
+				return false;
+		}
+
+		poolObject_unique_ptr<_Ty, _N>& operator=(const poolObject_unique_ptr<_Ty, _N>& o) noexcept {
+			if (this != &o) {
+				this->sp_ = std::move(o.sp_);
+			}
+			return *this;
+		}
+
+		Pool_Object<_Ty>* operator->() const { return sp_.operator->(); }
+	};
+
 	template<typename T>
 	class poolArray_unique_ptr
 	{
@@ -93,6 +168,10 @@ namespace pronet {
 			: sp(pool ? (new PoolArray<T>(pool->get(n))) : (nullptr), _Deleter(pool)) {}
 
 		poolArray_unique_ptr(poolArray_unique_ptr&& o) noexcept : sp(std::move(o.sp)) {}
+
+		~poolArray_unique_ptr() {
+			sp.reset();
+		}
 
 		//	スマートポインタを返す
 		std::unique_ptr<PoolArray<T>, _Deleter>& operator()() { return sp; }
@@ -157,6 +236,10 @@ namespace pronet {
 			if (size > 0 && pool != nullptr)
 				sp = std::shared_ptr<PoolArray<T>>(new PoolArray<T>(pool->get(size)), Deleter(pool));
 		}
+		
+		~poolArray_shared_ptr() {
+			sp.reset();
+		}
 
 		PoolArray<T> operator()() const {
 			return sp;
@@ -205,20 +288,43 @@ namespace pronet {
 		poolObject_shared_ptr(ObjectPool<T, N>* pool = nullptr)
 		{
 			if (pool != nullptr) {
-				Pool_Object<T> buf = pool->pop();
-				sp = std::shared_ptr<Pool_Object<T>>(new Pool_Object<T>(buf), Deleter(pool));
+				sp = std::shared_ptr<Pool_Object<T>>(new Pool_Object<T>(pool->pop()), Deleter(pool));
 			}
 		}
 
-		std::shared_ptr<Pool_Object<T>> operator()() {
+		template<class T, std::size_t N>
+		poolObject_shared_ptr(poolObject_shared_ptr<T, N>& o) noexcept
+		{
+			sp = o.sp;
+		}
+
+		~poolObject_shared_ptr() {
+			sp.reset();
+		}
+
+		void realloc(ObjectPool<T, N>* _pool) {
+			sp.reset();
+			sp = std::shared_ptr<Pool_Object<T>>(new Pool_Object<T>(_pool->pop()), Deleter(_pool));
+			if (!sp)
+				throw std::runtime_error("ObjectPoo allocation failed!");
+		}
+
+		std::shared_ptr<Pool_Object<T>> operator()() const {
 			return sp;
 		}
 
-		T* operator->() const {
-			return sp->data;
+		explicit operator bool() const {
+			return sp.operator bool();
 		}
 
-		poolObject_shared_ptr<Pool_Object<T>, N>& operator=(const poolArray_shared_ptr<Pool_Object<T>>& o) {
+		T* get() const { return sp->operator->(); }
+
+		T* operator->() const {
+			//_print_memory(this, sizeof(*this));
+			return sp->operator->();
+		}
+
+		poolObject_shared_ptr<T, N>& operator=(const poolObject_shared_ptr& o) {
 			if (this != &o) {
 				this->sp = o.sp;
 			}
@@ -226,7 +332,21 @@ namespace pronet {
 		}
 
 		T& operator[](size_t n) {
-			return sp->data[n];
+			return sp->operator->()[n];
+		}
+
+		bool get_index() const {
+			Pool_Object<T>* const ptr = sp.get();
+			std::cout << "index : " << ptr->index << std::endl;
+			//std::cout << "count : " << this->sp.use_count() << std::endl;
+			if (sp) {
+				std::cout << "exsist" << std::endl;
+				return true;
+			}
+			else {
+				std::cout << "null" << std::endl;
+				return false;
+			}
 		}
 
 		void reset() {

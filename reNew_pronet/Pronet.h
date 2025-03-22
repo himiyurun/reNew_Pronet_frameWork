@@ -1,6 +1,7 @@
 #pragma once
 #include "loader.h"
 #include "Player.h"
+#include "BulletManager.h"
 #include "glfw_Window.h"
 
 static const size_t strLv = 6;
@@ -13,6 +14,9 @@ class PronetManager : public glfw_Window {
 	pronet::Player player;
 	std::array<pronet::Chanck_2D<VBOLV, SHDLV>, CHANCK_LOAD_SIZE> chanck;
 
+	pronet::ObjectPool<Object, 6> bulletobj;
+	pronet::ObjectPool<Shader, 6> bulletshd;
+	BulletManager sample;
 public:
 	//	コンストラクタ
 	//	windowInfo : 作成するウインドウの情報
@@ -23,7 +27,7 @@ public:
 	~PronetManager();
 
 	void load();
-	
+
 	//	ループ内で実行する処理
 	virtual void process();
 };
@@ -49,6 +53,19 @@ void PronetManager<VBOLV, SHDLV>::load()
 	loader_object.load_playerinfo("player.fi", &info);
 	player.init(dimentionSize, &info);
 	loader_object.load_chanck(0, 0, chanck[0]);
+
+	BulletCreateInfo bulletInfo;
+	bulletInfo.id_ = "sample";
+	bulletInfo.coef_ = 12;
+	bulletInfo.interval_ = 5;
+	bulletInfo.rad_ = 0.f;
+	bulletInfo.speed_ = 0.07f;
+	pronet::poolObject_shared_ptr<Object, 6> obj(&bulletobj);
+	pronet::poolObject_shared_ptr<Shader, 6> shd(&bulletshd);
+
+	obj->init(2, 4, bulletAngleVertex, 6, bulletAngleIndex);
+	shd->init("bullet.vert", "bullet.frag");
+	sample.init(bulletInfo, obj, shd);
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
@@ -56,6 +73,7 @@ void PronetManager<VBOLV, SHDLV>::process()
 {
 	static GLfloat velocity(0.05f);
 	static GLfloat last_pos[2];
+	static glm::vec2 bullet_pos(0.f);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -73,6 +91,12 @@ void PronetManager<VBOLV, SHDLV>::process()
 	else if (glfwGetKey(window, GLFW_KEY_D)) {
 		player.param.position[0] += velocity;
 	}
+	if (glfwGetKey(window, GLFW_KEY_F3)) {
+		if (swapStat())
+			setSwapEventsStatus(false);
+		else
+			setSwapEventsStatus(true);
+	}
 
 	if (chanck[0].Intersect(player)) {
 		player.param.position[0] = last_pos[0];
@@ -82,6 +106,14 @@ void PronetManager<VBOLV, SHDLV>::process()
 	pronet::updateApplicationUniformParam(&param);
 	pronet::updatePlayer2vUniformParam(player.parameter());
 	pronet::updateFrameCounter();
+	bullet_pos.x = player.position()[0];
+	bullet_pos.y = player.position()[1];
+	if (glfwGetKey(window, GLFW_KEY_SPACE)) {
+		sample.run(bullet_pos, true);
+	}
+	else {
+		sample.run(bullet_pos, false);
+	}
 	chanck[0].draw();
 	player.draw();
 }
