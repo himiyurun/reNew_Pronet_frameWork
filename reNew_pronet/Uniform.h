@@ -28,6 +28,12 @@ typedef struct {
 }Player2vParam;
 
 typedef struct {
+	glm::vec2 pos_;		//	”­ŽË‚·‚éŠp“x
+	float beg_rad_;		//	”­ŽË‚·‚éŠp“x
+	float radius_;		//	Žn“_‚©‚ç‚Ì‹——£
+}BulletDataParam;
+
+typedef struct {
 	glm::vec2 position_;
 	float degrees_;
 }BulletParam;
@@ -36,6 +42,7 @@ enum ShaderBlock {
 	PNGL_WINDOW_PARAM,
 	PN_GAME_STRUCTURE_PARAM,
 	PN_GAME_PLAYER_PARAM,
+	GAME_BULLET_DATA_PARAM,
 	GAME_BULLET_PARAM,
 	SHADER_BLOCK_SIZE,
 	SHADER_BLOCK_INFO_END
@@ -44,6 +51,7 @@ enum ShaderBlock {
 #define PRONET_GL_WINDOW_PARAMETER			PNGL_WINDOW_PARAM
 #define PRONET_GAME_STRUCTURE_PARAMETER		PN_GAME_STRUCTURE_PARAM
 #define PRONET_GAME_PLAYER_PARAMETER		PN_GAME_PLAYER_PARAM
+#define GAME_BULLET_DATA_PARAMETER			GAME_BULLET_DATA_PARAM
 #define GAME_BULLET_PARAMETER				GAME_BULLET_PARAM
 
 namespace pronet {

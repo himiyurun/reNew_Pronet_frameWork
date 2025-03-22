@@ -8,6 +8,12 @@ layout(std140) uniform window {
 	float scale;
 }win;
 
+layout(std140) uniform bulletData {
+	vec2 pos;
+	float beg_rad;
+	float radius;
+}bulData;
+
 layout(std140) uniform bullet {
 	vec2 position;
 	float rad;
@@ -34,6 +40,6 @@ vec4 rotate4v(vec4 _verts, float _deg) {
 }
 
 void main() {
-	gl_Position = rotate4v(position, bul.rad) + vec4(bul.position, 0.0, 0.0);
+	gl_Position = position + vec4(bulData.pos + bul.position, 0.0, 0.0);
 	scaleWindows();
 }

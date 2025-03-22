@@ -19,6 +19,7 @@ void BulletManager::run(glm::vec2& _pos, bool _gen_stat)
 	instance_.execute(_pos, _gen_stat);
 	shader_->use();
 	for (auto& a : instance_.bullet_array_) {
+		pronet::updateUniformBlock(GAME_BULLET_DATA_PARAMETER, &a.param);
 		for (auto& b : a.bullets_) {
 			pronet::updateUniformBlock(GAME_BULLET_PARAMETER, &b);
 			object_->draw();

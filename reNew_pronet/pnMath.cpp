@@ -25,3 +25,13 @@ size_t pronet::multiplier(size_t _num, size_t _count)
 	return num;
 }
 
+float pronet::radiansf(float _degrees)
+{
+	return _degrees / 180.f * 3.14f;
+}
+
+double pronet::radiansd(double _degrees)
+{
+	return _degrees / 180.0 * 3.14;
+}
+

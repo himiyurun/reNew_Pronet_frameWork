@@ -3,7 +3,7 @@
 
 #include "TLSFmemory.h"
 
-#define POOL_SIZE_BIT	(16)
+#define POOL_SIZE_BIT	(18)
 #define POOL_INDEX_BIT	(4)
 
 static pronet::TLSFmemory mainMemory(POOL_SIZE_BIT, POOL_INDEX_BIT);

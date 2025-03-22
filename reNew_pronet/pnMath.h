@@ -10,4 +10,9 @@ namespace pronet {
 
 	//	2乗する
 	size_t multiplier(size_t _num, size_t _count);
+
+	//	度数法から弧度法に変換する
+	//	degrees : 変換する度数
+	float radiansf(float _degrees);
+	double radiansd(double _degrees);
 }

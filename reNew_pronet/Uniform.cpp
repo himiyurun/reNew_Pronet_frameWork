@@ -6,6 +6,7 @@ void pronet::initUniformBlock()
 	unf[PNGL_WINDOW_PARAM].Init("window", sizeof(WindowParam));
 	unf[PN_GAME_STRUCTURE_PARAM].Init("structure", sizeof(Structure2vParam));
 	unf[PN_GAME_PLAYER_PARAM].Init("player", sizeof(Player2vParam));
+	unf[GAME_BULLET_DATA_PARAM].Init("bulletData", sizeof(BulletDataParam));
 	unf[GAME_BULLET_PARAM].Init("bullet", sizeof(BulletParam));
 }
 

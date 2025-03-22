@@ -6,6 +6,7 @@
 
 #include "pnTlsf.h"
 #include "Uniform.h"
+#include "pnMath.h"
 
 /*
 * 弾幕の管理をするクラス
@@ -13,9 +14,7 @@
 */
 
 typedef struct {
-	glm::vec2 pos_;		//	発射する角度
-	float beg_rad_;		//	発射する角度
-	float radius_;		//	始点からの距離
+	BulletDataParam param;
 	std::vector<BulletParam, pnTlsfInsertSTLtype<BulletParam>> bullets_;	//	各弾幕の位置
 }Bullet_Data;
 

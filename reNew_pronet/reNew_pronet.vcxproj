@@ -148,9 +148,11 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="pnMath.cpp" />
+    <ClCompile Include="readBMP.cpp" />
     <ClCompile Include="readDocument.cpp" />
     <ClCompile Include="readtxt.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TLSFmemory.cpp" />
     <ClCompile Include="Uniform.cpp" />
   </ItemGroup>
@@ -178,10 +180,12 @@
     <ClInclude Include="pnTlsf.h" />
     <ClInclude Include="pronet_memory.h" />
     <ClInclude Include="Pronet.h" />
+    <ClInclude Include="readBMP.h" />
     <ClInclude Include="readDocument.h" />
     <ClInclude Include="readtxt.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Structure.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TLSFmemory.h" />
     <ClInclude Include="tlsf.h" />
