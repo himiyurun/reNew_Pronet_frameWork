@@ -14,10 +14,11 @@ pronet::readBMP::readBMP(const char* _imgname)
 	ifs.read(reinterpret_cast<char*>(&infoh_), sizeof(BITMAPINFOHEADER));
 	if (ifs.fail()) {
 		ifs.close();
-		throw std::runtime_error(_imgname + std::string(" can't read : readBMP.readBMP(const char*)"));
+		throw std::runtime_error(_imgname + std::string(" can't read bmpHeader : readBMP.readBMP(const char*)"));
 	}
 
-	size_t bufSize(infoh_.biWidth * infoh_.biHeight * 0x04);
+	std::cout << "bitmapinfomation   file : " << _imgname << ", height : " << infoh_.biHeight << ", width : " << infoh_.biWidth << ", format : " << infoh_.biBitCount / BIT_SIZE_ONE_BYTE << std::endl;
+	size_t bufSize(infoh_.biWidth * infoh_.biHeight * infoh_.biBitCount / BIT_SIZE_ONE_BYTE);
 	img_.resize(bufSize);
 	ifs.read(reinterpret_cast<char*>(img_.data()), bufSize);
 	if (ifs.fail()) {

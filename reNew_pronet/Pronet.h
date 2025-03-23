@@ -16,6 +16,7 @@ class PronetManager : public glfw_Window {
 
 	pronet::ObjectPool<Object, 6> bulletobj;
 	pronet::ObjectPool<Shader, 6> bulletshd;
+	pronet::ObjectPool<Texture, 6> bullettex;
 	BulletManager sample;
 public:
 	//	コンストラクタ
@@ -36,6 +37,7 @@ template<std::size_t VBOLV, std::size_t SHDLV>
 PronetManager<VBOLV, SHDLV>::PronetManager(glfw_windowCreateInfo* windowInfo, const char* loadfilelist_name)
 	: glfw_Window(windowInfo)
 	, loader_object(&dimentionSize, loadfilelist_name)
+	, bulletobj(2), bulletshd(2), bullettex(2)
 {
 	pronet::initUniformBlock();
 }
@@ -62,10 +64,12 @@ void PronetManager<VBOLV, SHDLV>::load()
 	bulletInfo.speed_ = 0.07f;
 	pronet::poolObject_shared_ptr<Object, 6> obj(&bulletobj);
 	pronet::poolObject_shared_ptr<Shader, 6> shd(&bulletshd);
+	pronet::poolObject_shared_ptr<Texture, 6> tex(&bullettex);
 
-	obj->init(2, 4, bulletAngleVertex, 6, bulletAngleIndex);
+	obj->init(2, 4, bulletAngleVertex, 6, bulletAngleIndex, bulletAngleUv);
 	shd->init("bullet.vert", "bullet.frag");
-	sample.init(bulletInfo, obj, shd);
+	tex->init("pic/enemypre.bmp");
+	sample.init(bulletInfo, obj, shd, tex);
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>

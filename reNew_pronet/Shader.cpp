@@ -3,6 +3,7 @@
 Shader::Shader()
 	: program(0)
 	, Block()
+	, texUnitID(0xffffffff)
 {
 }
 
@@ -48,7 +49,7 @@ GLboolean Shader::init(const char* vsrc, const char* fsrc)
 		return false;
 	}
 	pronet::getBlockBindInfo(program, Block);
-
+	texUnitID = glGetUniformLocation(program, "tex");
 	return true;
 }
 
@@ -56,6 +57,7 @@ void Shader::reset()
 {
 	if (program != 0) {
 		glDeleteProgram(program);
+		texUnitID = 0xffffffff;
 	}
 }
 

@@ -37,17 +37,14 @@ void print_ObjectInfo2v(const ObjectInfo2v* const info);
 class Object
 {
 	GLuint vao;
-
 	GLuint vbo;
-
 	GLuint ibo;
+	GLuint tbo;
 
 protected:
 
 	GLsizei vertexcount;
-
 	GLsizei indexcount;
-
 	GLboolean index_used;
 
 public:
@@ -57,7 +54,7 @@ public:
 	~Object();
 
 	void init(GLint size, const ObjectInfo2v *const info, GLboolean index_used, GLboolean texture_used);
-	void init(GLint size, GLsizei vertcount, const glm::vec2* vertex, GLsizei indcount, const GLuint* index);
+	void init(GLint size, GLsizei vertcount, const glm::vec2* vertex, GLsizei indcount, const GLuint* index, const glm::vec2* uv = nullptr);
 
 	void reset();
 

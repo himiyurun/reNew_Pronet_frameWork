@@ -123,6 +123,7 @@ int main() {
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Error : " << e.what() << std::endl;
+		std::cout << "プログラムを終了するには Enter キーを押してください" << std::endl;
 		getchar();
 		return EXIT_FAILURE;
 	}

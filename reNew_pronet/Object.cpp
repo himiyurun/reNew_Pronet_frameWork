@@ -4,6 +4,7 @@ Object::Object()
 	: vao(0)
 	, vbo(0)
 	, ibo(0)
+	, tbo(0)
 	, vertexcount(0)
 	, indexcount(0)
 	, index_used(false)
@@ -34,11 +35,20 @@ void Object::init(GLint size, const ObjectInfo2v *const info, GLboolean index_us
 		indexcount = info->indexcount;
 		glGenBuffers(1, &ibo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::vec2) * indexcount, &info->index[0], GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32_t) * indexcount, &info->index[0], GL_STATIC_DRAW);
+	}
+
+	if (texture_used) {
+		glGenBuffers(1, &tbo);
+		glBindBuffer(GL_ARRAY_BUFFER, tbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * vertexcount, &info->uv[0], GL_STATIC_DRAW);
+
+		glVertexAttribPointer(1, size, GL_FLOAT, GL_FALSE, 0, 0);
+		glEnableVertexAttribArray(1);
 	}
 }
 
-void Object::init(GLint size, GLsizei vertcount, const glm::vec2* vertex, GLsizei indcount, const GLuint* index)
+void Object::init(GLint size, GLsizei vertcount, const glm::vec2* vertex, GLsizei indcount, const GLuint* index, const glm::vec2* uv)
 {
 	index_used = true;
 	vertexcount = vertcount;
@@ -58,6 +68,15 @@ void Object::init(GLint size, GLsizei vertcount, const glm::vec2* vertex, GLsize
 		glGenBuffers(1, &ibo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(glm::vec2) * indexcount, index, GL_STATIC_DRAW);
+	}
+
+	if (uv) {
+		glGenBuffers(1, &tbo);
+		glBindBuffer(GL_ARRAY_BUFFER, tbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * vertexcount, uv, GL_STATIC_DRAW);
+
+		glVertexAttribPointer(1, size, GL_FLOAT, GL_FALSE, 0, 0);
+		glEnableVertexAttribArray(1);
 	}
 }
 

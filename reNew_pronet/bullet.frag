@@ -1,6 +1,9 @@
 #version 330 core
+in vec2 tv;
 out vec4 fragment;
 
+uniform sampler2D tex;
+
 void main() {
-	fragment = vec4(0.25, 0.25, 0.25, 1.0);
+	fragment = texture(tex, tv);
 }

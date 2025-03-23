@@ -67,6 +67,18 @@
     <Filter Include="リソース ファイル\Shader">
       <UniqueIdentifier>{3468d990-bed4-48d7-a6bf-b6be6f7619bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\picture">
+      <UniqueIdentifier>{759b0185-72f4-4ca6-949a-8c3be3131edb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\log">
+      <UniqueIdentifier>{a68c2844-3ad2-4e06-b07b-441c4f5112c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\PnHead\script">
+      <UniqueIdentifier>{b24c630b-2f70-497e-86ce-ab2e6e42c964}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\PnLib\script">
+      <UniqueIdentifier>{8e79e032-1223-4304-b252-4ab17c9dfbd7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -130,9 +142,12 @@
       <Filter>ソース ファイル\PnLib\pnstr</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\GLI</Filter>
     </ClCompile>
     <ClCompile Include="readBMP.cpp">
+      <Filter>ソース ファイル\PnLib\exreader</Filter>
+    </ClCompile>
+    <ClCompile Include="PythonScript.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -231,9 +246,12 @@
       <Filter>ヘッダー ファイル\PnHead\pnstr</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\GLI</Filter>
     </ClInclude>
     <ClInclude Include="readBMP.h">
+      <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
+    </ClInclude>
+    <ClInclude Include="PythonScript.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -313,7 +331,15 @@
       <Filter>リソース ファイル\MemoryAllocaterLog</Filter>
     </Text>
     <Text Include="log20241230.txt">
-      <Filter>リソース ファイル</Filter>
+      <Filter>リソース ファイル\log</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="pic\enemypre.bmp">
+      <Filter>リソース ファイル\picture</Filter>
+    </Image>
+    <Image Include="pic\gameobject.bmp">
+      <Filter>リソース ファイル\picture</Filter>
+    </Image>
   </ItemGroup>
 </Project>

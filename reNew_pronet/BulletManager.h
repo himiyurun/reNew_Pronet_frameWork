@@ -3,6 +3,7 @@
 #include "Bullet.h"
 #include "Object.h"
 #include "Shader.h"
+#include "Texture.h"
 
 typedef struct {
 	const char* id_;		//	’e–‹‚É•t‚¯‚é–¼‘O
@@ -17,17 +18,22 @@ class BulletManager
 	Bullet instance_;
 	pronet::poolObject_shared_ptr<Object, 6> object_;
 	pronet::poolObject_shared_ptr<Shader, 6> shader_;
+	pronet::poolObject_shared_ptr<Texture, 6> texture_;
 public:
-	BulletManager(const BulletCreateInfo& _info = BulletCreateInfo(), const pronet::poolObject_shared_ptr<Object, 6>& _object = pronet::poolObject_shared_ptr<Object, 6>(), const pronet::poolObject_shared_ptr<Shader, 6>& _shader = pronet::poolObject_shared_ptr<Shader, 6>()) 
+	BulletManager(const BulletCreateInfo& _info = BulletCreateInfo()
+		, const pronet::poolObject_shared_ptr<Object, 6>& _object = pronet::poolObject_shared_ptr<Object, 6>()
+		, const pronet::poolObject_shared_ptr<Shader, 6>& _shader = pronet::poolObject_shared_ptr<Shader, 6>()
+		, const pronet::poolObject_shared_ptr<Texture, 6>& _texture = pronet::poolObject_shared_ptr<Texture, 6>())
 		: instance_(_info.id_, _info.coef_, _info.interval_, _info.rad_, _info.speed_)
-		, object_(_object), shader_(_shader)
+		, object_(_object), shader_(_shader), texture_(_texture)
 	{
 
 	}
 
 	~BulletManager() {}
 
-	void init(const BulletCreateInfo& _info, const pronet::poolObject_shared_ptr<Object, 6>& _object, const pronet::poolObject_shared_ptr<Shader, 6>& _shader);
+	void init(const BulletCreateInfo& _info, const pronet::poolObject_shared_ptr<Object, 6>& _object
+		, const pronet::poolObject_shared_ptr<Shader, 6>& _shader, const pronet::poolObject_shared_ptr<Texture, 6>& _texture = pronet::poolObject_shared_ptr<Texture, 6>());
 
 	void reset();
 

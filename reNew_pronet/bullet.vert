@@ -1,5 +1,10 @@
 #version 330 core
-in vec4 position;
+#define OBJECT_ANGLE_VERTEX	layout(location = 0)
+#define OBJECT_UV_VERTEX	layout(location = 1)
+OBJECT_ANGLE_VERTEX in vec4 position;
+OBJECT_UV_VERTEX in vec2 uv;
+
+out vec2 tv;
 
 layout(std140) uniform window {
 	vec2 size;
@@ -40,6 +45,7 @@ vec4 rotate4v(vec4 _verts, float _deg) {
 }
 
 void main() {
+	tv = uv;
 	gl_Position = position + vec4(bulData.pos + bul.position, 0.0, 0.0);
 	scaleWindows();
 }

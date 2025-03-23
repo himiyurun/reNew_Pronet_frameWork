@@ -25,6 +25,13 @@ constexpr glm::vec2 bulletAngleVertex[] = {
 	{  0.5f, -0.5f }
 };
 
+constexpr glm::vec2 bulletAngleUv[] = {
+	{ 1.0f, 1.0f },
+	{ 0.0f, 1.0f },
+	{ 0.0f, 0.0f },
+	{ 1.0f, 0.0f }
+};
+
 constexpr uint32_t bulletAngleIndex[] = {
 	0, 1, 2,
 	0, 3, 2
