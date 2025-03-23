@@ -4,6 +4,7 @@
 #define CHANCK_LOAD_SIZE	(1)
 
 #include "Pronet.h"
+#include "PythonScript.h"
 
 void libInit() 
 {
@@ -86,36 +87,8 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	PronetManager<6, 6> game(&winInfo, "LoadFileList.fi");
 	
-	/*
-	pronet::ObjectPool<test, 6> hoge(32);
-	pronet::ObjectPool<ins, 6> hoge2;
-	pronet::pnTlsf_unique_ptr<pronet::poolObject_shared_ptr<ins, 6>> spa(3);
-	for (auto& a : spa) {
-		a.realloc(&hoge2);
-		a->init(324, 123.f);
-	}
-	std::shared_ptr<int> tester(new int(16));
-	pronet::poolObject_shared_ptr<test, 6> hogep(&hoge);
-	pronet::poolObject_shared_ptr<test, 6> hogep2(&hoge);
-	hoge.resize(96);
-	hogep->print_bit();
-	hogep2->print_bit();
-	std::cout << "stdusecount : " << tester.use_count() << std::endl;
-	std::cout << "beg" << std::endl;
-	hogep->init(spa[0], spa[1]);
-	hogep2->init(nullptr, nullptr);
-	hogep->print_bit();
-	hogep2->print_bit();
-	std::cout << "beg" << std::endl;
-	hogep2->init(spa[1], spa[2]);
-	std::cout << "end" << std::endl;
-	hogep->print_bit();
-	hogep2->print_bit();
-	spa.reset();
-	std::cout << "usecount : " << hogep().use_count() << ", " << hogep2().use_count() << std::endl;
-	std::cout << "hogep : " + std::to_string(hogep->get()) << std::endl;
-	std::cout << "hogep2 : " + std::to_string(hogep2->get2()) << std::endl;
-	*/
+	PythonScript interprinter("pysrc");
+	interprinter.execute_file("main.py");
 
 	try {
 		game.load();
