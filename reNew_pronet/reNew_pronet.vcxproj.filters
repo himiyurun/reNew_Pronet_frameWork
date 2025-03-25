@@ -150,6 +150,9 @@
     <ClCompile Include="PythonScript.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="PyBullet.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pronet.h">
@@ -252,6 +255,9 @@
       <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
     </ClInclude>
     <ClInclude Include="PythonScript.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="PyBullet.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

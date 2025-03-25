@@ -37,6 +37,8 @@ bool PythonScript::execute_file(std::string _file)
 		init();
 		std::string dirFile(dir_ + '/' + _file);
 		py::exec_file(dirFile.c_str(), global_, local_);
+		py::object main = local_["main"];
+		main();
 	}
 	catch (const py::error_already_set&) {
 		PyErr_Print();

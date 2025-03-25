@@ -104,12 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\include;C:\boost_1_87_0\include\boost-1_87;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\include;C:\boost_1_87_0\include\boost-1_87;$(ProjectDir)include;C:\Users\A20046\AppData\Local\Programs\Python\Python312\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\libs;C:\boost_1_87_0\stage\lib\x64;$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\libs;C:\boost_1_87_0\stage\lib\x64;$(ProjectDir)lib;C:\Users\A20046\AppData\Local\Programs\Python\Python312\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;user32.lib;shell32.lib;gdi32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -121,14 +121,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\include;C:\boost_1_87_0\include\boost-1_87;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\include;C:\boost_1_87_0\include\boost-1_87;$(ProjectDir)include;C:\Users\A20046\AppData\Local\Programs\Python\Python312\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\libs;C:\boost_1_87_0\stage\lib\x64;$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\libs;C:\boost_1_87_0\stage\lib\x64;$(ProjectDir)lib;C:\Users\A20046\AppData\Local\Programs\Python\Python312\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;user32.lib;shell32.lib;gdi32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -148,6 +148,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="pnMath.cpp" />
+    <ClCompile Include="PyBullet.cpp" />
     <ClCompile Include="PythonScript.cpp" />
     <ClCompile Include="readBMP.cpp" />
     <ClCompile Include="readDocument.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="pnTlsf.h" />
     <ClInclude Include="pronet_memory.h" />
     <ClInclude Include="Pronet.h" />
+    <ClInclude Include="PyBullet.h" />
     <ClInclude Include="PythonScript.h" />
     <ClInclude Include="readBMP.h" />
     <ClInclude Include="readDocument.h" />
