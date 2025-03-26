@@ -1,8 +1,4 @@
-# これはサンプルの Python スクリプトです。
-
-# Shift+F10 を押して実行するか、ご自身のコードに置き換えてください。
-# Shift を2回押す を押すと、クラス/ファイル/ツールウィンドウ/アクション/設定を検索します。
-
+import glbs
 
 def print_hi(name):
     # スクリプトをデバッグするには以下のコード行でブレークポイントを使用してください。
@@ -16,12 +12,21 @@ def main():
             if (j + (i % 16)) % 2 == 0:
                 text += '#'
             else:
-                text += ' 'tiyii
+                text += ' '
         print(text)
     print_hi('Python')
+
+ct = 0
+def sample():
+    global ct
+    ct += 1
 # ガター内の緑色のボタンを押すとスクリプトを実行します。
 if __name__ == '__main__':
     print_hi('PyCharm')
 main()
+glbs.Loop(sample, 10000000)
+print(ct)
+for i in range(10000000):
+    ct += 1
+print(ct)
 
-# PyCharm のヘルプは https://www.jetbrains.com/help/pycharm/ を参照してください

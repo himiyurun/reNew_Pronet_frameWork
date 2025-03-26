@@ -6,18 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="667a9f57-1961-4768-8984-990dc4eb1b15" name="変更" comment="">
       <change beforePath="$PROJECT_DIR$/../../.vs/reNew_pronet/v17/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/reNew_pronet/v17/Browse.VC.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../glbs/dllmain.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../glbs/framework.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../glbs/BulletDB.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../glbs/BulletDB.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../glbs/glbs.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../glbs/glbs.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../glbs/glbs.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/../../glbs/glbs.vcxproj.filters" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../glbs/pch.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../glbs/pch.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../glbs/glbs.vcxproj.user" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../reNew_pronet.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../reNew_pronet.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PythonScript.h" beforeDir="false" afterPath="$PROJECT_DIR$/../PythonScript.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../reNew_pronet.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../reNew_pronet.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../x64/Debug/BitMap64.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../x64/Debug/BitMap64.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../x64/Debug/Chanck.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../x64/Debug/Chanck.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../x64/Debug/Object.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../x64/Debug/Object.obj" afterDir="false" />
@@ -80,6 +77,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "pre",
@@ -136,10 +134,14 @@
       <workItem from="1742730093746" duration="1303000" />
       <workItem from="1742732453653" duration="1267000" />
       <workItem from="1742888297738" duration="932000" />
+      <workItem from="1742937051008" duration="2518000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main のカバレッジ結果" MODIFIED="1742957056283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
