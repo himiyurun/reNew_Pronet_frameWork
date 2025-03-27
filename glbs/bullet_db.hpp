@@ -2,6 +2,7 @@
 #define BOOST_PYTHON_STATIC_LIB
 #include <boost/python.hpp>
 #include "../reNew_pronet/PyBullet.h"
+#include <glad/glad.h>
 
 #define DLL_EXPORTS
 #ifdef DLL_EXPORTS
@@ -32,4 +33,3 @@ namespace glbs {
 	namespace texture {
 	}
 }
-extern GLBS_API void Loop(py::object _func, std::size_t _ct);

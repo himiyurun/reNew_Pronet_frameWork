@@ -1,7 +1,7 @@
 #pragma once
 #include "loader.h"
 #include "Player.h"
-#include "BulletManager.h"
+#include "PyBullet.h"
 #include "glfw_Window.h"
 
 static const size_t strLv = 6;
@@ -17,7 +17,7 @@ class PronetManager : public glfw_Window {
 	pronet::ObjectPool<Object, 6> bulletobj;
 	pronet::ObjectPool<Shader, 6> bulletshd;
 	pronet::ObjectPool<Texture, 6> bullettex;
-	BulletManager sample;
+	PyBullet sample;
 public:
 	//	コンストラクタ
 	//	windowInfo : 作成するウインドウの情報
@@ -56,12 +56,15 @@ void PronetManager<VBOLV, SHDLV>::load()
 	player.init(dimentionSize, &info);
 	loader_object.load_chanck(0, 0, chanck[0]);
 
-	BulletCreateInfo bulletInfo;
-	bulletInfo.id_ = "sample";
-	bulletInfo.coef_ = 12;
-	bulletInfo.interval_ = 5;
-	bulletInfo.rad_ = 0.f;
-	bulletInfo.speed_ = 0.07f;
+	PyBulletCreateInfo bulletInfo;
+	bulletInfo.info_.id_ = "sample";
+	bulletInfo.info_.coef_ = 12;
+	bulletInfo.info_.interval_ = 5;
+	bulletInfo.info_.rad_ = 0.f;
+	bulletInfo.info_.speed_ = 0.07f;
+	bulletInfo.exec_func_id_ = "execute";
+	bulletInfo.gen_func_id_ = "generate";
+	bulletInfo.update_func_id_ = "update";
 	pronet::poolObject_shared_ptr<Object, 6> obj(&bulletobj);
 	pronet::poolObject_shared_ptr<Shader, 6> shd(&bulletshd);
 	pronet::poolObject_shared_ptr<Texture, 6> tex(&bullettex);
@@ -69,7 +72,7 @@ void PronetManager<VBOLV, SHDLV>::load()
 	obj->init(2, 4, bulletAngleVertex, 6, bulletAngleIndex, bulletAngleUv);
 	shd->init("bullet.vert", "bullet.frag");
 	tex->init("pic/enemypre.bmp");
-	sample.init(bulletInfo, obj, shd, tex);
+	sample.Initialize("main.py", bulletInfo, obj, shd, tex, "pysrc");
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
@@ -116,7 +119,7 @@ void PronetManager<VBOLV, SHDLV>::process()
 		sample.run(bullet_pos, true);
 	}
 	else {
-		sample.run(bullet_pos, false);
+		//sample.run(bullet_pos, false);
 	}
 	chanck[0].draw();
 	player.draw();

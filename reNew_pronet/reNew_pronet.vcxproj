@@ -104,12 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\include;C:\boost_1_87_0\include\boost-1_87;$(ProjectDir)include;C:\Users\A20046\AppData\Local\Programs\Python\Python312\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(USERPROFILE)\AppData\Local\Programs\Python\Python312\include;C:\boost_1_87_0\include\boost-1_87;$(ProjectDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\libs;C:\boost_1_87_0\stage\lib\x64;$(ProjectDir)lib;C:\Users\A20046\AppData\Local\Programs\Python\Python312\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(USERPROFILE)\AppData\Local\Programs\Python\Python312\libs;C:\boost_1_87_0\stage\lib\x64;$(ProjectDir)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;user32.lib;shell32.lib;gdi32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -121,14 +121,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\include;C:\boost_1_87_0\include\boost-1_87;$(ProjectDir)include;C:\Users\A20046\AppData\Local\Programs\Python\Python312\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(USERPROFILE)\AppData\Local\Programs\Python\Python312\include;C:\boost_1_87_0\include\boost-1_87;$(ProjectDir)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\rayrk\AppData\Local\Programs\Python\Python312\libs;C:\boost_1_87_0\stage\lib\x64;$(ProjectDir)lib;C:\Users\A20046\AppData\Local\Programs\Python\Python312\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(USERPROFILE)\AppData\Local\Programs\Python\Python312\libs;C:\boost_1_87_0\stage\lib\x64;$(ProjectDir)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;user32.lib;shell32.lib;gdi32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

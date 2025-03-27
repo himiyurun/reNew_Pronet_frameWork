@@ -82,14 +82,6 @@ int main() {
 	winInfo.title = "test_game";
 	winInfo.monitor = nullptr;
 
-	PythonScript interprinter("pysrc");
-	interprinter.execute_file("main.py");
-	py::object main = interprinter["main"];
-	PYTHON_RUN_BEGIN() {
-		main();
-	}
-	PYTHON_RUN_END();
-
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
