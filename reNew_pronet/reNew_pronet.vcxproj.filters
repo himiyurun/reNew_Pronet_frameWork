@@ -73,9 +73,6 @@
     <Filter Include="リソース ファイル\log">
       <UniqueIdentifier>{a68c2844-3ad2-4e06-b07b-441c4f5112c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\PnHead\script">
-      <UniqueIdentifier>{b24c630b-2f70-497e-86ce-ab2e6e42c964}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\PnLib\script">
       <UniqueIdentifier>{8e79e032-1223-4304-b252-4ab17c9dfbd7}</UniqueIdentifier>
     </Filter>
@@ -147,10 +144,7 @@
     <ClCompile Include="readBMP.cpp">
       <Filter>ソース ファイル\PnLib\exreader</Filter>
     </ClCompile>
-    <ClCompile Include="PythonScript.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="PyBullet.cpp">
+    <ClCompile Include="BullletSys.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -254,10 +248,7 @@
     <ClInclude Include="readBMP.h">
       <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
     </ClInclude>
-    <ClInclude Include="PythonScript.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PyBullet.h">
+    <ClInclude Include="BullletSys.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

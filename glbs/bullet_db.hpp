@@ -1,7 +1,7 @@
 #pragma once
 #define BOOST_PYTHON_STATIC_LIB
 #include <boost/python.hpp>
-#include "../reNew_pronet/PyBullet.h"
+//#include "../reNew_pronet/PyBullet.h"
 
 #define DLL_EXPORTS
 #ifdef DLL_EXPORTS
