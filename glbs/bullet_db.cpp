@@ -1,12 +1,10 @@
 #include "bullet_db.hpp"
+#include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 
-GLBS_API void Loop(py::object _func, std::size_t _ct)
-{
-	for (size_t i = 0; i < _ct; i++) {
-		_func();
-	}
-}
+
 
 BOOST_PYTHON_MODULE(glbs) {
-	py::def("Loop", &Loop);
+	py::class_<std::vector<BulletParam, pnTlsfInsertSTLtype<BulletParam>>>("BulletParams")
+		//.def(py::vector_indexing_suite<std::vector<BulletParam, pnTlsfInsertSTLtype<BulletParam>>>())
+		.def("size", &std::vector<BulletParam, pnTlsfInsertSTLtype<BulletParam>>::size);
 }

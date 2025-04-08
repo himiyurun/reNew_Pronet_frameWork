@@ -32,4 +32,3 @@ namespace glbs {
 	namespace texture {
 	}
 }
-extern GLBS_API void Loop(py::object _func, std::size_t _ct);
