@@ -8,7 +8,7 @@
 typedef struct {
 	const char* id_;		//	’e–‹‚É•t‚¯‚é–¼‘O
 	uint32_t coef_;			//	’e–‹‚ÌŒÂ”
-	uint32_t interval_;		//	’e–‹‚Ì”­Ë‚·‚é•p“x
+	size_t interval_;		//	’e–‹‚Ì”­Ë‚·‚é•p“x
 	float rad_;				//	’e–‹‚Ì”­Ë‚·‚éŠp“x
 	float speed_;			//	’e–‹‚Ì‘¬“x
 }BulletCreateInfo;

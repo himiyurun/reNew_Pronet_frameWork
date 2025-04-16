@@ -15,7 +15,7 @@ BulletSys::BulletSys(const char* _py_name)
 		exec_func_ = "execute";
 		gen_func_ = "generate";
 		upd_func_ = "update";
-		bullet_ = bullet_system::createBulletDB("normal", 1.f, 12, 10, 360.f, 0.07f
+		bullet_ = bullet_system::createBulletDB("normal", 1.f, 16.f, 12, 10, 360.f, 0.07f, 0
 			, bullet_system::_template::bullet_update_main, bullet_system::_template::bullet_generate_main);
 
 	}
