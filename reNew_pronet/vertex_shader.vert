@@ -1,5 +1,6 @@
 #version 330 core
-in vec4 position;
+#define OBJECT_ANGLE_VERTEX	layout(location = 0)
+OBJECT_ANGLE_VERTEX in vec4 position;
 
 layout(std140) uniform window {
 	vec2 size;
@@ -13,10 +14,6 @@ layout(std140) uniform structure {
 	float rotate;
 }str;
 
-vec2 scaling2v() {
-	return vec2(win.scale / win.size);
-}
-
 vec4 scaling4v() {
 	return vec4(vec2(win.scale / win.size), 1.0, 1.0);
 }
@@ -27,11 +24,6 @@ vec4 rotate4v(vec4 _verts, float _deg) {
 			   ,_verts.x * sin(rad) + _verts.y * cos(rad)
 			   ,_verts.z
 			   ,_verts.w);
-}
-
-mat2 rotate2m(float _rad) {
-	return mat2(cos(_rad) , -sin(_rad)
-	           ,sin(_rad) , cos(_rad));
 }
 
 mat4 rotate4m(float _rad) {

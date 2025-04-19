@@ -2,6 +2,7 @@
 #include "loader.h"
 #include "Player.h"
 #include "BulletManager.h"
+#include "BulletObject.h"
 #include "glfw_Window.h"
 
 static const size_t strLv = 6;
@@ -16,7 +17,9 @@ class PronetManager : public glfw_Window {
 
 	pronet::ObjectPool<Object, 6> bulletobj;
 	pronet::ObjectPool<Shader, 6> bulletshd;
+	pronet::ObjectPool<Texture, 6> bullettex;
 	BulletManager sample;
+	BulletObject pybullet;
 public:
 	//	コンストラクタ
 	//	windowInfo : 作成するウインドウの情報
@@ -36,6 +39,7 @@ template<std::size_t VBOLV, std::size_t SHDLV>
 PronetManager<VBOLV, SHDLV>::PronetManager(glfw_windowCreateInfo* windowInfo, const char* loadfilelist_name)
 	: glfw_Window(windowInfo)
 	, loader_object(&dimentionSize, loadfilelist_name)
+	, bulletobj(2), bulletshd(2), bullettex(2)
 {
 	pronet::initUniformBlock();
 }
@@ -54,18 +58,33 @@ void PronetManager<VBOLV, SHDLV>::load()
 	player.init(dimentionSize, &info);
 	loader_object.load_chanck(0, 0, chanck[0]);
 
+	/*
+	PyBulletCreateInfo bulletInfo;
+	bulletInfo.info_.id_ = "sample";
+	bulletInfo.info_.coef_ = 12;
+	bulletInfo.info_.interval_ = 5;
+	bulletInfo.info_.rad_ = 0.f;
+	bulletInfo.info_.speed_ = 0.07f;
+	bulletInfo.exec_func_id_ = "execute";
+	bulletInfo.gen_func_id_ = "generate";
+	bulletInfo.update_func_id_ = "update";
+	*/
+	pronet::poolObject_shared_ptr<Object, 6> obj(&bulletobj);
+	pronet::poolObject_shared_ptr<Shader, 6> shd(&bulletshd);
+	pronet::poolObject_shared_ptr<Texture, 6> tex(&bullettex);
+
+	obj->init(2, 4, bulletAngleVertex, 6, bulletAngleIndex, bulletAngleUv);
+	shd->init("bullet.vert", "bullet.frag");
+	tex->init("pic/enemypre.bmp");
 	BulletCreateInfo bulletInfo;
 	bulletInfo.id_ = "sample";
 	bulletInfo.coef_ = 12;
-	bulletInfo.interval_ = 5;
-	bulletInfo.rad_ = 0.f;
+	bulletInfo.interval_ = 10;
+	bulletInfo.rad_ = 360.f;
 	bulletInfo.speed_ = 0.07f;
-	pronet::poolObject_shared_ptr<Object, 6> obj(&bulletobj);
-	pronet::poolObject_shared_ptr<Shader, 6> shd(&bulletshd);
 
-	obj->init(2, 4, bulletAngleVertex, 6, bulletAngleIndex);
-	shd->init("bullet.vert", "bullet.frag");
-	sample.init(bulletInfo, obj, shd);
+	sample.init(bulletInfo, obj, shd, tex);
+	pybullet.init("pysrc/main.py", shd, obj, tex);
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
@@ -106,13 +125,16 @@ void PronetManager<VBOLV, SHDLV>::process()
 	pronet::updateApplicationUniformParam(&param);
 	pronet::updatePlayer2vUniformParam(player.parameter());
 	pronet::updateFrameCounter();
+	data_base::updateLastClock();
 	bullet_pos.x = player.position()[0];
 	bullet_pos.y = player.position()[1];
 	if (glfwGetKey(window, GLFW_KEY_SPACE)) {
-		sample.run(bullet_pos, true);
+		//sample.run(bullet_pos, true);
+		pybullet.run(bullet_pos, true);
 	}
 	else {
-		sample.run(bullet_pos, false);
+		//sample.run(bullet_pos, false);
+		pybullet.run(bullet_pos, false);
 	}
 	chanck[0].draw();
 	player.draw();

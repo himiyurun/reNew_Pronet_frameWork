@@ -7,6 +7,8 @@
 #include <glad/glad.h>
 #include "pnTlsf.h"
 
+#define BIT_SIZE_ONE_BYTE	(0x08)
+
 namespace pronet {
 	class readBMP
 	{

@@ -15,6 +15,8 @@ class Shader
 
 	size_t Block[SHADER_BLOCK_SIZE];
 
+	GLuint texUnitID;
+
 public:
 	Shader();
 
@@ -33,6 +35,7 @@ public:
 		pronet::bindUniformObject(Block);
 	}
 
-	[[nodiscard]]GLuint getProgram() const { return program; }
+	[[nodiscard]] GLuint getProgram() const { return program; }
+	[[nodiscard]] GLuint getTextureUnitID() const { return texUnitID; }
 };
 
