@@ -98,6 +98,8 @@ namespace data_base {
 	//	指定したインデックスのBULLET_FUNC_MANGER構造体を初期化する
 	PY_BULLET_API void resetBulletFunctionManager(size_t _index);
 
+	PY_BULLET_API BULLET_FUNC_MANAGER* getBulletManager(size_t _id);
+
 	//	最後に実行した時間を取得
 	PY_BULLET_API clock_t getLastClock();
 	//	時間を現在の時刻に更新する
@@ -134,6 +136,13 @@ namespace py_obj {
 		py::object _update;
 	}PYTHON_BULLET_FUNCTION_OBJECT;
 
+	PY_BULLET_API typedef struct {
+		const char* vert_name;
+		const char* frag_name;
+		const char* str_name;
+		const char* tex_name;
+	}PYTHON_BULLET_FILE_NAME_OBJECT;
+
 	extern std::vector<PYTHON_FUNCTION_OBJECT> py_func_db;
 	extern std::vector<PYTHON_BULLET_FUNCTION_OBJECT> py_bulfunc_db;
 	extern std::vector<PYTHON_SETUP_INFO> py_info_db;
@@ -145,6 +154,8 @@ namespace py_obj {
 	extern data_base::BULLET_OBJECT_DATA* bulobj_data_bind_obj;
 	//	各弾幕の情報
 	extern data_base::BULLET_OBJECT_PARAM* bulobj_param_bind_obj;
+
+	extern PYTHON_BULLET_FILE_NAME_OBJECT name_base;
 
 	//	パイソンのスクリプトオブジェクトを作成する
 	//	file_name : ファイル名
@@ -168,6 +179,15 @@ namespace py_obj {
 	//	file_name : ファイル名
 	//	str : データを書き込む構造体
 	PY_BULLET_API void initializePythonFunctionObject(const char* _file_name, PYTHON_FUNCTION_OBJECT& _str);
+
+	//	読み込むファイル名を書き込む関数
+	//	vert : バーテックスシェーダーソースファイル名
+	//	frag : フラグメントシェーダーソースファイル名
+	//	str	 : 頂点ファイルソースファイル名
+	//	tex  : テクスチャファイル名
+	PY_BULLET_API void writeBulletFileNameObject(const char* _vert, const char* _frag, const char* _str, const char* _tex);
+
+	PY_BULLET_API PYTHON_BULLET_FILE_NAME_OBJECT& getBulletFileNameObject();
 
 	//	指定した関数名の関数オブジェクトを取得する
 	//	index : パイソンオブジェクトの番号
@@ -234,6 +254,12 @@ namespace bullet_system {
 	//	※ この関数は現在、機能を提供していません!!
 	PY_BULLET_API void deleteBulletDB(size_t _bullet);
 
+	//	弾幕オブジェクトの個数を取得する
+	PY_BULLET_API size_t getBulletSize();
+
+	//	弾幕オブジェクトの配列を取得する（参照）
+	PY_BULLET_API const std::vector<data_base::BULLET_FUNC_MANAGER>& getBulletDB();
+
 	//	弾幕を生成する
 	//	index : インデックス番号
 	//	pos : 弾幕の始点
@@ -262,6 +288,9 @@ namespace bullet_system {
 	PY_BULLET_API void BulletSystemInit();
 	//	ライブラリの終了処理
 	PY_BULLET_API void BulletSystemTerminate();
+
+	//	度数法を弧度法に変換する
+	PY_BULLET_API float to_rad(float _deg);
 }
 #endif // GLBS_PYTHON_DB_STATIC_LIB
 

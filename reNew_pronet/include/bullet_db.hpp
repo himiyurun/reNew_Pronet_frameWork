@@ -20,8 +20,8 @@ BOOST_PYTHON_MODULE(glbs) {
 	using namespace data_base;
 	using namespace py_obj;
 	using namespace bullet_system;
+	py::def("test", &test);
 	py::def("getLastClock", &data_base::getLastClock);
-	py::def("toRad", &bullet_system::to_rad);
 	py::class_<BULLET_PARAM_DATA>("BulletParamData")
 		.def_readwrite("coef", &BULLET_PARAM_DATA::coef)
 		.def_readwrite("area", &BULLET_PARAM_DATA::area)

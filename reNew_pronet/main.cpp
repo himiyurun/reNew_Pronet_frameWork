@@ -3,7 +3,7 @@
 #define STRUCTURE_POOL_BIT_MAP_LEVEL	(6)
 #define CHANCK_LOAD_SIZE	(1)
 
-#include <glbs/py_db.hpp>
+#include <bullet_db.hpp>
 #include "Pronet.h"
 
 void libInit() 
@@ -18,6 +18,7 @@ void libInit()
 
 	bullet_system::BulletSystemInit();
 	atexit(bullet_system::BulletSystemTerminate);
+	PyInit_glbs();
 }
 
 int main() {
@@ -34,18 +35,6 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	PronetManager<6, 6> game(&winInfo, "LoadFileList.fi");
-
-	bullet_system::BulletSystemInit();
-	atexit(bullet_system::BulletSystemTerminate);
-	py_obj::createPythonFunctionObject("pysrc/main.py");
-	py_obj::bindPythonBulletFuncObject(1);
-	float pos[2]{};
-	data_base::BULLET_PARAM_DATA sap0;
-	data_base::BULLET_OBJECT_DATA sap;
-	data_base::BULLET_OBJECT_PARAM sap2;
-	py_obj::executeBindPythonBulletFuncExecute(sap0, sap);
-	py_obj::executeBindPythonBulletFuncGenerate(pos, false, data_base::BULLET_PARAM_DATA(), pos, 360.f, 6.f, 1, sap);
-	py_obj::executeBindPythonBulletFuncUpdate(pos, false, data_base::BULLET_PARAM_DATA(), sap, 1, 0, sap2);
 
 	try {
 		game.load();

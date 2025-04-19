@@ -110,7 +110,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(USERPROFILE)\AppData\Local\Programs\Python\Python312\libs;C:\boost_1_87_0\stage\lib\x64;$(ProjectDir)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;user32.lib;shell32.lib;gdi32.lib;glfw3.lib;Python_DB.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;user32.lib;shell32.lib;gdi32.lib;glfw3.lib;Python_DB.lib;glbs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,7 +129,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(USERPROFILE)\AppData\Local\Programs\Python\Python312\libs;C:\boost_1_87_0\stage\lib\x64;$(ProjectDir)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;user32.lib;shell32.lib;gdi32.lib;glfw3.lib;Python_DB.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;user32.lib;shell32.lib;gdi32.lib;glfw3.lib;Python_DB.lib;glbs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -138,6 +138,7 @@
     <ClCompile Include="BoundaryTag.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletManager.cpp" />
+    <ClCompile Include="BulletObject.cpp" />
     <ClCompile Include="BullletSys.cpp" />
     <ClCompile Include="Chanck.cpp" />
     <ClCompile Include="collib.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="BoundaryTag.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletManager.h" />
+    <ClInclude Include="BulletObject.h" />
     <ClInclude Include="BullletSys.h" />
     <ClInclude Include="Chanck.h" />
     <ClInclude Include="collib.h" />

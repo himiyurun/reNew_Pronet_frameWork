@@ -2,6 +2,7 @@
 #include "loader.h"
 #include "Player.h"
 #include "BulletManager.h"
+#include "BulletObject.h"
 #include "glfw_Window.h"
 
 static const size_t strLv = 6;
@@ -18,6 +19,7 @@ class PronetManager : public glfw_Window {
 	pronet::ObjectPool<Shader, 6> bulletshd;
 	pronet::ObjectPool<Texture, 6> bullettex;
 	BulletManager sample;
+	BulletObject pybullet;
 public:
 	//	コンストラクタ
 	//	windowInfo : 作成するウインドウの情報
@@ -82,6 +84,7 @@ void PronetManager<VBOLV, SHDLV>::load()
 	bulletInfo.speed_ = 0.07f;
 
 	sample.init(bulletInfo, obj, shd, tex);
+	pybullet.init("pysrc/main.py", shd, obj, tex);
 }
 
 template<std::size_t VBOLV, std::size_t SHDLV>
@@ -122,13 +125,16 @@ void PronetManager<VBOLV, SHDLV>::process()
 	pronet::updateApplicationUniformParam(&param);
 	pronet::updatePlayer2vUniformParam(player.parameter());
 	pronet::updateFrameCounter();
+	data_base::updateLastClock();
 	bullet_pos.x = player.position()[0];
 	bullet_pos.y = player.position()[1];
 	if (glfwGetKey(window, GLFW_KEY_SPACE)) {
-		sample.run(bullet_pos, true);
+		//sample.run(bullet_pos, true);
+		pybullet.run(bullet_pos, true);
 	}
 	else {
 		//sample.run(bullet_pos, false);
+		pybullet.run(bullet_pos, false);
 	}
 	chanck[0].draw();
 	player.draw();

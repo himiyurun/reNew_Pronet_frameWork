@@ -147,6 +147,9 @@
     <ClCompile Include="BullletSys.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="BulletObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pronet.h">
@@ -249,6 +252,9 @@
       <Filter>ヘッダー ファイル\PnHead\exreader</Filter>
     </ClInclude>
     <ClInclude Include="BullletSys.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
