@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "bit.h"
+#include "pnTlsf.h"
 
 #define BITCOUNT_OF_64	(6)
 #define BITMASK_OF_64	(0x3f)
@@ -9,7 +10,7 @@
 namespace pronet {
 	class BitMap64
 	{
-		std::vector<uint64_t> bit;
+		std::vector<uint64_t, pnTlsfInsertSTLtype<uint64_t>> bit;
 
 	public:
 		//	コンストラクタ

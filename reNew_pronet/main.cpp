@@ -5,6 +5,7 @@
 
 #include <bullet_db.hpp>
 #include "Pronet.h"
+#include "ObjectPoolTestor.h"
 
 void libInit() 
 {
@@ -35,6 +36,9 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	PronetManager<6, 6> game(&winInfo, "LoadFileList.fi");
+
+	ObjectPoolTestor<Object, 6> testor(32, 64, 30);
+	testor.run();
 
 	try {
 		game.load();

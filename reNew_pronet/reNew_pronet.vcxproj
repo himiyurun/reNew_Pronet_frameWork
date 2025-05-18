@@ -149,6 +149,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="pnFreeList.cpp" />
     <ClCompile Include="pnMath.cpp" />
     <ClCompile Include="readBMP.cpp" />
     <ClCompile Include="readDocument.cpp" />
@@ -178,8 +179,10 @@
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ObjectPoolArray.h" />
     <ClInclude Include="ObjectPoolList.h" />
+    <ClInclude Include="ObjectPoolTestor.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="colCell.h" />
+    <ClInclude Include="pnFreeList.h" />
     <ClInclude Include="pnMath.h" />
     <ClInclude Include="pnTlsf.h" />
     <ClInclude Include="pronet_memory.h" />

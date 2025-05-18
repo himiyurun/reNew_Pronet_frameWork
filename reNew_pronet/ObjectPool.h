@@ -31,6 +31,10 @@ namespace pronet {
 		T* operator()() {
 			return &(*data)[index];
 		}
+
+		T* get() const {
+			return &(*data)[index];
+		}
 	};
 
 	template<class T, std::size_t N>
