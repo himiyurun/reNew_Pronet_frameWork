@@ -23,7 +23,7 @@ namespace pronet {
 
 		//	位置を指定してそこのビットを取得する
 		bool operator[](size_t _n) const {
-			size_t current(getCurrent(_n));
+			size_t current(getCurrent(_n));	
 			size_t index(getIndex(_n));
 
 			if (bit[current] & (1ULL << index))
@@ -123,6 +123,38 @@ namespace pronet {
 					*_idx = index + ((uint64_t)i << BITCOUNT_OF_64);
 					return true;
 				}
+			}
+			return false;
+		}
+
+		bool find_one_from_unit(size_t _start, size_t* const _idx) const {
+			size_t current(getCurrent(_start));
+			size_t offset(getIndex(_start));
+			size_t index(0);
+
+			assert(_start < bit.size() * 64 && "Error : BitMap64.find_one_from : out of range");
+
+			if (_bit_find_one_from(bit[current], UNSIGNED_INT_64, offset, &index)) {
+				*_idx = index + ((uint64_t)current << BITCOUNT_OF_64);
+				return true;
+			}
+			return false;
+		}
+
+		bool find_one_from_to_16cpy(size_t _start, size_t* const _idx) const {
+			size_t current(getCurrent(_start));
+			size_t offset(getIndex(_start));
+			size_t index(0);
+
+			assert(_start + 0x10 < bit.size() * 64 && "Error : BitMap64.find_one_from : out of range");
+			assert(0x40 * (current + 1) - _start < offset && "Error :  BitMap64.find_one_from : start position is wrong!");
+
+			uint64_t buf = bit[current] >> offset;
+			uint64_t arb;
+			memcpy(&arb, &buf, sizeof(uint16_t));
+			if (_bit_find_one_from(arb, UNSIGNED_INT_64, 0, &index)) {
+				*_idx = index + ((uint64_t)current << BITCOUNT_OF_64) + offset;
+				return true;
 			}
 			return false;
 		}

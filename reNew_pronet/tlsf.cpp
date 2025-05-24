@@ -28,14 +28,19 @@ bool pronet::tlsf_set::get(size_t _size, obj_type& _obj)
 {
 	size_t index(0);
 	uint8_t fli(0), sli(0);
-	fl_store_type_shared tag = locate(_size, &fli, &sli, &index);
+	size_t size = Alignment(_size);
+	fl_store_type_shared tag = locate(size, &fli, &sli, &index);
 	if (!tag) {
-		return false;
+		resize(bufSiz_ + size * 2);
+		tag = locate(size, &fli, &sli, &index);
+		if (!tag)
+			return false;
 	}
+	std::cout << "tag size : " << tag->size() << std::endl;
+	print_bmp();
 	unrigist(tag, fli, sli, index);
-	size_t size = sizeAlignment(_size);
-	if (tag->size() - _size > minsiz_) {
-		fl_store_type_shared rtag = tag->split(tag, _size, flPool_);
+	if (tag->size() - size > minsiz_) {
+		fl_store_type_shared rtag = tag->split(tag, size, flPool_);
 		rigist(rtag);
 		if (!rtag->nextTag())
 			final_list = rtag;
@@ -49,47 +54,108 @@ void pronet::tlsf_set::back(obj_type& _obj)
 {
 	size_t index(0);
 	uint8_t fli(0), sli(0);
-	if (!_obj) {
+	fl_store_type_shared obj = _obj;
+	if (!obj) {
 		throw std::runtime_error("Pool Object is null!! : tlsf_set.back(obj_type)");
 	}
-	calcTlsfIndex(fli, sli, _obj->size());
+	obj->setUsed(false);
+	calcTlsfIndex(fli, sli, obj->size());
 	index = calcIndex(fli, sli);
-	fl_store_type_shared nextt = _obj->nextTag();
+	fl_store_type_shared nextt = obj->nextTag();
 	if (nextt) {
 		if (!nextt->is_used()) {
 			unrigist(nextt);
-			_obj->marge(_obj, nextt);
+			obj->marge(obj, nextt);
 		}
 	}
-	fl_store_type_shared prevt = _obj->prevTag().lock();
+	fl_store_type_shared prevt = obj->prevTag().lock();
 	if(prevt){
 		if (!prevt->is_used()) {
 			unrigist(prevt);
-			prevt->marge(prevt, _obj);
-			_obj = prevt;
+			prevt->marge(prevt, obj);
+			obj = prevt;
 		}
 	}
-	_obj->setUsed(false);
-	rigist(_obj);
+	rigist(obj);
+	resize(compress());
 }
 
 void tlsf_set::resize(size_t _size)
 {
 	size_t new_size = sizeAlignment(_size);
-	fl_store_type_shared fl(&flPool_);
-	if (!fl) {
-		throw std::bad_alloc();
+	resize_bmp(new_size);
+	fl_store_type_shared fl;
+	std::cout << "tlsf resize : " << new_size << ", presize : " << bufSiz_ << std::endl;
+
+	if (new_size > bufSiz_) {
+		fl.realloc(&flPool_);
+		if (!fl) {
+			throw std::bad_alloc();
+		}
+
+		if (final_list->is_used()) {
+			fl->init(bufSiz_, new_size - bufSiz_, false, nullptr, final_list.s_ptr());
+			final_list->setNextTag(fl);
+			rigist(fl);
+			printFlMap();
+			final_list = fl;
+			std::cout << "last used!!!!!!!!!!!!!!!!!!!" << std::endl;
+		}
+		else {
+			final_list->detachLink();
+			unrigist(final_list);
+			final_list->resize(final_list->size() + new_size - bufSiz_);
+			rigist(final_list);
+			std::cout << "last not used!!!!!!!!!!!!!!!!!!!" << std::endl;
+		}
 	}
-	if (final_list->is_used()) {
-		fl->init(bufSiz_, new_size - bufSiz_, false, nullptr, final_list.s_ptr());
-		fl->setNextTag(fl);
-		rigist(fl);
+	else if (new_size < bufSiz_) {
+		size_t index(0);
+		size_t total(0);
+		fl = final_list;
+		index = fl->index();
+		total = fl->size();
+		std::cout << "total : " << total << ", bufSize : " << bufSiz_ << ", new_size : " << new_size; std::cout << ", fl index : " << fl->index() << std::endl;
+		while (bufSiz_ - (total) > new_size) {
+			fl = fl->prevTag().lock();
+			index = fl->index();
+			total += fl->size();
+			if (!fl->prevTag().lock())
+				throw std::logic_error("out of range!! : tlsf_set.resize(size_t)");
+		}
+		size_t split_siz(total - (bufSiz_ - new_size));
+		if (split_siz > 0) {
+			std::cout << "total : " << total << ", bufSize : " << bufSiz_ << ", new_size : " << new_size << ", split_siz : " << split_siz; std::cout << ", fl index : " << fl->index() << std::endl;
+			unrigist(fl);
+			fl->split(fl, split_siz, flPool_);
+			rigist(fl);
+		}
+		else {
+			fl = fl->prevTag().lock();
+		}
+
+		fl_store_type_shared nowfl = fl;
+		fl_store_type_shared lastfl = fl;
+		fl = fl->nextTag();
+		while (fl) {
+			std::cout << "tag size : " << fl->size() << std::endl;
+			unrigist(fl);
+			lastfl = fl;
+			fl = fl->nextTag();
+			lastfl->detachTag();
+		}
+		final_list = nowfl;
+		printFlMap();
+		nowfl->setNextTag(nullptr);
+		std::cout << "final size : " << final_list->size() << std::endl;
+		std::cout << "compressed bmp" << std::endl;
+		print_bmp();
+		resize_bmp(new_size);
 	}
 	else {
-		final_list->detachLink();
-		final_list->resize(final_list->size() + new_size - bufSiz_);
-		rigist(final_list);
+		std::cerr << "Log : Pool resize same size : tlsf_set.resize(size_t)" << std::endl;
 	}
+	bufSiz_ = new_size;
 }
 
 size_t tlsf_set::compress()
@@ -97,6 +163,9 @@ size_t tlsf_set::compress()
 	fl_store_type_shared fl = final_list;
 	while (!fl->is_used()) {
 		fl = fl->prevTag().lock();
+		if (!fl) {
+			return bufSiz_;
+		}
 	}
 	return fl->index() + fl->size();
 }
@@ -130,10 +199,19 @@ void pronet::tlsf_set::printFlMap() const
 	size_t tag_ct(0);
 	fl_store_type_shared buf(first_list.lock());
 	while (buf) {
-		std::cout << "tag " << tag_ct << " : " << buf->size() << std::endl;
+		std::cout << "tag " << tag_ct << " : " << buf->index() << " : " << buf->size() << " : " << buf->is_used() << std::endl;
 		tag_ct++;
 		buf = buf->nextTag();
 	}
+}
+
+size_t pronet::tlsf_set::Alignment(size_t _n) const
+{
+	size_t size = sizeAlignment(_n);
+	if (size < minsiz_)
+		return minsiz_;
+	else
+		return size;
 }
 
 void pronet::tlsf_set::rigist(fl_store_type_shared& _obj)
@@ -161,6 +239,11 @@ void pronet::tlsf_set::rigist(fl_store_type_shared& _obj)
 
 	//	フリーリストを割り当てる、前後のリンクを引数に取る
 	_obj->attachLink(_obj, data_[index].lock(), nullptr);
+	if (!_obj->nextTag())
+		final_list = _obj;
+	if (!_obj->prevTag().lock())
+		first_list = _obj.s_ptr();
+
 	data_[index] = _obj.s_ptr();
 }
 
@@ -184,10 +267,14 @@ tlsf_set::fl_store_type_shared tlsf_set::locate(size_t _size, uint8_t* const _fl
 {
 	uint8_t fli(0), sli(0);
 	if (!search(fli, sli, _size)) {
+		std::cerr << "Log : Can't Found free block!!" << std::endl;
 		return nullptr;
 	}
+	std::cout << "locate fli : " << (unsigned)fli << ", locate sli : " << (unsigned)sli << std::endl;
 	size_t index(calcIndex(fli, sli));
 	fl_store_type_shared obj = data_[index].lock();
+	std::cout << "size : " << final_list->size() << std::endl;
+
 	if (_fli)
 		*_fli = fli;
 	if (_sli)
@@ -204,29 +291,26 @@ bool tlsf_set::search(uint8_t& _fli, uint8_t& _sli, size_t _size) const
 	align_idx(f, s);
 	size_t fli(f), sli(s);
 	if (_bit_get_status(fli_, UNSIGNED_INT_64, fli)) {
-		if (sli_.find_one_from(calcIndex(fli, sli), &sli)) {
-			std::cout << "sli : " << sli << std::endl;
-			_fli = fli;
+		std::cout << "1fli : " << fli << ", 1sli : " << sli << std::endl;
+		if (sli_.find_one_from_unit(calcIndex(fli, sli), &sli)) {
+			_fli = sli >> bitdiv_;
 			_sli = sli & bitmsk_;
 			return true;
 		}
-		else {
-			throw std::logic_error("Not working TLSFrigist system!! : tlsf_set.search(uint8_t, uint8_t, size_t)");
-		}
 	}
-	else {
-		sli = 0;
-	}
+	sli = 0;
 
-	if (!_bit_find_one_from(fli_, UNSIGNED_INT_64, fli, &fli)) {
+	if (!_bit_find_one_from(fli_, UNSIGNED_INT_64, ++fli, &fli)) {
+		std::cout << "fli : " << fli << ", sli : " << sli << std::endl;
 		std::cerr << "Log : Memory Block is Full!!" << std::endl;
 		return false;
 	}
-	if (!sli_.find_one_from(calcIndex(fli, sli), &sli)) {
+	if (!sli_.find_one_from_unit(calcIndex(fli, sli), &sli)) {
 		print_bmp();
 		std::cout << "fli : " << fli << ", sli : " << sli << ", index : " << calcIndex(fli, sli) << std::endl;
-		throw std::logic_error("Not working TLSFrigist system!! : tlsf_set.search(uint8_t, uint8_t, size_t)");
+		throw std::logic_error("Not working second level index in TLSFrigist system!! : tlsf_set.search(uint8_t, uint8_t, size_t)");
 	}
+	std::cout << "rfli : " << fli << ", rsli : " << (sli & bitmsk_) << std::endl;
 	_fli = fli;
 	_sli = sli & bitmsk_;
 	return true;
@@ -241,7 +325,7 @@ bool tlsf_set::getStat(uint8_t _fli, uint8_t _sli) const
 void tlsf_set::resize_bmp(size_t _size)
 {
 	size_t lsb = 0;
-	if (!pronet::_bit_find_one_from_reverse(bufSiz_, sizeof(size_t) * 0x08, 0, &lsb)) {
+	if (!pronet::_bit_find_one_from_reverse(_size, sizeof(size_t) * 0x08, 0, &lsb)) {
 		throw std::runtime_error("pool_size is too small : tlsf_set");
 	}
 	fliLv_ = ++lsb;
@@ -253,8 +337,8 @@ void tlsf_set::resize_bmp(size_t _size)
 void tlsf_set::align_idx(uint8_t& _fli, uint8_t& _sli) const
 {
 	_sli++;
-	if (_sli >= minsiz_) {
-		_sli %= minsiz_;
+	if (_sli > bitmsk_) {
+		_sli &= bitmsk_;
 		_fli++;
 	}
 }

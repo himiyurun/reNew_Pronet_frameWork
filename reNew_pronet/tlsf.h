@@ -49,7 +49,7 @@ namespace pronet {
 		uint8_t fliLv_;				//	FLIのレベルの数
 	public:
 		tlsf_set(uint8_t _div_size, size_t _pool_size);
-		~tlsf_set();
+		virtual ~tlsf_set();
 
 		//	オブジェクトを取得する
 		//	size : オブジェクトのサイズ
@@ -77,6 +77,9 @@ namespace pronet {
 		//	ビットマップを描画
 		void print_bmp() const;
 		void printFlMap() const;
+
+	private:
+		virtual [[nodiscard]] size_t Alignment(size_t _n) const;
 
 	private:
 		//	メモリブロックの割り当てを行う

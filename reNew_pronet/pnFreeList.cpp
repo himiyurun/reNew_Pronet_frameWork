@@ -32,7 +32,7 @@ pnFreeList::fl_type_shared pnFreeList::split(fl_type_shared& _this, size_t _af_s
 		throw std::logic_error("Used tag can't split : pnFreeList.split(size_t)");
 	}
 	fl_type_shared rtag(&_pool);
-	rtag->init(index_ + bufSiz_, bufSiz_ - _af_size, false, nextTag_, _this.s_ptr());
+	rtag->init(index_ + _af_size, bufSiz_ - _af_size, false, nextTag_, _this.s_ptr());
 	if (nextTag_)
 		nextTag_->setPrevTag(rtag.s_ptr());
 	nextTag_ = rtag;

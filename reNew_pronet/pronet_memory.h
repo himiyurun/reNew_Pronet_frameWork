@@ -277,11 +277,10 @@ namespace pronet {
 
 			//	オーバーロードされたオブジェクト返却の処理
 			void operator()(Pool_Object<T>* ptr) {
-				std::cout << "ptr : " << ptr->index << std::endl;
-				if (!ptr->get())
+				if (!ptr->get()) {
 					throw std::bad_alloc();
+				}
 				ptr->operator->()->reset();
-				std::cout << "execute reset func" << std::endl;
 				_pool->push(ptr);
 				std::cout << "pool_object shared ptr return object" << std::endl;
 			}

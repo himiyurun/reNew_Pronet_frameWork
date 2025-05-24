@@ -7,19 +7,6 @@
 #include "Pronet.h"
 #include "tlsf.h"
 
-class sample_class {
-	int i;
-public:
-	sample_class(int i = 0)
-		: i(i)
-	{
-	}
-	void set(int _i) { i = _i; }
-	[[nodiscard]] int get() const { return i; }
-};
-
-std::weak_ptr<sample_class> ptrhoge;
-
 void libInit() 
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -33,10 +20,6 @@ void libInit()
 	bullet_system::BulletSystemInit();
 	atexit(bullet_system::BulletSystemTerminate);
 	PyInit_glbs();
-}
-
-void testfun(std::weak_ptr<sample_class> sp) {
-	ptrhoge = sp;
 }
 
 int main() {
@@ -56,20 +39,44 @@ int main() {
 
 	try {
 		{
-			pronet::tlsf_set set(4, 1024);
-			for (size_t i = 0; i < 1024; i++) {
+			pronet::tlsf_set set(4, 32);
+			pronet::tlsf_set::obj_type stra;
+			pronet::tlsf_set::obj_type strb;
+			pronet::tlsf_set::obj_type strc;
+			pronet::tlsf_set::obj_type strd;
+			set.printFlMap();
+			set.get(128, stra);
+			set.printFlMap();
+			set.get(128, strb);
+			set.back(stra);
+			set.get(256, stra);
+			set.get(256, strc);
+			set.back(stra);
+			set.get(512, stra);
+			set.get(512, strd);
+			set.back(stra);
+			set.printFlMap();
+			for (size_t i = 1; i <= 1024; i++) {
+				std::cout << "allocate : " << i << std::endl;
 				pronet::tlsf_set::obj_type str;
-				if (!set.get(i, str))
-					std::cerr << "error : " << std::endl;
-				if (!str)
+				if (!set.get(i, str)) {
+					set.print_bmp();
+					std::cerr << "error : tag is null : " << std::endl;
+				}
+				if (!str) {
 					throw std::bad_alloc();
+				}
 				set.print_bmp();
 				set.printFlMap();
+				std::cout << "deallocate" << std::endl;
 				set.back(str);
 				set.print_bmp();
 				set.printFlMap();
 				std::cout << i << " end" << std::endl;
 			}
+			set.back(strb);
+			set.back(strc);
+			set.back(strd);
 		}
 		game.load();
 		game.run();
