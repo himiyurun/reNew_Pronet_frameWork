@@ -5,7 +5,20 @@
 
 #include <bullet_db.hpp>
 #include "Pronet.h"
-#include "ObjectPoolTestor.h"
+#include "tlsf.h"
+
+class sample_class {
+	int i;
+public:
+	sample_class(int i = 0)
+		: i(i)
+	{
+	}
+	void set(int _i) { i = _i; }
+	[[nodiscard]] int get() const { return i; }
+};
+
+std::weak_ptr<sample_class> ptrhoge;
 
 void libInit() 
 {
@@ -22,6 +35,10 @@ void libInit()
 	PyInit_glbs();
 }
 
+void testfun(std::weak_ptr<sample_class> sp) {
+	ptrhoge = sp;
+}
+
 int main() {
 	libInit();
 	
@@ -30,17 +47,30 @@ int main() {
 	winInfo.height = 480;
 	winInfo.title = "test_game";
 	winInfo.monitor = nullptr;
-
+	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	PronetManager<6, 6> game(&winInfo, "LoadFileList.fi");
 
-	ObjectPoolTestor<Object, 6> testor(32, 64, 30);
-	testor.run();
-
 	try {
+		{
+			pronet::tlsf_set set(4, 1024);
+			for (size_t i = 0; i < 1024; i++) {
+				pronet::tlsf_set::obj_type str;
+				if (!set.get(i, str))
+					std::cerr << "error : " << std::endl;
+				if (!str)
+					throw std::bad_alloc();
+				set.print_bmp();
+				set.printFlMap();
+				set.back(str);
+				set.print_bmp();
+				set.printFlMap();
+				std::cout << i << " end" << std::endl;
+			}
+		}
 		game.load();
 		game.run();
 	}

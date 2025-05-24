@@ -1,49 +1,49 @@
 #include "pnFreeList.h"
 
 using namespace pronet;
-inline void pnFreeList::init(size_t _pool_index, size_t _tag_size, bool _is_used, free_list_type _next_link, free_list_type _prev_link, free_list_type _next_llist, free_list_type _prev_llist)
+void pnFreeList::init(size_t _pool_index, size_t _tag_size, bool _is_used, fl_type_shared _next_link, fl_type_weak _prev_link, fl_type_weak _next_llist, fl_type_weak _prev_llist)
 {
 	index_ = _pool_index;
 	bufSiz_ = _tag_size;
 	used_stat_ = _is_used;
 	nextTag_ = _next_link;
 	prevTag_ = _prev_link;
-	neLinkList_ = _next_llist;
-	preLinkList_ = _prev_llist;
+	nextLink_ = _next_llist;
+	prevLink_ = _prev_llist;
 }
 
-inline void pnFreeList::reset()
+void pnFreeList::reset()
 {
 	index_ = 0;
 	bufSiz_ = 0;
 	used_stat_ = 0;
-	nextTag_ = nullptr;
-	prevTag_ = nullptr;
-	neLinkList_ = nullptr;
-	preLinkList_ = nullptr;
+	nextTag_.reset();
+	prevTag_.reset();
+	nextLink_.reset();
+	prevLink_.reset();
 }
 
-inline pnFreeList::free_list_type pnFreeList::split(free_list_type _this, size_t _this_size, ObjectPool<pnFreeList, _PN_FREE_LIST_LEVEL>& _pool)
+pnFreeList::fl_type_shared pnFreeList::split(fl_type_shared& _this, size_t _af_size, ObjectPool<pnFreeList, _PN_FREE_LIST_LEVEL>& _pool)
 {
-	if (_this_size > bufSiz_) {
+	if (_af_size > bufSiz_) {
 		throw std::logic_error("Tag size is too small : pnFreeList.split(size_t)");
 	}
 	if (used_stat_) {
 		throw std::logic_error("Used tag can't split : pnFreeList.split(size_t)");
 	}
-	free_list_type rtag(&_pool);
-	rtag->init(index_ + bufSiz_, bufSiz_ - _this_size, false, nextTag_, _this, nullptr, nullptr);
+	fl_type_shared rtag(&_pool);
+	rtag->init(index_ + bufSiz_, bufSiz_ - _af_size, false, nextTag_, _this.s_ptr());
 	if (nextTag_)
-		nextTag_->setPrevTag(rtag);
+		nextTag_->setPrevTag(rtag.s_ptr());
 	nextTag_ = rtag;
 	detachLink();
 
-	bufSiz_ = _this_size;
+	bufSiz_ = _af_size;
 	return rtag;
 }
 
 
-inline void pnFreeList::marge(free_list_type _this, free_list_type _rtag)
+void pnFreeList::marge(fl_type_shared& _this, fl_type_shared _rtag)
 {
 	if (_rtag.get() != nextTag_.get())
 		throw std::logic_error("rtag is not same NextTag : pnFreeList.marge(Pool_Object<pnFreeList<_Ty>>*, ObjectPool<pnFreeList<_Ty>, _lv>&)");
@@ -52,56 +52,65 @@ inline void pnFreeList::marge(free_list_type _this, free_list_type _rtag)
 
 	bufSiz_ += _rtag->size();
 	nextTag_ = _rtag->nextTag();
-	nextTag_->setPrevTag(_this);
+	if (nextTag_)
+		nextTag_->setPrevTag(_this.s_ptr());
 	_rtag->detachLink();
 	detachLink();
 	_rtag.reset();
 }
 
-inline void pnFreeList::attachTag(free_list_type _this, free_list_type _next, free_list_type _prev)
+void pnFreeList::attachTag(fl_type_shared& _this, fl_type_shared& _next, fl_type_shared& _prev)
 {
 	if (_next) {
-		_next->setPrevTag(_this);
+		_next->setPrevTag(_this.s_ptr());
 		_this->setNextTag(_next);
 	}
 	if (_prev) {
 		_prev->setNextTag(_this);
-		_this->setPrevTag(_prev);
+		_this->setPrevTag(_prev.s_ptr());
 	}
 }
 
-inline void pnFreeList::attachLink(free_list_type _this, free_list_type _next, free_list_type _prev)
+void pnFreeList::attachLink(fl_type_shared _this, fl_type_shared _next, fl_type_shared _prev)
 {
 	if (_next) {
-		_next->setPrevLink(_this);
-		_this->setNextLink(_next);
+		_next->setPrevLink(_this.s_ptr());
+		_this->setNextLink(_next.s_ptr());
 	}
 	if (_prev) {
-		_prev->setNextLink(_this);
-		_this->setPrevLink(_prev);
+		_prev->setNextLink(_this.s_ptr());
+		_this->setPrevLink(_prev.s_ptr());
 	}
 }
 
-inline void pnFreeList::detachTag()
+void pnFreeList::detachTag()
 {
 	if (nextTag_) {
 		nextTag_->setPrevTag(prevTag_);
 	}
-	if (prevTag_) {
-		prevTag_->setNextTag(nextTag_);
+	fl_type_shared prev(prevTag_.lock());
+	if (prev) {
+		prev->setNextTag(nextTag_);
 	}
-	nextTag_ = nullptr;
-	prevTag_ = nullptr;
+	nextTag_.reset();
+	prevTag_.reset();
 }
 
-inline void pnFreeList::detachLink()
+void pnFreeList::detachLink()
 {
-	if (neLinkList_) {
-		neLinkList_->setPrevLink(preLinkList_);
+	fl_type_shared next(nextLink_.lock());
+	if (next) {
+		next->setPrevLink(prevLink_);
 	}
-	if (preLinkList_) {
-		preLinkList_->setNextLink(neLinkList_);
+	fl_type_shared prev(prevLink_.lock());
+	if (prev) {
+		prev->setNextLink(nextLink_);
 	}
-	neLinkList_ = nullptr;
-	preLinkList_ = nullptr;
+	nextLink_.reset();
+	prevLink_.reset();
+}
+
+void pronet::pnFreeList::setUsed(bool _status)
+{
+	used_stat_ = _status;
 }

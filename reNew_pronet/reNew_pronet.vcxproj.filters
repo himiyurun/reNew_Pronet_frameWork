@@ -156,6 +156,9 @@
     <ClCompile Include="pnFreeList.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="tlsf.cpp">
+      <Filter>ソース ファイル\PnLib\util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Pronet.h">

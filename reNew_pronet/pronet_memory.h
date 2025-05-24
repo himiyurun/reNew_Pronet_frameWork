@@ -277,8 +277,11 @@ namespace pronet {
 
 			//	オーバーロードされたオブジェクト返却の処理
 			void operator()(Pool_Object<T>* ptr) {
-				Pool_Object<T> buf = std::move(*ptr);
-				buf->reset();
+				std::cout << "ptr : " << ptr->index << std::endl;
+				if (!ptr->get())
+					throw std::bad_alloc();
+				ptr->operator->()->reset();
+				std::cout << "execute reset func" << std::endl;
 				_pool->push(ptr);
 				std::cout << "pool_object shared ptr return object" << std::endl;
 			}
@@ -290,6 +293,11 @@ namespace pronet {
 			if (pool != nullptr) {
 				sp = std::shared_ptr<Pool_Object<T>>(new Pool_Object<T>(pool->pop()), Deleter(pool));
 			}
+		}
+
+		poolObject_shared_ptr(const std::shared_ptr<Pool_Object<T>>& _sp)
+			: sp(_sp)
+		{
 		}
 
 		template<class T, std::size_t N>
@@ -313,6 +321,10 @@ namespace pronet {
 			return sp;
 		}
 
+		std::shared_ptr<Pool_Object<T>> s_ptr() const {
+			return sp;
+		}
+
 		explicit operator bool() const {
 			return sp.operator bool();
 		}
@@ -327,6 +339,13 @@ namespace pronet {
 		poolObject_shared_ptr<T, N>& operator=(const poolObject_shared_ptr& o) {
 			if (this != &o) {
 				this->sp = o.sp;
+			}
+			return *this;
+		}
+
+		poolObject_shared_ptr<T, N>& operator=(const std::shared_ptr<Pool_Object<T>>& o) {
+			if (sp != o) {
+				sp = o;
 			}
 			return *this;
 		}
